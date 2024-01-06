@@ -19,12 +19,13 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "true"
+    "project": true
   },
   "settings": {
     "react": {
       "version": "detect"
-    }
+    },
+    "import/ignore": ["node_modules/react-native/index\\.js$"]
   },
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
