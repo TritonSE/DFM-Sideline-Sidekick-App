@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import ConditionsSection from "./ConditionsSection";
 
 export default function App() {
   return (
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <ConditionsSection/>
       <StatusBar style="auto" />
     </View>
   );
@@ -13,7 +14,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0, //inquire about changing flex
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
