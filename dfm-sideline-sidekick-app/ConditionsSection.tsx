@@ -1,11 +1,24 @@
 import { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ConditionsSection() {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
 
+
+  interface BulletListProps {
+    items: string[];
+  }
+  const BulletList = ({ items }: BulletListProps) => (
+    <View style={styles.list}>
+      {items.map((item: string, index: number) => (
+        <View key={index} style={styles.listItem}>
+          <Text style={styles.bullet}>{'\u2022'}</Text>
+          <Text style={styles.itemText}>{item}</Text>
+        </View>
+      ))}
+    </View>
+  );
 
   function onOverviewPress() {
     if (!isOverviewPressed) {
@@ -26,8 +39,9 @@ export default function ConditionsSection() {
       <Image style={styles.image} source={require("./assets/ic_caretleft.png")} />
       <View style={styles.margin}>
         <Text style={styles.subtitle}>Medical Emergency</Text>
-        <Text style={styles.condition}>Cervical Spine Injury</Text>
+        <Text style={styles.title}>Cervical Spine Injury</Text>
       </View>
+
       <View style={styles.menu}>
         <Pressable style={ isOverviewPressed ? styles.menuButtonSelected : styles.menuButton } onPress={onOverviewPress}>
           <Text style={ isOverviewPressed ? styles.menuTextSelected : styles.menuText }
@@ -40,9 +54,10 @@ export default function ConditionsSection() {
           </Text>
         </Pressable>
       </View>
+
       <View style={styles.information}>
         <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
-
+          
           <View style={styles.infoSection}>
             <Text style={styles.descriptionTitle}>
               Importance
@@ -56,48 +71,38 @@ export default function ConditionsSection() {
             <Text style={styles.descriptionTitle}>
               Mechanism of Injury
             </Text>
-            <Text style={styles.descriptionInfo}>
-              {"  ·  Direct blow to head/neck\n  ·  Axial loading to spine, esp. w/neck in flexion"}
-            </Text>
+            <BulletList items={["Direct blow to head/neck", "Axial loading to spine, esp. w/neck in flexion"]}/> 
           </View>
 
           <View style={styles.infoSection}>
             <Text style={styles.descriptionTitle}>
               Diagnosis
             </Text>
-            <Text style={styles.descriptionInfo}>
-              {"  ·  Local pain\n  ·  Ecchymosis, and swelling"}
-            </Text>
+            <BulletList items={["Local pain", "Ecchymosis, and swelling"]} />
           </View>
 
           <View style={styles.infoSection}>
             <Text style={styles.descriptionTitle}>
               Physical Exam
             </Text>
-            <Text style={styles.descriptionInfo}>
-              {"  ·  TTP over spinous process or vertebral bodies"}
-            </Text>
+            <BulletList items={["TTP over spinous process or vertebral bodies"]} />
           </View>
-
         </View>
-        <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
 
-          <View style={styles.infoSection}>
+        <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
+            <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>
                 Acute Management
               </Text>
-              <Text style={styles.descriptionInfo}>
-              {"  ·  Immobilize with spine board, cervical-collar, and barriers to lateral head movement (or whole body vacuum splint)  \n  ·  If this is not available, immobilize by placing hands on patient shoulders and using forearms to immobilize head"}
-              </Text>
+              <BulletList items={["Immobilize with spine board, cervical-collar, and barriers to lateral head movement (or whole body vacuum splint)",
+                                    "If this is not available, immobilize by placing hands on patient shoulders and using forearms to immobilize head"]}/>
             </View>
 
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>
                 Dispo
               </Text>
-              <Text style={styles.descriptionInfo}>
-                {"  ·  Emergency transport to ED for CT (most accurate) +/- XR"}
-              </Text>
+              <BulletList items={["Emergency transport to ED for CT (most accurate) +/- XR"]} />
             </View>
 
             <View style={styles.infoSection}>
@@ -105,13 +110,13 @@ export default function ConditionsSection() {
                 Considerations
               </Text>
               <Text style={styles.descriptionInfo}>
-                {"If any suspicion for injury, send to ED. However, less likely if the following criteria are met:\n  ·  No cervical spine tenderness\n  ·  Normal alertness/consciousness/GCS 15\n  ·  No major distracting injuries\n  ·  Normal neurologic status (full strength/sensation in all extremities)\n  ·  Ability to actively rotate neck to 45 degrees laterally in both directions\n"}
+                If any suspicion for injury, send to ED. However, less likely if the following criteria are met: 
               </Text>
+              <BulletList items={["No cervical spine tenderness", "Normal alertness/consciousness/GCS 15", "No major distracting injuries", "Normal neurologic status (full strength/sensation in all extremities)", "Ability to actively rotate neck to 45 degrees laterally in both directions"]} /> 
             </View>
 
         </View>
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -166,18 +171,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#00629B",
   },
-  condition: {
+  title: {
     fontFamily: "Roboto",
     fontSize: 32,
     fontWeight: "bold",
     color: "#182B49",
+    marginLeft: 3 // ask if the title should be pushed to the right or be aligned with subtext
   },
   image: {
     width:24,
     height:24,
     marginLeft:16,
     marginBottom:43,
-    
   },
   information: {
     marginLeft:16,
@@ -187,7 +192,6 @@ const styles = StyleSheet.create({
   overview: {
   },
   howToTreat: {
-
   },
   overviewHidden: {
     display:'none'
@@ -209,5 +213,23 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     marginTop:15
-  }
+  }, 
+  list: { 
+    paddingLeft: 10,
+    marginRight: 50, 
+    marginTop: 5,
+  },
+  listItem: {
+    flexDirection: 'row'
+  },
+  bullet: {
+    marginRight: 5,
+    fontSize: 18,
+    color: '#000000',
+  },
+  itemText: {
+    fontSize: 16,
+    fontFamily: "Roboto",
+    color: '#000000',
+  },
 });
