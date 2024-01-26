@@ -109,4 +109,82 @@ export const createGeneralPrinciple = async (req, res) => {
   }
 };
 
+// Delete an emergency by ID
+export const deleteEmergencyById = async (req, res) => {
+  try {
+    const deletedEmergency = await Emergency.findByIdAndDelete(req.params.id);
+    if (!deletedEmergency) {
+      return res.status(404).json({ message: "Emergency not found" });
+    }
+
+    // Respond with success and the doc deleted
+    res.status(200).json({sucesss: true, "deleted document": deletedEmergency});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Delete a general principle by ID
+export const deleteGeneralPrincipleById = async (req, res) => {
+  try {
+    const deletedPrinciple = await GeneralPrinciple.findByIdAndDelete(req.params.id);
+    if (!deletedPrinciple) {
+      return res.status(404).json({ message: "General principle not found" });
+    }
+
+    // Respond with success and the doc deleted
+    res.status(200).json({sucesss: true, "deleted document": deletedPrinciple});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Update an emergency by id
+export const updatedEmergencyById = async (req, res) => {
+  try {
+
+    // filter to find emergency by id
+    const filter = { _id: req.params.id};
+    // update changed to found emergency
+    const update = req.body;
+
+    const updatedEmergency = await Emergency.findOneAndUpdate(filter, update, {
+      new: true, // returns the updated emergency
+      // includeResultMetadata: true (uncomment for metadata information)
+    });
+    if (!updatedEmergency) {
+      res.status(404).json({message: "Emergency not found"});
+    }
+
+    // Respond with the updated emergency data
+    res.status(200).json(updatedEmergency);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Update an general principle by id
+export const updatedGeneralPrincipleById = async (req, res) => {
+  try {
+
+    // filter to find emergency by id
+    const filter = { _id: req.params.id};
+    // update changed to found emergency
+    const update = req.body;
+
+    const updatedPrinciple = await GeneralPrinciple.findOneAndUpdate(filter, update, {
+      new: true, // returns the updated emergency
+      // includeResultMetadata: true (uncomment for metadata information)
+    });
+    if (!updatedPrinciple) {
+      res.status(404).json({message: "General principle not found"});
+    }
+
+    // Respond with the updated general principle data
+    res.status(200).json(updatedPrinciple);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 export { getAllEmergencies, getEmergencyById, getAllGeneralPrinciples, getGeneralPrincipleById };

@@ -12,6 +12,10 @@ import {
   getEmergencyById,
   getAllGeneralPrinciples,
   getGeneralPrincipleById,
+  deleteEmergencyById,
+  deleteGeneralPrincipleById,
+  updatedEmergencyById,
+  updatedGeneralPrincipleById
 } from "../controllers/issueController.js";
 
 const router = express.Router();
@@ -39,6 +43,29 @@ router.post(
   createGeneralPrinciple,
 );
 
-// Add more routes as needed (e.g., PUT, DELETE)
+// DELETE a specific emergency by ID
+router.delete(
+  "/emergencies/:id",
+  deleteEmergencyById
+);
 
+// DELETE a specific general principle by ID
+router.delete(
+  "/generalPrinciples/:id",
+  deleteGeneralPrincipleById
+);
+
+// PUT a specific emergency by ID
+router.put(
+  "/emergencies/:id",
+  updatedEmergencyById
+)
+
+// PUT a specific general principle by ID
+router.put(
+  "/generalPrinciples/:id",
+  updatedGeneralPrincipleById
+)
+
+// Add more routes as needed (e.g., PUT, DELETE)
 export default router;
