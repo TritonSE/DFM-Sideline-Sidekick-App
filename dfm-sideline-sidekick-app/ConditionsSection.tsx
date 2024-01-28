@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
+import { Image, Platform, Pressable, StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 
 export default function ConditionsSection() {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
@@ -8,6 +8,7 @@ export default function ConditionsSection() {
   interface BulletListProps {
     items: string[];
   }
+
   const BulletList = ({ items }: BulletListProps) => (
     <View style={styles.list}>
       {items.map((item: string, index: number) => (
@@ -139,7 +140,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "flex-start",
     justifyContent: "center",
-    marginTop: 77,
+    ...Platform.select({
+      ios: {
+        marginTop: 80,
+      },
+      android: { 
+        marginTop: 40,
+      },
+      default: {
+        marginTop: 50,
+      },
+    })
   },
   margin: {
     marginLeft: 16,
@@ -189,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     color: "#182B49",
-    marginLeft: 2, // ask if the title should be pushed to the right or be aligned with subtext
+    marginLeft: 2, 
   },
   image: {
     width: 24,
