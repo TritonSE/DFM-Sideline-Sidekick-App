@@ -34,30 +34,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const GeneralPrinciples = () => {
+const EmergencyCare = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>
-      <Text style={styles.title}>General Principles</Text>
-      <Text style={styles.subTitle}>General Principles</Text>
-      <BulletPoint
-        letter="A"
-        text="Risk Warning"
-        subpoints={[
-          "Thunder = risk (lightning within 8-10 mile radius)",
-          "Can occur w/o clouds or rain",
-          "Avoid landlines (cellphone is safe)",
-        ]}
-      />
-      <BulletPoint
-        letter="B"
-        text="Resuming Activity"
-        subpoints={["30 min after last sound of thunder or sight of lightning"]}
-      />
+      <Text style={styles.title}>Emergency Care</Text>
+      <Text style={styles.subTitle}>Emergency Care</Text>
+      <BulletPoint letter="A" text="Activate EMS" subpoints={[]} />
+      <BulletPoint letter="B" text="Move to Safe Location" subpoints={[]} />
+      <BulletPoint letter="C" text="CPR and AED use are safe!" subpoints={[]} />
     </View>
   );
 };
 
-export default GeneralPrinciples;
+export default EmergencyCare;

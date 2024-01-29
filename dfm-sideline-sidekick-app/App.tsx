@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
+import EmergencyCare from "./pages/EmergencyCare";
 import GeneralPrinciples from "./pages/generalPrinciples";
 
 const styles = StyleSheet.create({
@@ -14,9 +15,9 @@ const styles = StyleSheet.create({
 
 export default function App() {
   return (
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     <View style={styles.container}>
-      <GeneralPrinciples/>
+      <GeneralPrinciples />
+      {/* <EmergencyCare/> */}
       <StatusBar style="auto" />
     </View>
   );
