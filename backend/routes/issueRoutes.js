@@ -1,22 +1,23 @@
 import express from "express";
-import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
-import { createEmergency, createGeneralPrinciple } from "../controllers/issueController.js";
 
 import {
-  validateEmergencyData,
-  validateGeneralPrincipleData,
-  handleValidationErrors,
-} from "../validators/issueValidator.js";
-import {
-  getAllEmergencies,
-  getEmergencyById,
-  getAllGeneralPrinciples,
-  getGeneralPrincipleById,
+  createEmergency,
+  createGeneralPrinciple,
   deleteEmergencyById,
   deleteGeneralPrincipleById,
+  getAllEmergencies,
+  getAllGeneralPrinciples,
+  getEmergencyById,
+  getGeneralPrincipleById,
   updatedEmergencyById,
-  updatedGeneralPrincipleById
+  updatedGeneralPrincipleById,
 } from "../controllers/issueController.js";
+import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
+import {
+  handleValidationErrors,
+  validateEmergencyData,
+  validateGeneralPrincipleData,
+} from "../validators/issueValidator.js";
 
 const router = express.Router();
 
@@ -44,28 +45,16 @@ router.post(
 );
 
 // DELETE a specific emergency by ID
-router.delete(
-  "/emergencies/:id",
-  deleteEmergencyById
-);
+router.delete("/emergencies/:id", deleteEmergencyById);
 
 // DELETE a specific general principle by ID
-router.delete(
-  "/generalPrinciples/:id",
-  deleteGeneralPrincipleById
-);
+router.delete("/generalPrinciples/:id", deleteGeneralPrincipleById);
 
 // PUT a specific emergency by ID
-router.put(
-  "/emergencies/:id",
-  updatedEmergencyById
-)
+router.put("/emergencies/:id", updatedEmergencyById);
 
 // PUT a specific general principle by ID
-router.put(
-  "/generalPrinciples/:id",
-  updatedGeneralPrincipleById
-)
+router.put("/generalPrinciples/:id", updatedGeneralPrincipleById);
 
 // Add more routes as needed (e.g., PUT, DELETE)
 export default router;
