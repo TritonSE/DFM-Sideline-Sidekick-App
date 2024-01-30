@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Image, Platform, Pressable, StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
+import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+
+import styles from "./ConditionSectionStyles";
 
 export default function ConditionsSection() {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
 
-  interface BulletListProps {
+  type BulletListProps = {
     items: string[];
   }
 
@@ -133,125 +135,3 @@ export default function ConditionsSection() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    ...Platform.select({
-      ios: {
-        marginTop: 80,
-      },
-      android: { 
-        marginTop: 40,
-      },
-      default: {
-        marginTop: 50,
-      },
-    })
-  },
-  margin: {
-    marginLeft: 16,
-  },
-  menu: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-evenly",
-    width: "100%",
-    marginTop: 45,
-  },
-  menuText: {
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#000000",
-    textAlign: "left",
-    marginLeft: 16,
-  },
-  menuButton: {
-    borderBottomWidth: 3,
-    borderColor: "#D5D5D5",
-    width: "50%",
-  },
-  menuButtonSelected: {
-    borderBottomWidth: 3,
-    borderColor: "#000000",
-    width: "50%",
-  },
-  menuTextSelected: {
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#000000",
-    textAlign: "left",
-    marginLeft: 16,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontFamily: "Roboto",
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#00629B",
-    marginLeft: 2,
-  },
-  title: {
-    fontFamily: "Roboto",
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#182B49",
-    marginLeft: 2, 
-  },
-  image: {
-    width: 24,
-    height: 24,
-    marginLeft: 16,
-    marginBottom: 22,
-  },
-  information: {
-    marginLeft: 16,
-    marginTop: 20,
-    marginRight: 16,
-  },
-  overview: {},
-  howToTreat: {},
-  overviewHidden: {
-    display: "none",
-  },
-  howToTreatHidden: {
-    display: "none",
-  },
-  descriptionTitle: {
-    fontFamily: "Roboto",
-    fontSize: 18,
-    color: "#000000",
-    fontWeight: "bold",
-  },
-  descriptionInfo: {
-    marginTop: 5,
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#000000",
-  },
-  infoSection: {
-    marginTop: 15,
-  },
-  list: {
-    paddingLeft: 10,
-    marginRight: 50,
-    marginTop: 5,
-  },
-  listItem: {
-    flexDirection: "row",
-  },
-  bullet: {
-    marginRight: 5,
-    fontSize: 18,
-    color: "#000000",
-  },
-  itemText: {
-    fontSize: 16,
-    fontFamily: "Roboto",
-    color: "#000000",
-  },
-});
