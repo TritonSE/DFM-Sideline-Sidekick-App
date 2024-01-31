@@ -5,6 +5,7 @@ import {
   createGeneralPrinciple,
   deleteEmergencyById,
   deleteGeneralPrincipleById,
+  getAll,
   getAllEmergencies,
   getAllGeneralPrinciples,
   getEmergencyById,
@@ -20,6 +21,9 @@ import {
 } from "../validators/issueValidator.js";
 
 const router = express.Router();
+
+//GET all emergencies and general principles
+router.get("/all", getAll);
 
 // GET all emergencies
 router.get("/emergencies", getAllEmergencies);
@@ -56,5 +60,5 @@ router.put("/emergencies/:id", updatedEmergencyById);
 // PUT a specific general principle by ID
 router.put("/generalPrinciples/:id", updatedGeneralPrincipleById);
 
-// Add more routes as needed (e.g., PUT, DELETE)
+// Add more routes as needed
 export default router;

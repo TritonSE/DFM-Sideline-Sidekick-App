@@ -3,6 +3,17 @@ import { validationResult } from "express-validator";
 
 import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
 
+// Get all emergencies and general principles
+const getAll = async (req, res) => {
+  try {
+    const emergencies = await Emergency.find();
+    const generalPrinciples = await GeneralPrinciple.find();
+    res.json({ emergencies, generalPrinciples });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Get all emergencies
 const getAllEmergencies = async (req, res) => {
   try {
@@ -186,4 +197,10 @@ export const updatedGeneralPrincipleById = async (req, res) => {
   }
 };
 
-export { getAllEmergencies, getEmergencyById, getAllGeneralPrinciples, getGeneralPrincipleById };
+export {
+  getAll,
+  getAllEmergencies,
+  getEmergencyById,
+  getAllGeneralPrinciples,
+  getGeneralPrincipleById,
+};
