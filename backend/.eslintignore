@@ -6,3 +6,8 @@ out/
 public/
 next.config.js
 vite.config.ts
+controllers/*.js
+models/*.js
+routes/*.js
+validators/*.js
+errors.js
