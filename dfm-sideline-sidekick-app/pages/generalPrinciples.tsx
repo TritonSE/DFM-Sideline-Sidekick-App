@@ -46,15 +46,26 @@ const GeneralPrinciples = () => {
         letter="A"
         text="Risk Warning"
         subpoints={[
-          "Thunder = risk (lightning within 8-10 mile radius)",
-          "Can occur w/o clouds or rain",
-          "Avoid landlines (cellphone is safe)",
+          {
+            text: "Thunder = risk (lightning within 8-10 mile radius)",
+          },
+          { text: "Can occur w/o clouds or rain" },
+          { text: "Avoid landlines (cellphone is safe)" },
         ]}
       />
       <BulletPoint
         letter="B"
         text="Resuming Activity"
-        subpoints={["30 min after last sound of thunder or sight of lightning"]}
+        subpoints={[
+          {
+            text: "30 min after last sound of thunder or sight of lightning",
+            subpoints: [
+              {
+                text: "“Half an hour since thunder roars, now it’s safe to go outdoors”",
+              },
+            ],
+          },
+        ]}
       />
     </View>
   );
