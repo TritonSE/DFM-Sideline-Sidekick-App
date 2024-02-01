@@ -14,22 +14,22 @@ export default function ConditionsSection() {
       try {
         await Font.loadAsync({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+          "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+          "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
         });
         setIsFontsLoaded(true);
       } catch (error) {
         console.error("Error loading fonts:", error);
       }
     }
-  
+
     void loadFont();
   }, []);
 
   type BulletListProps = {
     items: string[];
-  }
+  };
 
   const BulletList = ({ items }: BulletListProps) => (
     <View style={styles.list}>

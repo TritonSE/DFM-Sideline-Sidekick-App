@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import ConditionsSection from "./ConditionsSection";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     <View style={styles.container}>
-      <ConditionsSection/>
+      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
   );
