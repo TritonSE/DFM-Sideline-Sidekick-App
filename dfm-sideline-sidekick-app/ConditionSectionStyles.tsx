@@ -30,7 +30,7 @@ export default StyleSheet.create({
         marginTop: 45,
     },
     menuText: {
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#000000",
         textAlign: "left",
@@ -47,24 +47,21 @@ export default StyleSheet.create({
         width: "50%",
     },
     menuTextSelected: {
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Bold",
         fontSize: 16,
         color: "#000000",
         textAlign: "left",
         marginLeft: 16,
-        fontWeight: "bold",
     },
     subtitle: {
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Bold",
         fontSize: 18,
-        fontWeight: "bold",
         color: "#00629B",
         marginLeft: 2,
     },
     title: {
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Bold",
         fontSize: 32,
-        fontWeight: "bold",
         color: "#182B49",
         marginLeft: 2, 
     },
@@ -88,14 +85,13 @@ export default StyleSheet.create({
         display: "none",
     },
     descriptionTitle: {
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Bold",
         fontSize: 18,
         color: "#000000",
-        fontWeight: "bold",
     },
     descriptionInfo: {
         marginTop: 5,
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#000000",
     },
@@ -117,7 +113,7 @@ export default StyleSheet.create({
     },
     itemText: {
         fontSize: 16,
-        fontFamily: "Roboto",
+        fontFamily: "Roboto-Regular",
         color: "#000000",
     },
 });

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import * as Font from "expo-font";
+import { useEffect, useState } from "react";
 import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import styles from "./ConditionSectionStyles";
@@ -6,6 +7,25 @@ import styles from "./ConditionSectionStyles";
 export default function ConditionsSection() {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
+  const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function loadFont() {
+      try {
+        await Font.loadAsync({
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+        });
+        setIsFontsLoaded(true);
+      } catch (error) {
+        console.error("Error loading fonts:", error);
+      }
+    }
+  
+    void loadFont();
+  }, []);
 
   type BulletListProps = {
     items: string[];
@@ -36,9 +56,14 @@ export default function ConditionsSection() {
     }
   }
 
+  if (!isFontsLoaded) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
         <Image style={styles.image} source={require("./assets/ic_caretleft.png")} />
         <View style={styles.margin}>
           <Text style={styles.subtitle}>Medical Emergency</Text>
