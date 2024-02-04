@@ -1,38 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
 import BulletPoint from "../components/BulletPoint";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 50,
-    textAlign: "left",
-    alignSelf: "stretch",
-    paddingLeft: 25,
-  },
-  title: {
-    color: "#182B49",
-    fontSize: 28,
-    fontFamily: "Roboto",
-    fontWeight: "700",
-    marginBottom: 20,
-    textAlign: "left",
-    paddingTop: 10,
-  },
-  subTitle: {
-    color: "#182B49",
-    fontSize: 21,
-    fontFamily: "Roboto",
-    fontWeight: "700",
-    marginBottom: 5,
-    textAlign: "left",
-  },
-  button: {
-    fontSize: 25,
-  },
-});
+import styles from "./generalPrinciplesStyles"
 
 const GeneralPrinciples = () => {
   return (

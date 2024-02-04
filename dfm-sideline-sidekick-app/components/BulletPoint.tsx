@@ -1,5 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+
+import styles from "./BulletPointStyles"
 
 type Subpoint = {
   text: string;
@@ -11,43 +13,6 @@ type BulletPointProps = {
   text: string;
   subpoints?: Subpoint[];
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 15,
-  },
-  circle: {
-    width: 24, // this should be a "props"-value in future
-    height: 24, // this should be a "props"-value in future
-    borderRadius: 24 / 2,
-    backgroundColor: "#00629B",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  circleCaption: {
-    fontSize: 14,
-    color: "white",
-    fontWeight: "600",
-  },
-  mainText: {
-    color: "black",
-    fontSize: 16,
-    fontFamily: "Roboto",
-    fontWeight: "700",
-    paddingLeft: 5,
-  },
-  subpoints: {
-    paddingTop: 5,
-    paddingLeft: 38,
-    paddingRight: 25,
-  },
-  point: {
-    fontSize: 15,
-  },
-});
 
 const BulletPoint: React.FC<BulletPointProps> = ({ letter, text, subpoints }) => {
   // render subpoints recursively

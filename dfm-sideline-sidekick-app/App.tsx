@@ -1,8 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-import EmergencyCare from "./pages/EmergencyCare";
-import GeneralPrinciples from "./pages/generalPrinciples";
+export default function App() {
+  return (
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -12,13 +19,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <GeneralPrinciples />
-      {/* <EmergencyCare/> */}
-      <StatusBar style="auto" />
-    </View>
-  );
-}
