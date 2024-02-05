@@ -1,6 +1,18 @@
 import express from "express";
-import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
 import { validationResult } from "express-validator";
+
+import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
+
+// Get all emergencies and general principles
+const getAll = async (req, res) => {
+  try {
+    const emergencies = await Emergency.find();
+    const generalPrinciples = await GeneralPrinciple.find();
+    res.json({ emergencies, generalPrinciples });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 // Get all emergencies
 const getAllEmergencies = async (req, res) => {
@@ -118,11 +130,11 @@ export const deleteEmergencyById = async (req, res) => {
     }
 
     // Respond with success and the doc deleted
-    res.status(200).json({sucesss: true, "deleted document": deletedEmergency});
+    res.status(200).json({ sucesss: true, "deleted document": deletedEmergency });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 // Delete a general principle by ID
 export const deleteGeneralPrincipleById = async (req, res) => {
@@ -133,18 +145,17 @@ export const deleteGeneralPrincipleById = async (req, res) => {
     }
 
     // Respond with success and the doc deleted
-    res.status(200).json({sucesss: true, "deleted document": deletedPrinciple});
+    res.status(200).json({ sucesss: true, "deleted document": deletedPrinciple });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 // Update an emergency by id
 export const updatedEmergencyById = async (req, res) => {
   try {
-
     // filter to find emergency by id
-    const filter = { _id: req.params.id};
+    const filter = { _id: req.params.id };
     // update changed to found emergency
     const update = req.body;
 
@@ -153,7 +164,7 @@ export const updatedEmergencyById = async (req, res) => {
       // includeResultMetadata: true (uncomment for metadata information)
     });
     if (!updatedEmergency) {
-      res.status(404).json({message: "Emergency not found"});
+      res.status(404).json({ message: "Emergency not found" });
     }
 
     // Respond with the updated emergency data
@@ -161,14 +172,13 @@ export const updatedEmergencyById = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 // Update an general principle by id
 export const updatedGeneralPrincipleById = async (req, res) => {
   try {
-
     // filter to find emergency by id
-    const filter = { _id: req.params.id};
+    const filter = { _id: req.params.id };
     // update changed to found emergency
     const update = req.body;
 
@@ -177,7 +187,7 @@ export const updatedGeneralPrincipleById = async (req, res) => {
       // includeResultMetadata: true (uncomment for metadata information)
     });
     if (!updatedPrinciple) {
-      res.status(404).json({message: "General principle not found"});
+      res.status(404).json({ message: "General principle not found" });
     }
 
     // Respond with the updated general principle data
@@ -185,6 +195,12 @@ export const updatedGeneralPrincipleById = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
-export { getAllEmergencies, getEmergencyById, getAllGeneralPrinciples, getGeneralPrincipleById };
+export {
+  getAll,
+  getAllEmergencies,
+  getEmergencyById,
+  getAllGeneralPrinciples,
+  getGeneralPrincipleById,
+};
