@@ -1,4 +1,5 @@
 import { Text, TouchableOpacity, View } from "react-native";
+
 import AntIcon from "react-native-vector-icons/AntDesign";
 
 import BulletPoint from "../components/BulletPoint";
