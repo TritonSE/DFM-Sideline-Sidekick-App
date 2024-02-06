@@ -3,8 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { Button, Platform, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
-
-  // "https://api.sampleapis.com/wines/reds"
   // storing api url
   const localhost = Platform.OS === "android" ? "10.0.2.2" : "127.0.0.1";
   const url = `http://${localhost}:3001/api/all`;
@@ -76,15 +74,15 @@ export default function App() {
       console.log(jsonOutput);
 
     } catch (err) {
-      console.log(err);
+      console.log("ERROR:", err);
     }
-  }
+  };
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Button title="Download here!" onPress={downloadJSON}/>
+      <Button title="Download here!" onPress={downloadJSON} />
       <StatusBar style="auto" />
     </View>
   );
