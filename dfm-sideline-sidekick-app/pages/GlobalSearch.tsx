@@ -1,52 +1,19 @@
 import { useState } from "react";
-import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, Text, TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome"; 
+
+import styles from "./GlobalSearchStyles";
 
 type Document = {
   id: string;
   title: string;
+  subtitle: string;
 };
 
-const styles = StyleSheet.create({
-    container: {
-      paddingHorizontal: 17.5,
-      paddingTop: 50,
-    },
-    title: {
-      color: "#182B49",
-      fontSize: 28,
-      fontFamily: "Roboto",
-      fontWeight: "700",
-      marginBottom: 20,
-      textAlign: "left",
-      paddingTop: 10,
-    },
-    searchSection: {
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      borderWidth: 1,
-      borderColor: "rgba(0, 0, 0, 0.4)",
-      borderRadius: 10,
-      margin: 0,
-    },
-    searchIcon: {
-      padding: 10,
-    },
-    input: {
-      flex: 1,
-      paddingVertical: 10,
-      color: "#424242",
-    },
-    itemTitle: {
-      padding: 10,
-    },
-  });
-
 const documents: Document[] = [
-  { id: "1", title: "Emergency Action Plan" },
-  { id: "2", title: "First Aid Procedures" },
-  { id: "3", title: "Fire Safety Manual" },
+  { id: "1", title: "Cervical Spine Injury", subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do." },
+  { id: "2", title: "Cervical Strain", subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing." },
+  { id: "3", title: "Stroke", subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." },
 ];
 
 const SearchBarComponent = () => {
@@ -75,12 +42,22 @@ const SearchBarComponent = () => {
           placeholder="Search"
           value={query}
           onChangeText={handleSearch}
+          selectionColor="#909090"
         />
       </View>
       <FlatList
         data={filteredDocuments}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Text style={styles.itemTitle}>{item.title}</Text>}
+        ItemSeparatorComponent={() => <View style={styles.divider} />}
+        renderItem={({ item }) => (
+          <View style={styles.listItemContainer}>
+            <View style={styles.listItemTextContainer}>
+              <Text style={styles.listItemTitle}>{item.title}</Text>
+              <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
+            </View>
+            <Icon name="chevron-right" size={12} color="#909090" />
+          </View>
+        )}
       />
     </View>
   );
