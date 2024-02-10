@@ -1,12 +1,4 @@
-import * as Font from 'expo-font';
 import { StyleSheet } from "react-native";
-
-const customFonts = {
-  'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
-  'Roboto-Bold': require('../assets/fonts/Roboto-Bold.ttf')
-};
-
-Font.loadAsync(customFonts);
 
 const styles = StyleSheet.create({
   container: {

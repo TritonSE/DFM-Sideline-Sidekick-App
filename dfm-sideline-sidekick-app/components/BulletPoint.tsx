@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-import styles from "./BulletPointStyles"
+import styles from "./BulletPointStyles";
 
 type Subpoint = {
   text: string;
@@ -14,7 +14,7 @@ type BulletPointProps = {
   subpoints?: Subpoint[];
 };
 
-const BulletPoint: React.FC<BulletPointProps> = ({ letter, text, subpoints }) => {
+const BulletPoint: React.FC<BulletPointProps> = ({ letter, text, subpoints: initSubpoints }) => {
   // render subpoints recursively
   const renderSubpoints = (subpoints: Subpoint[], level = 0) => {
     const markers = [
@@ -47,7 +47,7 @@ const BulletPoint: React.FC<BulletPointProps> = ({ letter, text, subpoints }) =>
         </View>
         <Text style={styles.mainText}>{text}</Text>
       </View>
-      <View style={styles.subpoints}>{subpoints && renderSubpoints(subpoints)}</View>
+      <View style={styles.subpoints}>{initSubpoints && renderSubpoints(initSubpoints)}</View>
     </View>
   );
 };
