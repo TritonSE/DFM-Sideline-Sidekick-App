@@ -1,3 +1,5 @@
+import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import { useFonts } from "expo-font";
 import { Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
@@ -6,6 +8,13 @@ import BulletPoint from "../components/BulletPoint";
 import styles from "./generalPrinciplesStyles";
 
 const GeneralPrinciples = () => {
+  const [fontsLoaded] = useFonts({
+    "Roboto-Regular": Roboto_400Regular,
+    "Roboto-Bold": Roboto_700Bold,
+  });
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <View style={styles.container}>
       <TouchableOpacity>
