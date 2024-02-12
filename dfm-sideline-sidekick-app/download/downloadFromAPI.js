@@ -50,7 +50,7 @@ export const downloadJSON = async (fileName, OS) => {
             uri = result.uri;
 
             // update the stored version to the newest version
-            await setStoredVersion(newestVersion);
+            await setStoredVersion(newestVersion.toString());
 
         } else {
             console.log("File already exists and is up to date");

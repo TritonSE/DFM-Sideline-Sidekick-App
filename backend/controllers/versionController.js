@@ -1,5 +1,3 @@
-import express from "express";
-
 import { Version } from "../models/versionModel.js";
 import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
 

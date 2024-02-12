@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const getStoredVersion = async () => {
     try {
         const result = await AsyncStorage.getItem('version');
-        return result
+        return parseInt(result);
     } catch (e) {
         console.log("Get version failed:", e);
     }
@@ -15,7 +15,7 @@ export const setStoredVersion = async (value) => {
     console.log("value", value);
 
     try {
-        await AsyncStorage.setItem('version', value);
+        await AsyncStorage.setItem('version', value.toString());
     } catch (e) {
         console.log("Set version failed:", e)
     }
