@@ -1,13 +1,42 @@
+// import { useRoute } from "@react-navigation/native";
+import { ParamListBase, RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
+// eslint-disable-next-line import/namespace
 import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import styles from "./ConditionSectionStyles";
+import { getEmergency } from "./emergencies";
 
-export default function ConditionsSection() {
+import type { Emergency } from "./emergencies";
+
+export type RootStackParamList = {
+  // Define the parameters for your screens here
+  Conditions: { emergencyObjectId: string }; // Example parameter
+} & ParamListBase;
+
+// Define the type for the route parameters
+type ConditionsScreenRouteProp = RouteProp<RootStackParamList, "Conditions">;
+
+// Define the type for the navigation object
+type ConditionsScreenNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
+
+type Props = {
+  route: ConditionsScreenRouteProp;
+  navigation: ConditionsScreenNavigationProp;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function ConditionsSection({ route, navigation }: Props) {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
+
+  // const route = useRoute();
+  const { params } = route; // Destructure params from the route object
+  //const { emergencyObjectId } = route.params();
+  const [emergency, setEmergency] = useState<Emergency>();
 
   useEffect(() => {
     async function loadFont() {
@@ -26,6 +55,20 @@ export default function ConditionsSection() {
 
     void loadFont();
   }, []);
+
+  useEffect(() => {
+    if (params?.emergencyObjectId) {
+      // Check if params and emergencyObjectId exist
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      getEmergency(params.emergencyObjectId).then((result) => {
+        if (result.success) {
+          setEmergency(result.data);
+        } else {
+          console.error("Error fetching emergency data:", result.error);
+        }
+      });
+    }
+  }, [params]); // Include params in the dependency array
 
   type BulletListProps = {
     items: string[];
@@ -67,7 +110,8 @@ export default function ConditionsSection() {
         <Image style={styles.image} source={require("./assets/ic_caretleft.png")} />
         <View style={styles.margin}>
           <Text style={styles.subtitle}>Medical Emergency</Text>
-          <Text style={styles.title}>Cervical Spine Injury</Text>
+          {/* <Text style={styles.title}>Cervical Spine Injury</Text> */}
+          {emergency && <Text style={styles.title}>{emergency.title}</Text>}
         </View>
 
         <View style={styles.menu}>
