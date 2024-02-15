@@ -33,10 +33,22 @@ export default function ConditionsSection({ route, navigation }: Props) {
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
 
+
   // const route = useRoute();
   const { params } = route; // Destructure params from the route object
   //const { emergencyObjectId } = route.params();
   const [emergency, setEmergency] = useState<Emergency>();
+
+  const mechanismArray: string[] = emergency?.overview?.["Mechanism of Injury"] ?? [];
+  const diagnosisArray: string[] = emergency?.overview?.Diagnosis ?? [];
+  const physicalArray: string[] = emergency?.overview?.["Physical Exam"] ?? [];
+
+  const accuteArray: string[] = emergency?.treatment?.["Acute Management"] ?? [];
+  const dispoArray: string[] = emergency?.treatment?.Dispo ?? [];
+  const contentArray: string[] = emergency?.treatment?.Considerations.Content ?? [];
+
+
+  
 
   useEffect(() => {
     async function loadFont() {
@@ -138,31 +150,24 @@ export default function ConditionsSection({ route, navigation }: Props) {
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Importance</Text>
               <Text style={styles.descriptionInfo}>
-                The cervical spine is not stabilized or protected by ribs or other surrounding
-                structures, so fractures are more common and can be unstable. This creates risk for
-                potential damage to the spinal cord resulting in quadriplegia and death and could be
-                made worse by moving patients without proper immobilization
+                {emergency?.overview?.Importance}
               </Text>
             </View>
 
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Mechanism of Injury</Text>
-              <BulletList
-                items={[
-                  "Direct blow to head/neck",
-                  "Axial loading to spine, esp. w/neck in flexion",
-                ]}
-              />
+              <BulletList items={mechanismArray}/> 
             </View>
 
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Diagnosis</Text>
-              <BulletList items={["Local pain", "Ecchymosis, and swelling"]} />
+              <BulletList items={diagnosisArray} />
             </View>
 
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Physical Exam</Text>
-              <BulletList items={["TTP over spinous process or vertebral bodies"]} />
+                
+              <BulletList items={physicalArray} />
             </View>
           </View>
 
@@ -170,32 +175,22 @@ export default function ConditionsSection({ route, navigation }: Props) {
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Acute Management</Text>
               <BulletList
-                items={[
-                  "Immobilize with spine board, cervical-collar, and barriers to lateral head movement (or whole body vacuum splint)",
-                  "If this is not available, immobilize by placing hands on patient shoulders and using forearms to immobilize head",
-                ]}
+                items={accuteArray}
               />
             </View>
 
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Dispo</Text>
-              <BulletList items={["Emergency transport to ED for CT (most accurate) +/- XR"]} />
+              <BulletList items={dispoArray} />
             </View>
 
             <View style={styles.infoSection}>
               <Text style={styles.descriptionTitle}>Considerations</Text>
               <Text style={styles.descriptionInfo}>
-                If any suspicion for injury, send to ED. However, less likely if the following
-                criteria are met:
+                {emergency?.treatment.Considerations.Header}
               </Text>
               <BulletList
-                items={[
-                  "No cervical spine tenderness",
-                  "Normal alertness/consciousness/GCS 15",
-                  "No major distracting injuries",
-                  "Normal neurologic status (full strength/sensation in all extremities)",
-                  "Ability to actively rotate neck to 45 degrees laterally in both directions",
-                ]}
+                items={contentArray}
               />
             </View>
           </View>

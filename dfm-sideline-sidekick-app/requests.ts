@@ -14,9 +14,10 @@ type Method = "GET" | "POST" | "PUT";
  * every request. This means in the rest of our code, we can write "/api/foo"
  * instead of "http://localhost:3001/api/foo".
  */
-// const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+//const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 // INSERT IP ADDRESS HERE
-const API_BASE_URL = "http://100.112.104.53:3001";
+const API_BASE_URL = "http://100.83.62.24:3001";
+
 
 /**
  * A wrapper around the built-in `fetch()` function that abstracts away some of
