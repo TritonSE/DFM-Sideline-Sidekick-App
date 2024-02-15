@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import PropTypes from "prop-types";
 // eslint-disable-next-line import/namespace
 import { StyleSheet, View } from "react-native";
 import { Circle, G, Svg } from "react-native-svg";
@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// eslint-disable-next-line react/prop-types
 export const CircleIcon = ({ fillColor }) => {
   const circleRadius = 44.6533;
   const circleCenterX = 45;
@@ -20,7 +19,7 @@ export const CircleIcon = ({ fillColor }) => {
   return (
     <View style={styles.container}>
       <Svg width={89.307} height={89.307} viewBox="0 0 90 91" fill="none">
-        <Circle cx={circleCenterX} cy={circleCenterY} r={circleRadius} fill={fillColor} />
+        <Circle cx={circleCenterX} cy={circleCenterY} r={circleRadius} fill={fillColor as string} />
 
         <G transform={`translate(${circleCenterX - 20}, ${circleCenterY - 20})`}>
           <SearchIcon />
@@ -28,4 +27,8 @@ export const CircleIcon = ({ fillColor }) => {
       </Svg>
     </View>
   );
+};
+
+CircleIcon.propTypes = {
+  fillColor: PropTypes.string.isRequired,
 };
