@@ -4,11 +4,11 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from "react";
-// eslint-disable-next-line import/namespace
 import { StyleSheet } from "react-native";
 
 import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
+// eslint-disable-next-line import/no-named-as-default
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";

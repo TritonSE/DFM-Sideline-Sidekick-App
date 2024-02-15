@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native';
+import { Text, View } from "react-native";
 
 const TabPage = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Search Dummy Page</Text>
     </View>
   );

@@ -1,9 +1,9 @@
-import { View } from 'react-native';
-import { Svg, Path } from 'react-native-svg';
+import { View } from "react-native";
+import { Path, Svg } from "react-native-svg";
 
 export const SearchIcon = () => {
   return (
-    <View >
+    <View>
       <Svg width={40} height={40} viewBox="0 0 40 41" fill="none">
         <Path
           fillRule="evenodd"
@@ -15,5 +15,3 @@ export const SearchIcon = () => {
     </View>
   );
 };
-
-

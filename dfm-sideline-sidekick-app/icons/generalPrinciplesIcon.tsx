@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-// eslint-disable-next-line import/namespace
 import { View } from "react-native";
 import { G, Path, Svg } from "react-native-svg";
 

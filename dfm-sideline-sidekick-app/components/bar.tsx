@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// eslint-disable-next-line import/namespace
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { BookmarkIcon } from "../icons/bookmarkIcon";
