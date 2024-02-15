@@ -7,7 +7,7 @@ import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
 
-const GeneralPrinciples = () => {
+const GeneralPrinciples = (title, content) => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -20,8 +20,8 @@ const GeneralPrinciples = () => {
       <TouchableOpacity>
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>
-      <Text style={styles.title}>General Principles</Text>
-      <Text style={styles.subTitle}>General Principles</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.subTitle}>{content.title}</Text>
       <BulletPoint
         letter="A"
         text="Risk Warning"
