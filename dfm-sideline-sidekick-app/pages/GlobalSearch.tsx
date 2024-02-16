@@ -46,19 +46,23 @@ const SearchBarComponent = () => {
   };
 
   const highlightText = (text: string, input: string): React.ReactNode[] => {
-    // Escape special characters in the query for use in a regular expression
-    const escapedQuery = input.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&");
-    // Build a regex to match the query as whole words
-    const queryRegex = new RegExp(`(\\b${escapedQuery})`, "gi");
+    // Split the input into individual words and escape special characters for regex
+    const words = input.split(/\s+/).map((word) => word.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&"));
 
-    // Split the title by the regular expression to get an array of parts
+    // Create a regex pattern that matches any of the words
+    const pattern = words.join("|"); // Join the words with the regex 'or' operator
+    const queryRegex = new RegExp(`(${pattern})`, "gi");
+
+    // Split the text by the regular expression to get an array of parts
     const parts = text.split(queryRegex);
 
     return parts.map((part, index) => {
-      // Check if the part of the title matches the query and is not just a whitespace
+      // Check if the part of the text matches any of the words in the query
       const isMatch = queryRegex.test(part) && part.trim() !== "";
+      // Reset lastIndex because of the global regex test side effect
+      queryRegex.lastIndex = 0;
       return (
-        <Text key={index} style={isMatch ? styles.highlightedText : undefined}>
+        <Text key={index.toString()} style={isMatch ? styles.highlightedText : undefined}>
           {part}
         </Text>
       );
