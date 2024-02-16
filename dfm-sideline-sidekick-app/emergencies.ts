@@ -2,23 +2,31 @@ import { get, handleAPIError, post, put } from "./requests";
 
 import type { APIResult } from "./requests";
 
+// export type Emergency = {
+//   _id: string;
+//   title: string;
+//   overview?: {
+//     Importance?: string;
+//     "Mechanism of Injury"?: string[];
+//     Diagnosis?: string[];
+//     "Physical Exam"?: string[];
+//   };
+//   treatment?: {
+//     "Acute Management"?: string[];
+//     Dispo?: string[];
+//     Considerations?: {
+//       Header?: string;
+//       Content?: string[];
+//     };
+//   };
+//   content?: object;
+// };
+
 export type Emergency = {
   _id: string;
   title: string;
-  overview:{
-    Importance: string;
-    'Mechanism of Injury': string[];
-    Diagnosis: string[];
-    'Physical Exam': string[];
-  };
-  treatment:{
-    'Acute Management': string[];
-    Dispo: string[];
-    Considerations:{
-      Header: string;
-      Content: string[];
-    };
-  };
+  overview?: object;
+  treatment?: object;
   content?: object;
 };
 

@@ -15,9 +15,9 @@ type Method = "GET" | "POST" | "PUT";
  * instead of "http://localhost:3001/api/foo".
  */
 //const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
-// INSERT IP ADDRESS HERE
-const API_BASE_URL = "http://100.83.62.24:3001";
-
+// NOTE TO REVIEWERS: INSERT IP ADDRESS HERE
+// YOU MUST BE ON THE SAME NETWORK AS TEST DEVICE AND HAVE BACKEND RUNNING (WITH .env SETUP and "Database Connected" message)
+const API_BASE_URL = "http://100.112.104.53:3001";
 
 /**
  * A wrapper around the built-in `fetch()` function that abstracts away some of
