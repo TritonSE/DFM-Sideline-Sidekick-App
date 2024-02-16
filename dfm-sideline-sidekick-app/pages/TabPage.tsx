@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 const TabPage = () => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Search Dummy Page</Text>
+      <Text>Tab Dummy Page</Text>
     </View>
   );
 };

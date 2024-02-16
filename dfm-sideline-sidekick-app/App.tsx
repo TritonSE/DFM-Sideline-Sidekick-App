@@ -9,12 +9,10 @@ import { StyleSheet } from "react-native";
 import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
 // eslint-disable-next-line import/no-named-as-default
-import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 
 type RootStackParamList = {
-  Home: undefined;
   Bookmark: undefined;
   Search: undefined;
   Tab: undefined;
@@ -56,8 +54,7 @@ const BottomNavBarComponent = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="Search">
         <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
         <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />

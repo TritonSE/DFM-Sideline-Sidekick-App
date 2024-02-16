@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import { BookmarkIcon } from "../icons/bookmarkIcon";
 import { CircleIcon } from "../icons/circleIcon";
 import { GeneralPrinciplesIcon } from "../icons/generalPrinciplesIcon";
+import styles from "./barStyles";
 
 export type NavItem = {
   id: number;
@@ -12,27 +13,12 @@ export type NavItem = {
 };
 
 export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(2);
 
   const handleItemClick = (itemId: number) => {
     setSelectedItemId(itemId);
     items.find((item) => item.id === itemId)?.onClick();
   };
-
-  const styles = StyleSheet.create({
-    bottomBar: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-      alignItems: "center",
-      backgroundColor: "#f0f0f0",
-      padding: 8,
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: 79,
-    },
-  });
 
   return (
     <View style={styles.bottomBar}>
