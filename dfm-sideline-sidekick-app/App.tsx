@@ -8,7 +8,6 @@ import { StyleSheet } from "react-native";
 
 import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
-// eslint-disable-next-line import/no-named-as-default
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 

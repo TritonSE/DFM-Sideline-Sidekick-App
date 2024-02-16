@@ -4,6 +4,7 @@ import { TouchableOpacity, View } from "react-native";
 import { BookmarkIcon } from "../icons/bookmarkIcon";
 import { CircleIcon } from "../icons/circleIcon";
 import { GeneralPrinciplesIcon } from "../icons/generalPrinciplesIcon";
+
 import styles from "./barStyles";
 
 export type NavItem = {

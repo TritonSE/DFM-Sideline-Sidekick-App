@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Circle, G, Svg } from "react-native-svg";
 
 import { SearchIcon } from "../icons/searchIcon";
