@@ -3,7 +3,6 @@ import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
-// eslint-disable-next-line import/namespace
 import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import styles from "./ConditionSectionStyles";

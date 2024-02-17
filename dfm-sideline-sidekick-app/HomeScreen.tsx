@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 // import * as Font from "expo-font";
 // import { useEffect, useState } from "react";
 // import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
-// eslint-disable-next-line import/namespace
 import { Pressable, Text } from "react-native";
 // import styles from "./ConditionSectionStyles";
 // import { getEmergency } from "./emergencies";
