@@ -7,7 +7,13 @@ import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
 
-const GeneralPrinciples = (title, content) => {
+type BulletPointProps = {
+  title: string;
+  // subpoints?: Subpoint[];
+};
+
+// const GeneralPrinciples = (title, content) => {
+const GeneralPrinciples: React.FC<BulletPointProps> = ({ title }) => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -21,7 +27,8 @@ const GeneralPrinciples = (title, content) => {
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.subTitle}>{content.title}</Text>
+      {/* <Text style={styles.subTitle}>{content.title}</Text> */}
+      <Text style={styles.subTitle}>{title}</Text>
       <BulletPoint
         letter="A"
         text="Risk Warning"
