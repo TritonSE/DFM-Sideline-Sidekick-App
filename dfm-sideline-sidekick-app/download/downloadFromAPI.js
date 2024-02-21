@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as FileSystem from 'expo-file-system';
+
+// import { PermissionsAndroid } from 'react-native';
 
 import { checkDirectoryExists, checkFileExists } from './File Preprocess/existenceChecker';
 import { createResumable } from './createResumable/createResumable';
 import { getCurrentVersion } from './versionControl/getCurrentVersion';
 import { getStoredVersion, setStoredVersion } from './versionControl/storedVersion';
 
-
 export const downloadJSON = async (fileName, OS) => {
 
     // compatibility for type of device
-    const localhost = OS === "android" ? "10.0.2.2" : "127.0.0.1";
+    const localhost = OS === "android" ? "10.0.2.2" : "128.54.212.207";
     const url = `http://${localhost}:3001/api/allWithVersion`; // all data
     const versionUrl = `http://${localhost}:3001/api/version`; // newest version
+
+    console.log(OS);
 
     // directory in local storage to store files at
     const fileDir = FileSystem.documentDirectory + "expo/";
@@ -53,7 +57,7 @@ export const downloadJSON = async (fileName, OS) => {
             await setStoredVersion(newestVersion.toString());
 
         } else {
-            console.log("File already exists and is up to date");
+            console.log("File already exists and is up to date!");
             uri = fileDir + fileName;
         }
 
