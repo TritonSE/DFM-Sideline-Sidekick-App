@@ -13,7 +13,7 @@ import type { Emergency } from "./emergencies";
 
 export type RootStackParamList = {
   // Define the parameters for your screens here
-  Conditions: { emergencyObjectId: string }; // Example parameter
+  Conditions: { emergency: Emergency }; // Example parameter
 } & ParamListBase;
 
 // Define the type for the route parameters
@@ -63,17 +63,18 @@ export default function ConditionsSection({ route, navigation }: Props) {
   }, []);
 
   useEffect(() => {
-    if (params?.emergencyObjectId) {
-      // Check if params and emergencyObjectId exist
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      getEmergency(params.emergencyObjectId).then((result) => {
-        if (result.success) {
-          setEmergency(result.data);
-        } else {
-          console.error("Error fetching emergency data:", result.error);
-        }
-      });
-    }
+    // if (params?.emergencyObjectId) {
+    //   // Check if params and emergencyObjectId exist
+    //   // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    //   getEmergency(params.emergencyObjectId).then((result) => {
+    //     if (result.success) {
+    //       setEmergency(result.data);
+    //     } else {
+    //       console.error("Error fetching emergency data:", result.error);
+    //     }
+    //   });
+    // }
+    setEmergency(params.emergency);
   }, [params]); // Include params in the dependency array
 
   useEffect(() => {
@@ -158,7 +159,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
                 ))}
               </View>
             )}
-
           </View>
 
           <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
@@ -195,7 +195,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
                 ))}
               </View>
             )}
-
           </View>
         </View>
       </ScrollView>
