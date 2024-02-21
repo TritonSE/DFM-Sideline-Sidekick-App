@@ -7,7 +7,7 @@ import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-na
 
 import styles from "./ConditionSectionStyles";
 import StringRenderer from "./components/StringRenderer";
-import { getEmergency } from "./emergencies";
+// import { getEmergency } from "./emergencies";
 
 import type { Emergency } from "./emergencies";
 

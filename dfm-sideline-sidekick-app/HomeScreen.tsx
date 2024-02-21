@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, Text } from "react-native";
 
 import { getEmergency } from "./emergencies";
@@ -31,7 +31,7 @@ export default function HomeScreen() {
       }
     }
 
-    fetchEmergency();
+    void fetchEmergency();
   }, []);
 
   const handlePress = () => {
@@ -41,7 +41,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <Pressable onPress={handlePress} disabled={!emergency}>
+    <Pressable onPress={handlePress}>
       <Text>Navigate to ConditionsSection</Text>
     </Pressable>
   );
