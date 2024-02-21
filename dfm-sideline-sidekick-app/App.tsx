@@ -4,26 +4,30 @@ import GeneralPrinciples from "./pages/generalPrinciples";
 
 // const content = 
 //   {
-//   title: 'Risk Warning',
-//   content: [
-//     {
-//       text: "Thunder = risk (lightning within 8-10 mile radius)",
-//     },
-//     { text: "Can occur w/o clouds or rain" },
-//     { text: "Avoid landlines (cellphone is safe)" },
-//   ],
+//   title: 'General Principles',
+//   content: {
+//     '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)': "",
+//     "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker"
+//     }
 //   }
-// ;
+//   ;
 
-const content = 
+const content = [
   {
   title: 'General Principles',
   content: {
     '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)': "",
     "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker"
     }
-  }
-;
+  },
+  {
+    title: 'General Principles 2',
+    content: {
+      '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)': "",
+      "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker"
+      }
+    }
+  ];
 
 export default function App() {
   return (

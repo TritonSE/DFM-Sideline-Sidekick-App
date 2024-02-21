@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
+import ArrayPage from "../components/ArrayPage";
 import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
@@ -35,7 +36,7 @@ type Content = {
 type GeneralProps = {
   titleProp: string;
   overviewProp?: object;
-  contentProp: Content;
+  contentProp: Content | Content[];
 };
 
 // const GeneralPrinciples = (title, content) => {
@@ -50,7 +51,12 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ titleProp, overviewProp, co
   // const { title, content } = contentProp;
 
   if (Array.isArray(contentProp)) {
-    return <Text>Hello</Text>;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>{titleProp}</Text>
+        <ArrayPage arrayProp={contentProp}/>
+      </View>
+    );
   } else {
     return (
       <View style={styles.container}>
