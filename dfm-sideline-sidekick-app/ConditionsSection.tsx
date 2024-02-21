@@ -41,29 +41,8 @@ export default function ConditionsSection({ route, navigation }: Props) {
   const [contentHeaders, setContentHeaders] = useState<string[]>([]);
   const [contentValues, setContentValues] = useState<StringValue[]>([]);
 
-  // const route = useRoute();
   const { params } = route; // Destructure params from the route object
-  //const { emergencyObjectId } = route.params();
   const [emergency, setEmergency] = useState<Emergency>();
-
-  // Assuming emergency is of type Emergency
-  // if (emergency?.overview && typeof emergency.overview === "object") {
-  //   setOverviewHeaders(Object.keys(emergency.overview));
-  //   setOverviewValues(Object.values(emergency.overview));
-  // }
-
-  // if (emergency?.overview && typeof emergency.overview === "string") {
-  //   //const overviewHeaders = Object.keys(emergency.overview);
-  //   console.log(emergency.overview);
-  // }
-
-  // const mechanismArray: string[] = emergency?.overview?.["Mechanism of Injury"] ?? [];
-  // const diagnosisArray: string[] = emergency?.overview?.Diagnosis ?? [];
-  // const physicalArray: string[] = emergency?.overview?.["Physical Exam"] ?? [];
-
-  // const accuteArray: string[] = emergency?.treatment?.["Acute Management"] ?? [];
-  // const dispoArray: string[] = emergency?.treatment?.Dispo ?? [];
-  // const contentArray: string[] = emergency?.treatment?.Considerations?.Content ?? [];
 
   useEffect(() => {
     async function loadFont() {
@@ -114,21 +93,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
     }
   }, [emergency]);
 
-  // type BulletListProps = {
-  //   items: string[];
-  // };
-
-  // const BulletList = ({ items }: BulletListProps) => (
-  //   <View style={styles.list}>
-  //     {items.map((item: string, index: number) => (
-  //       <View key={index} style={styles.listItem}>
-  //         <Text style={styles.bullet}>{"\u2022"}</Text>
-  //         <Text style={styles.itemText}>{item}</Text>
-  //       </View>
-  //     ))}
-  //   </View>
-  // );
-
   function onOverviewPress() {
     if (!isOverviewPressed) {
       setIsOverviewPressed(!isOverviewPressed);
@@ -154,7 +118,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
         <Image style={styles.image} source={require("./assets/ic_caretleft.png")} />
         <View style={styles.margin}>
           <Text style={styles.subtitle}>Medical Emergency</Text>
-          {/* <Text style={styles.title}>Cervical Spine Injury</Text> */}
           {emergency && <Text style={styles.title}>{emergency.title}</Text>}
         </View>
 
@@ -196,40 +159,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
               </View>
             )}
 
-            {/* {emergency?.overview && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Importance</Text>
-                <Text style={styles.descriptionInfo}>{emergency?.overview.}</Text>
-              </View>
-            )}
-            {emergency?.overview?.Importance && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Importance</Text>
-                <Text style={styles.descriptionInfo}>{emergency?.overview?.Importance}</Text>
-              </View>
-            )}
-
-            {mechanismArray.length !== 0 && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Mechanism of Injury</Text>
-                <BulletList items={mechanismArray} />
-              </View>
-            )}
-
-            {diagnosisArray.length !== 0 && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Diagnosis</Text>
-                <BulletList items={diagnosisArray} />
-              </View>
-            )}
-
-            {physicalArray.length !== 0 && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Physical Exam</Text>
-
-                <BulletList items={physicalArray} />
-              </View>
-            )} */}
           </View>
 
           <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
@@ -267,31 +196,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
               </View>
             )}
 
-            {/* {accuteArray.length !== 0 && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Acute Management</Text>
-                <BulletList items={accuteArray} />
-              </View>
-            )}
-
-            {dispoArray.length !== 0 && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Dispo</Text>
-                <BulletList items={dispoArray} />
-              </View>
-            )}
-
-            {contentArray.length !== 0 && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionTitle}>Considerations</Text>
-                {emergency?.treatment?.Considerations?.Header && (
-                  <Text style={styles.descriptionInfo}>
-                    {emergency?.treatment?.Considerations?.Header}
-                  </Text>
-                )}
-                <BulletList items={contentArray} />
-              </View>
-            )} */}
           </View>
         </View>
       </ScrollView>
