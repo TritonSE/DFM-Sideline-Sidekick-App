@@ -7,13 +7,39 @@ import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
 
-type BulletPointProps = {
+// type GeneralProps = {
+//   titleProp: string;
+//   overviewProp?: object;
+//   contentProp: {
+//     title: string;
+//     content: { text: string, subpoints?: {text: string} | undefined }[];
+//   }[] | {
+//     title: string;
+//     content: { text: string, subpoints?: {text: string} | undefined }[];
+//   };
+// };
+
+// type GeneralProps = {
+//   titleProp: string;
+//   overviewProp?: object;
+//   contentProp: object;
+// };
+
+type ContentItem = Record<string, string>;
+
+type Content = {
   title: string;
-  // subpoints?: Subpoint[];
+  content: ContentItem;
+};
+
+type GeneralProps = {
+  titleProp: string;
+  overviewProp?: object;
+  contentProp: Content;
 };
 
 // const GeneralPrinciples = (title, content) => {
-const GeneralPrinciples: React.FC<BulletPointProps> = ({ title }) => {
+const GeneralPrinciples: React.FC<GeneralProps> = ({ titleProp, overviewProp, contentProp }) => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -21,41 +47,22 @@ const GeneralPrinciples: React.FC<BulletPointProps> = ({ title }) => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity>
-        <AntIcon name="close" style={styles.button} />
-      </TouchableOpacity>
-      <Text style={styles.title}>{title}</Text>
-      {/* <Text style={styles.subTitle}>{content.title}</Text> */}
-      <Text style={styles.subTitle}>{title}</Text>
-      <BulletPoint
-        letter="A"
-        text="Risk Warning"
-        subpoints={[
-          {
-            text: "Thunder = risk (lightning within 8-10 mile radius)",
-          },
-          { text: "Can occur w/o clouds or rain" },
-          { text: "Avoid landlines (cellphone is safe)" },
-        ]}
-      />
-      <BulletPoint
-        letter="B"
-        text="Resuming Activity"
-        subpoints={[
-          {
-            text: "30 min after last sound of thunder or sight of lightning",
-            subpoints: [
-              {
-                text: "“Half an hour since thunder roars, now it’s safe to go outdoors”",
-              },
-            ],
-          },
-        ]}
-      />
-    </View>
-  );
+  // const { title, content } = contentProp;
+
+  if (Array.isArray(contentProp)) {
+    return <Text>Hello</Text>;
+  } else {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity>
+          <AntIcon name="close" style={styles.button} />
+        </TouchableOpacity>
+        <Text style={styles.title}>{titleProp}</Text>
+        <Text style={styles.subTitle}>{contentProp.title}</Text>
+        <BulletPoint content={contentProp.content} />
+      </View>
+    );
+  }
 };
 
 export default GeneralPrinciples;
