@@ -9,7 +9,7 @@ import { createResumable } from "./createResumable/createResumable";
 import { getCurrentVersion } from "./versionControl/getCurrentVersion";
 import { getStoredVersion, setStoredVersion } from "./versionControl/storedVersion";
 
-export const downloadJSON = async (fileName, OS) => {
+export const downloadJSON = async (fileName: string, OS: string) => {
   let localhost;
 
   // check if currently running on an emulator or device
@@ -36,7 +36,7 @@ export const downloadJSON = async (fileName, OS) => {
 
   try {
     // will store the path to our file
-    let uri;
+    let uri = "";
 
     const newestVersion = (await getCurrentVersion(versionUrl))[0].version;
     const storedVersion = await getStoredVersion();
