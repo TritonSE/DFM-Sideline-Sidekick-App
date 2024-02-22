@@ -4,13 +4,24 @@
 import * as FileSystem from "expo-file-system";
 
 import { checkDirectoryExists, checkFileExists } from "./File Preprocess/existenceChecker";
+import { checkDevice } from "./checkDevice/checkDevice";
 import { createResumable } from "./createResumable/createResumable";
 import { getCurrentVersion } from "./versionControl/getCurrentVersion";
 import { getStoredVersion, setStoredVersion } from "./versionControl/storedVersion";
 
 export const downloadJSON = async (fileName, OS) => {
-  // compatibility for type of device
-  const localhost = OS === "android" ? "10.0.2.2" : "127.0.0.1";
+  let localhost;
+
+  // check if currently running on an emulator or device
+  const isDevice = checkDevice();
+
+  if (isDevice) {
+    localhost = "192.168.1.44"; // ip address of laptop (for running on physical devices)
+  } else {
+    // compatibility for type of device
+    localhost = OS === "android" ? "10.0.2.2" : "127.0.0.1";
+  }
+
   const url = `http://${localhost}:3001/api/allWithVersion`; // all data
   const versionUrl = `http://${localhost}:3001/api/version`; // newest version
 
