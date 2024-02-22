@@ -33,14 +33,28 @@ type Content = {
   content: ContentItem;
 };
 
+// type GeneralProps = {
+//   titleProp: string;
+//   overviewProp?: object;
+//   contentProp: Content | Content[];
+//   navigation: any;
+// };
 type GeneralProps = {
-  titleProp: string;
-  overviewProp?: object;
-  contentProp: Content | Content[];
+  route: {
+    params: {
+      titleProp: string;
+      overviewProp?: object;
+      contentProp: Content | Content[];
+    };
+  };
+  navigation: any;
 };
 
 // const GeneralPrinciples = (title, content) => {
-const GeneralPrinciples: React.FC<GeneralProps> = ({ titleProp, overviewProp, contentProp }) => {
+// const GeneralPrinciples: React.FC<GeneralProps> = ({ titleProp, overviewProp, contentProp, navigation }) => {
+const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
+  const { titleProp, contentProp } = route.params;
+
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -53,8 +67,8 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ titleProp, overviewProp, co
   if (Array.isArray(contentProp)) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{titleProp}</Text>
-        <ArrayPage arrayProp={contentProp}/>
+        {/* <Text style={styles.title}>{titleProp}</Text> */}
+        <ArrayPage arrayProp={contentProp} title={titleProp} />
       </View>
     );
   } else {

@@ -1,42 +1,31 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+
+import ArrayPage from "./components/ArrayPage";
+import Home from "./pages/Home";
 import GeneralPrinciples from "./pages/generalPrinciples";
-
-// const content = 
-//   {
-//   title: 'General Principles',
-//   content: {
-//     '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)': "",
-//     "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker"
-//     }
-//   }
-//   ;
-
-const content = [
-  {
-  title: 'General Principles',
-  content: {
-    '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)': "",
-    "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker"
-    }
-  },
-  {
-    title: 'General Principles 2',
-    content: {
-      '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)': "",
-      "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker"
-      }
-    }
-  ];
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    <View style={styles.container}>
-      {/* <Text>Open up App.js to start working on your app!</Text> */}
-      <GeneralPrinciples titleProp="Emergency Action Plan" contentProp={content}/>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="GeneralPrinciples" component={GeneralPrinciples} />
+
+        <Stack.Screen name="ArrayPage" component={ArrayPage} />
+      </Stack.Navigator>
       <StatusBar style="auto" />
-    </View>
+    </NavigationContainer>
+
+    // <View style={styles.container}>
+    //   {/* <Text>Open up App.js to start working on your app!</Text> */}
+
+    //   {/* <GeneralPrinciples titleProp="Emergency Action Plan" contentProp={content}/> */}
+    //   <StatusBar style="auto" />
+    // </View>
   );
 }
 
