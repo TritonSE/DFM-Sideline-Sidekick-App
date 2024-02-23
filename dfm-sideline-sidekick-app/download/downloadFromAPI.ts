@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as FileSystem from "expo-file-system";
@@ -38,7 +37,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     // will store the path to our file
     let uri = "";
 
-    const newestVersion = (await getCurrentVersion(versionUrl))[0].version;
+    const newestVersion = (await getCurrentVersion(versionUrl))[0].version as string;
     const storedVersion = await getStoredVersion();
 
     console.log(storedVersion, newestVersion);
@@ -64,10 +63,16 @@ export const downloadJSON = async (fileName: string, OS: string) => {
 
       // downloads file from api and stores in result
       const result = await downloadResumable.downloadAsync();
-      uri = result.uri;
+      if (result) {
+        uri = result.uri;
+      }
 
       // update the stored version to the newest version
-      await setStoredVersion(newestVersion.toString());
+      if (newestVersion) {
+        await setStoredVersion(newestVersion.toString());
+      } else {
+        console.log("No versions currently exist.");
+      }
     } else {
       console.log("File already exists and is up to date");
       uri = fileDir + fileName;

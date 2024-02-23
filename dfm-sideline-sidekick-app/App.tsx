@@ -3,14 +3,12 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { checkConnection } from "./download/connection/checkConnection";
 import { downloadJSON } from "./download/downloadFromAPI";
 
-
 export default function App() {
-
   const deviceType = Platform.OS;
 
   // makes it so that it only checks the version once per app launch
@@ -21,11 +19,9 @@ export default function App() {
 
   // checks on app open, connect change
   useEffect(() => {
-
     // stores if connected
     connected = checkConnection();
     console.log(attempted);
-    
 
     // if also connected, attempt to redownload
     if (connected && !attempted) {
