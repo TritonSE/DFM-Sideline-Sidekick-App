@@ -68,8 +68,6 @@ router.put("/generalPrinciples/:id", updatedGeneralPrincipleById);
 // GET the version of the database
 router.get("/version", getVersion);
 
-// router.post("/version", createVersion);
-
 // update the version number
 router.put("/version", updatedVersion);
 

@@ -15,7 +15,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
   const isDevice = checkDevice();
 
   if (isDevice) {
-    localhost = "192.168.1.44"; // ip address of laptop (for running on physical devices)
+    localhost = "100.115.33.192"; // ip address of laptop (for running on physical devices) [1. go to command line, 2. type ipconfig /all 3. it's under IPv4 address]
   } else {
     // compatibility for type of device
     localhost = OS === "android" ? "10.0.2.2" : "127.0.0.1";
@@ -40,7 +40,13 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     const newestVersion = (await getCurrentVersion(versionUrl))[0].version as string;
     const storedVersion = await getStoredVersion();
 
-    console.log(storedVersion, newestVersion);
+    console.log(); // feel free to remove these extra logs, they're just for output clarity when debugging
+
+    console.log("PRINT VERSIONS BEFORE UPDATE");
+    console.log("UPDATED DEVICE VERSION:", storedVersion);
+    console.log("NEWEST VERSION:", newestVersion);
+
+    console.log();
 
     // no stored version or current doesn't match stored version
     if (!fileExists || !storedVersion || storedVersion < newestVersion) {
@@ -49,15 +55,15 @@ export const downloadJSON = async (fileName: string, OS: string) => {
 
       // deletes file if it exists
       if (fileExists) {
-        console.log("Deleting existing file");
+        console.log("DELETING EXISTING FILE");
         await FileSystem.deleteAsync(fileDir + fileName);
 
         // Check if the file still exists
         const fileStillExists = await checkFileExists(fileDir, fileName);
         if (!fileStillExists) {
-          console.log("File successfully deleted");
+          console.log("FILE SUCCESSFULLY DELETED");
         } else {
-          console.log("File deletion failed");
+          console.log("FILE DELETION FAILED");
         }
       }
 
@@ -71,10 +77,10 @@ export const downloadJSON = async (fileName: string, OS: string) => {
       if (newestVersion) {
         await setStoredVersion(newestVersion.toString());
       } else {
-        console.log("No versions currently exist.");
+        console.log("NO VERSIONS CURRENTLY EXIST");
       }
     } else {
-      console.log("File already exists and is up to date");
+      console.log("FILE ALREADY EXISTS AND IS UP TO DATE");
       uri = fileDir + fileName;
     }
 
@@ -90,13 +96,22 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     console.log("OUTPUT", output);
     console.log("VERSION:", jsonOutput.version[0].version);
 
-    const x = await getStoredVersion();
+    const updatedStoredVersion = await getStoredVersion();
 
-    console.log("PRINT UPDATED VERSIONS (should be the same):", x, newestVersion);
+    console.log("PRINT UPDATED VERSIONS (should be the same):");
+    console.log("UPDATED DEVICE VERSION:", updatedStoredVersion);
+    console.log("NEWEST VERSION:", newestVersion);
+
+    console.log();
 
     // prints emergencies and general principles
-    // console.log(jsonOutput.emergencies);
-    // console.log(jsonOutput.generalPrinciples);
+    console.log("EMERGENCIES JSON:");
+    console.log(jsonOutput.emergencies);
+
+    console.log();
+
+    console.log("GENERAL PRINCIPLES JSON:");
+    console.log(jsonOutput.generalPrinciples);
   } catch (err) {
     console.log("ERROR:", err);
   }

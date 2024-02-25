@@ -7,19 +7,19 @@ export const getStoredVersion = async () => {
     if (result) {
       return parseInt(result);
     } else {
-      return result; // null value
+      return result; // null value means no stored version yet (first download)
     }
   } catch (e) {
-    console.log("Get version failed:", e);
+    console.log("GET VERSION FAILED:", e);
   }
 };
 
-export const setStoredVersion = async (value: string) => {
-  console.log("value", value);
+export const setStoredVersion = async (version: string) => {
+  console.log("STORED VERSION:", version);
 
   try {
-    await AsyncStorage.setItem("version", value.toString());
+    await AsyncStorage.setItem("version", version.toString());
   } catch (e) {
-    console.log("Set version failed:", e);
+    console.log("SET VERSION FAILED:", e);
   }
 };

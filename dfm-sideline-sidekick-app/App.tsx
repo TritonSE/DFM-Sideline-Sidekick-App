@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable import/namespace */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -14,26 +15,30 @@ export default function App() {
   // makes it so that it only checks the version once per app launch
   let attempted = false;
 
-  // check connection
-  let connected = checkConnection();
+  // true when there's connection
+  let connected = false;
 
   // checks on app open, connect change
   useEffect(() => {
     // stores if connected
-    connected = checkConnection();
-    console.log(attempted);
+    console.log("ATTEMPTED BEFORE:", attempted);
 
-    // if also connected, attempt to redownload
-    if (connected && !attempted) {
-      downloadJSON("data.json", deviceType);
-      attempted = true; // latches
+    async function matchConditions() {
+      connected = await checkConnection();
+      // if also connected, attempt to redownload
+      if (connected && !attempted) {
+        await downloadJSON("data.json", deviceType);
+
+        attempted = true; // latches
+      }
     }
+
+    matchConditions();
   }, [connected]);
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      {/* <Button title="Download here!" onPress={() => {downloadJSON("data.json", deviceType)}} /> */}
       <StatusBar style="auto" />
     </View>
   );
