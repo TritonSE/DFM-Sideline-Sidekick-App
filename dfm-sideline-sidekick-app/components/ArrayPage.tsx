@@ -55,7 +55,6 @@ const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
   }
 
   const handleItemPress = (item) => {
-    // Navigate to the GeneralPrinciples screen with the selected item
     navigation.navigate("GeneralPrinciples", { titleProp: item.title, contentProp: item });
   };
 
@@ -83,7 +82,7 @@ const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
         <FlatList
           data={content}
           keyExtractor={(item) => item.title}
-          ItemSeparatorComponent={() => <View style={styles.divider} />} //<Text style={styles.title}>{title}</Text>
+          ItemSeparatorComponent={() => <View style={styles.divider} />}
           renderItem={renderListItem}
         />
       </View>

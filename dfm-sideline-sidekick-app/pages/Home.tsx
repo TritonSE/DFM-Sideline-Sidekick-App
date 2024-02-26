@@ -31,7 +31,6 @@ const content = [
   },
 ];
 
-// const Home = ({navigation}) => {
 export default function Home({ navigation }) {
   return (
     <View style={styles.container2}>

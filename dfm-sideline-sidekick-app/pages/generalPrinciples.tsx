@@ -8,24 +8,6 @@ import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
 
-// type GeneralProps = {
-//   titleProp: string;
-//   overviewProp?: object;
-//   contentProp: {
-//     title: string;
-//     content: { text: string, subpoints?: {text: string} | undefined }[];
-//   }[] | {
-//     title: string;
-//     content: { text: string, subpoints?: {text: string} | undefined }[];
-//   };
-// };
-
-// type GeneralProps = {
-//   titleProp: string;
-//   overviewProp?: object;
-//   contentProp: object;
-// };
-
 type ContentItem = Record<string, string>;
 
 type Content = {
@@ -33,12 +15,6 @@ type Content = {
   content: ContentItem;
 };
 
-// type GeneralProps = {
-//   titleProp: string;
-//   overviewProp?: object;
-//   contentProp: Content | Content[];
-//   navigation: any;
-// };
 type GeneralProps = {
   route: {
     params: {
@@ -50,8 +26,6 @@ type GeneralProps = {
   navigation: any;
 };
 
-// const GeneralPrinciples = (title, content) => {
-// const GeneralPrinciples: React.FC<GeneralProps> = ({ titleProp, overviewProp, contentProp, navigation }) => {
 const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   const { titleProp, contentProp } = route.params;
 
@@ -67,7 +41,6 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   if (Array.isArray(contentProp)) {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.title}>{titleProp}</Text> */}
         <ArrayPage arrayProp={contentProp} title={titleProp} />
       </View>
     );
