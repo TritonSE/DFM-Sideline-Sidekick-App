@@ -49,7 +49,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     console.log();
 
     // no stored version or current doesn't match stored version
-    if (!fileExists || !storedVersion || storedVersion < newestVersion) {
+    if (!fileExists || !storedVersion || storedVersion !== newestVersion) {
       // find directory or creates it if not found
       await checkDirectoryExists(fileDir);
 
