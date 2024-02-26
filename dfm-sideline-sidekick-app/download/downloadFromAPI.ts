@@ -15,7 +15,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
   const isDevice = checkDevice();
 
   if (isDevice) {
-    localhost = "100.115.33.192"; // ip address of laptop (for running on physical devices) [1. go to command line, 2. type ipconfig /all 3. it's under IPv4 address]
+    localhost = process.env.EXPO_PUBLIC_IP_ADDRESS; // PUT YOUR IP ADDRESS OF YOUR LAPTOP HERE (for running on physical devices) [1. go to command line, 2. type ipconfig /all 3. it's under IPv4 address]
   } else {
     // compatibility for type of device
     localhost = OS === "android" ? "10.0.2.2" : "127.0.0.1";
