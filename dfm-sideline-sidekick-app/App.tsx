@@ -13,7 +13,6 @@ import BookmarkPage from "./pages/BookmarkPage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 
-
 type RootStackParamList = {
   Bookmark: undefined;
   Search: undefined;
