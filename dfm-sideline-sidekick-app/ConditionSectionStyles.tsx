@@ -27,7 +27,7 @@ export default StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-evenly",
     width: "100%",
-    marginTop: 45,
+    marginTop: 16,
   },
   menuText: {
     fontFamily: "Roboto-Regular",
@@ -73,7 +73,7 @@ export default StyleSheet.create({
   },
   information: {
     marginLeft: 16,
-    marginTop: 20,
+    marginTop: 0,
     marginRight: 16,
   },
   overview: {},
