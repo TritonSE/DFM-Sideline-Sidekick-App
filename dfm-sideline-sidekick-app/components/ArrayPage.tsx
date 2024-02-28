@@ -78,6 +78,9 @@ const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
   return (
     <View>
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButtonContainer}>
+          <Icon name="chevron-left" size={12} color="#000000" style={styles.backButton}/>
+        </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
         <FlatList
           data={content}

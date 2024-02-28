@@ -47,7 +47,7 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <AntIcon name="close" style={styles.button} />
         </TouchableOpacity>
         <Text style={styles.title}>{titleProp}</Text>

@@ -5,6 +5,13 @@ const styles = StyleSheet.create({
     // flex: 1,
     // padding: 10,
   },
+  backButtonContainer: {
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  backButton:{
+    fontSize: 16,
+  },
   title: {
     color: "#182B49",
     fontSize: 28,
