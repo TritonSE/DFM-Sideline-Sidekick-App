@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
@@ -33,6 +33,8 @@ const documents: Document[] = [
 const SearchBarComponent = () => {
   const [query, setQuery] = useState("");
   const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<TextInput>(null);
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -43,6 +45,15 @@ const SearchBarComponent = () => {
   const clearInput = () => {
     setQuery("");
     setFilteredDocuments([]);
+  };
+
+  const cancelSearch = () => {
+    setQuery("");
+    setFilteredDocuments([]);
+    setIsFocused(false);
+    if (inputRef.current !== null) {
+      inputRef.current.blur();
+    }
   };
 
   const highlightText = (text: string, input: string): React.ReactNode[] => {
@@ -69,6 +80,12 @@ const SearchBarComponent = () => {
     });
   };
 
+  useEffect(() => {
+    if (isFocused && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFocused]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Global Search</Text>
@@ -76,11 +93,18 @@ const SearchBarComponent = () => {
         <View style={styles.searchSection}>
           <Icon name="search" size={13} color="gray" style={styles.searchIcon} />
           <TextInput
+            ref={inputRef}
             style={styles.input}
             placeholder="Search"
             value={query}
             onChangeText={handleSearch}
             selectionColor="#909090"
+            onFocus={() => {
+              setIsFocused(true);
+            }}
+            onBlur={() => {
+              setIsFocused(false);
+            }}
           />
           {query.length > 0 && (
             <TouchableOpacity onPress={clearInput} style={{ padding: 10 }}>
@@ -89,29 +113,39 @@ const SearchBarComponent = () => {
           )}
         </View>
         <View>
-          {query.length > 0 && (
-            <TouchableOpacity onPress={clearInput} style={styles.cancelButton}>
+          {isFocused && (
+            <TouchableOpacity onPress={cancelSearch} style={styles.cancelButton}>
               <Text>Cancel</Text>
             </TouchableOpacity>
           )}
         </View>
       </View>
-      {filteredDocuments.length > 0 && (
-        <FlatList
-          data={filteredDocuments}
-          keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={() => <View style={styles.divider} />}
-          renderItem={({ item }) => (
-            <View style={styles.listItemContainer}>
-              <View style={styles.listItemTextContainer}>
-                <Text style={styles.listItemTitle}>{highlightText(item.title, query)}</Text>
-                <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
-              </View>
-              <Icon name="chevron-right" size={20} color="#909090" />
-            </View>
-          )}
-        />
-      )}
+      <View>
+        {isFocused ? (
+          query.length > 0 ? (
+            <FlatList
+              data={filteredDocuments}
+              keyExtractor={(item) => item.id}
+              ItemSeparatorComponent={() => <View style={styles.divider} />}
+              renderItem={({ item }) => (
+                <View style={styles.listItemContainer}>
+                  <View style={styles.listItemTextContainer}>
+                    <Text style={styles.listItemTitle}>{highlightText(item.title, query)}</Text>
+                    <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
+                  </View>
+                  <Icon name="chevron-right" size={20} color="#909090" />
+                </View>
+              )}
+            />
+          ) : (
+            // Show recent searches if the search bar is focused but there's no query
+            <Text>Recent Searches...</Text>
+          )
+        ) : (
+          // Show home screen cards if the search bar isn't focused
+          <Text>Home Screen Cards...</Text>
+        )}
+      </View>
     </View>
   );
 };

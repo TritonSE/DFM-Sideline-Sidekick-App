@@ -1,10 +1,10 @@
-import { Text, View } from "react-native";
+import SearchBarComponent from "./GlobalSearch";
 
 const SearchPage = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Search Dummy Page</Text>
-    </View>
+    <>
+      <SearchBarComponent />
+    </>
   );
 };
 
