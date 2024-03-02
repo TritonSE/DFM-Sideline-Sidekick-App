@@ -1,7 +1,8 @@
 type Document = {
   id: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
+  [key: string]: any;
 };
 
 export const searchDocuments = (documents: Document[], searchText: string): Document[] => {
@@ -9,28 +10,19 @@ export const searchDocuments = (documents: Document[], searchText: string): Docu
     return [];
   }
 
-  // Lowercase the search text for case-insensitive comparisons
   const lowerSearchText = searchText.toLowerCase();
 
-  // Score each document based on how well it matches the search text
   const scoredDocs = documents.map((doc) => {
     const lowerTitle = doc.title.toLowerCase();
     let score = 0;
 
-    // Exact match scores highest
     if (lowerTitle === lowerSearchText) {
       score = 100;
-    }
-    // Starting match scores higher
-    else if (lowerTitle.startsWith(lowerSearchText)) {
+    } else if (lowerTitle.startsWith(lowerSearchText)) {
       score = 75;
-    }
-    // Contains the search text scores lower
-    else if (lowerTitle.includes(lowerSearchText)) {
+    } else if (lowerTitle.includes(lowerSearchText)) {
       score = 50;
-    }
-    // Check if each word in the search text is contained in the title
-    else {
+    } else {
       const searchTextWords = lowerSearchText.split(/\s+/);
       const titleWords = lowerTitle.split(/\s+/);
       searchTextWords.forEach((searchWord) => {

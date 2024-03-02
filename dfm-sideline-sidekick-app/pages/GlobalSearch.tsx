@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+import { useData } from "../DataContext";
 import { searchDocuments } from "../HandleSearch";
 
 import styles from "./GlobalSearchStyles";
@@ -12,33 +13,25 @@ type Document = {
   subtitle: string;
 };
 
-const documents: Document[] = [
-  {
-    id: "1",
-    title: "Cervical Spine Injury",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-  },
-  {
-    id: "2",
-    title: "Cervical Strain",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
-  },
-  {
-    id: "3",
-    title: "Stroke",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-  },
-];
-
 const SearchBarComponent = () => {
   const [query, setQuery] = useState("");
   const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<TextInput>(null);
+  const { jsonData } = useData();
+  const emergencies = jsonData?.emergencies || [];
+  const generalPrinciples = jsonData?.generalPrinciples || [];
 
   const handleSearch = (text: string) => {
     setQuery(text);
-    const matchedDocuments = searchDocuments(documents, text);
+    const allDocuments = [...emergencies, ...generalPrinciples];
+    const matchedDocuments = searchDocuments(allDocuments, text).map((doc) => ({
+      ...doc,
+      id: doc._id,
+      subtitle:
+        doc.subtitle ||
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.", //default subtitle
+    }));
     setFilteredDocuments(matchedDocuments);
   };
 
@@ -61,16 +54,13 @@ const SearchBarComponent = () => {
     const words = input.split(/\s+/).map((word) => word.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&"));
 
     // Create a regex pattern that matches any of the words
-    const pattern = words.join("|"); // Join the words with the regex 'or' operator
+    const pattern = words.join("|");
     const queryRegex = new RegExp(`(${pattern})`, "gi");
 
-    // Split the text by the regular expression to get an array of parts
     const parts = text.split(queryRegex);
 
     return parts.map((part, index) => {
-      // Check if the part of the text matches any of the words in the query
       const isMatch = queryRegex.test(part) && part.trim() !== "";
-      // Reset lastIndex because of the global regex test side effect
       queryRegex.lastIndex = 0;
       return (
         <Text key={index.toString()} style={isMatch ? styles.highlightedText : undefined}>
@@ -138,11 +128,9 @@ const SearchBarComponent = () => {
               )}
             />
           ) : (
-            // Show recent searches if the search bar is focused but there's no query
             <Text>Recent Searches...</Text>
           )
         ) : (
-          // Show home screen cards if the search bar isn't focused
           <Text>Home Screen Cards...</Text>
         )}
       </View>

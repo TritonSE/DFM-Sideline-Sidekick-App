@@ -112,7 +112,10 @@ export const downloadJSON = async (fileName: string, OS: string) => {
 
     console.log("GENERAL PRINCIPLES JSON:");
     console.log(jsonOutput.generalPrinciples);
+
+    return jsonOutput;
   } catch (err) {
     console.log("ERROR:", err);
+    return null;
   }
 };
