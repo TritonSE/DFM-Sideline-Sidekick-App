@@ -1,8 +1,18 @@
+// type Document = {
+//   id: string;
+//   title: string;
+//   subtitle?: string;
+//   [key: string]: any;
+//   // overview?: {},
+//   // treatment?: {},
+//   // content?: {},
+// };
 type Document = {
-  id: string;
+  _id?: string;
   title: string;
   subtitle?: string;
-  [key: string]: any;
+  overview?: object;
+  treatment?: object;
 };
 
 export const searchDocuments = (documents: Document[], searchText: string): Document[] => {
@@ -35,12 +45,9 @@ export const searchDocuments = (documents: Document[], searchText: string): Docu
     return { ...doc, score };
   });
 
-  // Filter out documents that don't match at all
   const filteredDocs = scoredDocs.filter((doc) => doc.score > 0);
 
-  // Sort by score in descending order
   const sortedDocs = filteredDocs.sort((a, b) => b.score - a.score);
 
-  // Return the documents sorted by their score
-  return sortedDocs.map((doc) => ({ id: doc.id, title: doc.title, subtitle: doc.subtitle }));
+  return sortedDocs.map(({ score, ...doc }) => doc);
 };

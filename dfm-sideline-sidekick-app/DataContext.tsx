@@ -1,16 +1,33 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 
-type DataContextType = {
-  jsonData: any;
-  updateJsonData: (data: any) => void;
+type MedicalEmergency = {
+  title: string;
+  overview: object;
+  treatment: object;
+  content: object;
 };
 
+type GeneralPrinciple = {
+  title: string;
+  overview: object;
+  content: object;
+};
+
+type JsonDataStructure = {
+  emergencies?: MedicalEmergency[]; // Optional array of MedicalEmergency
+  generalPrinciples?: GeneralPrinciple[]; // Optional array of GeneralPrinciple
+};
+
+type DataContextType = {
+  jsonData: JsonDataStructure | null;
+  updateJsonData: (data: JsonDataStructure) => void;
+};
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [jsonData, setJsonData] = useState<any>(null);
+  const [jsonData, setJsonData] = useState<JsonDataStructure | null>(null);
 
-  const updateJsonData = (data: any) => {
+  const updateJsonData = (data: JsonDataStructure) => {
     setJsonData(data);
   };
 
