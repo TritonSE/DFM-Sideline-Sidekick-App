@@ -29,7 +29,7 @@ const SearchBarComponent = () => {
       ...doc,
       id: doc._id,
       subtitle:
-        doc.subtitle ||
+        doc.subtitle ??
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.", //default subtitle
     }));
     setFilteredDocuments(matchedDocuments);
