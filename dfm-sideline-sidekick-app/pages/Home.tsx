@@ -1,4 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Button, StyleSheet, View } from "react-native";
+
+import { RootStackParamList } from "./generalPrinciples";
 
 const title = "Emergency Action Plan";
 
@@ -31,21 +35,22 @@ const content = [
   },
 ];
 
-export default function Home({ navigation }) {
-  return (
-    <View style={styles.container2}>
-      <Button
-        title="Go to General Principles"
-        onPress={() =>
-          navigation.navigate("GeneralPrinciples", { titleProp: title, contentProp: content })
-        }
-      />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container2: {
     width: "100%",
   },
 });
+
+export default function Home() {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const handleNavigation = () => {
+    navigation.navigate("GeneralPrinciples", { titleProp: title, contentProp: content });
+  };
+
+  return (
+    <View style={styles.container2}>
+      <Button title="Go to General Principles" onPress={handleNavigation} />
+    </View>
+  );
+}

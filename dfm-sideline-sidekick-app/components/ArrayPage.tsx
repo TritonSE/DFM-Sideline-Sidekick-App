@@ -8,15 +8,15 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 import styles from "./ArrayPageStyles";
 
-export type RootStackParamList = {
-  GeneralPrinciples: { titleProp: string; contentProp: Content } | undefined;
-};
-
 type ContentItem = Record<string, string>;
 
 type Content = {
   title: string;
   content: ContentItem;
+};
+
+export type RootStackParamList = {
+  GeneralPrinciples: { titleProp: string; contentProp: Content } | undefined;
 };
 
 type ArrayProps = {
