@@ -2,6 +2,7 @@ import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
+import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -43,6 +44,7 @@ const content = [
 ];
 const temp = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -54,11 +56,11 @@ const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
     return <Text>Loading...</Text>;
   }
 
-  const handleItemPress = (item) => {
+  const handleItemPress = (item: Content) => {
     navigation.navigate("GeneralPrinciples", { titleProp: item.title, contentProp: item });
   };
 
-  const renderListItem = ({ item, index }) => (
+  const renderListItem = ({ item, index }: { item: Content; index: number }) => (
     <TouchableOpacity
       onPress={() => {
         handleItemPress(item);
@@ -78,8 +80,13 @@ const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
   return (
     <View>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButtonContainer}>
-          <Icon name="chevron-left" size={12} color="#000000" style={styles.backButton}/>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={styles.backButtonContainer}
+        >
+          <Icon name="chevron-left" size={12} color="#000000" style={styles.backButton} />
         </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
         <FlatList
