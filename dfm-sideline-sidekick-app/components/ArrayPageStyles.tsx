@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
   },
-  backButton:{
+  backButton: {
     fontSize: 16,
   },
   title: {
