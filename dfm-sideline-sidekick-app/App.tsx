@@ -9,7 +9,7 @@ import { Platform, StyleSheet } from "react-native";
 import { BottomNavBar, NavItem } from "./components/bar";
 import { checkConnection } from "./download/connection/checkConnection";
 import { downloadJSON } from "./download/downloadFromAPI";
-import BookmarkPage from "./pages/BookmarkPage";
+import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 
@@ -83,7 +83,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Search">
-        <Stack.Screen name="Home" component={BookmarkPage} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
         <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
       </Stack.Navigator>
