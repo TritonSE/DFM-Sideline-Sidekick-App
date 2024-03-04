@@ -3,13 +3,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import React from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
 import styles from "./HomePageStyles";
 
 const HomePage = () => {
-
   const [query, setQuery] = useState("");
 
   const handleSearch = (text: string) => {
@@ -48,6 +47,26 @@ const HomePage = () => {
         </View>
       </View>
       <Text style={styles.title}>Browse By Category</Text>
+      <View style={styles.categories}>
+        <Pressable style={styles.categoryButton}>
+          <Text style={styles.buttonText}>General{"\n"}Principles</Text>
+        </Pressable>
+        <Pressable style={styles.categoryButton}>
+          <Text style={styles.buttonText}>Medical Issues</Text>
+        </Pressable>
+        <Pressable style={styles.categoryButton}>
+          <Text style={styles.buttonText}>Upper Extremity{"\n"}Injuries</Text>
+        </Pressable>
+        <Pressable style={styles.categoryButton}>
+          <Text style={styles.buttonText}>Lower Extremity{"\n"}Injuries</Text>
+        </Pressable>
+        <Pressable style={styles.categoryButton}>
+          <Text style={styles.buttonText}>Axial Injuries</Text>
+        </Pressable>
+        <Pressable style={styles.categoryButton}>
+          <Text style={styles.buttonText}>Soft Tissues{"\n"}Injuries</Text>
+        </Pressable>
+      </View>
       <Text style={styles.title}>Medical Emergencies</Text>
       <Text style={styles.title}>Commonly Viewed</Text>
     </View>
