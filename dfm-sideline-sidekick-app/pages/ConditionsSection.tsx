@@ -2,8 +2,9 @@
 import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import * as Font from "expo-font";
-import { useEffect, useState } from "react";
-import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React, { useEffect, useState } from "react";
+import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import StringRenderer from "../components/StringRenderer";
 
@@ -11,6 +12,7 @@ import styles from "./ConditionSectionStyles";
 // import { getEmergency } from "./emergencies";
 
 import type { Emergency } from "../emergencies";
+
 
 export type RootStackParamList = {
   // Define the parameters for your screens here
@@ -116,7 +118,14 @@ export default function ConditionsSection({ route, navigation }: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+          <Image style={styles.image} source={require("../assets/ic_caretleft.png")}/>
+        </TouchableOpacity>
         <View style={styles.margin}>
           <Text style={styles.subtitle}>Medical Emergency</Text>
           {emergency && <Text style={styles.title}>{emergency.title}</Text>}
