@@ -14,7 +14,7 @@ import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 
 type RootStackParamList = {
-  Bookmark: undefined;
+  Home: undefined;
   Search: undefined;
   Tab: undefined;
 };
@@ -28,9 +28,9 @@ const BottomNavBarComponent = () => {
   const navigationItems: NavItem[] = [
     {
       id: 1,
-      icon: "bookmark",
+      icon: "home",
       onClick: () => {
-        navigation.navigate("Bookmark");
+        navigation.navigate("Home");
       },
     },
     {
@@ -83,7 +83,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Search">
-        <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={BookmarkPage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
         <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
       </Stack.Navigator>

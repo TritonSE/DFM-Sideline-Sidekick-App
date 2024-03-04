@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 
-import { BookmarkIcon } from "../icons/bookmarkIcon";
+// import { BookmarkIcon } from "../icons/bookmarkIcon";
+import { HomeIcon } from "../icons/homeIcon";
 import { CircleIcon } from "../icons/circleIcon";
 import { GeneralPrinciplesIcon } from "../icons/generalPrinciplesIcon";
 
@@ -34,8 +35,8 @@ export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
             <View style={{ top: -26.65 }}>
               <CircleIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
             </View>
-          ) : item.icon === "bookmark" ? (
-            <BookmarkIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
+          ) : item.icon === "home" ? (
+            <HomeIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
           ) : (
             <GeneralPrinciplesIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
           )}
