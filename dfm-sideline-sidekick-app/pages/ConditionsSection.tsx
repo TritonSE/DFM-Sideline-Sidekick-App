@@ -5,8 +5,9 @@ import * as Font from "expo-font";
 import { useEffect, useState } from "react";
 import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
-import styles from "./ConditionSectionStyles";
 import StringRenderer from "../components/StringRenderer";
+
+import styles from "./ConditionSectionStyles";
 // import { getEmergency } from "./emergencies";
 
 import type { Emergency } from "../emergencies";

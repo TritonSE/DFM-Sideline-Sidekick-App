@@ -7,10 +7,10 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import AppInitializer from "./AppInitializer";
-import ConditionsSection from "./pages/ConditionsSection";
 import { DataProvider } from "./DataContext";
 import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
+import ConditionsSection from "./pages/ConditionsSection";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 
