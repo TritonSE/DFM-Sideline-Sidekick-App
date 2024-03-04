@@ -8,18 +8,19 @@ export default StyleSheet.create({
     justifyContent: "center",
     ...Platform.select({
       ios: {
-        marginTop: 80,
+        paddingTop: 80,
       },
       android: {
-        marginTop: 40,
+        paddingTop: 40,
       },
       default: {
-        marginTop: 50,
+        paddingTop: 50,
       },
     }),
   },
   margin: {
     marginLeft: 16,
+    marginTop: 20
   },
   menu: {
     display: "flex",
