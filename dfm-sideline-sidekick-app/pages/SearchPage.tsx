@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { RootStackParamList } from "../ConditionsSection";
+import { RootStackParamList } from "./ConditionsSection";
 import { useData } from "../DataContext";
 import { searchDocuments } from "../HandleSearch";
 

@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import styles from "./ConditionSectionStyles";
-import StringRenderer from "./components/StringRenderer";
+import StringRenderer from "../components/StringRenderer";
 // import { getEmergency } from "./emergencies";
 
-import type { Emergency } from "./emergencies";
+import type { Emergency } from "../emergencies";
 
 export type RootStackParamList = {
   // Define the parameters for your screens here
