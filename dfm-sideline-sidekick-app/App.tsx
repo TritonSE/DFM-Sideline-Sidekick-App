@@ -7,16 +7,27 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import AppInitializer from "./AppInitializer";
+import ConditionsSection from "./ConditionsSection";
 import { DataProvider } from "./DataContext";
 import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 
+type DocumentBase = {
+  _id: string;
+  title: string;
+  subtitle?: string;
+  overview?: object;
+  treatment?: object;
+  content?: object;
+};
+
 type RootStackParamList = {
   Bookmark: undefined;
   Search: undefined;
   Tab: undefined;
+  MedicalConditions: { emergency: DocumentBase };
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -61,6 +72,11 @@ export default function App() {
           <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
           <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
           <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="MedicalConditions"
+            component={ConditionsSection}
+            options={{ headerShown: true, title: "Condition Details" }}
+          />
         </Stack.Navigator>
         <BottomNavBarComponent />
         <StatusBar style="auto" />

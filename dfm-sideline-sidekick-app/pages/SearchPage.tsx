@@ -1,7 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+import { RootStackParamList } from "../ConditionsSection";
 import { useData } from "../DataContext";
 import { searchDocuments } from "../HandleSearch";
 
@@ -16,10 +19,7 @@ type DocumentBase = {
   content?: object;
 };
 
-// type JsonData = {
-//   emergencies?: DocumentBase[];
-//   generalPrinciples?: DocumentBase[];
-// };
+type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
 const SearchBarComponent = () => {
   const [query, setQuery] = useState("");
@@ -29,6 +29,7 @@ const SearchBarComponent = () => {
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
   const generalPrinciples = jsonData?.generalPrinciples ?? [];
+  const navigation = useNavigation<ConditionsNavigationProp>();
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -38,7 +39,7 @@ const SearchBarComponent = () => {
       _id: doc._id ?? "fallback-id",
       subtitle:
         doc.subtitle ??
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.", //default subtitle
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.", //default subtitle for now
     }));
     setFilteredDocuments(matchedDocuments);
   };
@@ -126,13 +127,18 @@ const SearchBarComponent = () => {
               keyExtractor={(item) => item._id}
               ItemSeparatorComponent={() => <View style={styles.divider} />}
               renderItem={({ item }) => (
-                <View style={styles.listItemContainer}>
+                <TouchableOpacity
+                  style={styles.listItemContainer}
+                  onPress={() => {
+                    navigation.navigate("MedicalConditions", { emergency: item });
+                  }}
+                >
                   <View style={styles.listItemTextContainer}>
                     <Text style={styles.listItemTitle}>{highlightText(item.title, query)}</Text>
                     <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
                   </View>
                   <Icon name="chevron-right" size={20} color="#909090" />
-                </View>
+                </TouchableOpacity>
               )}
             />
           ) : (
