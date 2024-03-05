@@ -1,7 +1,8 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable import/namespace */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import * as Font from "expo-font";
+import { useEffect, useState } from "react";
 import React from "react";
 import {
   Pressable,
@@ -20,6 +21,7 @@ import styles from "./HomePageStyles";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
+  const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -28,6 +30,22 @@ const HomePage = () => {
   const clearInput = () => {
     setQuery("");
   };
+
+  useEffect(() => {
+    async function loadFont() {
+      try {
+        await Font.loadAsync({
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+        });
+        setIsFontsLoaded(true);
+      } catch (error) {
+        console.error("Error loading fonts:", error);
+      }
+    }
+
+    void loadFont();
+  }, []);
 
   const CarouselComponent = () => {
     const carouselItems: CarouselItem[] = [
@@ -40,6 +58,10 @@ const HomePage = () => {
 
     return <Carousel items={carouselItems} />;
   };
+
+  if (!isFontsLoaded) {
+    return null;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
