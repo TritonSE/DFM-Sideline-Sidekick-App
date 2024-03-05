@@ -14,6 +14,7 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import { ArrowIcon } from "../icons/arrowIcon";
 
 import { Carousel } from "../components/carousel";
 
@@ -47,7 +48,7 @@ const HomePage = () => {
     void loadFont();
   }, []);
 
-  const CarouselComponent = () => {
+  const EmergenciesComponent = () => {
     const carouselItems: CarouselItem[] = [
       {
         id: 1,
@@ -63,10 +64,46 @@ const HomePage = () => {
         id: 3,
         title: "Cauda Equina Syndrome",
         description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
+      },
+      {
+        id: 4,
+        title: "Cauda Equina Syndrome",
+        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
       }
     ];
 
-    return <Carousel items={carouselItems} />;
+    const color = "#E5EFF5"
+
+    return <Carousel items={carouselItems} cardColor={"#E5EFF5"} />;
+  };
+
+  const BookmarksComponent = () => {
+    const carouselItems: CarouselItem[] = [
+      {
+        id: 1,
+        title: "Cervical Spine Injury",
+        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
+      },
+      {
+        id: 2,
+        title: "Cold Illnesses",
+        description: "Moderate (86-89°F) or Severe (<86°F)"
+      },
+      {
+        id: 3,
+        title: "Cauda Equina Syndrome",
+        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
+      },
+      {
+        id: 4,
+        title: "Cauda Equina Syndrome",
+        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
+      }
+    ];
+
+    const color = "#E5EFF5"
+
+    return <Carousel items={carouselItems} cardColor={"#FFFFFF"} />;
   };
 
   if (!isFontsLoaded) {
@@ -124,13 +161,16 @@ const HomePage = () => {
         </View>
         <Text style={styles.title}>Medical Emergencies</Text>
 
-        <CarouselComponent />
+        <EmergenciesComponent />
 
         <Text style={styles.title}>Commonly Viewed</Text>
-        {/* <Text style={styles.title}>Commonly Viewed</Text>
+
+        <BookmarksComponent />
+
         <Text style={styles.title}>Commonly Viewed</Text>
         <Text style={styles.title}>Commonly Viewed</Text>
-        <Text style={styles.title}>Commonly Viewed</Text> */}
+        <Text style={styles.title}>Commonly Viewed</Text>
+        <Text style={styles.title}>Commonly Viewed</Text>
       </ScrollView>
     </SafeAreaView>
   );

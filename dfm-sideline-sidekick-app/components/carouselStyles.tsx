@@ -3,7 +3,15 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     carouselContainer: {
-        height: 150,
+        position: "relative",
+
+        height: 175,
+        width: "100%",
+
+        marginBottom: 10,
+
+        justifyContent: "center",
+        alignContent: "center",
     },
     viewPager: {
         flex: 1,
@@ -11,7 +19,6 @@ const styles = StyleSheet.create({
         alignContent: "center",
     },
     page: {
-        backgroundColor: "#E5EFF5",
 
         marginLeft: 50,
 
@@ -41,6 +48,32 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         textAlign: "center",
     },
+    progress: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignContent: "center",
+        marginBottom: 5,
+    },
+    dotActive: {
+        borderRadius: 50,
+        width: 9,
+        height: 9,
+
+        marginLeft: 2.5,
+        marginRight: 2.5,
+
+        backgroundColor: "#00629B"
+    },
+    dot: {
+        borderRadius: 50,
+        width: 9,
+        height: 9,
+
+        marginLeft: 2.5,
+        marginRight: 2.5,
+
+        backgroundColor: "#D9D9D9"
+    }
 })
 
 export default styles;
