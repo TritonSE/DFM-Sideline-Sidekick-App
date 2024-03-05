@@ -7,6 +7,7 @@ import { Pressable, Text, TextInput, TouchableOpacity, View } from "react-native
 import Icon from "react-native-vector-icons/Feather";
 
 import styles from "./HomePageStyles";
+import { Carousel } from "../components/carousel";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
@@ -17,6 +18,19 @@ const HomePage = () => {
 
   const clearInput = () => {
     setQuery("");
+  };
+
+  const CarouselComponent = () => {
+
+    const carouselItems: CarouselItem[] = [
+      {
+        id: 1,
+        title: "Cervial",
+        description: "LDKFJSLDJKF"
+      }
+    ];
+  
+    return <Carousel items={carouselItems} />;
   };
 
   return (
@@ -68,9 +82,11 @@ const HomePage = () => {
         </Pressable>
       </View>
       <Text style={styles.title}>Medical Emergencies</Text>
+      <CarouselComponent/>
       <Text style={styles.title}>Commonly Viewed</Text>
     </View>
   );
 };
 
 export default HomePage;
+
