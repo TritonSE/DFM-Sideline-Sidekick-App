@@ -12,28 +12,23 @@ export type CarouselItem = {
 };
 
 export const Carousel: React.FC<{ items: CarouselItem[] }> = ({ items }) => {
+
+
   return (
     <View style={styles.carouselContainer}>
-        <PagerView style={styles.viewPager} initialPage={0} offscreenPageLimit={2}>
+        <PagerView
+            style={styles.viewPager}
+            initialPage={0}
+            pageMargin={-100}
+            offscreenPageLimit={3}
+        >
             {items.map((item) => (
                 <View key={item.id} style={styles.page}>
-                    <Text>{item.title}</Text>
-                    <Text>{item.description}</Text>
+                    <Text style={styles.cardTitle}>{item.title}</Text>
+                    <Text style={styles.cardDescription} numberOfLines={2}>{item.description}</Text>
                 </View>
             ))}
         </PagerView>
     </View>
   );
 };
-
-{/* <View style={styles.carouselContainer}>
-        <Text>Hi</Text>
-        <PagerView style={styles.viewPager} initialPage={0}>
-            {items.map((item) => (
-                <View key={item.id} style={styles.page}>
-                    <Text>{item.title}</Text>
-                    <Text>{item.description}</Text>
-                </View>
-            ))}
-        </PagerView>
-</View> */}

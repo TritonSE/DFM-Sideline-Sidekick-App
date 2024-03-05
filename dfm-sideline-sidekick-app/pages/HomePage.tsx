@@ -33,9 +33,19 @@ const HomePage = () => {
     const carouselItems: CarouselItem[] = [
       {
         id: 1,
-        title: "Cervial",
-        description: "LDKFJSLDJKF",
+        title: "Cervical Spine Injury",
+        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
       },
+      {
+        id: 2,
+        title: "Cold Illnesses",
+        description: "Moderate (86-89°F) or Severe (<86°F)"
+      },
+      {
+        id: 3,
+        title: "Cauda Equina Syndrome",
+        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
+      }
     ];
 
     return <Carousel items={carouselItems} />;
@@ -91,8 +101,14 @@ const HomePage = () => {
           </Pressable>
         </View>
         <Text style={styles.title}>Medical Emergencies</Text>
+
         <CarouselComponent />
+
         <Text style={styles.title}>Commonly Viewed</Text>
+        {/* <Text style={styles.title}>Commonly Viewed</Text>
+        <Text style={styles.title}>Commonly Viewed</Text>
+        <Text style={styles.title}>Commonly Viewed</Text>
+        <Text style={styles.title}>Commonly Viewed</Text> */}
       </ScrollView>
     </SafeAreaView>
   );
