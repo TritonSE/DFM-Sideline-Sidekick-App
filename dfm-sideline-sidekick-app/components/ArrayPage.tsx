@@ -24,24 +24,6 @@ type ArrayProps = {
   title: string;
 };
 
-const content = [
-  {
-    title: "General Principles",
-    content: {
-      '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)':
-        "",
-      "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker",
-    },
-  },
-  {
-    title: "General Principles 2",
-    content: {
-      '"If you see it, flee it; if you can hear it, clear it.” (National Lightning Safety Institute)':
-        "",
-      "Assign roles": "Weather Monitor\n Chain of Command/Decision-maker",
-    },
-  },
-];
 const temp = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -90,7 +72,7 @@ const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
         </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
         <FlatList
-          data={content}
+          data={arrayProp}
           keyExtractor={(item) => item.title}
           ItemSeparatorComponent={() => <View style={styles.divider} />}
           renderItem={renderListItem}
