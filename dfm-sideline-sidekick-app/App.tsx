@@ -12,11 +12,13 @@ import { downloadJSON } from "./download/downloadFromAPI";
 import BookmarkPage from "./pages/BookmarkPage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
+import ViewAll from "./components/viewAll";
 
 type RootStackParamList = {
   Bookmark: undefined;
   Search: undefined;
   Tab: undefined;
+  ViewAll: undefined;
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -82,7 +84,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Search">
+      <Stack.Navigator initialRouteName="ViewAll">
+        <Stack.Screen name="ViewAll" component={ViewAll} options={{ headerShown: false }} />
         <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
         <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
