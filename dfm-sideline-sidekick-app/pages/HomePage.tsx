@@ -87,7 +87,7 @@ const HomePage = () => {
       {
         id: 2,
         title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)"
+        description: "Moderate (86-89°F) or Severe (<86°F)",
       },
       {
         id: 3,
@@ -138,7 +138,7 @@ const HomePage = () => {
             )}
           </View>
         </View>
-        <Text style={styles.title}>Browse By Category</Text>
+        <Text style={styles.subtitle}>Browse By Category</Text>
         <View style={styles.categories}>
           <Pressable style={styles.categoryButton}>
             <Text style={styles.buttonText}>General{"\n"}Principles</Text>
@@ -159,18 +159,26 @@ const HomePage = () => {
             <Text style={styles.buttonText}>Soft Tissues{"\n"}Injuries</Text>
           </Pressable>
         </View>
-        <Text style={styles.title}>Medical Emergencies</Text>
-
+        <View style={styles.row}>
+          <Text style={styles.subtitle}>Medical Emergencies</Text>
+          <View style={styles.viewAllRow}>
+            <Text style={styles.viewAll}>View all 7</Text>
+            <ArrowIcon />
+          </View>
+        </View>
         <EmergenciesComponent />
 
-        <Text style={styles.title}>Commonly Viewed</Text>
-
+        <View style={styles.row}>
+          <Text style={styles.subtitle}>Commonly Viewed</Text>
+          <View style={styles.viewAllRow}>
+            <Text style={styles.viewAll}>View all 7</Text>
+            <ArrowIcon />
+          </View>
+        </View>
         <BookmarksComponent />
-
+        {/* <Text style={styles.title}>Commonly Viewed</Text>
         <Text style={styles.title}>Commonly Viewed</Text>
-        <Text style={styles.title}>Commonly Viewed</Text>
-        <Text style={styles.title}>Commonly Viewed</Text>
-        <Text style={styles.title}>Commonly Viewed</Text>
+        <Text style={styles.title}>Commonly Viewed</Text>  */}
       </ScrollView>
     </SafeAreaView>
   );

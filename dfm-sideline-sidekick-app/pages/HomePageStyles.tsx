@@ -7,6 +7,8 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         marginTop: 80,
+        marginLeft: 10,
+        marginRight: 10,
       },
       android: {
         marginTop: 40,
@@ -18,10 +20,18 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#182B49",
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: "Roboto",
     fontWeight: "700",
     marginBottom: 20,
+    textAlign: "left",
+    paddingTop: 10,
+  },
+  subtitle: {
+    color: "#182B49",
+    fontSize: 20,
+    fontFamily: "Roboto",
+    fontWeight: "700",
     textAlign: "left",
     paddingTop: 10,
   },
@@ -78,6 +88,20 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFFFFF",
     fontWeight: "bold",
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  viewAll: {
+    marginRight: 10,
+  },
+  viewAllRow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 export default styles;
