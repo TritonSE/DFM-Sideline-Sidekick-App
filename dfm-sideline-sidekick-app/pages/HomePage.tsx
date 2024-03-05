@@ -14,6 +14,7 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import { ArrowIcon } from "../icons/arrowIcon";
 
 import { Carousel } from "../components/carousel";
 
@@ -57,13 +58,14 @@ const HomePage = () => {
       {
         id: 2,
         title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)"
+        description: "Moderate (86-89°F) or Severe (<86°F)",
       },
       {
         id: 3,
         title: "Cauda Equina Syndrome",
-        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
-      }
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
     ];
 
     return <Carousel items={carouselItems} />;
@@ -101,7 +103,7 @@ const HomePage = () => {
             )}
           </View>
         </View>
-        <Text style={styles.title}>Browse By Category</Text>
+        <Text style={styles.subtitle}>Browse By Category</Text>
         <View style={styles.categories}>
           <Pressable style={styles.categoryButton}>
             <Text style={styles.buttonText}>General{"\n"}Principles</Text>
@@ -122,11 +124,22 @@ const HomePage = () => {
             <Text style={styles.buttonText}>Soft Tissues{"\n"}Injuries</Text>
           </Pressable>
         </View>
-        <Text style={styles.title}>Medical Emergencies</Text>
-
+        <View style={styles.row}>
+          <Text style={styles.subtitle}>Medical Emergencies</Text>
+          <View style={styles.viewAllRow}>
+            <Text style={styles.viewAll}>View all 7</Text>
+            <ArrowIcon />
+          </View>
+        </View>
         <CarouselComponent />
 
-        <Text style={styles.title}>Commonly Viewed</Text>
+        <View style={styles.row}>
+          <Text style={styles.subtitle}>Commonly Viewed</Text>
+          <View style={styles.viewAllRow}>
+            <Text style={styles.viewAll}>View all 7</Text>
+            <ArrowIcon />
+          </View>
+        </View>
         {/* <Text style={styles.title}>Commonly Viewed</Text>
         <Text style={styles.title}>Commonly Viewed</Text>
         <Text style={styles.title}>Commonly Viewed</Text>
