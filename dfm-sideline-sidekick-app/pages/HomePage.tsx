@@ -14,13 +14,13 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-import { ArrowIcon } from "../icons/arrowIcon";
 
 import { Carousel } from "../components/carousel";
+import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
 
-const HomePage = () => {
+const HomePage = props => {
   const [query, setQuery] = useState("");
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
 
@@ -110,6 +110,10 @@ const HomePage = () => {
     return null;
   }
 
+  const navigateTo = (page) => {
+    props.navigation.navigate(page);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
@@ -140,7 +144,7 @@ const HomePage = () => {
         </View>
         <Text style={styles.subtitle}>Browse By Category</Text>
         <View style={styles.categories}>
-          <Pressable style={styles.categoryButton}>
+          <Pressable style={styles.categoryButton} onPress={() => {navigateTo('GeneralPrinciples')}}>
             <Text style={styles.buttonText}>General{"\n"}Principles</Text>
           </Pressable>
           <Pressable style={styles.categoryButton}>
@@ -161,10 +165,10 @@ const HomePage = () => {
         </View>
         <View style={styles.row}>
           <Text style={styles.subtitle}>Medical Emergencies</Text>
-          <View style={styles.viewAllRow}>
+          <TouchableOpacity style={styles.viewAllRow}>
             <Text style={styles.viewAll}>View all 7</Text>
             <ArrowIcon />
-          </View>
+          </TouchableOpacity>
         </View>
         <EmergenciesComponent />
 
@@ -176,9 +180,6 @@ const HomePage = () => {
           </View>
         </View>
         <BookmarksComponent />
-        {/* <Text style={styles.title}>Commonly Viewed</Text>
-        <Text style={styles.title}>Commonly Viewed</Text>
-        <Text style={styles.title}>Commonly Viewed</Text>  */}
       </ScrollView>
     </SafeAreaView>
   );

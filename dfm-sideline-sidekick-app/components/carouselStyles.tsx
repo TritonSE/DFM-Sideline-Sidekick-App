@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
     carouselContainer: {
         position: "relative",
 
-        height: 175,
+        height: 155,
         width: "100%",
 
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 5,
 
         justifyContent: "center",
         alignContent: "center",
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
     page: {
 
-        marginLeft: 50,
+        marginLeft: 65,
 
         padding: 15,
 
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         FontFamily: "Roboto",
         color: "#000000",
 
-        elevation: 15,
-        shadowColor: 'rgba(0, 0, 0, 0.6)',
+        elevation: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
     },
     cardTitle: {
         fontSize: 16,
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignContent: "center",
-        marginBottom: 5,
     },
     dotActive: {
         borderRadius: 50,

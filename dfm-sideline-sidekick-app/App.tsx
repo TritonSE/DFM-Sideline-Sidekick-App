@@ -12,11 +12,14 @@ import { downloadJSON } from "./download/downloadFromAPI";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
+import GeneralPrinciples from "./pages/generalPrinciples";
+import EmergencyCare from "./pages/EmergencyCare";
 
 type RootStackParamList = {
   Home: undefined;
   Search: undefined;
   Tab: undefined;
+  GeneralPrinciples: undefined;
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -86,6 +89,8 @@ export default function App() {
         <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
         <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
+
+        <Stack.Screen name="GeneralPrinciples" component={GeneralPrinciples} options={{ headerShown: false }} />
       </Stack.Navigator>
       <BottomNavBarComponent />
       <StatusBar style="auto" />

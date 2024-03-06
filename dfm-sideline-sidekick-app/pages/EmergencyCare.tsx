@@ -7,7 +7,7 @@ import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
 
-const EmergencyCare = () => {
+const EmergencyCare = props => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -17,7 +17,7 @@ const EmergencyCare = () => {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => {props.navigation.goBack(null)}}>
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>
       <Text style={styles.title}>Emergency Care</Text>

@@ -7,7 +7,7 @@ import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
 
-const GeneralPrinciples = () => {
+const GeneralPrinciples = props => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -15,10 +15,11 @@ const GeneralPrinciples = () => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <AntIcon name="close" style={styles.button} />
+      <TouchableOpacity onPress={() => {props.navigation.goBack(null)}}>
+        <AntIcon name="close" style={styles.button}/>
       </TouchableOpacity>
       <Text style={styles.title}>General Principles</Text>
       <Text style={styles.subTitle}>General Principles</Text>
