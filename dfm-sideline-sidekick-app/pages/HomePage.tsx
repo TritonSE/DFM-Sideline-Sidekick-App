@@ -20,7 +20,7 @@ import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
 
-const HomePage = props => {
+const HomePage = (props) => {
   const [query, setQuery] = useState("");
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
 
@@ -58,21 +58,23 @@ const HomePage = props => {
       {
         id: 2,
         title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)"
+        description: "Moderate (86-89°F) or Severe (<86°F)",
       },
       {
         id: 3,
         title: "Cauda Equina Syndrome",
-        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
       },
       {
         id: 4,
         title: "Cauda Equina Syndrome",
-        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
-      }
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
     ];
 
-    const color = "#E5EFF5"
+    const color = "#E5EFF5";
 
     return <Carousel items={carouselItems} cardColor={"#E5EFF5"} />;
   };
@@ -92,16 +94,18 @@ const HomePage = props => {
       {
         id: 3,
         title: "Cauda Equina Syndrome",
-        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
       },
       {
         id: 4,
         title: "Cauda Equina Syndrome",
-        description: "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence"
-      }
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
     ];
 
-    const color = "#E5EFF5"
+    const color = "#E5EFF5";
 
     return <Carousel items={carouselItems} cardColor={"#FFFFFF"} />;
   };
@@ -112,13 +116,13 @@ const HomePage = props => {
 
   const navigateTo = (page) => {
     props.navigation.navigate(page);
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.title}>Home</Text>
-        <View style={styles.searchContainer}>
+        <Text style={[styles.title, styles.horizontalPadding]}>Home</Text>
+        <View style={[styles.searchContainer, styles.horizontalPadding]}>
           <View style={styles.searchSection}>
             <Icon name="search" size={13} color="gray" style={styles.searchIcon} />
             <TextInput
@@ -142,9 +146,14 @@ const HomePage = props => {
             )}
           </View>
         </View>
-        <Text style={styles.subtitle}>Browse By Category</Text>
+        <Text style={[styles.subtitle, styles.horizontalPadding]}>Browse By Category</Text>
         <View style={styles.categories}>
-          <Pressable style={styles.categoryButton} onPress={() => {navigateTo('GeneralPrinciples')}}>
+          <Pressable
+            style={styles.categoryButton}
+            onPress={() => {
+              navigateTo("GeneralPrinciples");
+            }}
+          >
             <Text style={styles.buttonText}>General{"\n"}Principles</Text>
           </Pressable>
           <Pressable style={styles.categoryButton}>
@@ -163,7 +172,7 @@ const HomePage = props => {
             <Text style={styles.buttonText}>Soft Tissues{"\n"}Injuries</Text>
           </Pressable>
         </View>
-        <View style={styles.row}>
+        <View style={[styles.row, styles.horizontalPadding]}>
           <Text style={styles.subtitle}>Medical Emergencies</Text>
           <TouchableOpacity style={styles.viewAllRow}>
             <Text style={styles.viewAll}>View all 7</Text>
@@ -172,7 +181,7 @@ const HomePage = props => {
         </View>
         <EmergenciesComponent />
 
-        <View style={styles.row}>
+        <View style={[styles.row, styles.horizontalPadding]}>
           <Text style={styles.subtitle}>Commonly Viewed</Text>
           <View style={styles.viewAllRow}>
             <Text style={styles.viewAll}>View all 7</Text>

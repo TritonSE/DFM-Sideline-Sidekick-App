@@ -3,7 +3,6 @@ import { Platform, StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 17.5,
     ...Platform.select({
       ios: {
         marginTop: 80,
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 5,
     borderRadius: 10,
-    width: "45%",
+    width: "43%",
     height: 90,
   },
   buttonText: {
@@ -105,6 +104,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+  },
+  horizontalPadding: {
+    paddingHorizontal: 17,
   },
 });
 export default styles;
