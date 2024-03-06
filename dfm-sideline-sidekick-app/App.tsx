@@ -14,11 +14,14 @@ import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 import ViewAll from "./components/viewAll";
 
+import Home from "./pages/Home";
+
 type RootStackParamList = {
   Bookmark: undefined;
   Search: undefined;
   Tab: undefined;
   ViewAll: undefined;
+  Home: undefined,
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -84,7 +87,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ViewAll">
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ViewAll" component={ViewAll} options={{ headerShown: false }} />
         <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
