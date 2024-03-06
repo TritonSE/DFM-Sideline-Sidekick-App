@@ -2,6 +2,7 @@ import express from "express";
 import { validationResult } from "express-validator";
 
 import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
+import { updatedVersion } from "./versionController.js";
 
 // Get all emergencies and general principles
 const getAll = async (req, res) => {
