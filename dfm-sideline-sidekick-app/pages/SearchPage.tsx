@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
 import { useData } from "../DataContext";
 import { searchDocuments } from "../HandleSearch";
+import SearchBar from "../SearchBarComponent";
 
 import { RootStackParamList } from "./ConditionsSection";
 import styles from "./GlobalSearchStyles";
@@ -21,31 +22,55 @@ type DocumentBase = {
 
 type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
-const SearchBarComponent = () => {
-  const [query, setQuery] = useState("");
+const SearchPage: React.FC = () => {
+  const [query, setQuery] = useState<string>("");
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentBase[]>([]);
-  const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef<TextInput>(null);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
   const generalPrinciples = jsonData?.generalPrinciples ?? [];
   const navigation = useNavigation<ConditionsNavigationProp>();
+  const inputRef = useRef<TextInput>(null);
 
   const handleSearch = (text: string) => {
     setQuery(text);
-    const allDocuments = [...emergencies, ...generalPrinciples];
-    const matchedDocuments = searchDocuments(allDocuments, text).map((doc) => ({
-      ...doc,
-      _id: doc._id ?? "fallback-id",
-      subtitle:
-        doc.subtitle ??
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.", //default subtitle for now
-    }));
-    setFilteredDocuments(matchedDocuments);
+    if (text) {
+      const allDocuments = [...emergencies, ...generalPrinciples];
+      const matchedDocuments = searchDocuments(allDocuments, text).map((doc) => ({
+        ...doc,
+        _id: doc._id ?? "fallback-id",
+        subtitle:
+          doc.subtitle ??
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      }));
+      setFilteredDocuments(matchedDocuments);
+    } else {
+      setFilteredDocuments([]);
+    }
+  };
+
+  const highlightText = (text: string, input: string): React.ReactNode[] => {
+    const words = input.split(/\s+/).map((word) => word.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&"));
+    const pattern = words.join("|");
+    const queryRegex = new RegExp(`(${pattern})`, "gi");
+    const parts = text.split(queryRegex);
+
+    return parts.map((part, index) => {
+      const isMatch = queryRegex.test(part) && part.trim() !== "";
+      queryRegex.lastIndex = 0;
+
+      return (
+        <Text key={index.toString()} style={isMatch ? styles.highlightedText : undefined}>
+          {part}
+        </Text>
+      );
+    });
   };
 
   const clearInput = () => {
-    setQuery("");
+    const newQuery = "";
+    setQuery(newQuery);
+    handleSearch(newQuery);
     setFilteredDocuments([]);
   };
 
@@ -58,67 +83,23 @@ const SearchBarComponent = () => {
     }
   };
 
-  const highlightText = (text: string, input: string): React.ReactNode[] => {
-    // Split the input into individual words and escape special characters for regex
-    const words = input.split(/\s+/).map((word) => word.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&"));
-
-    // Create a regex pattern that matches any of the words
-    const pattern = words.join("|");
-    const queryRegex = new RegExp(`(${pattern})`, "gi");
-
-    const parts = text.split(queryRegex);
-
-    return parts.map((part, index) => {
-      const isMatch = queryRegex.test(part) && part.trim() !== "";
-      queryRegex.lastIndex = 0;
-      return (
-        <Text key={index.toString()} style={isMatch ? styles.highlightedText : undefined}>
-          {part}
-        </Text>
-      );
-    });
-  };
-
-  useEffect(() => {
-    if (isFocused && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Global Search</Text>
-      <View style={styles.searchContainer}>
-        <View style={styles.searchSection}>
-          <Icon name="search" size={13} color="gray" style={styles.searchIcon} />
-          <TextInput
-            ref={inputRef}
-            style={styles.input}
-            placeholder="Search"
-            value={query}
-            onChangeText={handleSearch}
-            selectionColor="#909090"
-            onFocus={() => {
-              setIsFocused(true);
-            }}
-            onBlur={() => {
-              setIsFocused(false);
-            }}
-          />
-          {query.length > 0 && (
-            <TouchableOpacity onPress={clearInput} style={{ padding: 10 }}>
-              <Icon name="x" size={15} color="gray" />
-            </TouchableOpacity>
-          )}
-        </View>
-        <View>
-          {isFocused && (
-            <TouchableOpacity onPress={cancelSearch} style={styles.cancelButton}>
-              <Text>Cancel</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
+      <SearchBar
+        query={query}
+        setQuery={handleSearch}
+        onFocus={() => {
+          setIsFocused(true);
+        }}
+        onBlur={() => {
+          setIsFocused(false);
+        }}
+        onClear={clearInput}
+        onCancel={cancelSearch}
+        isFocused={isFocused}
+        inputRef={inputRef}
+      />
       <View>
         {isFocused ? (
           query.length > 0 ? (
@@ -151,5 +132,4 @@ const SearchBarComponent = () => {
     </View>
   );
 };
-
-export default SearchBarComponent;
+export default SearchPage;

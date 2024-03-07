@@ -75,7 +75,7 @@ export default function App() {
           <Stack.Screen
             name="MedicalConditions"
             component={ConditionsSection}
-            options={{ headerShown: false}}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
         <BottomNavBarComponent />

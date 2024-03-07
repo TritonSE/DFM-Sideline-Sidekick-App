@@ -20,7 +20,7 @@ export default StyleSheet.create({
   },
   margin: {
     marginLeft: 16,
-    marginTop: 20
+    marginTop: 20,
   },
   menu: {
     display: "flex",
