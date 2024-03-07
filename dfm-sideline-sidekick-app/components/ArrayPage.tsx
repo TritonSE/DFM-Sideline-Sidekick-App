@@ -26,6 +26,7 @@ type ArrayProps = {
 
 const temp = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
