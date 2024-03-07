@@ -113,6 +113,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     console.log("GENERAL PRINCIPLES JSON:");
     console.log(jsonOutput.generalPrinciples);
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return jsonOutput;
   } catch (err) {
     console.log("ERROR:", err);

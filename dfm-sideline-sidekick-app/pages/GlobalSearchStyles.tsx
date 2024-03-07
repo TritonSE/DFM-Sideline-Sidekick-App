@@ -76,5 +76,8 @@ const styles = StyleSheet.create({
   highlightedText: {
     color: "#00629B",
   },
+  resultList: {
+    paddingBottom: 350,
+  },
 });
 export default styles;

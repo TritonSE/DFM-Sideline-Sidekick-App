@@ -13,6 +13,7 @@ import BookmarkPage from "./pages/BookmarkPage";
 import ConditionsSection from "./pages/ConditionsSection";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
+import GeneralPrinciples from "./pages/generalPrinciples";
 
 type DocumentBase = {
   _id: string;
@@ -28,6 +29,7 @@ type RootStackParamList = {
   Search: undefined;
   Tab: undefined;
   MedicalConditions: { emergency: DocumentBase };
+  GeneralPrinciples: { contentProp: DocumentBase };
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -75,6 +77,11 @@ export default function App() {
           <Stack.Screen
             name="MedicalConditions"
             component={ConditionsSection}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="GeneralPrinciples"
+            component={GeneralPrinciples}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

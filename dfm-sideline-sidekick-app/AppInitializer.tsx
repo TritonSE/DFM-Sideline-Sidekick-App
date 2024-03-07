@@ -26,7 +26,9 @@ function AppInitializer() {
       connected = await checkConnection();
       // if also connected, attempt to redownload
       if (connected && !attempted) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const jsonData = await downloadJSON("data.json", deviceType);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         updateJsonData(jsonData);
 
         attempted = true; // latches

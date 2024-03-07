@@ -1,12 +1,3 @@
-// type Document = {
-//   id: string;
-//   title: string;
-//   subtitle?: string;
-//   [key: string]: any;
-//   // overview?: {},
-//   // treatment?: {},
-//   // content?: {},
-// };
 type Document = {
   _id?: string;
   title: string;
@@ -49,5 +40,5 @@ export const searchDocuments = (documents: Document[], searchText: string): Docu
 
   const sortedDocs = filteredDocs.sort((a, b) => b.score - a.score);
 
-  return sortedDocs.map(({ score, ...doc }) => doc);
+  return sortedDocs.map(({ score: _score, ...doc }) => doc);
 };

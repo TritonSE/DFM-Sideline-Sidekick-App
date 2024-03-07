@@ -108,7 +108,8 @@ const SearchPage: React.FC = () => {
             <Text>Home Screen Cards...</Text>
           )
         ) : (
-          <FlatList
+          <View style={styles.resultList}>
+            <FlatList
               data={filteredDocuments}
               keyExtractor={(item) => item._id}
               ItemSeparatorComponent={() => <View style={styles.divider} />}
@@ -117,8 +118,8 @@ const SearchPage: React.FC = () => {
                   style={styles.listItemContainer}
                   onPress={() => {
                     if (item.content !== undefined) {
-                      // navigation.navigate("General")
-                      console.log(item.content)
+                      navigation.navigate("GeneralPrinciples", { contentProp: item });
+                      console.log(item.content);
                     } else {
                       navigation.navigate("MedicalConditions", { emergency: item });
                     }
@@ -132,6 +133,7 @@ const SearchPage: React.FC = () => {
                 </TouchableOpacity>
               )}
             />
+          </View>
         )}
       </View>
     </View>
