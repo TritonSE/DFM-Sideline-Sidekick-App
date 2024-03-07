@@ -101,9 +101,14 @@ const SearchPage: React.FC = () => {
         inputRef={inputRef}
       />
       <View>
-        {isFocused ? (
-          query.length > 0 ? (
-            <FlatList
+        {query.length === 0 ? (
+          isFocused ? (
+            <Text>Recent Searches...</Text>
+          ) : (
+            <Text>Home Screen Cards...</Text>
+          )
+        ) : (
+          <FlatList
               data={filteredDocuments}
               keyExtractor={(item) => item._id}
               ItemSeparatorComponent={() => <View style={styles.divider} />}
@@ -111,7 +116,12 @@ const SearchPage: React.FC = () => {
                 <TouchableOpacity
                   style={styles.listItemContainer}
                   onPress={() => {
-                    navigation.navigate("MedicalConditions", { emergency: item });
+                    if (item.content !== undefined) {
+                      // navigation.navigate("General")
+                      console.log(item.content)
+                    } else {
+                      navigation.navigate("MedicalConditions", { emergency: item });
+                    }
                   }}
                 >
                   <View style={styles.listItemTextContainer}>
@@ -122,11 +132,6 @@ const SearchPage: React.FC = () => {
                 </TouchableOpacity>
               )}
             />
-          ) : (
-            <Text>Recent Searches...</Text>
-          )
-        ) : (
-          <Text>Home Screen Cards...</Text>
         )}
       </View>
     </View>
