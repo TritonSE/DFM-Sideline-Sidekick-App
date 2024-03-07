@@ -12,6 +12,10 @@ type Document = {
   subtitle: string;
 };
 
+type Props = {
+  title: string;
+};
+
 const documents: Document[] = [
   {
     id: "1",
@@ -30,7 +34,7 @@ const documents: Document[] = [
   },
 ];
 
-const SearchBarComponent = () => {
+const SearchBarComponent: React.FC<Props> = ({ title }) => {
   const [query, setQuery] = useState("");
   const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
 
@@ -71,7 +75,7 @@ const SearchBarComponent = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Global Search</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.searchContainer}>
         <View style={styles.searchSection}>
           <Icon name="search" size={13} color="gray" style={styles.searchIcon} />

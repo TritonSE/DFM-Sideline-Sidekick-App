@@ -1,20 +1,23 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const { width, height } = Dimensions.get("window");
+const minDimension = Math.min(width, height);
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 17.5,
-    paddingTop: 50,
+    paddingHorizontal: width * 0.05, // 5% of screen width/height
+    paddingTop: height * 0.05, // 5% of screen width/height
   },
   listItemContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: height * 0.015, // 1.5% of screen width/height
+    paddingHorizontal: width * 0.04, // 4% of screen width/height
   },
   cancelButton: {
-    paddingLeft: 10,
-    marginBottom: 8,
+    paddingLeft: width * 0.02, // 2% of screen width/height
+    marginBottom: height * 0.008, // 0.8% of screen width/height
     justifyContent: "center",
     alignItems: "center",
     overflow: "visible",
@@ -23,28 +26,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listItemTitle: {
-    fontSize: 18,
+    fontSize: minDimension * 0.06, // 6% of screen width/height
     fontWeight: "500",
-    paddingBottom: 10,
+    paddingBottom: height * 0.012, // 1.2% of screen width/height
   },
   listItemSubtitle: {
-    fontSize: 13,
+    fontSize: minDimension * 0.035, // 3.5% of screen width/height
     color: "grey",
   },
   divider: {
     height: 1,
     backgroundColor: "lightgrey",
-    marginHorizontal: 15,
-    marginVertical: 10,
+    marginHorizontal: width * 0.04, // 4% of screen width/height
+    marginVertical: height * 0.01, // 1% of screen width/height
   },
   title: {
     color: "#182B49",
-    fontSize: 28,
-    fontFamily: "Roboto",
+    fontSize: minDimension * 0.1, // 10% of screen width/height
     fontWeight: "700",
-    marginBottom: 20,
+    marginBottom: height * 0.02, // 2% of screen width/height
     textAlign: "left",
-    paddingTop: 10,
+    paddingTop: height * 0.007, // 0.7% of screen width/height
+    fontFamily: "Roboto-Regular",
   },
   searchContainer: {
     flexDirection: "row",
@@ -58,23 +61,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "rgba(0, 0, 0, 0.4)",
-    borderRadius: 10,
+    borderRadius: minDimension * 0.02, // 2% of screen width
     margin: 0,
-    marginBottom: 10,
+    marginBottom: height * 0.01, // 1% of screen height
   },
   searchIcon: {
-    padding: 10,
+    padding: minDimension * 0.02, // 2% of screen width
   },
   input: {
     flex: 1,
-    paddingVertical: 10,
+    paddingVertical: height * 0.01, // 1% of screen height
     color: "#424242",
   },
   itemTitle: {
-    padding: 10,
+    padding: minDimension * 0.02, // 2% of screen height/width
   },
   highlightedText: {
     color: "#00629B",
   },
 });
+
 export default styles;
