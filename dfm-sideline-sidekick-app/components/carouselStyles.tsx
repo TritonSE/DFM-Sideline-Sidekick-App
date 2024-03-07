@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
         marginRight: 50,
       },
       android: {
-        marginLeft: 90,
-        marginRight: 100,
+        marginLeft: 25,
+        marginRight: 25,
       },
       default: {
         marginLeft: 65,

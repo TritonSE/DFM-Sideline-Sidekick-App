@@ -72,6 +72,18 @@ const HomePage = (props) => {
         description:
           "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
       },
+      {
+        id: 5,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 6,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
     ];
 
     const color = "#E5EFF5";

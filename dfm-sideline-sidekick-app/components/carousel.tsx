@@ -1,6 +1,6 @@
 /* eslint-disable import/namespace */
-import React, { useState } from "react";
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import styles from "./carouselStyles";
 
@@ -16,17 +16,35 @@ export type CarouselProps = {
 };
 
 export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
+  // for tracking progress
   const [page, setPage] = useState(0);
-  const viewWidth = Dimensions.get("window").width;
 
+  // for getting the width of our page
+  const [pageWidth, setPageWidth] = useState(0);
+  const pageRef = useRef(null);
+
+  const spacing = 50;
+
+  // conditional background formatting
   const cardStyle = StyleSheet.create({
     cardBack: {
       backgroundColor: cardColor,
     },
   });
 
+  // renders items in carousel
   const renderItem = ({ item }: { item: CarouselItem }) => (
-    <View key={item.id} style={[styles.page, cardStyle.cardBack]}>
+    <View
+      ref={pageRef}
+      onLayout={(event) => {
+        const { width } = event.nativeEvent.layout;
+        setPageWidth(width);
+      }}
+      key={item.id} 
+      style={[
+        styles.page,
+        cardStyle.cardBack,
+    ]}>
       <Text style={styles.cardTitle}>{item.title}</Text>
       <Text style={styles.cardDescription} numberOfLines={2}>
         {item.description}
@@ -34,10 +52,17 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
     </View>
   );
 
-  const handleScroll = (e) => {
-    const newPage = Math.round(e.nativeEvent.contentOffset.x / viewWidth);
-    setPage(newPage);
-  };
+  const onScrollEnd = (e) => {
+    const contentOffset = e.nativeEvent.contentOffset;
+    console.log(contentOffset);
+    console.log(pageWidth);
+    
+
+    // Divide the horizontal offset by the width of the view to see which page is visible
+    const pageNum = Math.floor(contentOffset.x / (pageWidth + spacing));
+    console.log('scrolled to page ', pageNum);
+    setPage(pageNum);
+  }
 
   return (
     <View style={styles.carouselContainer}>
@@ -46,9 +71,11 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
         renderItem={renderItem}
         horizontal
         pagingEnabled
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
+        snapToAlignment="center"
+        decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={onScrollEnd}
+        contentContainerStyle={{ paddingRight: spacing+5, paddingLeft: spacing+5 }} // Add padding to the right to ensure the last item snaps correctly
       />
       <View style={styles.progress}>
         {items.map((item, index) => (
