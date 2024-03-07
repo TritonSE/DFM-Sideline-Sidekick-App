@@ -1,5 +1,5 @@
 import * as Font from "expo-font";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import SearchBarComponent from "./GlobalSearch";

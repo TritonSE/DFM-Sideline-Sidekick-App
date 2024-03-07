@@ -34,6 +34,7 @@ const documents: Document[] = [
   },
 ];
 
+// eslint-disable-next-line react/prop-types
 const SearchBarComponent: React.FC<Props> = ({ title }) => {
   const [query, setQuery] = useState("");
   const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
