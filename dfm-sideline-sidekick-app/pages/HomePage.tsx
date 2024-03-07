@@ -20,7 +20,7 @@ import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
 
-const HomePage = (props) => {
+const HomePage = () => {
   const [query, setQuery] = useState("");
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
 
@@ -126,10 +126,6 @@ const HomePage = (props) => {
     return null;
   }
 
-  const navigateTo = (page) => {
-    props.navigation.navigate(page);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
@@ -160,12 +156,7 @@ const HomePage = (props) => {
         </View>
         <Text style={[styles.subtitle, styles.horizontalPadding]}>Browse By Category</Text>
         <View style={styles.categories}>
-          <Pressable
-            style={styles.categoryButton}
-            onPress={() => {
-              navigateTo("GeneralPrinciples");
-            }}
-          >
+          <Pressable style={styles.categoryButton}>
             <Text style={styles.buttonText}>General{"\n"}Principles</Text>
           </Pressable>
           <Pressable style={styles.categoryButton}>

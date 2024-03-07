@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   page: {
     ...Platform.select({
       ios: {
-        marginLeft: 90,
+        marginLeft: 50,
         marginRight: 50,
       },
       android: {
