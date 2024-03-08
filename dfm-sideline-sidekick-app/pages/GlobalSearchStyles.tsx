@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: 10,
-    paddingHorizontal: 2,
   },
   listItemTextContainer: {
     flex: 1,
@@ -27,7 +26,6 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: "lightgrey",
-    marginHorizontal: 15,
     marginVertical: 10,
   },
   title: {
