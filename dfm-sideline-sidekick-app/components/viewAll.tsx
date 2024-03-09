@@ -7,6 +7,9 @@ import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNa
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "./ConditionsSection";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import styles from "./viewAllStyles";
@@ -90,15 +93,27 @@ type Props = {
 //   );
 // };
 
-const Card = ({ title, description }) => {
+type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
+
+const Card = ({ emergency }) => {
+  const navigation = useNavigation<ConditionsNavigationProp>();
   return (
-    <Pressable>
+    <Pressable
+    onPress={() => {
+      if (emergency.content !== undefined) {
+        navigation.navigate("GeneralPrinciples", { titleProp: emergency.title, contentProp: emergency.content });
+      } else {
+        navigation.navigate("MedicalConditions", { emergency: emergency });
+      }
+    }}
+    >
       <View style={styles.containerCard}>
         <View style={styles.containerCard2}>
           <View style={styles.grayArea} />
           <View style={styles.textArea}>
-            <Text style={styles.textTitle}>{title}</Text>
-            <Text style={styles.text}>{description}</Text>
+            <Text style={styles.textTitle}>{emergency.title}</Text>
+            <Text style={styles.text}>{emergency.content}</Text>
+            {/* //add logic to make this either overview or content */}
           </View>
         </View>
       </View>
@@ -135,8 +150,8 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
           {params.arrayProp.map((emergency) => (
           <Card
             key={emergency.title}
-            title={emergency.title}
-            description={placeholder} //change this to either be overview or content
+            emergency={emergency}
+            // description={placeholder} //change this to either be overview or content
           />
           ))}
         </ScrollView>
