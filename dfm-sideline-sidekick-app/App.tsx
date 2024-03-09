@@ -4,11 +4,13 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity , View } from "react-native";
+import React, { useEffect }, { useState } from "react";
+import { Platform, StyleSheet, TouchableOpacity , View } from "react-native";
 
 
 import { BottomNavBar, NavItem } from "./components/bar";
+import { checkConnection } from "./download/connection/checkConnection";
+import { downloadJSON } from "./download/downloadFromAPI";
 import {Bookmark} from './components/bookmark'
 import { BookmarkIcon, BookmarkTag } from './icons/bookmarkIcon';
 import BookmarkPage from "./pages/BookmarkPage";
@@ -60,6 +62,32 @@ const BottomNavBarComponent = () => {
 };
 
 export default function App() {
+  const deviceType = Platform.OS;
+
+  // makes it so that it only checks the version once per app launch
+  let attempted = false;
+
+  // true when there's connection
+  let connected = false;
+
+  // checks on app open, connect change
+  useEffect(() => {
+    // stores if connected
+    console.log("ATTEMPTED BEFORE:", attempted);
+
+    async function matchConditions() {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      connected = await checkConnection();
+      // if also connected, attempt to redownload
+      if (connected && !attempted) {
+        await downloadJSON("data.json", deviceType);
+
+        attempted = true; // latches
+      }
+    }
+
+    void matchConditions();
+  }, [connected]);
 
   return (
     //<EmergencyCare />
