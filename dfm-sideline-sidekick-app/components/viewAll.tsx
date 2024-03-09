@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from "react";
-import { Text, View, Platform, ScrollView } from "react-native";
+import { Text, View, Platform, ScrollView, TouchableOpacity, Pressable } from "react-native";
 import * as FileSystem from "expo-file-system";
 import { downloadJSON } from "../download/downloadFromAPI";
 import { RouteProp } from "@react-navigation/native"; // Import RouteProp
@@ -7,9 +7,11 @@ import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNa
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 
+import Icon from "react-native-vector-icons/FontAwesome";
+
 import styles from "./viewAllStyles";
 
-const placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et";
+const placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
 
 // type array = {
 //   "How To Treat": {
@@ -77,14 +79,30 @@ type Props = {
 
 
 
+// const Card = ({ title, description }) => {
+//   return (
+//     <View style={styles.containerCard}>
+//       <View style={styles.card}>
+//         <Text style={styles.cardTitle}>{title}</Text>
+//         <Text style={styles.cardDescription}>{description}</Text>
+//       </View>
+//     </View>
+//   );
+// };
+
 const Card = ({ title, description }) => {
   return (
-    <View style={styles.containerCard}>
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{title}</Text>
-        <Text style={styles.cardDescription}>{description}</Text>
+    <Pressable>
+      <View style={styles.containerCard}>
+        <View style={styles.containerCard2}>
+          <View style={styles.grayArea} />
+          <View style={styles.textArea}>
+            <Text style={styles.textTitle}>{title}</Text>
+            <Text style={styles.text}>{description}</Text>
+          </View>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -101,8 +119,18 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
   }
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{params.title}</Text>
-        <Text>{params.arrayProp.length} items</Text>
+        <View style={styles.top}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+            style={styles.backButtonContainer}
+          >
+            <Icon name="chevron-left" size={12} color="#000000" style={styles.backButton} />
+          </TouchableOpacity>
+          <Text style={styles.title}>{params.title}</Text>
+        </View>
+        <Text style={styles.lenItems}>{params.arrayProp.length} items</Text>
         <ScrollView>
           {params.arrayProp.map((emergency) => (
           <Card
