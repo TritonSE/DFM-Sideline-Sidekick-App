@@ -2,7 +2,7 @@ import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 import { Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
-
+import { Bookmark } from "../components/bookmark";
 import BulletPoint from "../components/BulletPoint";
 
 import styles from "./generalPrinciplesStyles";
@@ -17,6 +17,9 @@ const GeneralPrinciples = () => {
   }
   return (
     <View style={styles.container}>
+      <View style={styles.topRightContainer}>
+        <Bookmark PageName="General Principles Page" />
+      </View>
       <TouchableOpacity>
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>

@@ -2,23 +2,31 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
+import { TouchableOpacity, View } from "react-native";
+import { BookmarkIcon, BookmarkTag } from './icons/bookmarkIcon';
+import {Bookmark} from './components/bookmark'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
+import EmergencyCare from "./pages/EmergencyCare";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
+import GeneralPrinciples from "./pages/generalPrinciples";
 
 type RootStackParamList = {
   Bookmark: undefined;
   Search: undefined;
   Tab: undefined;
+  Emergency: undefined;
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+
 
 const BottomNavBarComponent = () => {
   const navigation = useNavigation<StackNavigation>();
@@ -51,12 +59,14 @@ const BottomNavBarComponent = () => {
 };
 
 export default function App() {
+
   return (
+    //<EmergencyCare />
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Search">
+      <Stack.Navigator initialRouteName="Tab">
         <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
-        <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
+        <Stack.Screen name="Tab" component={GeneralPrinciples} options={{ headerShown: false }}/>
       </Stack.Navigator>
       <BottomNavBarComponent />
       <StatusBar style="auto" />
