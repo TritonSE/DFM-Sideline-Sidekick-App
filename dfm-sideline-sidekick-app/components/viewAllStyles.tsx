@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'center',
+    //temp
     textAlign: 'center',
     fontSize: 13,
   },
