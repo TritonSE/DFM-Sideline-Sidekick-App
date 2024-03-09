@@ -2,14 +2,15 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import { TouchableOpacity, View } from "react-native";
-import { BookmarkIcon, BookmarkTag } from './icons/bookmarkIcon';
-import {Bookmark} from './components/bookmark'
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity , View } from "react-native";
+
 
 import { BottomNavBar, NavItem } from "./components/bar";
+import {Bookmark} from './components/bookmark'
+import { BookmarkIcon, BookmarkTag } from './icons/bookmarkIcon';
 import BookmarkPage from "./pages/BookmarkPage";
 import EmergencyCare from "./pages/EmergencyCare";
 import SearchPage from "./pages/SearchPage";

@@ -1,8 +1,10 @@
-import { TouchableOpacity } from "react-native";
-import { BookmarkIcon, BookmarkTag } from '../icons/bookmarkIcon';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState } from "react";
-import {getAllBookmarks, createBookmark, deleteBookmark} from './bookmarkRoutes'
+import { TouchableOpacity } from "react-native";
+
+import { BookmarkIcon, BookmarkTag } from '../icons/bookmarkIcon';
+
+ 
+import {createBookmark, deleteBookmark, getAllBookmarks} from './bookmarkRoutes'
 
 
 type bookmarkProps = {
