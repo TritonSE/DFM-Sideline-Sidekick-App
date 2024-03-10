@@ -25,7 +25,6 @@ type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditi
 const SearchPage: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentBase[]>([]);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [recentSearches, setRecentSearches] = useState<DocumentBase[]>([]);
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
@@ -41,8 +40,7 @@ const SearchPage: React.FC = () => {
         ...doc,
         _id: doc._id ?? "fallback-id",
         subtitle:
-          doc.subtitle ??
-          "Lorem ipsum dolor sit amet, consectetur adip iscing elit, sed do.",
+          doc.subtitle ?? "Lorem ipsum dolor sit amet, consectetur adip iscing elit, sed do.",
       }));
       setFilteredDocuments(matchedDocuments);
     } else {
@@ -54,11 +52,20 @@ const SearchPage: React.FC = () => {
     setRecentSearches((currentSearches) => {
       const exists = currentSearches.find((item) => item._id === document._id);
       if (exists) {
-        return currentSearches; 
+        return currentSearches;
       }
       const newSearches = [document, ...currentSearches];
       return newSearches.slice(0, 10); // limitting to most recent 10 searches
     });
+  };
+
+  const handlePress = (item: DocumentBase) => {
+    addToRecentSearches(item);
+    if (item.content !== undefined) {
+      navigation.navigate("GeneralPrinciples", { contentProp: item });
+    } else {
+      navigation.navigate("MedicalConditions", { emergency: item });
+    }
   };
 
   const highlightText = (text: string, input: string): React.ReactNode[] => {
@@ -89,9 +96,13 @@ const SearchPage: React.FC = () => {
   const cancelSearch = () => {
     setQuery("");
     setFilteredDocuments([]);
-    setIsFocused(false);
     if (inputRef.current !== null) {
       inputRef.current.blur();
+    }
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      navigation.navigate("Bookmark");
     }
   };
 
@@ -101,21 +112,15 @@ const SearchPage: React.FC = () => {
       <SearchBar
         query={query}
         setQuery={handleSearch}
-        onFocus={() => {
-          setIsFocused(true);
-        }}
-        onBlur={() => {
-          setIsFocused(false);
-        }}
         onClear={clearInput}
         onCancel={cancelSearch}
-        isFocused={isFocused}
         inputRef={inputRef}
+        isFocused={true}
       />
       <View>
         {query.length === 0 ? (
-          isFocused ? (
-            <><Text style={styles.subtitle}>Recent</Text>
+          <>
+            <Text style={styles.subtitle}>Recent</Text>
             <FlatList
               data={recentSearches}
               keyExtractor={(item) => item._id}
@@ -124,13 +129,8 @@ const SearchPage: React.FC = () => {
                 <TouchableOpacity
                   style={styles.listItemContainer}
                   onPress={() => {
-                    if (item.content !== undefined) {
-                      navigation.navigate("GeneralPrinciples", { contentProp: item });
-                      console.log(item.content);
-                    } else {
-                      navigation.navigate("MedicalConditions", { emergency: item });
-                    }
-                  } }
+                    handlePress(item);
+                  }}
                 >
                   <View style={styles.listItemTextContainer}>
                     <Text style={styles.recentItemTitle}>{item.title}</Text>
@@ -138,10 +138,9 @@ const SearchPage: React.FC = () => {
                   </View>
                   <Icon name="chevron-right" size={20} color="#909090" />
                 </TouchableOpacity>
-              )} /></>
-          ) : (
-            <Text>Home Screen Cards...</Text>
-          )
+              )}
+            />
+          </>
         ) : (
           <View style={styles.resultList}>
             <FlatList
@@ -152,13 +151,7 @@ const SearchPage: React.FC = () => {
                 <TouchableOpacity
                   style={styles.listItemContainer}
                   onPress={() => {
-                    addToRecentSearches(item);
-                    if (item.content !== undefined) {
-                      navigation.navigate("GeneralPrinciples", { contentProp: item });
-                      console.log(item.content);
-                    } else {
-                      navigation.navigate("MedicalConditions", { emergency: item });
-                    }
+                    handlePress(item);
                   }}
                 >
                   <View style={styles.listItemTextContainer}>

@@ -41,6 +41,7 @@ const BottomNavBarComponent = () => {
   const navigationItems: NavItem[] = [
     {
       id: 1,
+      routeName: "Bookmark",
       icon: "bookmark",
       onClick: () => {
         navigation.navigate("Bookmark");
@@ -48,6 +49,7 @@ const BottomNavBarComponent = () => {
     },
     {
       id: 2,
+      routeName: "Search",
       icon: "search",
       onClick: () => {
         navigation.navigate("Search");
@@ -55,6 +57,7 @@ const BottomNavBarComponent = () => {
     },
     {
       id: 3,
+      routeName: "Principles",
       icon: "principles",
       onClick: () => {
         navigation.navigate("Tab");
