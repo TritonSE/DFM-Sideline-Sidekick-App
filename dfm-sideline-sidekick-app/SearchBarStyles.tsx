@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     borderColor: "rgba(0, 0, 0, 0.4)",
     borderRadius: 10,
     margin: 0,
-    marginBottom: 10,
   },
   input: {
     flex: 1,

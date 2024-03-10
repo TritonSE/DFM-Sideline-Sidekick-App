@@ -9,7 +9,7 @@ import { searchDocuments } from "../HandleSearch";
 import SearchBar from "../SearchBarComponent";
 
 import { RootStackParamList } from "./ConditionsSection";
-import styles from "./GlobalSearchStyles";
+import styles from "./SearchPageStyles";
 
 type DocumentBase = {
   _id: string;
@@ -26,6 +26,7 @@ const SearchPage: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentBase[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [recentSearches, setRecentSearches] = useState<DocumentBase[]>([]);
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
   const generalPrinciples = jsonData?.generalPrinciples ?? [];
@@ -41,12 +42,23 @@ const SearchPage: React.FC = () => {
         _id: doc._id ?? "fallback-id",
         subtitle:
           doc.subtitle ??
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+          "Lorem ipsum dolor sit amet, consectetur adip iscing elit, sed do.",
       }));
       setFilteredDocuments(matchedDocuments);
     } else {
       setFilteredDocuments([]);
     }
+  };
+
+  const addToRecentSearches = (document: DocumentBase) => {
+    setRecentSearches((currentSearches) => {
+      const exists = currentSearches.find((item) => item._id === document._id);
+      if (exists) {
+        return currentSearches; 
+      }
+      const newSearches = [document, ...currentSearches];
+      return newSearches.slice(0, 10); // limitting to most recent 10 searches
+    });
   };
 
   const highlightText = (text: string, input: string): React.ReactNode[] => {
@@ -103,7 +115,30 @@ const SearchPage: React.FC = () => {
       <View>
         {query.length === 0 ? (
           isFocused ? (
-            <Text>Recent Searches...</Text>
+            <><Text style={styles.subtitle}>Recent</Text>
+            <FlatList
+              data={recentSearches}
+              keyExtractor={(item) => item._id}
+              ItemSeparatorComponent={() => <View style={styles.divider} />}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.listItemContainer}
+                  onPress={() => {
+                    if (item.content !== undefined) {
+                      navigation.navigate("GeneralPrinciples", { contentProp: item });
+                      console.log(item.content);
+                    } else {
+                      navigation.navigate("MedicalConditions", { emergency: item });
+                    }
+                  } }
+                >
+                  <View style={styles.listItemTextContainer}>
+                    <Text style={styles.recentItemTitle}>{item.title}</Text>
+                    <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
+                  </View>
+                  <Icon name="chevron-right" size={20} color="#909090" />
+                </TouchableOpacity>
+              )} /></>
           ) : (
             <Text>Home Screen Cards...</Text>
           )
@@ -117,6 +152,7 @@ const SearchPage: React.FC = () => {
                 <TouchableOpacity
                   style={styles.listItemContainer}
                   onPress={() => {
+                    addToRecentSearches(item);
                     if (item.content !== undefined) {
                       navigation.navigate("GeneralPrinciples", { contentProp: item });
                       console.log(item.content);

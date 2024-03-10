@@ -9,15 +9,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 10,
+    paddingVertical: 10, 
   },
   listItemTextContainer: {
     flex: 1,
+    marginRight: 30
   },
   listItemTitle: {
     fontSize: 18,
     fontWeight: "500",
     paddingBottom: 10,
+  },
+  recentItemTitle: {
+    color: "#484848",
+    paddingBottom: 10,
+    fontSize: 18,
+    fontWeight: "500",
   },
   listItemSubtitle: {
     fontSize: 13,
@@ -36,6 +43,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "left",
     paddingTop: 10,
+  },
+  subtitle: {
+    color: "#182B49",
+    fontSize: 18,
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    paddingTop: 12
   },
   itemTitle: {
     padding: 10,
