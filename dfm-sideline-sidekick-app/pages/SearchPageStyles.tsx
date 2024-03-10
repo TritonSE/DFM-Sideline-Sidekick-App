@@ -9,11 +9,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 10, 
+    paddingVertical: 15, 
   },
   listItemTextContainer: {
     flex: 1,
-    marginRight: 30
+    marginRight: 30,
   },
   listItemTitle: {
     fontSize: 18,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Roboto",
     fontWeight: "500",
-    paddingTop: 12
+    paddingTop: 15,
   },
   itemTitle: {
     padding: 10,
