@@ -61,6 +61,9 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   } else {
     return (
       <View style={styles.container}>
+        <View style={styles.topRightContainer}>
+          <Bookmark PageName="Emergency Page" />
+        </View>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
