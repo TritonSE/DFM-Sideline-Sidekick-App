@@ -7,8 +7,8 @@ import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNa
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 
-import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "./ConditionsSection";
+// import { useNavigation } from "@react-navigation/native";
+// import { RootStackParamList } from "../ConditionsSection";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -93,15 +93,16 @@ type Props = {
 //   );
 // };
 
-type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
+// type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
-const Card = ({ emergency }) => {
-  const navigation = useNavigation<ConditionsNavigationProp>();
+const Card = ({ emergency, navigation }) => {
+  // const navigation = useNavigation<ConditionsNavigationProp>();
   return (
     <Pressable
     onPress={() => {
       if (emergency.content !== undefined) {
-        navigation.navigate("GeneralPrinciples", { titleProp: emergency.title, contentProp: emergency.content });
+        // navigation.navigate("GeneralPrinciples", { titleProp: emergency.title, contentProp: emergency.content });
+        navigation.navigate("GeneralPrinciples", { titleProp: emergency.title, contentProp: emergency });
       } else {
         navigation.navigate("MedicalConditions", { emergency: emergency });
       }
@@ -132,6 +133,7 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
+  console.log(params.arrayProp[4])
     return (
       <View style={styles.container}>
         <View style={styles.top}>
@@ -151,6 +153,7 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
           <Card
             key={emergency.title}
             emergency={emergency}
+            navigation={navigation}
             // description={placeholder} //change this to either be overview or content
           />
           ))}

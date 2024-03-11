@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Roboto-Bold",
     fontWeight: "700",
-    paddingLeft: 5,
+    paddingLeft: 7,
+    paddingRight: 27,
   },
   subpoints: {
     paddingTop: 5,

@@ -13,6 +13,8 @@ import BookmarkPage from "./pages/BookmarkPage";
 import SearchPage from "./pages/SearchPage";
 import TabPage from "./pages/TabPage";
 import ViewAll from "./components/viewAll";
+import ConditionsSection from "./ConditionsSection";
+import GeneralPrinciples from "./pages/generalPrinciples";
 
 import Home from "./pages/Home";
 
@@ -22,6 +24,8 @@ type RootStackParamList = {
   Tab: undefined;
   ViewAll: undefined;
   Home: undefined,
+  MedicalConditions: undefined,
+  GeneralPrinciples: undefined,
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -93,6 +97,16 @@ export default function App() {
         <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
         <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
         <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
+        <Stack.Screen
+            name="MedicalConditions"
+            component={ConditionsSection}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="GeneralPrinciples"
+            component={GeneralPrinciples}
+            options={{ headerShown: false }}
+          />
       </Stack.Navigator>
       <BottomNavBarComponent />
       <StatusBar style="auto" />
