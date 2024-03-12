@@ -10,6 +10,8 @@ import StringRenderer from "./components/StringRenderer";
 // import { getEmergency } from "./emergencies";
 
 import type { Emergency } from "./emergencies";
+import React from "react";
+import { Bookmark } from "./components/bookmark";
 
 export type RootStackParamList = {
   // Define the parameters for your screens here
@@ -114,6 +116,9 @@ export default function ConditionsSection({ route, navigation }: Props) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.topRightContainer}>
+          <Bookmark PageName="Conditions Section Page" />
+      </View>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
         <Image style={styles.image} source={require("./assets/ic_caretleft.png")} />
