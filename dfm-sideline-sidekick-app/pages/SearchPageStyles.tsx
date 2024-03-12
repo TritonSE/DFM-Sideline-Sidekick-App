@@ -24,11 +24,18 @@ const styles = StyleSheet.create({
   },
   listItemTextContainer: {
     flex: 1,
+    marginRight: 30,
   },
   listItemTitle: {
     fontSize: minDimension * 0.06, // 6% of screen width/height
     fontWeight: "500",
     paddingBottom: height * 0.012, // 1.2% of screen width/height
+  },
+  recentItemTitle: {
+    color: "#484848",
+    paddingBottom: 10,
+    fontSize: 18,
+    fontWeight: "500",
   },
   listItemSubtitle: {
     fontSize: minDimension * 0.035, // 3.5% of screen width/height
@@ -78,6 +85,9 @@ const styles = StyleSheet.create({
   },
   highlightedText: {
     color: "#00629B",
+  },
+  resultList: {
+    paddingBottom: 350,
   },
 });
 
