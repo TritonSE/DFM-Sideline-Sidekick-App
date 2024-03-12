@@ -18,7 +18,7 @@ const borderRadius = 0.035 * minDimension;
 if (width > height) {
   pressableRatio = 0.3;
 } else {
-  pressableRatio = 0.45;
+  pressableRatio = 0.5;
 }
 
 // Get the width of the device screen
@@ -60,21 +60,17 @@ const styles = StyleSheet.create({
   pressable: {
     backgroundColor: "#00629b",
     borderColor: "#00000033",
-    justifyContent: "center",
-    alignItems: "center",
     borderRadius,
     width: (170 / 390.0) * width, //uses Figma measurements to set a width
     height: pressableRatio * (170 / 390.0) * width, //aspect ratio applied to width to set a height
-
-    //width: pressableWidth,
   },
   pressableText: {
     fontFamily: "Roboto-Bold",
     fontSize: 0.049 * minDimension,
-    // textAlign: "left",
+    textAlignVertical: "top",
     color: "#ffffff",
-    paddingHorizontal: (13.98 / (2 * 390)) * width, //Figma measurements for padding horizontal
-    paddingVertical: (15.06 / (2 * 930.25)) * height, //Figma measurements for padding vertical
+    paddingHorizontal: (13.98 / (1 * 390)) * width, //Figma measurements for padding horizontal
+    paddingVertical: (15.06 / (1 * 930.25)) * height, //Figma measurements for padding vertical
   },
 });
 

@@ -45,7 +45,9 @@ const GeneralPrinciplesMain = () => {
       <View key={index} style={styles.row}>
         {row.map((label, colIndex) => (
           <Pressable key={`${index}-${colIndex}`} style={styles.pressable}>
-            <Text style={styles.pressableText}>{label}</Text>
+            <Text style={styles.pressableText} numberOfLines={0}>
+              {label}
+            </Text>
           </Pressable>
         ))}
       </View>
