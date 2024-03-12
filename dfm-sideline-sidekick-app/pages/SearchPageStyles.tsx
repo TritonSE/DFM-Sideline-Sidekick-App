@@ -9,23 +9,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-  },
-  cancelButton: {
-    paddingLeft: 10,
-    marginBottom: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "visible",
+    paddingVertical: 15,
   },
   listItemTextContainer: {
     flex: 1,
+    marginRight: 30,
   },
   listItemTitle: {
     fontSize: 18,
     fontWeight: "500",
     paddingBottom: 10,
+  },
+  recentItemTitle: {
+    color: "#484848",
+    paddingBottom: 10,
+    fontSize: 18,
+    fontWeight: "500",
   },
   listItemSubtitle: {
     fontSize: 13,
@@ -34,7 +33,6 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: "lightgrey",
-    marginHorizontal: 15,
     marginVertical: 10,
   },
   title: {
@@ -46,35 +44,21 @@ const styles = StyleSheet.create({
     textAlign: "left",
     paddingTop: 10,
   },
-  searchContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  searchSection: {
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.4)",
-    borderRadius: 10,
-    margin: 0,
-    marginBottom: 10,
-  },
-  searchIcon: {
-    padding: 10,
-  },
-  input: {
-    flex: 1,
-    paddingVertical: 10,
-    color: "#424242",
+  subtitle: {
+    color: "#182B49",
+    fontSize: 18,
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    paddingTop: 15,
   },
   itemTitle: {
     padding: 10,
   },
   highlightedText: {
     color: "#00629B",
+  },
+  resultList: {
+    paddingBottom: 350,
   },
 });
 export default styles;

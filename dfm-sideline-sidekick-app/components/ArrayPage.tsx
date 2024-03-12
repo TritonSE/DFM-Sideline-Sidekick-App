@@ -26,7 +26,6 @@ type ArrayProps = {
 
 const temp = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
 
- 
 const ArrayPage: React.FC<ArrayProps> = ({ arrayProp, title }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 

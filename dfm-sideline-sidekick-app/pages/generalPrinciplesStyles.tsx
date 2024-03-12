@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     alignSelf: "stretch",
     paddingLeft: 25,
+    paddingBottom: 100,
   },
   title: {
     color: "#182B49",

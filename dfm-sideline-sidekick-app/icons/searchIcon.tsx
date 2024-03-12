@@ -1,9 +1,17 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Path, Svg } from "react-native-svg";
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+});
 
 export const SearchIcon = () => {
   return (
-    <View>
+    <View style={styles.iconContainer}>
       <Svg width={40} height={40} viewBox="0 0 40 41" fill="none">
         <Path
           fillRule="evenodd"

@@ -3,7 +3,7 @@ import { RouteProp } from "@react-navigation/native"; // Import RouteProp
 import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import { useFonts } from "expo-font";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
 import ArrayPage from "../components/ArrayPage";
@@ -28,20 +28,8 @@ type GeneralProps = {
   navigation: StackNavigationProp<RootStackParamList, "GeneralPrinciples">;
 };
 
-// type GeneralProps = {
-//   route: {
-//     params: {
-//       titleProp: string;
-//       overviewProp?: object;
-//       contentProp: Content | Content[];
-//     };
-//   };
-//   navigation: any;
-// };
-
 const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   const { params } = route; // Destructure params from the route object
-  //const { titleProp, contentProp } = route.params;
 
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
@@ -50,7 +38,6 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
-  // const { title, content } = contentProp;
 
   if (Array.isArray(params.contentProp)) {
     return (
@@ -61,19 +48,21 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
   } else {
     return (
       <View style={styles.container}>
-        <View style={styles.topRightContainer}>
-          <Bookmark PageName="Emergency Page" />
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <AntIcon name="close" style={styles.button} />
-        </TouchableOpacity>
-        <Text style={styles.title}>{params.titleProp}</Text>
-        <Text style={styles.subTitle}>{params.contentProp.title}</Text>
-        <BulletPoint content={params.contentProp.content} />
+        <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.topRightContainer}>
+            <Bookmark PageName="Emergency Page" />
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <AntIcon name="close" style={styles.button} />
+          </TouchableOpacity>
+          <Text style={styles.title}>{params.titleProp}</Text>
+          <Text style={styles.subTitle}>{params.contentProp.title}</Text>
+          <BulletPoint content={params.contentProp.content} />
+        </ScrollView>
       </View>
     );
   }
