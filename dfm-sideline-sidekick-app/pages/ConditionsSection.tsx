@@ -21,6 +21,7 @@ import styles from "./ConditionSectionStyles";
 
 import type { Emergency } from "../emergencies";
 
+
 export type RootStackParamList = {
   // Define the parameters for your screens here
   Conditions: { emergency: Emergency }; // Example parameter
@@ -124,7 +125,7 @@ export default function ConditionsSection({ route, navigation }: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topRightContainer}>
-        <Bookmark item={emergency} />
+          <Bookmark PageName="Conditions Section Page" />
       </View>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
         <TouchableOpacity

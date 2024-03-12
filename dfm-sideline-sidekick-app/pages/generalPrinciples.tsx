@@ -50,7 +50,7 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
       <View style={styles.container}>
         <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.topRightContainer}>
-            <Bookmark item={params.contentProp} />
+            <Bookmark PageName="Emergency Page" />
           </View>
           <TouchableOpacity
             onPress={() => {
@@ -59,7 +59,8 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
           >
             <AntIcon name="close" style={styles.button} />
           </TouchableOpacity>
-          <Text style={styles.title}>{params.contentProp.title}</Text>
+          <Text style={styles.title}>{params.titleProp}</Text>
+          <Text style={styles.subTitle}>{params.contentProp.title}</Text>
           <BulletPoint content={params.contentProp.content} />
         </ScrollView>
       </View>

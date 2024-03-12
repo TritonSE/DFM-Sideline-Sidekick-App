@@ -36,6 +36,8 @@ type RootStackParamList = {
 type StackNavigation = StackNavigationProp<RootStackParamList>;
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+
+
 const BottomNavBarComponent = () => {
   const navigation = useNavigation<StackNavigation>();
 

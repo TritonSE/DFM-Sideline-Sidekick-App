@@ -49,7 +49,7 @@ export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
               <CircleIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
             </View>
           ) : item.icon === "bookmark" ? (
-            <BookmarkIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
+            <BookmarkIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"}/>
           ) : (
             <GeneralPrinciplesIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
           )}
