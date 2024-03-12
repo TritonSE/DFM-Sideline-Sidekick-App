@@ -6,7 +6,6 @@ import AntIcon from "react-native-vector-icons/AntDesign";
 import BulletPoint from "../components/BulletPoint";
 import { Bookmark } from "../components/bookmark";
 
-
 import styles from "./generalPrinciplesStyles";
 
 const EmergencyCare = () => {
