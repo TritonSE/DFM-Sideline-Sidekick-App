@@ -2,7 +2,7 @@
 // 
 const AsyncStorage = require("@react-native-async-storage/async-storage").default;
 
-export const createBookmark = (item) => {
+export const createBookmark = async (item) => {
   try {
     let bookmarks = JSON.parse(await AsyncStorage.getItem("bookmarks")) || [];
     const exists = bookmarks.includes(item);
@@ -13,13 +13,13 @@ export const createBookmark = (item) => {
     console.log(item);
     console.log(bookmarks);
     await AsyncStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    console.log("Bookmark created:", name);
+    console.log("Bookmark created:", item);
   } catch (error) {
     throw new Error("Error creating bookmark: " + error.message);
   }
 };
 
-export const deleteBookmark = (item) => {
+export const deleteBookmark = async (item) => {
   try {
     const existingBookmarks = JSON.parse(await AsyncStorage.getItem("bookmarks")) || [];
     const index = existingBookmarks.findIndex((bookmark) => bookmark.title === item.title);

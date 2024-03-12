@@ -1,6 +1,7 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackNavigationProp } from "@react-navigation/stack";
+// eslint-disable-next-line import/order
 import { StatusBar } from "expo-status-bar";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
