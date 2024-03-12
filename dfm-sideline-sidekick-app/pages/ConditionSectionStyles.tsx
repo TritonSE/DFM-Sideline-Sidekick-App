@@ -31,7 +31,7 @@ export default StyleSheet.create({
     marginTop: 16,
   },
   topRightContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 80,
     right: 0,
     padding: 10,

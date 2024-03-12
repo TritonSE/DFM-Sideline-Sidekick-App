@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   topRightContainer: {
-    position: 'absolute',
-    top: 80,
+    position: "absolute",
+    top: 28,
     right: 0,
     padding: 10,
     zIndex: 1,

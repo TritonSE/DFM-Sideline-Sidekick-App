@@ -38,6 +38,7 @@ const SearchPage: React.FC = () => {
       const allDocuments = [...emergencies, ...generalPrinciples];
       const matchedDocuments = searchDocuments(allDocuments, text).map((doc) => ({
         ...doc,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         _id: doc._id ?? "fallback-id",
         subtitle:
           doc.subtitle ?? "Lorem ipsum dolor sit amet, consectetur adip iscing elit, sed do.",
