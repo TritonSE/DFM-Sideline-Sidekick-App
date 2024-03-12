@@ -1,14 +1,15 @@
 import * as Font from "expo-font";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 
-import SearchBarComponent from "./GlobalSearch";
+import SearchPage from "./SearchPage";
 import styles from "./generalPrinciplesMainStyles";
 
 const GeneralPrinciplesMain = () => {
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
+  const [searchShowing, setSearchShowing] = useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function loadFont() {
       try {
         await Font.loadAsync({
@@ -53,15 +54,17 @@ const GeneralPrinciplesMain = () => {
 
   return (
     <SafeAreaView>
-      <SearchBarComponent title="General Principles" />
-      <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.subheader}>
-            <Text style={styles.subheaderText}>Browse by Category</Text>
+      <SearchPage onPage={searchShowing} setShowing={setSearchShowing} />
+      {!searchShowing && (
+        <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.container}>
+            <View style={styles.subheader}>
+              <Text style={styles.subheaderText}>Browse by Category</Text>
+            </View>
+            <View style={styles.grid}>{renderPressables()}</View>
           </View>
-          <View style={styles.grid}>{renderPressables()}</View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

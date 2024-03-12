@@ -78,7 +78,11 @@ export default function App() {
         <Stack.Navigator initialRouteName="Search">
           <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
           <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
-          <Stack.Screen name="GPM" component={GeneralPrinciplesMain} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="GPM"
+            component={GeneralPrinciplesMain}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="MedicalConditions"
             component={ConditionsSection}

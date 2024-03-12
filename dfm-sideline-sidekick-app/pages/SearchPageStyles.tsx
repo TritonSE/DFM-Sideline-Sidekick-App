@@ -41,6 +41,13 @@ const styles = StyleSheet.create({
     fontSize: minDimension * 0.035, // 3.5% of screen width/height
     color: "grey",
   },
+  subtitle: {
+    color: "#182B49",
+    fontSize: 18,
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    paddingTop: 15,
+  },
   divider: {
     height: 1,
     backgroundColor: "lightgrey",
