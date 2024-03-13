@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 import { BookmarkIcon, BookmarkTag } from "../icons/bookmarkIcon";
 
-import { createBookmark, deleteBookmark } from "./bookmarkRoutes";
+import { createBookmark, deleteBookmark, findBookmark } from "./bookmarkRoutes";
 
 type bookmarkProps = {
   item: object | undefined;
@@ -12,12 +12,22 @@ type bookmarkProps = {
 export const Bookmark: React.FC<bookmarkProps> = ({ item }) => {
   const [selectedItemId, setSelectedItemId] = useState(0);
 
+  useEffect( ()=>{
+    async function checkExistence() {
+      const exists = await findBookmark(item);
+      if (exists) {
+        setSelectedItemId(1);
+      }
+    }
+    void checkExistence();
+  }, []);
+
   const handleBookmarkClick = () => {
     if (selectedItemId === 0) {
-      createBookmark(item);
+      void createBookmark(item);
       setSelectedItemId(1);
     } else {
-      deleteBookmark(item);
+      void deleteBookmark(item);
       setSelectedItemId(0);
     };
   };

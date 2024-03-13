@@ -35,6 +35,20 @@ export const deleteBookmark = async (item) => {
   }
 };
 
+export const findBookmark = async (item) => {
+  try {
+    const existingBookmarks = JSON.parse(await AsyncStorage.getItem("bookmarks")) || [];
+    const index = existingBookmarks.findIndex((bookmark) => bookmark.title === item.title);
+    if (index !== -1) {
+      return true;
+    } else {
+      return false; 
+    }
+  } catch (error) {
+    console.error("Error finding bookmark:", error);
+  }
+}
+
 export const getAllBookmarks = async () => {
   try {
     const existingBookmarks = JSON.parse(await AsyncStorage.getItem("bookmarks")) || [];
