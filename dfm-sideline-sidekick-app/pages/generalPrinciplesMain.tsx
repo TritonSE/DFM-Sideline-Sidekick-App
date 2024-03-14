@@ -1,6 +1,6 @@
 import * as Font from "expo-font";
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
 import SearchPage from "./SearchPage";
 import styles from "./generalPrinciplesMainStyles";
@@ -55,7 +55,7 @@ const GeneralPrinciplesMain = () => {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <SearchPage onPage={searchShowing} setShowing={setSearchShowing} />
       {!searchShowing && (
         <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
@@ -67,7 +67,7 @@ const GeneralPrinciplesMain = () => {
           </View>
         </ScrollView>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

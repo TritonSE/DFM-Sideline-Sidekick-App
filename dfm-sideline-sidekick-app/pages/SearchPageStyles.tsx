@@ -6,7 +6,7 @@ const minDimension = Math.min(width, height);
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: width * 0.05, // 5% of screen width/height
-    paddingTop: height * 0.06, // 5% of screen width/height
+    paddingTop: height * 0.06927, // ~7% of screen width/height
   },
   listItemContainer: {
     flexDirection: "row",
