@@ -6,14 +6,14 @@ const minDimension = Math.min(width, height);
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: width * 0.05, // 5% of screen width/height
-    paddingTop: height * 0.05, // 5% of screen width/height
+    paddingTop: height * 0.06, // 5% of screen width/height
   },
   listItemContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: height * 0.015, // 1.5% of screen width/height
-    paddingHorizontal: width * 0.04, // 4% of screen width/height
+    //paddingHorizontal: width * 0.005, // 4% of screen width/height
   },
   cancelButton: {
     paddingLeft: width * 0.02, // 2% of screen width/height
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   listItemTextContainer: {
     flex: 1,
-    marginRight: 30,
+    //marginRight: 30,
   },
   listItemTitle: {
     fontSize: 18, //minDimension * 0.06, // 6% of screen width/height
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: "lightgrey",
-    marginHorizontal: width * 0.04, // 4% of screen width/height
+    //marginHorizontal: width * 0.04, // 4% of screen width/height
     marginVertical: height * 0.01, // 1% of screen width/height
   },
   title: {
