@@ -12,8 +12,9 @@ import { BottomNavBar, NavItem } from "./components/bar";
 import BookmarkPage from "./pages/BookmarkPage";
 import ConditionsSection from "./pages/ConditionsSection";
 import SearchPage from "./pages/SearchPage";
-import TabPage from "./pages/TabPage";
+// import TabPage from "./pages/TabPage";
 import GeneralPrinciples from "./pages/generalPrinciples";
+import GeneralPrinciplesMain from "./pages/generalPrinciplesMain";
 
 type DocumentBase = {
   _id: string;
@@ -27,6 +28,7 @@ type DocumentBase = {
 type RootStackParamList = {
   Bookmark: undefined;
   Search: undefined;
+  GPM: undefined;
   Tab: undefined;
   MedicalConditions: { emergency: DocumentBase };
   GeneralPrinciples: { contentProp: DocumentBase };
@@ -60,7 +62,7 @@ const BottomNavBarComponent = () => {
       routeName: "Principles",
       icon: "principles",
       onClick: () => {
-        navigation.navigate("Tab");
+        navigation.navigate("GPM");
       },
     },
   ];
@@ -76,7 +78,11 @@ export default function App() {
         <Stack.Navigator initialRouteName="Search">
           <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
           <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
-          <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="GPM"
+            component={GeneralPrinciplesMain}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="MedicalConditions"
             component={ConditionsSection}

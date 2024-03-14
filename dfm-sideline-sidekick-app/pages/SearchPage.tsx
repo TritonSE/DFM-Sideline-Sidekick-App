@@ -20,9 +20,14 @@ type DocumentBase = {
   content?: object;
 };
 
+type SearchPageProps = {
+  onPage: boolean;
+  setShowing?: (param: boolean) => void;
+};
+
 type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
-const SearchPage: React.FC = () => {
+const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) => {
   const [query, setQuery] = useState<string>("");
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentBase[]>([]);
   const [recentSearches, setRecentSearches] = useState<DocumentBase[]>([]);
@@ -99,6 +104,10 @@ const SearchPage: React.FC = () => {
     if (inputRef.current !== null) {
       inputRef.current.blur();
     }
+    if (setShowing !== undefined) {
+      setShowing(false);
+      return;
+    }
     if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
@@ -115,56 +124,63 @@ const SearchPage: React.FC = () => {
         onClear={clearInput}
         onCancel={cancelSearch}
         inputRef={inputRef}
-        isFocused={true}
+        isFocused={onPage}
+        onFocus={() => {
+          if (setShowing !== undefined) {
+            setShowing(true);
+          }
+        }}
       />
-      <View>
-        {query.length === 0 ? (
-          <>
-            <Text style={styles.subtitle}>Recent</Text>
-            <FlatList
-              data={recentSearches}
-              keyExtractor={(item) => item._id}
-              ItemSeparatorComponent={() => <View style={styles.divider} />}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.listItemContainer}
-                  onPress={() => {
-                    handlePress(item);
-                  }}
-                >
-                  <View style={styles.listItemTextContainer}>
-                    <Text style={styles.recentItemTitle}>{item.title}</Text>
-                    <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
-                  </View>
-                  <Icon name="chevron-right" size={20} color="#909090" />
-                </TouchableOpacity>
-              )}
-            />
-          </>
-        ) : (
-          <View style={styles.resultList}>
-            <FlatList
-              data={filteredDocuments}
-              keyExtractor={(item) => item._id}
-              ItemSeparatorComponent={() => <View style={styles.divider} />}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.listItemContainer}
-                  onPress={() => {
-                    handlePress(item);
-                  }}
-                >
-                  <View style={styles.listItemTextContainer}>
-                    <Text style={styles.listItemTitle}>{highlightText(item.title, query)}</Text>
-                    <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
-                  </View>
-                  <Icon name="chevron-right" size={20} color="#909090" />
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        )}
-      </View>
+      {onPage && (
+        <View>
+          {query.length === 0 ? (
+            <>
+              <Text style={styles.subtitle}>Recent</Text>
+              <FlatList
+                data={recentSearches}
+                keyExtractor={(item) => item._id}
+                ItemSeparatorComponent={() => <View style={styles.divider} />}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.listItemContainer}
+                    onPress={() => {
+                      handlePress(item);
+                    }}
+                  >
+                    <View style={styles.listItemTextContainer}>
+                      <Text style={styles.recentItemTitle}>{item.title}</Text>
+                      <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
+                    </View>
+                    <Icon name="chevron-right" size={20} color="#909090" />
+                  </TouchableOpacity>
+                )}
+              />
+            </>
+          ) : (
+            <View style={styles.resultList}>
+              <FlatList
+                data={filteredDocuments}
+                keyExtractor={(item) => item._id}
+                ItemSeparatorComponent={() => <View style={styles.divider} />}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.listItemContainer}
+                    onPress={() => {
+                      handlePress(item);
+                    }}
+                  >
+                    <View style={styles.listItemTextContainer}>
+                      <Text style={styles.listItemTitle}>{highlightText(item.title, query)}</Text>
+                      <Text style={styles.listItemSubtitle}>{item.subtitle}</Text>
+                    </View>
+                    <Icon name="chevron-right" size={20} color="#909090" />
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          )}
+        </View>
+      )}
     </View>
   );
 };
