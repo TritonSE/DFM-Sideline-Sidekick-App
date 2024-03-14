@@ -43,8 +43,10 @@ const styles = StyleSheet.create({
     paddingVertical: (10 / 930.25) * height,
   },
   subheaderText: {
-    fontFamily: "Roboto-Regular",
-    fontSize: 0.05 * minDimension,
+    color: "#182b49",
+    fontFamily: "Roboto-Medium",
+    fontSize: 18, //0.05 * minDimension,
+    fontWeight: "500",
   },
   grid: {
     flexDirection: "column",

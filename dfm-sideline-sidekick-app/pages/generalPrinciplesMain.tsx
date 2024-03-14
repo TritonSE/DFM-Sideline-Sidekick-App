@@ -14,7 +14,7 @@ const GeneralPrinciplesMain = () => {
       try {
         await Font.loadAsync({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+          "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
         });

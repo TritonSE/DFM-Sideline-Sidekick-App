@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
   },
   listItemTitle: {
-    fontSize: minDimension * 0.06, // 6% of screen width/height
+    fontSize: 18, //minDimension * 0.06, // 6% of screen width/height
     fontWeight: "500",
     paddingBottom: height * 0.012, // 1.2% of screen width/height
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   listItemSubtitle: {
-    fontSize: minDimension * 0.035, // 3.5% of screen width/height
+    fontSize: 13, //minDimension * 0.035, // 3.5% of screen width/height
     color: "grey",
   },
   subtitle: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#182B49",
-    fontSize: minDimension * 0.1, // 10% of screen width/height
+    fontSize: 28, //minDimension * 0.1, // 10% of screen width/height
     fontWeight: "700",
     marginBottom: height * 0.02, // 2% of screen width/height
     textAlign: "left",
