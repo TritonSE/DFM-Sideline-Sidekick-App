@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 
 import { BookmarkIcon, BookmarkTag } from "../icons/bookmarkIcon";
 
@@ -12,7 +12,7 @@ type bookmarkProps = {
 export const Bookmark: React.FC<bookmarkProps> = ({ item }) => {
   const [selectedItemId, setSelectedItemId] = useState(0);
 
-  useEffect( ()=>{
+  useEffect(() => {
     async function checkExistence() {
       const exists = await findBookmark(item);
       if (exists) {
@@ -29,11 +29,11 @@ export const Bookmark: React.FC<bookmarkProps> = ({ item }) => {
     } else {
       void deleteBookmark(item);
       setSelectedItemId(0);
-    };
+    }
   };
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => {
         handleBookmarkClick();
       }}
@@ -43,6 +43,6 @@ export const Bookmark: React.FC<bookmarkProps> = ({ item }) => {
       ) : (
         <BookmarkIcon fillColor={"#001F3F"} />
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
