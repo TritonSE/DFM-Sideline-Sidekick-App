@@ -2,6 +2,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from "react";
 import { StyleSheet } from "react-native";
 
