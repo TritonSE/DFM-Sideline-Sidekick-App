@@ -30,6 +30,13 @@ export default StyleSheet.create({
     width: "100%",
     marginTop: 16,
   },
+  topRightContainer: {
+    position: "absolute",
+    top: 80,
+    right: 0,
+    padding: 10,
+    zIndex: 1,
+  },
   menuText: {
     fontFamily: "Roboto-Regular",
     fontSize: 16,

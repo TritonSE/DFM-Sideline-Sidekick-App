@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
 import BulletPoint from "../components/BulletPoint";
+import { Bookmark } from "../components/bookmark";
 
 import styles from "./generalPrinciplesStyles";
 
@@ -17,6 +18,9 @@ const EmergencyCare = () => {
   }
   return (
     <View style={styles.container}>
+      <View style={styles.topRightContainer}>
+        <Bookmark PageName="Emergency Page" />
+      </View>
       <TouchableOpacity>
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>

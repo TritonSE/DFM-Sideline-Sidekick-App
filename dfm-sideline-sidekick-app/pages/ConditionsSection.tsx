@@ -15,9 +15,9 @@ import {
 } from "react-native";
 
 import StringRenderer from "../components/StringRenderer";
+import { Bookmark } from "../components/bookmark";
 
 import styles from "./ConditionSectionStyles";
-// import { getEmergency } from "./emergencies";
 
 import type { Emergency } from "../emergencies";
 
@@ -123,6 +123,9 @@ export default function ConditionsSection({ route, navigation }: Props) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.topRightContainer}>
+        <Bookmark item={emergency} />
+      </View>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
         <TouchableOpacity
           onPress={() => {
