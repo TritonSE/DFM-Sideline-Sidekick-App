@@ -3,10 +3,14 @@
 This app is a React Native app with a Node backend, using a MongoDB database. Ask engineering manager about access to the Mongo database, and design lead for access to the figma.
 Contact Anthony if you have any issues with setup.
 
-## Frontend
+## App Frontend
 
 Our frontend is in the dfm-sideline-sidekick-app folder, and it is using a framework called [Expo](https://docs.expo.dev/).
 To set up, run npm install in this directory, and then npx expo start. You then have several options to run it, including using either an Android or iOS emulator. Install both of these, as we want our app to work on both Android and iOS. 
+
+## Admin Portal Frontend
+
+This is contained within the admin-portal-frontend folder, and uses Next.js. To set up, run npm install, and then npm run dev. 
 
 ## Backend
 
