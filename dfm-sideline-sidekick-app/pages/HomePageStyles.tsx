@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     textAlign: "left",
     paddingTop: 10,
+    maxWidth: "70%",
   },
   searchContainer: {
     flexDirection: "row",

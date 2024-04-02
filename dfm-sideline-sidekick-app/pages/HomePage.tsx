@@ -88,7 +88,93 @@ const HomePage = () => {
 
     const color = "#E5EFF5";
 
-    return <Carousel items={carouselItems} cardColor={"#E5EFF5"} />;
+    return <Carousel items={carouselItems} cardColor={color} />;
+  };
+
+  const FaceEyeComponent = () => {
+    const carouselItems: CarouselItem[] = [
+      {
+        id: 1,
+        title: "Cervical Spine Injury",
+        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
+      },
+      {
+        id: 2,
+        title: "Cold Illnesses",
+        description: "Moderate (86-89°F) or Severe (<86°F)",
+      },
+      {
+        id: 3,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 4,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 5,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 6,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+    ];
+
+    const color = "#E5EFF5";
+
+    return <Carousel items={carouselItems} cardColor={color} />;
+  };
+
+  const MouthElbowHipComponent = () => {
+    const carouselItems: CarouselItem[] = [
+      {
+        id: 1,
+        title: "Cervical Spine Injury",
+        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
+      },
+      {
+        id: 2,
+        title: "Cold Illnesses",
+        description: "Moderate (86-89°F) or Severe (<86°F)",
+      },
+      {
+        id: 3,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 4,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 5,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+      {
+        id: 6,
+        title: "Cauda Equina Syndrome",
+        description:
+          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
+      },
+    ];
+
+    const color = "#E5EFF5";
+
+    return <Carousel items={carouselItems} cardColor={color} />;
   };
 
   const BookmarksComponent = () => {
@@ -117,9 +203,9 @@ const HomePage = () => {
       },
     ];
 
-    const color = "#E5EFF5";
+    const color = "#FFFFFF";
 
-    return <Carousel items={carouselItems} cardColor={"#FFFFFF"} />;
+    return <Carousel items={carouselItems} cardColor={color} />;
   };
 
   if (!isFontsLoaded) {
@@ -175,6 +261,7 @@ const HomePage = () => {
             <Text style={styles.buttonText}>Soft Tissues{"\n"}Injuries</Text>
           </Pressable>
         </View>
+
         <View style={[styles.row, styles.horizontalPadding]}>
           <Text style={styles.subtitle}>Medical Emergencies</Text>
           <TouchableOpacity style={styles.viewAllRow}>
@@ -185,7 +272,25 @@ const HomePage = () => {
         <EmergenciesComponent />
 
         <View style={[styles.row, styles.horizontalPadding]}>
-          <Text style={styles.subtitle}>Commonly Viewed</Text>
+          <Text style={styles.subtitle}>Face and Eye Emergencies</Text>
+          <View style={styles.viewAllRow}>
+            <Text style={styles.viewAll}>View all 7</Text>
+            <ArrowIcon />
+          </View>
+        </View>
+        <FaceEyeComponent />
+
+        <View style={[styles.row, styles.horizontalPadding]}>
+          <Text style={styles.subtitle}>Mouth, Elbow, Hip Emergencies</Text>
+          <View style={styles.viewAllRow}>
+            <Text style={styles.viewAll}>View all 7</Text>
+            <ArrowIcon />
+          </View>
+        </View>
+        <MouthElbowHipComponent />
+
+        <View style={[styles.row, styles.horizontalPadding]}>
+          <Text style={styles.subtitle}>Bookmarks</Text>
           <View style={styles.viewAllRow}>
             <Text style={styles.viewAll}>View all 7</Text>
             <ArrowIcon />
