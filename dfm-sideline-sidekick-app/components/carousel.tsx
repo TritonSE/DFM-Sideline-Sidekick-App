@@ -1,5 +1,5 @@
 /* eslint-disable import/namespace */
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
 
 import styles from "./carouselStyles";
 
@@ -46,10 +46,8 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
       //   setPageWidth(width);
       // }}
       key={item.id}
-      style={[
-        styles.page,
-        cardStyle.cardBack,
-      ]}>
+      style={[styles.page, cardStyle.cardBack]}
+    >
       <Text style={styles.cardTitle}>{item.title}</Text>
       <Text style={styles.cardDescription} numberOfLines={2}>
         {item.description}
@@ -89,8 +87,9 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
         snapToAlignment="center"
         decelerationRate="normal"
         showsHorizontalScrollIndicator={true}
+        snapToInterval={Platform.OS === "ios" ? 10 : 0}
         // onMomentumScrollEnd={onScrollEnd}
-        contentContainerStyle={{ paddingRight: 55, paddingLeft: 55 }} // Add padding to the right to ensure the last item snaps correctly
+        contentContainerStyle={styles.contentContainerStyle} // Add padding to the right to ensure the last item snaps correctly
       />
       {/* <View style={styles.progress}>
         {dots}
@@ -98,4 +97,3 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
     </View>
   );
 };
-

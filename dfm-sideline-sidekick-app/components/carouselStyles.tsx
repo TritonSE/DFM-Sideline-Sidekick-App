@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/namespace
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   carouselContainer: {
@@ -19,20 +19,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
   },
+  contentContainerStyle: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingRight: 55,
+    paddingLeft: 55,
+  },
   page: {
-    ...Platform.select({
-      ios: {
-        marginLeft: 50,
-        marginRight: 50,
-      },
-      android: {
-        marginLeft: 10,
-        marginRight: 10,
-      },
-      default: {
-        marginLeft: 65,
-      },
-    }),
+    marginLeft: 10,
+    marginRight: 10,
 
     padding: 15,
 
