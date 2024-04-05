@@ -1,13 +1,36 @@
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import { RouteProp } from "@react-navigation/native"; // Import RouteProp
+import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import { useFonts } from "expo-font";
-import { Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
+import ArrayPage from "../components/ArrayPage";
 import BulletPoint from "../components/BulletPoint";
+import { Bookmark } from "../components/bookmark";
 
 import styles from "./generalPrinciplesStyles";
 
-const GeneralPrinciples = props => {
+type ContentItem = Record<string, string>;
+
+type Content = {
+  title: string;
+  content: ContentItem;
+};
+
+export type RootStackParamList = {
+  GeneralPrinciples: { titleProp: string; overviewProp?: object; contentProp: Content | Content[] };
+};
+
+type GeneralProps = {
+  route: RouteProp<RootStackParamList, "GeneralPrinciples">;
+  navigation: StackNavigationProp<RootStackParamList, "GeneralPrinciples">;
+};
+
+const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
+  const { params } = route; // Destructure params from the route object
+
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -16,40 +39,32 @@ const GeneralPrinciples = props => {
     return <Text>Loading...</Text>;
   }
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => {props.navigation.goBack(null)}}>
-        <AntIcon name="close" style={styles.button}/>
-      </TouchableOpacity>
-      <Text style={styles.title}>General Principles</Text>
-      <Text style={styles.subTitle}>General Principles</Text>
-      <BulletPoint
-        letter="A"
-        text="Risk Warning"
-        subpoints={[
-          {
-            text: "Thunder = risk (lightning within 8-10 mile radius)",
-          },
-          { text: "Can occur w/o clouds or rain" },
-          { text: "Avoid landlines (cellphone is safe)" },
-        ]}
-      />
-      <BulletPoint
-        letter="B"
-        text="Resuming Activity"
-        subpoints={[
-          {
-            text: "30 min after last sound of thunder or sight of lightning",
-            subpoints: [
-              {
-                text: "“Half an hour since thunder roars, now it’s safe to go outdoors”",
-              },
-            ],
-          },
-        ]}
-      />
-    </View>
-  );
+  if (Array.isArray(params.contentProp)) {
+    return (
+      <View style={styles.container}>
+        <ArrayPage arrayProp={params.contentProp} title={params.titleProp} />
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.topRightContainer}>
+            <Bookmark item={params.contentProp} />
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <AntIcon name="close" style={styles.button} />
+          </TouchableOpacity>
+          <Text style={styles.title}>{params.contentProp.title}</Text>
+          <BulletPoint content={params.contentProp.content} />
+        </ScrollView>
+      </View>
+    );
+  }
 };
 
 export default GeneralPrinciples;

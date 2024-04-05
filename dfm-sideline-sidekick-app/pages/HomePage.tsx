@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { Carousel } from "../components/carousel";
+import { Carousel, CarouselItem } from "../components/carousel";
 import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
@@ -209,7 +209,7 @@ const HomePage = () => {
   };
 
   if (!isFontsLoaded) {
-    return null;
+    return <Text>Loading...</Text>;
   }
 
   return (

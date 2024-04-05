@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useNavigationState } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 
 // import { BookmarkIcon } from "../icons/bookmarkIcon";
@@ -10,17 +11,30 @@ import styles from "./barStyles";
 
 export type NavItem = {
   id: number;
+  routeName: string;
   icon: string;
   onClick: () => void;
 };
 
 export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
   const [selectedItemId, setSelectedItemId] = useState<number | null>(2);
+  const currentRouteName = useNavigationState((state) => {
+    if (state !== undefined && state !== null) {
+      return state.routes[state.index].name;
+    }
+  });
 
   const handleItemClick = (itemId: number) => {
     setSelectedItemId(itemId);
     items.find((item) => item.id === itemId)?.onClick();
   };
+
+  useEffect(() => {
+    const currentItem = items.find((item) => item.routeName === currentRouteName);
+    if (currentItem !== undefined) {
+      handleItemClick(currentItem.id);
+    }
+  }, [currentRouteName]);
 
   return (
     <View style={styles.bottomBar}>

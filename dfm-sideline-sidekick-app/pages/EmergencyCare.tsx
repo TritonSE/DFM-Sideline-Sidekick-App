@@ -4,10 +4,11 @@ import { Text, TouchableOpacity, View } from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 
 import BulletPoint from "../components/BulletPoint";
+import { Bookmark } from "../components/bookmark";
 
 import styles from "./generalPrinciplesStyles";
 
-const EmergencyCare = props => {
+const EmergencyCare = (props) => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
@@ -17,7 +18,10 @@ const EmergencyCare = props => {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {props.navigation.goBack(null)}}>
+      <View style={styles.topRightContainer}>
+        <Bookmark PageName="Emergency Page" />
+      </View>
+      <TouchableOpacity>
         <AntIcon name="close" style={styles.button} />
       </TouchableOpacity>
       <Text style={styles.title}>Emergency Care</Text>
