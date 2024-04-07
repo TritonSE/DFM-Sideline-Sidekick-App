@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingRight: 55,
-    paddingLeft: 55,
+    paddingRight: 100,
+    paddingLeft: 100,
   },
   page: {
     marginLeft: 10,

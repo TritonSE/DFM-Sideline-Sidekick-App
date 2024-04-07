@@ -10,12 +10,12 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+import { useData } from "../DataContext";
 import { getAllBookmarks } from "../components/bookmarkRoutes";
 import { Carousel, CarouselItem } from "../components/carousel";
 import { ArrowIcon } from "../icons/arrowIcon";
@@ -36,10 +36,14 @@ const HomePage = () => {
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>();
 
+  const { jsonData } = useData();
+  const emergencies = jsonData?.emergencies ?? [];
+
   const handleSearch = () => {
-    navigation.navigate("Search");
+    navigation.navigate("Search" as never);
   };
 
+  // loads the font
   useEffect(() => {
     async function loadFont() {
       try {
@@ -54,145 +58,57 @@ const HomePage = () => {
     }
 
     void loadFont();
+  }, []);
 
-    // gets the bookmarks (if undefined means its loading)
-    async function getBookmarks() {
-      try {
-        setBookmarks(await getAllBookmarks());
-        console.log("here", bookmarks, bookmarks?.length);
-
-      } catch (error) {
-        console.log(error);
+  useEffect(() => {
+    // checks for bookmarks updates when navigate to page
+    const unsubscribe = navigation.addListener('focus', () => {
+      async function getBookmarks() {
+        try {
+          setBookmarks(await getAllBookmarks());
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
+      // gets the bookmarks (if undefined means its loading)
+      void getBookmarks();
+    })
 
-    void getBookmarks();
+    return unsubscribe;
 
-  }, [bookmarks?.length]);
+  }, [navigation, bookmarks]);
 
   const EmergenciesComponent = () => {
-    const carouselItems: CarouselItem[] = [
-      {
-        id: 1,
-        title: "Cervical Spine Injury",
-        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
-      },
-      {
-        id: 2,
-        title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)",
-      },
-      {
-        id: 3,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 4,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 5,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 6,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-    ];
+    const carouselItems: CarouselItem[] = [];
 
-    const color = "#E5EFF5";
+    emergencies.forEach((emergency, index) => {
 
-    return <Carousel items={carouselItems} cardColor={color} />;
-  };
 
-  const FaceEyeComponent = () => {
-    const carouselItems: CarouselItem[] = [
-      {
-        id: 1,
-        title: "Cervical Spine Injury",
-        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
-      },
-      {
-        id: 2,
-        title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)",
-      },
-      {
-        id: 3,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 4,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 5,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 6,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-    ];
+      // this section is due to inconsistencies in our database schema
+      let description = "";
 
-    const color = "#E5EFF5";
+      // has an object in overview
+      if (emergency.overview instanceof Object) {
 
-    return <Carousel items={carouselItems} cardColor={color} />;
-  };
+        if ("Placeholder" in emergency.overview) {
+          description = emergency.overview.Placeholder as string;
 
-  const MouthElbowHipComponent = () => {
-    const carouselItems: CarouselItem[] = [
-      {
-        id: 1,
-        title: "Cervical Spine Injury",
-        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
-      },
-      {
-        id: 2,
-        title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)",
-      },
-      {
-        id: 3,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 4,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 5,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 6,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-    ];
+        } else if ("Importance" in emergency.overview) {
+          description = emergency.overview.Importance as string;
+        }
+
+      } else if (typeof emergency.overview === "string") {
+        description = emergency.overview;
+      }
+
+      carouselItems.push(
+        {
+          _id: index.toString(),
+          ...emergency,
+          subtitle: description,
+        }
+      )
+    });
 
     const color = "#E5EFF5";
 
@@ -201,16 +117,16 @@ const HomePage = () => {
 
   const BookmarksComponent = () => {
 
-    let carouselItems: CarouselItem[] = [];
+    const carouselItems: CarouselItem[] = [];
 
     // not loading
     if (bookmarks) {
       bookmarks.reverse().forEach((bookmark, index) => {
         carouselItems.push(
           {
-            id: index,
+            _id: bookmark._id,
             title: bookmark.title,
-            description: bookmark.subtitle,
+            subtitle: bookmark.subtitle,
           }
         )
       })
@@ -224,6 +140,10 @@ const HomePage = () => {
   if (!isFontsLoaded) {
     return <Text>Loading...</Text>;
   }
+
+  const cards = [
+    "General\nPrinciples", "Medical Issues", "Upper Extremity\nInjuries", "Lower Extremity\nInjuries", "Axial Injuries", "Soft Tissues\nInjuries"
+  ]
 
   return (
     <SafeAreaView style={styles.container}>
@@ -239,26 +159,18 @@ const HomePage = () => {
         </View>
         <Text style={[styles.subtitle, styles.horizontalPadding]}>Browse By Category</Text>
         <View style={styles.categories}>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.buttonText}>General{"\n"}Principles</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.buttonText}>Medical Issues</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.buttonText}>Upper Extremity{"\n"}Injuries</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.buttonText}>Lower Extremity{"\n"}Injuries</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.buttonText}>Axial Injuries</Text>
-          </Pressable>
-          <Pressable style={styles.categoryButton}>
-            <Text style={styles.buttonText}>Soft Tissues{"\n"}Injuries</Text>
-          </Pressable>
+
+          {cards.map((card, index) => {
+            return (
+              <Pressable key={index} style={styles.categoryButton}>
+                <Text style={styles.buttonText}>{card}</Text>
+              </Pressable>
+            )
+          })}
+
         </View>
 
+        {/* Emergency Carousel */}
         <View style={[styles.row, styles.horizontalPadding]}>
           <Text style={styles.subtitle}>Medical Emergencies</Text>
           <TouchableOpacity style={styles.viewAllRow}>
@@ -268,24 +180,7 @@ const HomePage = () => {
         </View>
         <EmergenciesComponent />
 
-        <View style={[styles.row, styles.horizontalPadding]}>
-          <Text style={styles.subtitle}>Face and Eye Emergencies</Text>
-          <View style={styles.viewAllRow}>
-            <Text style={styles.viewAll}>View all 7</Text>
-            <ArrowIcon />
-          </View>
-        </View>
-        <FaceEyeComponent />
-
-        <View style={[styles.row, styles.horizontalPadding]}>
-          <Text style={styles.subtitle}>Mouth, Elbow, Hip Emergencies</Text>
-          <View style={styles.viewAllRow}>
-            <Text style={styles.viewAll}>View all 7</Text>
-            <ArrowIcon />
-          </View>
-        </View>
-        <MouthElbowHipComponent />
-
+        {/* Bookmarks Carousel */}
         <View style={[styles.row, styles.horizontalPadding]}>
           <Text style={styles.subtitle}>Bookmarks</Text>
           <View style={styles.viewAllRow}>
@@ -293,7 +188,9 @@ const HomePage = () => {
             <ArrowIcon />
           </View>
         </View>
-        <BookmarksComponent />
+        {/* Conditional bookmark display */}
+        {bookmarks ? (bookmarks.length === 0 ? <Text style={{ textAlign: "center" }}>No bookmarks</Text> : <BookmarksComponent />) : <Text style={{ textAlign: "center" }}>Loading...</Text>}
+
       </ScrollView>
     </SafeAreaView>
   );

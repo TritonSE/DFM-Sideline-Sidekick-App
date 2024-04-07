@@ -1,13 +1,20 @@
 /* eslint-disable import/namespace */
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
+import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import { RootStackParamList } from "../pages/ConditionsSection";
 
 import styles from "./carouselStyles";
 
 export type CarouselItem = {
-  id: number;
+  _id: string;
   title: string;
-  description: string;
+  subtitle?: string;
+  overview?: object;
+  treatment?: object;
+  content?: object;
 };
 
 export type CarouselProps = {
@@ -15,21 +22,11 @@ export type CarouselProps = {
   cardColor: string;
 };
 
+type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
+
 export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
-  // for tracking progress
-  // const [page, setPage] = useState(0);
 
-  // // for getting the width of our page
-  // const [pageWidth, setPageWidth] = useState(0);
-  // const pageRef = useRef(null);
-
-  // const { height, width } = useWindowDimensions();
-  // const [progress, setProgress] = useState(0);
-
-  // const spacing = 50;
-  // // gets the total size of the carousel and divides by our view width to see how many can fit on the screen
-  // const cardsPerView = Math.floor(width / (200 + (spacing + 5) * 2))
-  // const numDots = Math.ceil(items.length / cardsPerView);
+  const navigation = useNavigation<ConditionsNavigationProp>();
 
   // conditional background formatting
   const cardStyle = StyleSheet.create({
@@ -38,45 +35,36 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
     },
   });
 
+  const handlePress = (item: CarouselItem) => {
+    if (item.content !== undefined) {
+      navigation.navigate("GeneralPrinciples", { contentProp: item });
+    } else {
+      navigation.navigate("MedicalConditions", { emergency: item });
+    }
+  };
+
   // renders items in carousel
   const renderItem = ({ item }: { item: CarouselItem }) => (
-    <View
-      // ref={pageRef}
-      // onLayout={(event) => {
-      //   const { width } = event.nativeEvent.layout;
-      //   setPageWidth(width);
-      // }}
-      key={item.id}
+    <TouchableOpacity
+      key={item._id}
       style={[styles.page, cardStyle.cardBack]}
+      onPress={() => {
+        handlePress(item);
+      }}
     >
       <Text style={styles.cardTitle}>{item.title}</Text>
       <Text style={styles.cardDescription} numberOfLines={2}>
-        {item.description}
+        {item.subtitle}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 
-  // const onScrollEnd = (e) => {
-  //   const contentOffset = e.nativeEvent.contentOffset;
-  //   console.log(contentOffset);
-  //   console.log(pageWidth);
-  //   console.log(width);
-  //   console.log(cardsPerView, numDots);
-
-  //   const dotProgress = Math.ceil((contentOffset.x / (pageWidth + spacing)) / cardsPerView)
-
-  //   setProgress(dotProgress)
-  //   console.log('on dot', dotProgress);
-
-  //   // Divide the horizontal offset by the width of the view to see which page is visible
-  //   const pageNum = Math.floor(contentOffset.x / (pageWidth + spacing));
-  //   console.log('scrolled to page ', pageNum);
-  //   setPage(pageNum);
-  // }
-
-  // const dots = Array.from({ length: numDots }, (_, index) => (
-  //   <View key={index + 1} style={index === progress ? styles.dotActive : styles.dot} />
-  // ));
+  items.forEach((item) => {
+    console.log(item)
+    console.log(item.content);
+    ;
+    
+  })
 
   return (
     <View style={styles.carouselContainer}>
@@ -89,12 +77,8 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
         decelerationRate="normal"
         showsHorizontalScrollIndicator={true}
         snapToInterval={Platform.OS === "ios" ? 10 : 0}
-        // onMomentumScrollEnd={onScrollEnd}
         contentContainerStyle={styles.contentContainerStyle} // Add padding to the right to ensure the last item snaps correctly
       />
-      {/* <View style={styles.progress}>
-        {dots}
-      </View> */}
     </View>
   );
 };
