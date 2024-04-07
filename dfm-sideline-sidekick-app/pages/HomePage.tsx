@@ -1,6 +1,7 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable import/namespace */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { useNavigation } from "@react-navigation/native";
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -21,15 +22,11 @@ import { ArrowIcon } from "../icons/arrowIcon";
 import styles from "./HomePageStyles";
 
 const HomePage = () => {
-  const [query, setQuery] = useState("");
+  const navigation = useNavigation();
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
 
-  const handleSearch = (text: string) => {
-    setQuery(text);
-  };
-
-  const clearInput = () => {
-    setQuery("");
+  const handleSearch = () => {
+    navigation.navigate("Search");
   };
 
   useEffect(() => {
@@ -218,26 +215,10 @@ const HomePage = () => {
         <Text style={[styles.title, styles.horizontalPadding]}>Home</Text>
         <View style={[styles.searchContainer, styles.horizontalPadding]}>
           <View style={styles.searchSection}>
-            <Icon name="search" size={13} color="gray" style={styles.searchIcon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Search"
-              value={query}
-              onChangeText={handleSearch}
-              selectionColor="#909090"
-            />
-            {query.length > 0 && (
-              <TouchableOpacity onPress={clearInput} style={{ padding: 10 }}>
-                <Icon name="x" size={15} color="gray" />
-              </TouchableOpacity>
-            )}
-          </View>
-          <View>
-            {query.length > 0 && (
-              <TouchableOpacity onPress={clearInput} style={styles.cancelButton}>
-                <Text>Cancel</Text>
-              </TouchableOpacity>
-            )}
+            <Icon name="search" size={20} color="gray" style={styles.searchIcon} />
+            <Pressable style={styles.input} onPress={handleSearch}>
+              <Text style={styles.searchText}>Search</Text>
+            </Pressable>
           </View>
         </View>
         <Text style={[styles.subtitle, styles.horizontalPadding]}>Browse By Category</Text>
