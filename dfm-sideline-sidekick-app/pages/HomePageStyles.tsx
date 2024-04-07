@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/namespace
 import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "700",
     textAlign: "left",
-    paddingTop: 10,
+    // paddingTop: 10,
     maxWidth: "70%",
   },
   searchContainer: {
@@ -112,6 +111,9 @@ const styles = StyleSheet.create({
   },
   horizontalPadding: {
     paddingHorizontal: 17,
+  },
+  topPadding: {
+    paddingTop: 10,
   },
 });
 export default styles;
