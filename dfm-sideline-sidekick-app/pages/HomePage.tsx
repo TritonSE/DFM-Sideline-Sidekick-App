@@ -15,14 +15,25 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+import { getAllBookmarks } from "../components/bookmarkRoutes";
 import { Carousel, CarouselItem } from "../components/carousel";
 import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
 
+type Bookmark = {
+  _id: string;
+  subtitle: string;
+  title: string;
+  overview?: object;
+  treatment?: object;
+  content?: object;
+};
+
 const HomePage = () => {
   const [query, setQuery] = useState("");
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>();
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -46,7 +57,21 @@ const HomePage = () => {
     }
 
     void loadFont();
-  }, []);
+
+    // gets the bookmarks (if undefined means its loading)
+    async function getBookmarks() {
+      try {
+        setBookmarks(await getAllBookmarks());
+        console.log("here", bookmarks, bookmarks?.length);
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    void getBookmarks();
+
+  }, [bookmarks?.length]);
 
   const EmergenciesComponent = () => {
     const carouselItems: CarouselItem[] = [
@@ -178,30 +203,21 @@ const HomePage = () => {
   };
 
   const BookmarksComponent = () => {
-    const carouselItems: CarouselItem[] = [
-      {
-        id: 1,
-        title: "Cervical Spine Injury",
-        description: "Direct blow to head/neck. Axial loading to spine, esp. w/ neck in flexion.",
-      },
-      {
-        id: 2,
-        title: "Cold Illnesses",
-        description: "Moderate (86-89°F) or Severe (<86°F)",
-      },
-      {
-        id: 3,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-      {
-        id: 4,
-        title: "Cauda Equina Syndrome",
-        description:
-          "Pain radiating to the lower extremity, saddle anesthesia, urinary retention, bowelincontinence",
-      },
-    ];
+
+    let carouselItems: CarouselItem[] = [];
+
+    // not loading
+    if (bookmarks) {
+      bookmarks.reverse().forEach((bookmark, index) => {
+        carouselItems.push(
+          {
+            id: index,
+            title: bookmark.title,
+            description: bookmark.subtitle,
+          }
+        )
+      })
+    }
 
     const color = "#FFFFFF";
 

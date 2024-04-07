@@ -1,4 +1,5 @@
 /* eslint-disable import/namespace */
+import React from "react";
 import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
 
 import styles from "./carouselStyles";
