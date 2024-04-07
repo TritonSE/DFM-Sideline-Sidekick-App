@@ -92,6 +92,9 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "bold",
   },
+  searchText: {
+    color: "#CCCCCC",
+  },
   row: {
     display: "flex",
     flexDirection: "row",
