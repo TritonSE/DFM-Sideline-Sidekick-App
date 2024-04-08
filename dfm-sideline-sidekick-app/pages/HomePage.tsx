@@ -1,5 +1,4 @@
 /* eslint-disable import/no-duplicates */
-/* eslint-disable import/namespace */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useNavigation } from "@react-navigation/native";
 import * as Font from "expo-font";
@@ -73,7 +72,7 @@ const HomePage = () => {
   const EmergenciesComponent = () => {
     const carouselItems: CarouselItem[] = [];
 
-    emergencies.forEach((emergency, index) => {
+    emergencies.slice(0, 5).forEach((emergency, index) => {
       // this section is due to inconsistencies in our database schema
       let description = "";
 
@@ -105,13 +104,16 @@ const HomePage = () => {
 
     // not loading
     if (bookmarks) {
-      bookmarks.reverse().forEach((bookmark, index) => {
-        carouselItems.push({
-          _id: bookmark._id,
-          title: bookmark.title,
-          subtitle: bookmark.subtitle,
+      bookmarks
+        .slice(0, 5)
+        .reverse()
+        .forEach((bookmark) => {
+          carouselItems.push({
+            _id: bookmark._id,
+            title: bookmark.title,
+            subtitle: bookmark.subtitle,
+          });
         });
-      });
     }
 
     const color = "#FFFFFF";
@@ -160,10 +162,12 @@ const HomePage = () => {
         {/* Emergency Carousel */}
         <View style={[styles.row, styles.horizontalPadding, styles.topPadding]}>
           <Text style={styles.subtitle}>Medical Emergencies</Text>
-          <TouchableOpacity style={styles.viewAllRow}>
-            <Text style={styles.viewAll}>View all {emergencies.length}</Text>
-            <ArrowIcon />
-          </TouchableOpacity>
+          {emergencies.length > 0 ? (
+            <TouchableOpacity style={styles.viewAllRow}>
+              <Text style={styles.viewAll}>View all {emergencies.length}</Text>
+              <ArrowIcon />
+            </TouchableOpacity>
+          ) : null}
         </View>
         <EmergenciesComponent />
 
