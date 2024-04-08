@@ -7,8 +7,6 @@ const styles = StyleSheet.create({
       ios: {
         marginTop: 80,
         marginBottom: 150,
-        marginLeft: 10,
-        marginRight: 10,
       },
       android: {
         marginTop: 40,

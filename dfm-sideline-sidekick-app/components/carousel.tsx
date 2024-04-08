@@ -2,7 +2,15 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  FlatList,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { RootStackParamList } from "../pages/ConditionsSection";
 
@@ -25,8 +33,8 @@ export type CarouselProps = {
 type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
 export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
-
   const navigation = useNavigation<ConditionsNavigationProp>();
+  const width = Dimensions.get("window").width;
 
   // conditional background formatting
   const cardStyle = StyleSheet.create({
@@ -60,11 +68,9 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
   );
 
   items.forEach((item) => {
-    console.log(item)
+    console.log(item);
     console.log(item.content);
-    ;
-    
-  })
+  });
 
   return (
     <View style={styles.carouselContainer}>
@@ -76,7 +82,8 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
         snapToAlignment="center"
         decelerationRate="normal"
         showsHorizontalScrollIndicator={true}
-        snapToInterval={Platform.OS === "ios" ? 10 : 0}
+        snapToInterval={Platform.OS === "ios" ? width / 3 : 0}
+        // disableIntervalMomentum={Platform.OS === "ios" ? true : false}
         contentContainerStyle={styles.contentContainerStyle} // Add padding to the right to ensure the last item snaps correctly
       />
     </View>
