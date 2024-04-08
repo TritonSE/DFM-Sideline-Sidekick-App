@@ -2,6 +2,7 @@ import * as Font from "expo-font";
 import React, { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
+
 import SearchPage from "./SearchPage";
 import styles from "./generalPrinciplesMainStyles";
 
@@ -31,6 +32,11 @@ const GeneralPrinciplesMain = () => {
     return <Text>Loading...</Text>;
   }
 
+  const convertToScreenName = (label: string): string => {
+    return label.replace(/\s+(\w)/g, (_, match) => match.toUpperCase());
+  }
+
+
   const renderPressables = () => {
     const pressableData = [
       ["Emergency Action Plan", "Trauma Centers"],
@@ -38,13 +44,13 @@ const GeneralPrinciplesMain = () => {
       ["Inclement Weather", "Serious On-Field Injury"],
       ["Catastrophic Incident", "Administering Medication"],
       ["Muscle Injuries", "Ligament Injuries"],
-      ["Dislocations/Subluxations", "Fractures"],
+      ["Dislocations Subluxations", "Fractures"],
     ];
 
     return pressableData.map((row, index) => (
       <View key={index} style={styles.row}>
         {row.map((label, colIndex) => (
-          <Pressable key={`${index}-${colIndex}`} style={styles.pressable}>
+          <Pressable key={`${index}-${colIndex}`} style={styles.pressable} onPress={() => { console.log(convertToScreenName(label)); }}>
             <Text style={styles.pressableText} numberOfLines={0}>
               {label}
             </Text>
