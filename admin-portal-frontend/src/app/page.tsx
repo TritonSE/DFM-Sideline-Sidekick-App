@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import Image from 'next/image'
 import { auth } from './firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import search from './symbols/search.png'
 
 interface LoginForm {
   email: string;
@@ -12,9 +14,13 @@ interface LoginForm {
 
 export default function Home() {
   const [loginForm, setLoginForm] = useState<LoginForm>({ email: '', password: '' });
+  const [isFormFilled, setIsFormFilled] = useState(false);
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
+  const buttonStyle = loginForm.email && loginForm.password 
+    ? { backgroundColor: '#00629B' } 
+    : { backgroundColor: '#6C6C6C', cursor: 'not-allowed' };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,21 +41,24 @@ export default function Home() {
   
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    const formFilled = loginForm.email.trim() !== '' && loginForm.password.trim() !== '';
+    setIsFormFilled(formFilled);
     
     return () => {
       document.body.style.overflow = 'visible';
     };
-  }, []);
+  }, [loginForm.email, loginForm.password]);
 
   return (
     <div className="flex items-center justify-center">
-      <div className="w-2/6 bg-white shadow-xl rounded-lg p-14 flex flex-col items-center mt-24">
-        <h2 className="text-blue-950 text-xl font-bold mb-6">Sideline Sidekick Admin Mode</h2>
+      <div className="w-2/6 bg-white shadow-xl rounded-lg p-10 pt-8 flex flex-col items-center mt-24">
+        <Image src={search} alt="" width={60} height={60}/> 
+        <h2 className="text-blue-950 text-xl font-bold my-4">Sideline Sidekick Admin Mode</h2>
         <form onSubmit={handleSubmit} className="w-full">
           <div className="mb-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <label htmlFor="email" className="block text-sm font-medium mb-1">Username</label>
             <input
-              className="mb-4 p-2 border w-full rounded border-black border-opacity-40 text-zinc-400"
+              className="mb-4 p-2 border w-full rounded border-black border-opacity-40"
               type="text"
               name="email"
               id="email"
@@ -58,9 +67,9 @@ export default function Home() {
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
             <input
-              className="mb-4 p-2 border w-full rounded border-black border-opacity-40 text-zinc-400"
+              className="mb-4 p-2 border w-full rounded border-black border-opacity-40"
               type="password"
               name="password"
               id="password"
@@ -75,8 +84,14 @@ export default function Home() {
             </label>
           </div>
           <div className="mb-4">
-            <button type="submit" className="p-2 bg-neutral-500 rounded text-white w-full">Log in</button>
-            {error && <p className="error">{error}</p>}
+            <button 
+              type="submit" 
+              style={buttonStyle}
+              className={`p-2 w-full text-white font-bold rounded ${loginForm.email && loginForm.password ? 'hover:bg-blue-700' : ''}`}
+              disabled={!loginForm.email || !loginForm.password}>
+                Log in
+            </button>
+            {error && <p className="text-red-600 text-sm">{error}</p>}
           </div>
         </form>
         <a className="text-sm self-start text-sky-700" href="/forgot-password">I forgot my username or password</a>
