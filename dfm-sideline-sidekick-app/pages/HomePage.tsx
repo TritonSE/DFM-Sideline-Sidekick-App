@@ -160,7 +160,7 @@ const HomePage = () => {
                 style={styles.categoryButton}
                 onPress={() => {
                   if (route !== "") {
-                    navigation.navigate(route);
+                    navigation.navigate(route as never);
                   }
                 }}
               >
