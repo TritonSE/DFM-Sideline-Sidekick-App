@@ -134,6 +134,8 @@ const HomePage = () => {
     "Soft Tissues\nInjuries",
   ];
 
+  const routes = ["", "", "", "", "", ""];
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
@@ -151,8 +153,17 @@ const HomePage = () => {
         </Text>
         <View style={styles.categories}>
           {cards.map((card, index) => {
+            const route = routes[index];
             return (
-              <Pressable key={index} style={styles.categoryButton}>
+              <Pressable
+                key={index}
+                style={styles.categoryButton}
+                onPress={() => {
+                  if (route !== "") {
+                    navigation.navigate(route);
+                  }
+                }}
+              >
                 <Text style={styles.buttonText}>{card}</Text>
               </Pressable>
             );
