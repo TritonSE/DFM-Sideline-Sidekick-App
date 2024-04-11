@@ -93,6 +93,7 @@ export default function App() {
             component={GeneralPrinciples}
             options={{ headerShown: false }}
           />
+          
         </Stack.Navigator>
         <BottomNavBarComponent />
         <StatusBar style="auto" />
