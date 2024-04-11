@@ -17,20 +17,20 @@ import {
 import StringRenderer from "../components/StringRenderer";
 import { Bookmark } from "../components/bookmark";
 
-import styles from "./ConditionSectionStyles";
+import styles from "./EmergencyPrincipleStyles";
 
 import type { GeneralPrinciple } from "../generalPrinciple";
 
 export type RootStackParamList = {
   // Define the parameters for your screens here
-  Conditions: { emergency: GeneralPrinciple }; // Example parameter
+  Conditions: { generalPrinciple: GeneralPrinciple }; // Example parameter
 } & ParamListBase;
 
 // Define the type for the route parameters
-type ConditionsScreenRouteProp = RouteProp<RootStackParamList, "GeneralPrinciples">;
+type ConditionsScreenRouteProp = RouteProp<RootStackParamList, "EmergencyPrinciple">;
 
 // Define the type for the navigation object
-type ConditionsScreenNavigationProp = StackNavigationProp<RootStackParamList, "GeneralPrinciples">;
+type ConditionsScreenNavigationProp = StackNavigationProp<RootStackParamList, "EmergencyPrinciple">;
 
 type Props = {
   route: ConditionsScreenRouteProp;
@@ -39,7 +39,7 @@ type Props = {
 
 type StringValue = string | string[] | { [key: string]: StringValue };
 
-export default function ConditionsSection({ route, navigation }: Props) {
+export default function EmergencyPrinciple({ route, navigation }: Props) {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
@@ -118,7 +118,7 @@ export default function ConditionsSection({ route, navigation }: Props) {
         </TouchableOpacity>
         <View style={styles.margin}>
           <Text style={styles.subtitle}>General Principle</Text>
-          {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
+          {/* {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>} */}
         </View>
 
         {/* <View style={styles.menu}>
@@ -194,7 +194,7 @@ export default function ConditionsSection({ route, navigation }: Props) {
                 ))}
               </View>
             )} */}
-          {/* </View> */}
+        {/* </View> */}
         {/* </View> */}
       </ScrollView>
     </SafeAreaView>

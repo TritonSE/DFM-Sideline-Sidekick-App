@@ -15,8 +15,8 @@ import type { APIResult } from "./requests";
 // };
 
 export type GeneralPrinciple = {
-  _id: string;
-  title: string;
+  _id?: string;
+  title?: string;
   overview?: object;
   content?: object;
 };
