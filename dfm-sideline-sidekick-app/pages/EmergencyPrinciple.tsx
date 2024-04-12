@@ -118,7 +118,7 @@ export default function EmergencyPrinciple({ route, navigation }: Props) {
         </TouchableOpacity>
         <View style={styles.margin}>
           <Text style={styles.subtitle}>General Principle</Text>
-          {/* {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>} */}
+          {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
         </View>
 
         {/* <View style={styles.menu}>
@@ -140,7 +140,7 @@ export default function EmergencyPrinciple({ route, navigation }: Props) {
           </Pressable>
         </View> */}
 
-        {/* <View style={styles.information}>
+        <View style={styles.information}>
           <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
             {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
               <View style={styles.infoSection}>
@@ -161,13 +161,13 @@ export default function EmergencyPrinciple({ route, navigation }: Props) {
           </View>
 
           <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
-            {emergency?.treatment && typeof emergency.treatment === "string" && (
+            {/* {generalPrinciple?.treatment && typeof emergency.treatment === "string" && (
               <View style={styles.infoSection}>
                 <Text style={styles.descriptionInfo}>{emergency?.treatment}</Text>
               </View>
-            )}
+            )} */}
 
-            {emergency?.treatment && typeof emergency.treatment === "object" && (
+            {/* {emergency?.treatment && typeof emergency.treatment === "object" && (
               <View style={styles.infoSection}>
                 {treatmentHeaders.map((header, index) => (
                   <View key={index}>
@@ -176,15 +176,15 @@ export default function EmergencyPrinciple({ route, navigation }: Props) {
                   </View>
                 ))}
               </View>
-            )}
+            )} */}
 
-            {emergency?.content && typeof emergency.content === "string" && (
+            {generalPrinciple?.content && typeof generalPrinciple.content === "string" && (
               <View style={styles.infoSection}>
-                <Text style={styles.descriptionInfo}>{emergency?.content}</Text>
+                <Text style={styles.descriptionInfo}>{generalPrinciple?.content}</Text>
               </View>
             )}
 
-            {emergency?.content && typeof emergency.content === "object" && (
+            {generalPrinciple?.content && typeof generalPrinciple.content === "object" && (
               <View style={styles.infoSection}>
                 {contentHeaders.map((header, index) => (
                   <View key={index}>
@@ -193,9 +193,9 @@ export default function EmergencyPrinciple({ route, navigation }: Props) {
                   </View>
                 ))}
               </View>
-            )} */}
-        {/* </View> */}
-        {/* </View> */}
+            )}
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

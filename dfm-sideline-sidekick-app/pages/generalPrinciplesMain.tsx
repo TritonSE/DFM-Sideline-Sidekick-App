@@ -38,7 +38,7 @@ const GeneralPrinciplesMain = () => {
       try {
         //It seems to work on Android and iPad
         //Test Case: Cervical Spine Injury - demonstrate recursive rendering
-        const generalPrincipleObjectId = "65c586d1f922fa885e8208bd";
+        const generalPrincipleObjectId = "6618b3cd9915a5d3ccd75c9c";
         //Separate Test Case here: To Be Deleted Emergency - demonstrates textual rendering
         //const emergencyObjectId = "65b369a8e8fe96a404d4fd6b";
         //Test Case: New Emergency Placeholder Four - demonstrates blank rendering (only title in db)
@@ -62,7 +62,6 @@ const GeneralPrinciplesMain = () => {
 
   const handlePress = () => {
     if (generalPrinciple !== null) {
-      console.log(generalPrinciple);
       navigation.navigate("EmergencyPrinciple", { generalPrinciple });
     }
   };
