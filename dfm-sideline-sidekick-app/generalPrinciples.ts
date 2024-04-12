@@ -51,7 +51,7 @@ export async function createGeneralPrinciple(
   generalPrinciple: CreateGeneralPrincipleRequest,
 ): Promise<APIResult<GeneralPrinciple>> {
   try {
-    const response = await post("/api/generalPrinciple", generalPrinciple);
+    const response = await post("/api/generalPrinciples", generalPrinciple);
     const json = (await response.json()) as GeneralPrinciple;
     return { success: true, data: json };
   } catch (error) {
@@ -61,7 +61,7 @@ export async function createGeneralPrinciple(
 
 export async function getGeneralPrinciple(id: string): Promise<APIResult<GeneralPrinciple>> {
   try {
-    const response = await get(`/api/generalPrinciple/${id}`);
+    const response = await get(`/api/generalPrinciples/${id}`);
     const json = (await response.json()) as GeneralPrinciple;
     return { success: true, data: json };
   } catch (error) {
@@ -71,7 +71,7 @@ export async function getGeneralPrinciple(id: string): Promise<APIResult<General
 
 export async function getAllGeneralPrinciples(): Promise<APIResult<GeneralPrinciple[]>> {
   try {
-    const response = await get(`/api/generalPrinciple/`);
+    const response = await get(`/api/generalPrinciples/`);
     const json = (await response.json()) as GeneralPrinciple[];
     // const parsedJson = json.map((element) => (element));
     return { success: true, data: json };
@@ -86,7 +86,7 @@ export async function updateGeneralPrinciple(
 ): Promise<APIResult<GeneralPrinciple>> {
   try {
     // your code here
-    const response = await put(`/api/generalPrinciple/${generalPrinciple._id}`, generalPrinciple);
+    const response = await put(`/api/generalPrinciples/${generalPrinciple._id}`, generalPrinciple);
     const json = (await response.json()) as GeneralPrinciple;
     return { success: true, data: json };
   } catch (error) {

@@ -19,7 +19,7 @@ import { Bookmark } from "../components/bookmark";
 
 import styles from "./EmergencyPrincipleStyles";
 
-import type { GeneralPrinciple } from "../generalPrinciple";
+import type { GeneralPrinciple } from "../generalPrinciples";
 
 export type RootStackParamList = {
   // Define the parameters for your screens here

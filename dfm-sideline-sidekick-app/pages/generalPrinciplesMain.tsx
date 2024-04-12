@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import React, { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
-import { getGeneralPrinciple } from "../generalPrinciple";
+import { getGeneralPrinciple } from "../generalPrinciples";
 
 import SearchPage from "./SearchPage";
 import styles from "./generalPrinciplesMainStyles";
@@ -46,7 +46,6 @@ const GeneralPrinciplesMain = () => {
         //Test Case: Cervical Strain - demonstrates simple placeholder headers
         //const emergencyObjectId = "65b36f12640d62464e0dd129";
         const result = await getGeneralPrinciple(generalPrincipleObjectId);
-        console.log("TEST");
         console.log(result);
         if (result.success) {
           setGeneralPrinciple(result.data);
@@ -62,16 +61,10 @@ const GeneralPrinciplesMain = () => {
   }, []);
 
   const handlePress = () => {
-    console.log("TEST");
-    //if (generalPrinciple !== null) {
-    // generalPrinciple = {
-    //   _id: "test",
-    //   title: "First general principle",
-    // };
-    console.log("REACHED IF");
-    console.log(generalPrinciple);
-    navigation.navigate("EmergencyPrinciple", { generalPrinciple });
-    //}
+    if (generalPrinciple !== null) {
+      console.log(generalPrinciple);
+      navigation.navigate("EmergencyPrinciple", { generalPrinciple });
+    }
   };
 
   if (!fontsLoaded) {
