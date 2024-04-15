@@ -8,7 +8,7 @@ import { Bookmark } from "../components/bookmark";
 
 import styles from "./generalPrinciplesStyles";
 
-const EmergencyCare = (props) => {
+const EmergencyCare = () => {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": Roboto_400Regular,
     "Roboto-Bold": Roboto_700Bold,
