@@ -1,5 +1,6 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useNavigation } from "@react-navigation/native";
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
@@ -40,8 +41,9 @@ const HomePage = () => {
     async function loadFont() {
       try {
         await Font.loadAsync({
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+          "Roboto-Regular": Roboto_400Regular,
+          "Roboto-Medium": Roboto_500Medium,
+          "Roboto-Bold": Roboto_700Bold,
         });
         setIsFontsLoaded(true);
       } catch (error) {

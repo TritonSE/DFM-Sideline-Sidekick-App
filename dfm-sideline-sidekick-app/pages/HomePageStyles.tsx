@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
   title: {
     color: "#182B49",
     fontSize: 32,
-    fontFamily: "Roboto",
-    fontWeight: "700",
+    fontFamily: "Roboto-Bold",
     marginBottom: 20,
     textAlign: "left",
     paddingTop: 10,
@@ -30,10 +29,9 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "#182B49",
     fontSize: 20,
-    fontFamily: "Roboto",
-    fontWeight: "700",
+    fontFamily: "Roboto-Medium",
+    fontWeight: "600",
     textAlign: "left",
-    // paddingTop: 10,
     maxWidth: "70%",
   },
   searchContainer: {
