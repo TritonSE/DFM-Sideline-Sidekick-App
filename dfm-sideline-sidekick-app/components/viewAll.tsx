@@ -136,7 +136,7 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
   console.log(params.arrayProp[4])
     return (
       <View style={styles.container}>
-        <View style={styles.top}>
+        <View>
           <TouchableOpacity
             onPress={() => {
               navigation.goBack();
@@ -145,10 +145,15 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
           >
             <Icon name="chevron-left" size={12} color="#000000" style={styles.backButton} />
           </TouchableOpacity>
-          <Text style={styles.title}>{params.title}</Text>
+          <View style={styles.headerShadowContainer}>
+            <View style={styles.headerShadow}>
+              <Text style={styles.title}>{params.title}</Text>
+            </View>
+          </View>
+          {/* <Text style={styles.title}>{params.title}</Text> */}
         </View>
-        <Text style={styles.lenItems}>{params.arrayProp.length} items</Text>
-        <ScrollView>
+        <ScrollView style={styles.scroll}>
+          <Text style={styles.lenItems}>{params.arrayProp.length} items</Text>
           {params.arrayProp.map((emergency) => (
           <Card
             key={emergency.title}

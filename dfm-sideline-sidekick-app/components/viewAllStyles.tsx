@@ -43,12 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center', 
   },
-  cardTitle: {
-
-  },
-  cardDescription: {
-
-  },
   containerCard2: {
     backgroundColor: 'white',
     flexDirection: 'row',
@@ -106,9 +100,33 @@ const styles = StyleSheet.create({
   backButton: {
     fontSize: 20
   },
-  top: {
-    paddingBottom: 15,
+  headerShadowContainer: {
+    overflow: 'hidden',
+    paddingBottom: 5,
   },
+  headerShadow: {
+    // shadowOffset: { width: 1, height: 3 },
+    // shadowOpacity:  0.28,
+    // shadowRadius: 2,
+    // elevation: 5,
+
+
+    backgroundColor: 'white',
+    // flexDirection: 'row',
+    // borderRadius: 15,
+    // padding: 16, 
+    shadowColor: 'gray', 
+    shadowOffset: { 
+        width: 0, 
+        height: 5, 
+    },
+    shadowOpacity: 0.4, 
+    shadowRadius: 3, 
+    elevation: 14, 
+  },
+  scroll: {
+    paddingTop: 20,
+  }
 });
 
 export default styles;
