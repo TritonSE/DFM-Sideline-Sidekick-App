@@ -33,7 +33,7 @@ export default function Home() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/dashboard'); 
+      router.push('/home'); 
     } catch (err: any) {
       setError(err.message); 
     }
@@ -58,7 +58,7 @@ export default function Home() {
           <div className="mb-2">
             <label htmlFor="email" className="block text-sm font-medium mb-1">Username</label>
             <input
-              className="mb-4 p-2 border w-full rounded border-black border-opacity-40"
+              className="mb-4 p-2 border w-full rounded border-black border-opacity-40 "
               type="text"
               name="email"
               id="email"
