@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     alignSelf: "stretch",
     paddingLeft: 25,
+    paddingBottom: 100,
   },
   title: {
     color: "#182B49",
@@ -17,6 +18,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "left",
     paddingTop: 10,
+  },
+  topRightContainer: {
+    position: "absolute",
+    top: 28,
+    right: 0,
+    padding: 10,
+    zIndex: 1,
   },
   subTitle: {
     color: "#182B49",

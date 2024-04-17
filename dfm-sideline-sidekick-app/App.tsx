@@ -3,29 +3,37 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useEffect } from "react";
-import { Platform, StyleSheet } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 
+import AppInitializer from "./AppInitializer";
+import { DataProvider } from "./DataContext";
 import { BottomNavBar, NavItem } from "./components/bar";
-import { checkConnection } from "./download/connection/checkConnection";
-import { downloadJSON } from "./download/downloadFromAPI";
-import BookmarkPage from "./pages/BookmarkPage";
-import SearchPage from "./pages/SearchPage";
-import TabPage from "./pages/TabPage";
 import ViewAll from "./components/viewAll";
-import ConditionsSection from "./ConditionsSection";
+import ConditionsSection from "./pages/ConditionsSection";
+import HomePage from "./pages/HomePage";
+import SearchPage from "./pages/SearchPage";
+// import TabPage from "./pages/TabPage";
 import GeneralPrinciples from "./pages/generalPrinciples";
+import GeneralPrinciplesMain from "./pages/generalPrinciplesMain";
 
-import Home from "./pages/Home";
+type DocumentBase = {
+  _id: string;
+  title: string;
+  subtitle?: string;
+  overview?: object;
+  treatment?: object;
+  content?: object;
+};
 
 type RootStackParamList = {
-  Bookmark: undefined;
+  Home: undefined;
   Search: undefined;
-  Tab: undefined;
   ViewAll: undefined;
-  Home: undefined,
-  MedicalConditions: undefined,
-  GeneralPrinciples: undefined,
+  GPM: undefined;
+  Tab: undefined;
+  MedicalConditions: { emergency: DocumentBase };
+  GeneralPrinciples: { contentProp: DocumentBase };
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -37,13 +45,15 @@ const BottomNavBarComponent = () => {
   const navigationItems: NavItem[] = [
     {
       id: 1,
-      icon: "bookmark",
+      routeName: "Home",
+      icon: "home",
       onClick: () => {
-        navigation.navigate("Bookmark");
+        navigation.navigate("Home");
       },
     },
     {
       id: 2,
+      routeName: "Search",
       icon: "search",
       onClick: () => {
         navigation.navigate("Search");
@@ -51,9 +61,10 @@ const BottomNavBarComponent = () => {
     },
     {
       id: 3,
+      routeName: "Principles",
       icon: "principles",
       onClick: () => {
-        navigation.navigate("Tab");
+        navigation.navigate("GPM");
       },
     },
   ];
@@ -62,42 +73,20 @@ const BottomNavBarComponent = () => {
 };
 
 export default function App() {
-  const deviceType = Platform.OS;
-
-  // makes it so that it only checks the version once per app launch
-  let attempted = false;
-
-  // true when there's connection
-  let connected = false;
-
-  // checks on app open, connect change
-  useEffect(() => {
-    // stores if connected
-    console.log("ATTEMPTED BEFORE:", attempted);
-
-    async function matchConditions() {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      connected = await checkConnection();
-      // if also connected, attempt to redownload
-      if (connected && !attempted) {
-        await downloadJSON("data.json", deviceType);
-
-        attempted = true; // latches
-      }
-    }
-
-    void matchConditions();
-  }, [connected]);
-
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="ViewAll" component={ViewAll} options={{ headerShown: false }} />
-        <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
-        <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
-        <Stack.Screen name="Tab" component={TabPage} options={{ headerShown: false }} />
-        <Stack.Screen
+    <DataProvider>
+      <AppInitializer />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Search">
+          <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
+          <Stack.Screen name="ViewAll" component={ViewAll} options={{ headerShown: false }} />
+          <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="GPM"
+            component={GeneralPrinciplesMain}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="MedicalConditions"
             component={ConditionsSection}
             options={{ headerShown: false }}
@@ -107,10 +96,11 @@ export default function App() {
             component={GeneralPrinciples}
             options={{ headerShown: false }}
           />
-      </Stack.Navigator>
-      <BottomNavBarComponent />
-      <StatusBar style="auto" />
-    </NavigationContainer>
+        </Stack.Navigator>
+        <BottomNavBarComponent />
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    </DataProvider>
   );
 }
 

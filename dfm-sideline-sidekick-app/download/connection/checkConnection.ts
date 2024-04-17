@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import NetInfo from "@react-native-community/netinfo";
 
