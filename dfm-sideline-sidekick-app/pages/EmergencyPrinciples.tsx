@@ -17,7 +17,7 @@ import {
 import StringRenderer from "../components/StringRenderer";
 import { Bookmark } from "../components/bookmark";
 
-import styles from "./EmergencyPrincipleStyles";
+import styles from "./EmergencyPrinciplesStyles";
 
 import type { GeneralPrinciple } from "../generalPrinciples";
 
@@ -27,10 +27,13 @@ export type RootStackParamList = {
 } & ParamListBase;
 
 // Define the type for the route parameters
-type ConditionsScreenRouteProp = RouteProp<RootStackParamList, "EmergencyPrinciple">;
+type ConditionsScreenRouteProp = RouteProp<RootStackParamList, "EmergencyPrinciples">;
 
 // Define the type for the navigation object
-type ConditionsScreenNavigationProp = StackNavigationProp<RootStackParamList, "EmergencyPrinciple">;
+type ConditionsScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "EmergencyPrinciples"
+>;
 
 type Props = {
   route: ConditionsScreenRouteProp;
@@ -39,7 +42,7 @@ type Props = {
 
 type StringValue = string | string[] | { [key: string]: StringValue };
 
-export default function EmergencyPrinciple({ route, navigation }: Props) {
+export default function EmergencyPrinciples({ route, navigation }: Props) {
   const [isOverviewPressed, setIsOverviewPressed] = useState<boolean>(true);
   const [isTreatmentPressed, setIsTreatmentPressed] = useState<boolean>(false);
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);

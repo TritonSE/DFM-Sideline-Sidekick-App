@@ -15,7 +15,7 @@ import SearchPage from "./pages/SearchPage";
 // import TabPage from "./pages/TabPage";
 import GeneralPrinciples from "./pages/generalPrinciples";
 import GeneralPrinciplesMain from "./pages/generalPrinciplesMain";
-import EmergencyPrinciple from "./pages/EmergencyPrinciple";
+import EmergencyPrinciples from "./pages/EmergencyPrinciples";
 
 type DocumentBase = {
   _id: string;
@@ -96,8 +96,8 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="EmergencyPrinciple"
-            component={EmergencyPrinciple}
+            name="EmergencyPrinciples"
+            component={EmergencyPrinciples}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
