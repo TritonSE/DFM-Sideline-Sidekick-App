@@ -11,6 +11,8 @@ type GeneralPrinciple = {
   title: string;
   overview: object;
   content: object;
+  bullet: boolean;
+  subtitle: string;
 };
 
 type JsonDataStructure = {

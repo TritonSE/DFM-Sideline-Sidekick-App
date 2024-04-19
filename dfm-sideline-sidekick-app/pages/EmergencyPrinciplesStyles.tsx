@@ -73,6 +73,12 @@ export default StyleSheet.create({
     color: "#182B49",
     marginLeft: 2,
   },
+  subtitle2: {
+    fontFamily: "Roboto-Bold",
+    fontSize: 28,
+    color: "#182B49",
+    marginLeft: 2,
+  },
   image: {
     width: 24,
     height: 24,

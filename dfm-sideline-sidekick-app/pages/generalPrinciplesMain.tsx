@@ -6,6 +6,7 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { getGeneralPrinciple } from "../generalPrinciples";
 
+
 import SearchPage from "./SearchPage";
 import styles from "./generalPrinciplesMainStyles";
 const GeneralPrinciplesMain = () => {
@@ -65,6 +66,8 @@ const GeneralPrinciplesMain = () => {
   const handlePress = (label: string) => {
     console.log(label);
 
+    console.log(generalPrinciples);
+
     const matchedGeneralPrinciple = generalPrinciples.find((gp) => gp.title === label);
     //find((gp) => gp.title === label);
 
@@ -92,7 +95,7 @@ const GeneralPrinciplesMain = () => {
       ["Inclement Weather", "Serious On-Field Injury"],
       ["Catastrophic Incident", "Administering Medication"],
       ["Muscle Injuries", "Ligament Injuries"],
-      ["Dislocations Subluxations", "Fractures"],
+      ["Dislocations/Subluxations", "Fractures"],
     ];
 
     return pressableData.map((row, index) => (

@@ -9,6 +9,8 @@ const medicalEmergencySchema = new mongoose.Schema({
 
 const generalPrincipleSchema = new mongoose.Schema({
   title: String,
+  bullet: Boolean,
+  subtitle: String,
   overview: {},
   content: {},
 });

@@ -4,6 +4,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import * as Font from "expo-font";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useEffect, useState } from "react";
+import BulletPoint from "../components/BulletPoint";
+
 import {
   Image,
   Pressable,
@@ -105,101 +107,123 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
     return null;
   }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topRightContainer}>
-        <Bookmark item={generalPrinciple} />
-      </View>
-      <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-          <Image style={styles.image} source={require("../assets/ic_caretleft.png")} />
-        </TouchableOpacity>
-        <View style={styles.margin}>
-          <Text style={styles.subtitle}>General Principle</Text>
-          {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
+  if (generalPrinciple?.bullet === false) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topRightContainer}>
+          <Bookmark item={generalPrinciple} />
         </View>
-
-        {/* <View style={styles.menu}>
-          <Pressable
-            style={isOverviewPressed ? styles.menuButtonSelected : styles.menuButton}
-            onPress={onOverviewPress}
+        <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
           >
-            <Text style={isOverviewPressed ? styles.menuTextSelected : styles.menuText}>
-              Overview
-            </Text>
-          </Pressable>
-          <Pressable
-            style={isTreatmentPressed ? styles.menuButtonSelected : styles.menuButton}
-            onPress={onTreatmentPress}
-          >
-            <Text style={isTreatmentPressed ? styles.menuTextSelected : styles.menuText}>
-              How To Treat
-            </Text>
-          </Pressable>
-        </View> */}
-
-        <View style={styles.information}>
-          <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
-            {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionInfo}>{generalPrinciple?.overview}</Text>
-              </View>
-            )}
-
-            {generalPrinciple?.overview && typeof generalPrinciple.overview === "object" && (
-              <View style={styles.infoSection}>
-                {overviewHeaders.map((header, index) => (
-                  <View key={index}>
-                    <Text style={styles.descriptionTitle}>{header}</Text>
-                    <StringRenderer data={overviewValues[index]} />
-                  </View>
-                ))}
-              </View>
-            )}
+            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+            <Image style={styles.image} source={require("../assets/ic_caretleft.png")} />
+          </TouchableOpacity>
+          <View style={styles.margin}>
+            <Text style={styles.subtitle}>General Principle</Text>
+            {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
           </View>
 
-          <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
-            {/* {generalPrinciple?.treatment && typeof emergency.treatment === "string" && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionInfo}>{emergency?.treatment}</Text>
-              </View>
-            )} */}
-
-            {/* {emergency?.treatment && typeof emergency.treatment === "object" && (
-              <View style={styles.infoSection}>
-                {treatmentHeaders.map((header, index) => (
-                  <View key={index}>
-                    <Text style={styles.descriptionTitle}>{header}</Text>
-                    <StringRenderer data={treatmentValues[index]} />
-                  </View>
-                ))}
-              </View>
-            )} */}
-
-            {generalPrinciple?.content && typeof generalPrinciple.content === "string" && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionInfo}>{generalPrinciple?.content}</Text>
-              </View>
-            )}
-
-            {generalPrinciple?.content && typeof generalPrinciple.content === "object" && (
-              <View style={styles.infoSection}>
-                {contentHeaders.map((header, index) => (
-                  <View key={index}>
-                    <Text style={styles.descriptionTitle}>{header}</Text>
-                    <StringRenderer data={contentValues[index]} />
-                  </View>
-                ))}
-              </View>
-            )}
+          <View style={styles.margin}>
+            {generalPrinciple && <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>}
           </View>
+  
+          <View style={styles.information}>
+            <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
+              {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
+                <View style={styles.infoSection}>
+                  <Text style={styles.descriptionInfo}>{generalPrinciple?.overview}</Text>
+                </View>
+              )}
+  
+              {generalPrinciple?.overview && typeof generalPrinciple.overview === "object" && (
+                <View style={styles.infoSection}>
+                  {overviewHeaders.map((header, index) => (
+                    <View key={index}>
+                      <Text style={styles.descriptionTitle}>{header}</Text>
+                      <StringRenderer data={overviewValues[index]} />
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+  
+            <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
+  
+              {generalPrinciple?.content && typeof generalPrinciple.content === "string" && (
+                <View style={styles.infoSection}>
+                  <Text style={styles.descriptionInfo}>{generalPrinciple?.content}</Text>
+                </View>
+              )}
+  
+              {generalPrinciple?.content && typeof generalPrinciple.content === "object" && (
+                <View style={styles.infoSection}>
+                  {contentHeaders.map((header, index) => (
+                    <View key={index}>
+                      <Text style={styles.descriptionTitle}>{header}</Text>
+                      <StringRenderer data={contentValues[index]} />
+                    </View>
+                  ))}
+                </View>
+              )}
+  
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+  else {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topRightContainer}>
+          <Bookmark item={generalPrinciple} />
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+        <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <Image style={styles.image} source={require("../assets/ic_caretleft.png")} />
+          </TouchableOpacity>
+          <View style={styles.margin}>
+            <Text style={styles.subtitle}>General Principle</Text>
+            {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
+          </View>
+          <View style={styles.margin}>
+            {generalPrinciple && <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>}
+          </View>
+
+          
+          <View style={styles.information}>
+            <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
+                {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
+                  <View style={styles.infoSection}>
+                    <Text style={styles.descriptionInfo}>{generalPrinciple?.overview}</Text>
+                  </View>
+                )}
+    
+                {generalPrinciple?.overview && typeof generalPrinciple.overview === "object" && (
+                  <View style={styles.infoSection}>
+                    {overviewHeaders.map((header, index) => (
+                      <View key={index}>
+                        <Text style={styles.descriptionTitle}>{header}</Text>
+                        <StringRenderer data={overviewValues[index]} />
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </View>
+          </View>          
+
+        </ScrollView>
+      </SafeAreaView>
+    )
+  }
+
+  
 }

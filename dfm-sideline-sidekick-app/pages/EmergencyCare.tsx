@@ -7,6 +7,7 @@ import BulletPoint from "../components/BulletPoint";
 import { Bookmark } from "../components/bookmark";
 
 import styles from "./generalPrinciplesStyles";
+import React from "react";
 
 const EmergencyCare = () => {
   const [fontsLoaded] = useFonts({

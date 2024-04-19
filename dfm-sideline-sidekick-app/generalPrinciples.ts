@@ -19,6 +19,8 @@ export type GeneralPrinciple = {
   title?: string;
   overview?: object;
   content?: object;
+  bullet?: boolean;
+  subtitle?: string;
 };
 
 /**
@@ -30,6 +32,9 @@ export type CreateGeneralPrincipleRequest = {
   title: string;
   overview?: object;
   content?: object;
+  bullet?: boolean;
+  subtitle?: string;
+
 };
 
 /**
@@ -41,6 +46,9 @@ export type UpdateGeneralPrincipleRequest = {
   title: string;
   overview?: object;
   content?: object;
+  bullet?: boolean;
+  subtitle?: string;
+
 };
 
 /**

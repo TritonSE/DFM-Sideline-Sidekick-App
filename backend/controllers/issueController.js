@@ -101,12 +101,14 @@ export const createGeneralPrinciple = async (req, res) => {
     }
 
     // Extract data from the request body
-    const { title, overview, content } = req.body;
+    const { title, overview, bullet, subtitle, content } = req.body;
 
     // Create a new GeneralPrinciple instance
     const newGeneralPrinciple = new GeneralPrinciple({
       title,
       overview,
+      bullet,
+      subtitle,
       content,
     });
 
