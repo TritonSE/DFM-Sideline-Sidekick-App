@@ -1,9 +1,9 @@
 import express from "express";
 
 import {
-  createCategory,
-  addTitleToCategoryById,
-  deleteCategoryById,
+    createCategory,
+    addTitleToCategoryById,
+    deleteCategoryById,
 } from "../controllers/categoryController.js";
 
 const router = express.Router();

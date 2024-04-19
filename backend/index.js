@@ -3,8 +3,9 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { version } from "mongoose";
 import issueRoutes from "./routes/issueRoutes.js";
+import versionRoutes from "./routes/versionRoutes.js"
 import categoryRoutes from "./routes/categoryRoutes.js";
 
 // import { CustomError, InternalError } from "./errors.js";
@@ -57,6 +58,7 @@ app.use(express.json());
 // app.use("/category", categoryRouter);
 // app.use("/visualization", visRouter);
 app.use("/api", issueRoutes);
+app.use("/api", versionRoutes);
 app.use("/api", categoryRoutes)
 
 app.use(errorHandler);
