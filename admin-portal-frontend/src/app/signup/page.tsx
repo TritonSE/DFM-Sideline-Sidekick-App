@@ -2,6 +2,7 @@
 
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { auth } from '../firebase-config'; 
 import { useRouter } from 'next/navigation';
 
@@ -13,8 +14,19 @@ interface SignUpForm {
   password: string;
 }
 
+const formatFirebaseError = (error: any): string => {
+  if (error?.code && typeof error.code === 'string') {
+    const errorCode = error.code.split('/')[1];
+    return errorCode
+      .split('-')
+      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+  return 'An unexpected error occurred';
+};
 
 export default function SignUp() {
+  const db = getFirestore();
   const [signUpForm, setSignUpForm] = useState<SignUpForm>({
     firstName: '',
     lastName: '',
@@ -35,15 +47,28 @@ export default function SignUp() {
     setSignUpForm({ ...signUpForm, [name]: value });
   };
 
+  const checkInvitation = async (email: string) => { //checks if email has an invite
+    const inviteRef = doc(db, 'invitations', email);
+    const inviteSnap = await getDoc(inviteRef);
+    return inviteSnap.exists(); 
+  };
+  
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = signUpForm;
     
     try {
+      const invited = await checkInvitation(email);
+      if (!invited) {
+        setError("You must be invited to create an account.");
+        return;
+      }
+  
       await createUserWithEmailAndPassword(auth, email, password);
       router.push('/home');
     } catch (err: any) {
-      setError(err.message);
+      const friendlyError = formatFirebaseError(err);
+      setError(friendlyError);
     }
   };
 

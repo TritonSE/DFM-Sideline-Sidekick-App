@@ -35,7 +35,7 @@ export default function Home() {
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/home'); 
     } catch (err: any) {
-      setError(err.message); 
+      setError("The email or password is incorrect."); 
     }
   };
   
