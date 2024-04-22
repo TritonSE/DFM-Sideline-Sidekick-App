@@ -1,10 +1,6 @@
 import express from "express";
 
-import {
-    updatedVersion,
-    getVersion,
-    getAllWithVersion
-} from "../controllers/versionController.js";
+import { updatedVersion, getVersion, getAllWithVersion } from "../controllers/versionController.js";
 
 const router = express.Router();
 
