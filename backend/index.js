@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import issueRoutes from "./routes/issueRoutes.js";
+import { onRequest } from "firebase-functions/v2/https";
 
 // import { CustomError, InternalError } from "./errors.js";
 
@@ -59,6 +60,11 @@ app.use("/api", issueRoutes);
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server Started at ${process.env.PORT}`);
-});
+export const backend = onRequest({ region: "us-central1" }, app);
+
+if (process.env.NODE_ENV === "development") {
+  const port = process.env.DEV_PORT || 3001; // Default to 3000 if DEV_PORT is not set
+  app.listen(port, () => {
+    console.log(`Server started at http://localhost:${port}`);
+  });
+}
