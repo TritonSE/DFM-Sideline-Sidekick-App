@@ -108,7 +108,7 @@ export const deleteTitleToCategoryById = async (req, res) => {
     }
 
     // Delete title to the category's items array
-    const index = category.items.indexOf(deletedTitle)
+    const index = category.items.indexOf(deletedTitle);
     console.log("hihi");
 
     if (index > -1) {
@@ -122,7 +122,6 @@ export const deleteTitleToCategoryById = async (req, res) => {
     } else {
       res.status(404).json({ message: "Title not found" });
     }
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
