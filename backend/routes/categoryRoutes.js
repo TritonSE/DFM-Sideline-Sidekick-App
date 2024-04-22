@@ -6,6 +6,7 @@ import {
   createCategory,
   deleteCategoryById,
   addTitleToCategoryById,
+  deleteTitleToCategoryById,
 } from "../controllers/categoryController.js";
 import { handleValidationErrors, validateCategory } from "../validators/categoryValidator.js";
 
@@ -25,5 +26,8 @@ router.delete("/categories/:id", deleteCategoryById);
 
 // PUT new title to category ITEMS
 router.put("/categories/:id", addTitleToCategoryById);
+
+// PUT to delete title from category ITEMS
+router.put("/categories/:id/:title", deleteTitleToCategoryById);
 
 export default router;
