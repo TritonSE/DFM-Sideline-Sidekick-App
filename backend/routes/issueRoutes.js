@@ -20,9 +20,6 @@ import {
   validateGeneralPrincipleData,
 } from "../validators/issueValidator.js";
 
-import { Version } from "../models/versionModel.js";
-import { updatedVersion, getVersion, getAllWithVersion } from "../controllers/versionController.js";
-
 const router = express.Router();
 
 //GET all emergencies and general principles
@@ -62,15 +59,6 @@ router.put("/emergencies/:id", updatedEmergencyById);
 
 // PUT a specific general principle by ID
 router.put("/generalPrinciples/:id", updatedGeneralPrincipleById);
-
-// GET the version of the database
-router.get("/version", getVersion);
-
-// update the version number
-router.put("/version", updatedVersion);
-
-// get all data AND the version
-router.get("/allWithVersion", getAllWithVersion);
 
 // Add more routes as needed
 export default router;
