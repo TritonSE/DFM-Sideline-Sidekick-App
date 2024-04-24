@@ -10,12 +10,13 @@ import AppInitializer from "./AppInitializer";
 import { DataProvider } from "./DataContext";
 import { BottomNavBar, NavItem } from "./components/bar";
 import ConditionsSection from "./pages/ConditionsSection";
+import EmergencyPrinciples from "./pages/EmergencyPrinciples";
 import HomePage from "./pages/HomePage";
+import MainPrinciples from "./pages/MainPrinciples";
 import SearchPage from "./pages/SearchPage";
 // import TabPage from "./pages/TabPage";
 import GeneralPrinciples from "./pages/generalPrinciples";
 import GeneralPrinciplesMain from "./pages/generalPrinciplesMain";
-import EmergencyPrinciples from "./pages/EmergencyPrinciples";
 
 type DocumentBase = {
   _id: string;
@@ -34,6 +35,7 @@ type RootStackParamList = {
   MedicalConditions: { emergency: DocumentBase };
   GeneralPrinciples: { contentProp: DocumentBase };
   EmergencyPrinciples: { generalPrinciple: DocumentBase };
+  MainPrinciples: { generalPrinciple: DocumentBase };
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -98,6 +100,11 @@ export default function App() {
           <Stack.Screen
             name="EmergencyPrinciples"
             component={EmergencyPrinciples}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MainPrinciples"
+            component={MainPrinciples}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

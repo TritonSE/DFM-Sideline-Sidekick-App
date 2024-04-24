@@ -50,8 +50,8 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
   const [overviewHeaders, setOverviewHeaders] = useState<string[]>([]);
   const [overviewValues, setOverviewValues] = useState<StringValue[]>([]);
-  const [treatmentHeaders, setTreatmentHeaders] = useState<string[]>([]);
-  const [treatmentValues, setTreatmentValues] = useState<StringValue[]>([]);
+  // const [treatmentHeaders, setTreatmentHeaders] = useState<string[]>([]);
+  // const [treatmentValues, setTreatmentValues] = useState<StringValue[]>([]);
   const [contentHeaders, setContentHeaders] = useState<string[]>([]);
   const [contentValues, setContentValues] = useState<StringValue[]>([]);
 
@@ -130,7 +130,7 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
           <View style={styles.margin}>
             {generalPrinciple && <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>}
           </View>
-  
+
           <View style={styles.information}>
             <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
               {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
@@ -138,7 +138,7 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                   <Text style={styles.descriptionInfo}>{generalPrinciple?.overview}</Text>
                 </View>
               )}
-  
+
               {generalPrinciple?.overview && typeof generalPrinciple.overview === "object" && (
                 <View style={styles.infoSection}>
                   {overviewHeaders.map((header, index) => (
@@ -150,15 +150,14 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                 </View>
               )}
             </View>
-  
+
             <View style={isTreatmentPressed ? styles.howToTreat : styles.howToTreatHidden}>
-  
               {generalPrinciple?.content && typeof generalPrinciple.content === "string" && (
                 <View style={styles.infoSection}>
                   <Text style={styles.descriptionInfo}>{generalPrinciple?.content}</Text>
                 </View>
               )}
-  
+
               {generalPrinciple?.content && typeof generalPrinciple.content === "object" && (
                 <View style={styles.infoSection}>
                   {contentHeaders.map((header, index) => (
@@ -169,14 +168,12 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                   ))}
                 </View>
               )}
-  
             </View>
           </View>
         </ScrollView>
       </SafeAreaView>
     );
-  }
-  else {
+  } else {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topRightContainer}>
@@ -198,32 +195,28 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
             {generalPrinciple && <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>}
           </View>
 
-          
           <View style={styles.information}>
             <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
-                {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
-                  <View style={styles.infoSection}>
-                    <Text style={styles.descriptionInfo}>{generalPrinciple?.overview}</Text>
-                  </View>
-                )}
-    
-                {generalPrinciple?.overview && typeof generalPrinciple.overview === "object" && (
-                  <View style={styles.infoSection}>
-                    {overviewHeaders.map((header, index) => (
-                      <View key={index}>
-                        <Text style={styles.descriptionTitle}>{header}</Text>
-                        <StringRenderer data={overviewValues[index]} />
-                      </View>
-                    ))}
-                  </View>
-                )}
-              </View>
-          </View>          
+              {generalPrinciple?.overview && typeof generalPrinciple.overview === "string" && (
+                <View style={styles.infoSection}>
+                  <Text style={styles.descriptionInfo}>{generalPrinciple?.overview}</Text>
+                </View>
+              )}
 
+              {generalPrinciple?.overview && typeof generalPrinciple.overview === "object" && (
+                <View style={styles.infoSection}>
+                  {overviewHeaders.map((header, index) => (
+                    <View key={index}>
+                      <Text style={styles.descriptionTitle}>{header}</Text>
+                      <StringRenderer data={overviewValues[index]} />
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+          </View>
         </ScrollView>
       </SafeAreaView>
-    )
+    );
   }
-
-  
 }

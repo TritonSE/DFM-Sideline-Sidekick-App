@@ -6,7 +6,6 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { getGeneralPrinciple } from "../generalPrinciples";
 
-
 import SearchPage from "./SearchPage";
 import styles from "./generalPrinciplesMainStyles";
 const GeneralPrinciplesMain = () => {
@@ -64,16 +63,24 @@ const GeneralPrinciplesMain = () => {
   // }, []);
 
   const handlePress = (label: string) => {
-    console.log(label);
-
-    console.log(generalPrinciples);
+    const mainPressables = [
+      "Emergency Action Plan",
+      "Trauma Centers",
+      "Burn Centers",
+      "Inclement Weather",
+      "Catastrophic Incident",
+      "Muscle Injuries",
+    ];
 
     const matchedGeneralPrinciple = generalPrinciples.find((gp) => gp.title === label);
     //find((gp) => gp.title === label);
 
-    if (matchedGeneralPrinciple) {
+    if (matchedGeneralPrinciple && mainPressables.includes(label)) {
+      navigation.navigate("MainPrinciples", { generalPrinciple: matchedGeneralPrinciple });
+    } else if (matchedGeneralPrinciple) {
       // If a matching general principle is found, navigate to "EmergencyPrinciples"
       // and pass the matched general principle data as a parameter
+      console.log(matchedGeneralPrinciple);
       navigation.navigate("EmergencyPrinciples", { generalPrinciple: matchedGeneralPrinciple });
     } else {
       console.log(`No general principle found with title "${label}"`);

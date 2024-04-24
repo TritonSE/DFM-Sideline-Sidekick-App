@@ -5,6 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "flex-start",
+    paddingBottom: 110,
     justifyContent: "center",
     ...Platform.select({
       ios: {

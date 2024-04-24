@@ -21,6 +21,9 @@ const BulletList: React.FC<{ items: string[] }> = ({ items }) => (
 );
 
 const StringRenderer: React.FC<Props> = ({ data }) => {
+  console.log(data);
+  console.log(Array.isArray(data));
+  console.log(typeof data);
   if (typeof data === "string") {
     return <Text style={styles.descriptionInfo}>{data}</Text>;
   } else if (Array.isArray(data) && data.every((item) => typeof item === "string")) {
