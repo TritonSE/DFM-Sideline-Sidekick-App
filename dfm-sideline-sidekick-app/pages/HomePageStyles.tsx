@@ -5,15 +5,12 @@ const styles = StyleSheet.create({
     flex: 1,
     ...Platform.select({
       ios: {
-        marginTop: 80,
-        marginBottom: 150,
+        marginBottom: 100,
       },
       android: {
-        marginTop: 40,
         marginBottom: 110,
       },
       default: {
-        marginTop: 50,
         marginBottom: 120,
       },
     }),

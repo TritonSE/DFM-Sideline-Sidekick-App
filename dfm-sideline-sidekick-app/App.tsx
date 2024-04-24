@@ -80,7 +80,11 @@ export default function App() {
         <Stack.Navigator initialRouteName="Search">
           <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
           <Stack.Screen name="ViewAll" component={ViewAll} options={{ headerShown: false }} />
-          <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="Search"
+            component={SearchPage}
+            options={{ headerShown: false, animation: "none" }}
+          />
           <Stack.Screen
             name="GPM"
             component={GeneralPrinciplesMain}

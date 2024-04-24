@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "#182B49",
     fontSize: 18,
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-Medium",
     fontWeight: "500",
     paddingTop: 15,
   },
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginBottom: height * 0.02, // 2% of screen width/height
     textAlign: "left",
     paddingTop: height * 0.007, // 0.7% of screen width/height
-    fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Bold",
   },
   searchContainer: {
     flexDirection: "row",

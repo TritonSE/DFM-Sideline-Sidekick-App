@@ -13,9 +13,16 @@ export type GeneralPrinciple = {
   content: object;
 };
 
+export type Category = {
+  title: string;
+  items: string[];
+  type: string;
+};
+
 type JsonDataStructure = {
   emergencies?: MedicalEmergency[]; // Optional array of MedicalEmergency
   generalPrinciples?: GeneralPrinciple[]; // Optional array of GeneralPrinciple
+  categories?: Category[];
 };
 
 type DataContextType = {

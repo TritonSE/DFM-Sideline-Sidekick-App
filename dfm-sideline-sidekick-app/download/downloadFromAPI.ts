@@ -4,6 +4,7 @@ import * as FileSystem from "expo-file-system";
 
 import { checkDirectoryExists, checkFileExists } from "./File Preprocess/existenceChecker";
 import { checkDevice } from "./checkDevice/checkDevice";
+import { checkConnection } from "./connection/checkConnection";
 import { createResumable } from "./createResumable/createResumable";
 import { getCurrentVersion } from "./versionControl/getCurrentVersion";
 import { getStoredVersion, setStoredVersion } from "./versionControl/storedVersion";
@@ -18,11 +19,13 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     localhost = process.env.EXPO_PUBLIC_IP_ADDRESS; // PUT YOUR IP ADDRESS OF YOUR LAPTOP HERE (for running on physical devices) [1. go to command line, 2. type ipconfig /all 3. it's under IPv4 address]
   } else {
     // compatibility for type of device
-    localhost = OS === "android" ? "10.0.2.2" : "127.0.0.1";
+    localhost = OS === "android" ? "http://10.0.2.2:3001" : "http://127.0.0.1:3001";
   }
 
-  const url = `http://${localhost}:3001/api/allWithVersion`; // all data
-  const versionUrl = `http://${localhost}:3001/api/version`; // newest version
+  const url = `${localhost}/api/allWithVersion`; // all data
+  const versionUrl = `${localhost}/api/version`; // newest version
+
+  console.log(versionUrl);
 
   // directory in local storage to store files at
   const fileDir = FileSystem.documentDirectory + "expo/";
@@ -37,8 +40,17 @@ export const downloadJSON = async (fileName: string, OS: string) => {
     // will store the path to our file
     let uri = "";
 
-    const newestVersion = (await getCurrentVersion(versionUrl))[0].version as string;
     const storedVersion = await getStoredVersion();
+    let newestVersion: string | number | null | undefined;
+    if (await checkConnection()) {
+      try {
+        newestVersion = (await getCurrentVersion(versionUrl))[0].version as string;
+      } catch (error) {
+        newestVersion = storedVersion;
+      }
+    } else {
+      newestVersion = storedVersion;
+    }
 
     console.log(); // feel free to remove these extra logs, they're just for output clarity when debugging
 

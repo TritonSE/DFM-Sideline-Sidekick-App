@@ -47,8 +47,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
   const [overviewValues, setOverviewValues] = useState<StringValue[]>([]);
   const [treatmentHeaders, setTreatmentHeaders] = useState<string[]>([]);
   const [treatmentValues, setTreatmentValues] = useState<StringValue[]>([]);
-  const [contentHeaders, setContentHeaders] = useState<string[]>([]);
-  const [contentValues, setContentValues] = useState<StringValue[]>([]);
 
   const { params } = route; // Destructure params from the route object
   const [emergency, setEmergency] = useState<Emergency>();
@@ -95,11 +93,6 @@ export default function ConditionsSection({ route, navigation }: Props) {
     if (emergency?.treatment && typeof emergency.treatment === "object") {
       setTreatmentHeaders(Object.keys(emergency.treatment));
       setTreatmentValues(Object.values(emergency.treatment) as StringValue[]);
-    }
-
-    if (emergency?.content && typeof emergency.content === "object") {
-      setContentHeaders(Object.keys(emergency.content));
-      setContentValues(Object.values(emergency.content) as StringValue[]);
     }
   }, [emergency]);
 
@@ -171,7 +164,7 @@ export default function ConditionsSection({ route, navigation }: Props) {
               <View style={styles.infoSection}>
                 {overviewHeaders.map((header, index) => (
                   <View key={index}>
-                    <Text style={styles.descriptionTitle}>{header}</Text>
+                    {header !== '""' && <Text style={styles.descriptionTitle}>{header}</Text>}
                     <StringRenderer data={overviewValues[index]} />
                   </View>
                 ))}
@@ -190,25 +183,8 @@ export default function ConditionsSection({ route, navigation }: Props) {
               <View style={styles.infoSection}>
                 {treatmentHeaders.map((header, index) => (
                   <View key={index}>
-                    <Text style={styles.descriptionTitle}>{header}</Text>
+                    {header !== '""' && <Text style={styles.descriptionTitle}>{header}</Text>}
                     <StringRenderer data={treatmentValues[index]} />
-                  </View>
-                ))}
-              </View>
-            )}
-
-            {emergency?.content && typeof emergency.content === "string" && (
-              <View style={styles.infoSection}>
-                <Text style={styles.descriptionInfo}>{emergency?.content}</Text>
-              </View>
-            )}
-
-            {emergency?.content && typeof emergency.content === "object" && (
-              <View style={styles.infoSection}>
-                {contentHeaders.map((header, index) => (
-                  <View key={index}>
-                    <Text style={styles.descriptionTitle}>{header}</Text>
-                    <StringRenderer data={contentValues[index]} />
                   </View>
                 ))}
               </View>

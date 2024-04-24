@@ -1,6 +1,8 @@
+import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useRef, useState } from "react";
+import * as Font from "expo-font";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
@@ -23,11 +25,16 @@ type DocumentBase = {
 type SearchPageProps = {
   onPage: boolean;
   setShowing?: (param: boolean) => void;
+  title: string;
 };
 
 type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
-const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) => {
+const SearchPage: React.FC<SearchPageProps> = ({
+  onPage = true,
+  setShowing,
+  title = "Global Search",
+}) => {
   const [query, setQuery] = useState<string>("");
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentBase[]>([]);
   const [recentSearches, setRecentSearches] = useState<DocumentBase[]>([]);
@@ -36,6 +43,24 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
   const generalPrinciples = jsonData?.generalPrinciples ?? [];
   const navigation = useNavigation<ConditionsNavigationProp>();
   const inputRef = useRef<TextInput>(null);
+  const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function loadFont() {
+      try {
+        await Font.loadAsync({
+          "Roboto-Regular": Roboto_400Regular,
+          "Roboto-Medium": Roboto_500Medium,
+          "Roboto-Bold": Roboto_700Bold,
+        });
+        setIsFontsLoaded(true);
+      } catch (error) {
+        console.error("Error loading fonts:", error);
+      }
+    }
+
+    void loadFont();
+  }, []);
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -108,16 +133,15 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
       setShowing(false);
       return;
     }
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    } else {
-      navigation.navigate("Bookmark");
-    }
+    navigation.goBack();
   };
+  if (!isFontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Global Search</Text>
+      <Text style={styles.title}>{title}</Text>
       <SearchBar
         query={query}
         setQuery={handleSearch}

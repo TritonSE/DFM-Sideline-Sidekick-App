@@ -33,7 +33,7 @@ const HomePage = () => {
 
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
-  console.log("looooll", emergencies);
+  const categories = jsonData?.categories ?? [];
 
   const handleSearch = () => {
     navigation.navigate("Search" as never);
@@ -114,9 +114,7 @@ const HomePage = () => {
         .reverse()
         .forEach((bookmark) => {
           carouselItems.push({
-            _id: bookmark._id,
-            title: bookmark.title,
-            subtitle: bookmark.subtitle,
+            ...bookmark,
           });
         });
     }
@@ -131,12 +129,16 @@ const HomePage = () => {
   }
 
   const cards = [
-    "General\nPrinciples",
-    "Medical Issues",
-    "Upper Extremity\nInjuries",
-    "Lower Extremity\nInjuries",
-    "Axial Injuries",
-    "Soft Tissues\nInjuries",
+    { title: "General\nPrinciples", items: [...(jsonData?.generalPrinciples ?? [])] },
+    ...categories
+      .filter((category) => category.type === "Emergency")
+      .map((category) => {
+        const items = emergencies.filter((emergency) => category.items.includes(emergency.title));
+        return {
+          title: category.title,
+          items,
+        };
+      }),
   ];
 
   const routes = ["", "", "", "", "", ""];
@@ -164,12 +166,13 @@ const HomePage = () => {
                 key={index}
                 style={styles.categoryButton}
                 onPress={() => {
-                  if (route !== "") {
-                    navigation.navigate(route as never);
-                  }
+                  navigation.navigate("ViewAll", {
+                    arrayProp: card.items,
+                    title: card.title,
+                  });
                 }}
               >
-                <Text style={styles.buttonText}>{card}</Text>
+                <Text style={styles.buttonText}>{card.title}</Text>
               </Pressable>
             );
           })}
