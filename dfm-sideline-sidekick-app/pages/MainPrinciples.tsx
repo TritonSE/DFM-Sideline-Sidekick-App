@@ -151,7 +151,9 @@ export default function MainPrinciples({ route, navigation }: Props) {
                 >
                   <View style={styles.listItemTextContainer}>
                     <Text style={styles.listItemTitle}>{item}</Text>
-                    <Text style={styles.listItemSubtitle}>{item}</Text>
+                    <Text style={styles.listItemSubtitle}>
+                      {generalPrinciple?.overview[item].subheader}
+                    </Text>
                   </View>
                   <Icon name="chevron-right" size={20} color="#909090" />
                 </TouchableOpacity>

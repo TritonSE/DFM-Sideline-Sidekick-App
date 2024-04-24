@@ -1,23 +1,10 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "flex-start",
-    paddingBottom: 110,
-    justifyContent: "center",
-    ...Platform.select({
-      ios: {
-        paddingTop: 80,
-      },
-      android: {
-        paddingTop: 40,
-      },
-      default: {
-        paddingTop: 50,
-      },
-    }),
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: 15,
   },
   circle: {
     width: 24, // this should be a "props"-value in future
@@ -33,11 +20,41 @@ export default StyleSheet.create({
     color: "white",
     fontWeight: "600",
   },
-  pointContainer: {
-    flexDirection: "row",
-    // alignItems: "center",
-    paddingTop: 15,
+  mainText: {
+    color: "black",
+    fontSize: 16,
+    fontFamily: "Roboto-Bold",
+    fontWeight: "700",
+    paddingLeft: 7,
+    paddingRight: 27,
   },
+  subpoints: {
+    paddingTop: 5,
+    paddingLeft: 38,
+    paddingRight: 25,
+    fontFamily: "Roboto-Regular",
+  },
+  point: {
+    fontSize: 15,
+    fontFamily: "Roboto-Regular",
+  },
+  //   container: {
+  //     flex: 1,
+  //     backgroundColor: "#fff",
+  //     alignItems: "flex-start",
+  //     justifyContent: "center",
+  //     ...Platform.select({
+  //       ios: {
+  //         paddingTop: 80,
+  //       },
+  //       android: {
+  //         paddingTop: 40,
+  //       },
+  //       default: {
+  //         paddingTop: 50,
+  //       },
+  //     }),
+  //   },
   margin: {
     marginLeft: 16,
     marginTop: 20,
@@ -93,12 +110,6 @@ export default StyleSheet.create({
     color: "#182B49",
     marginLeft: 2,
   },
-  subtitle2: {
-    fontFamily: "Roboto-Bold",
-    fontSize: 28,
-    color: "#182B49",
-    marginLeft: 2,
-  },
   image: {
     width: 24,
     height: 24,
@@ -122,10 +133,6 @@ export default StyleSheet.create({
     fontFamily: "Roboto-Bold",
     fontSize: 18,
     color: "#000000",
-    // fontSize: 16,
-    fontWeight: "700",
-    paddingLeft: 7,
-    paddingRight: 27,
   },
   descriptionInfo: {
     marginTop: 5,
@@ -155,3 +162,5 @@ export default StyleSheet.create({
     color: "#000000",
   },
 });
+
+export default styles;

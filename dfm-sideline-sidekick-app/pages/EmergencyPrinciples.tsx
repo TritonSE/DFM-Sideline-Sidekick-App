@@ -17,6 +17,7 @@ import {
 } from "react-native";
 
 import StringRenderer from "../components/StringRenderer";
+import BulletRenderer from "../components/BulletRenderer";
 import { Bookmark } from "../components/bookmark";
 
 import styles from "./EmergencyPrinciplesStyles";
@@ -144,7 +145,7 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                   {overviewHeaders.map((header, index) => (
                     <View key={index}>
                       <Text style={styles.descriptionTitle}>{header}</Text>
-                      <StringRenderer data={overviewValues[index]} />
+                      <BulletRenderer data={overviewValues[index]} level={0} />
                     </View>
                   ))}
                 </View>
@@ -163,7 +164,7 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                   {contentHeaders.map((header, index) => (
                     <View key={index}>
                       <Text style={styles.descriptionTitle}>{header}</Text>
-                      <StringRenderer data={contentValues[index]} />
+                      <BulletRenderer data={contentValues[index]} level={0} />
                     </View>
                   ))}
                 </View>
@@ -191,9 +192,13 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
             <Text style={styles.subtitle}>General Principle</Text>
             {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
           </View>
-          <View style={styles.margin}>
-            {generalPrinciple && <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>}
-          </View>
+          {generalPrinciple?.subtitle && (
+            <View style={styles.margin}>
+              {generalPrinciple && (
+                <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>
+              )}
+            </View>
+          )}
 
           <View style={styles.information}>
             <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
@@ -207,8 +212,15 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                 <View style={styles.infoSection}>
                   {overviewHeaders.map((header, index) => (
                     <View key={index}>
-                      <Text style={styles.descriptionTitle}>{header}</Text>
-                      <StringRenderer data={overviewValues[index]} />
+                      <View style={styles.pointContainer}>
+                        <View style={styles.circle}>
+                          <Text style={styles.circleCaption}>
+                            {String.fromCharCode(65 + index)}
+                          </Text>
+                        </View>
+                        <Text style={styles.descriptionTitle}>{header}</Text>
+                      </View>
+                      <BulletRenderer data={overviewValues[index]} level={0} />
                     </View>
                   ))}
                 </View>
