@@ -9,7 +9,10 @@
     "rewrites": [
       {
         "source": "/api/**",
-        "function": "backend"
+        "function": {
+          "functionId": "backend",
+          "pinTag": true
+        }
       },
       {
         "source": "**",
