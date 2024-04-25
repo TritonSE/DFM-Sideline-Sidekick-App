@@ -20,9 +20,9 @@ jobs:
         run: |
           cd backend/
           touch .env
-          echo DATABASE_URL=${{ secrets.FIREBASE_TOKEN }}
-          echo DEV_PORT=3001
-          echo NODE_ENV=deployment
+          echo DATABASE_URL=${{ secrets.FIREBASE_TOKEN }} >> .env
+          echo DEV_PORT=3001 >> .env
+          echo NODE_ENV=deployment >> .env
           npm ci
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
