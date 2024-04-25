@@ -18,12 +18,15 @@ jobs:
           npm ci
           npm run build
       - name: Install backend dependencies
+        env:
+          MONGO_URL: ${{ secrets.MONGO_URL }}
         run: |
           cd backend/
           touch .env
-          echo DATABASE_URL=${{ secrets.MONGO_URL }} >> .env
-          echo DEV_PORT=3001 >> .env
-          echo NODE_ENV=deployment >> .env
+          echo "DATABASE_URL=$MONGO_URL" >> .env
+          echo "DEV_PORT=3001" >> .env
+          echo "NODE_ENV=deployment" >> .env
+          cat .env
           npm ci
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
