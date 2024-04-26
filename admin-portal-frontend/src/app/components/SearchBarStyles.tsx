@@ -7,7 +7,7 @@ const styles = {
     borderRadius: '9.367px',
     border: '0.937px solid var(--Neutral-Gray2, #D8D8D8)',
     background: 'var(--Neutral-Gray0, #F3F3F3)',
-    height: '46px',
+    height: '43px',
     width: '561px'
   },
   input: {

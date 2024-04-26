@@ -2,9 +2,8 @@
 
 import React from 'react';
 import SearchBar from './SearchBar';
-import Image from 'next/image';
-import IconSearch from './icons/ic_search.png';
-import styles from './HorizontalNavBarStyles'
+import styles from './HorizontalNavBarStyles';
+import SearchComponent from './SearchComponent';
 
 const HorizontalNavBar: React.FC = () => {
     return (
@@ -12,13 +11,7 @@ const HorizontalNavBar: React.FC = () => {
 
             <div style={styles.logoContainer}>
                 <div style={styles.logoBackground}>
-                    <Image
-                        src={IconSearch}
-                        alt="Image"
-                        width={18}
-                        height={18}
-                        style={{ filter: 'invert(100%)' }}
-                    />
+                    <SearchComponent width={18} height={18} color={"#FFFFFF"}/>
                 </div>
                 <span style={styles.logoText}>Sideline Sidekick</span>
             </div>

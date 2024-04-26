@@ -1,15 +1,13 @@
 'use client'
 
 import styles from './VerticalNavBarStyles';
-import profileIcon from './Profile Icon.png'
+import HomeComponent from './HomeComponent';
 import React, { ReactNode } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.css';
-import Image from 'next/image';
-import homeIcon from './icons/Home.png'
-import searchIcon from './icons/ic_search.png'
-import gpIcon from './icons/gen principles.png'
 import { Card, useAccordionButton } from 'react-bootstrap';
+import GpComponent from './GPComponent';
+import SearchComponent from './SearchComponent';
 
   
   const VerticalNavBar: React.FC = () => {
@@ -48,7 +46,8 @@ import { Card, useAccordionButton } from 'react-bootstrap';
                 <CustomAccordion eventKey="0">
                   <div style={styles.firstCarDiv}>
                     <div style={styles.image}>
-                      <Image src={homeIcon} alt={'Home'} style={styles.homeIcon} />
+                      {/* <Image src={homeIcon} alt={'Home'} style={styles.homeIcon} /> */}
+                      <HomeComponent />
                     </div>
                     Home
                   </div>
@@ -61,15 +60,15 @@ import { Card, useAccordionButton } from 'react-bootstrap';
             <Accordion.Header>
               <div style={styles.cardDivs}>
                 <div style={styles.image}>
-                  <Image src={searchIcon} alt={'Search'} style={styles.searchIcon} />
+                  <SearchComponent height={30.855} width={30.855} color={"#182B49"}/>
                 </div>
                 Search
               </div>
             </Accordion.Header>
             <Accordion.Body>
                 <ul>
-                  <li>All</li>
-                  <li>By Category</li>
+                  <li style={styles.listItem}>All</li>
+                  <li style={styles.listItem}>By Category</li>
                 </ul>
             </Accordion.Body>
           </Accordion.Item>
@@ -77,26 +76,28 @@ import { Card, useAccordionButton } from 'react-bootstrap';
             <Accordion.Header>
               <div style={styles.cardDivs}>
                 <div style={styles.image}>
-                  <Image src={gpIcon} alt={'General Principles'} style={styles.gpIcon} />
+                  {/* <Image src={gpIcon} alt={'General Principles'} style={styles.gpIcon} /> */}
+                  <GpComponent/>
                 </div>
                 General Principles
               </div>
             </Accordion.Header>
             <Accordion.Body>
-                <ul>
-                  <li>All</li>
-                  <li>Emergency Action Plan</li>
-                  <li>Trauma Centers</li>
-                  <li>Burn Centers</li>
-                  <li>Stroke Centers</li>
-                  <li>Serious On-Field Injury</li>
-                  <li>Catastrophic Incident</li>
-                  <li>Adminstering Medication</li>
-                  <li>Muscle Injuries</li>
-                  <li>Ligament Injuries</li>
-                  <li>Dislocations/Sublaxations</li>
-                  <li>Fractures</li>
-                </ul>
+            <ul style={{ listStyleType: 'none' }}>
+              <li style={styles.listItem}>All</li>
+              <li style={styles.listItem}>Emergency Action Plan</li>
+              <li style={styles.listItem}>Trauma Centers</li>
+              <li style={styles.listItem}>Burn Centers</li>
+              <li style={styles.listItem}>Stroke Centers</li>
+              <li style={styles.listItem}>Serious On-Field Injury</li>
+              <li style={styles.listItem}>Catastrophic Incident</li>
+              <li style={styles.listItem}>Adminstering Medication</li>
+              <li style={styles.listItem}>Muscle Injuries</li>
+              <li style={styles.listItem}>Ligament Injuries</li>
+              <li style={styles.listItem}>Dislocations/Sublaxations</li>
+              <li style={styles.listItem}>Fractures</li>
+            </ul>
+
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

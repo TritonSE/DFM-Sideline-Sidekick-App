@@ -1,6 +1,6 @@
-import HorizontalNavBar from './horizontalNavbar'
+import HorizontalNavBar from './components/HorizontalNavbar'
 import React from 'react';
-import VerticalNavBar from './VerticalNavBar';
+import VerticalNavBar from './components/VerticalNavBar';
 import styles from './pageStyles'
 
 const AnotherPage: React.FC = () => {

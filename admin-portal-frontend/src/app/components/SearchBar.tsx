@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './searchbarStyles';
-import searchIcon from './icons/ic_search_grey.png'
+import styles from './SearchBarStyles';
+import searchIcon from '../icons/ic_search_grey.png'
 import Image from 'next/image';
 
 interface SearchBarProps {

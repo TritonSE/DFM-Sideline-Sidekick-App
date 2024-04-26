@@ -12,14 +12,8 @@ const VerticalNavBarStyles = {
     border: 'none',
   },
   accordionContainer: {
-    paddingTop: '109px' 
-  },
-  iconContainer: {
-    width: '30.855px',
-    height: '30.855px',
-    marginRight: '20px',
-    display: 'flex',
-    alignItems: 'center',
+    paddingTop: '109px',
+    
   },
   homeIcon: {
     width: '24px',
@@ -28,6 +22,10 @@ const VerticalNavBarStyles = {
   searchIcon: {
     width: '31px',
     height: '30px',
+  },
+  listItem: {
+    marginBottom: '0.6vh',
+    fontSize: '14.96px'
   },
   gpIcon: {
     width: '13px',
@@ -38,7 +36,7 @@ const VerticalNavBarStyles = {
     height: '30.855px',
     marginRight: '20px',
     display: 'flex',
-    alignItems: 'center' 
+    alignItems: 'center'  
   },
   firstCarDiv: {
     display: 'flex',
