@@ -13,10 +13,10 @@
     "lint-check": "npm run check-git-hooks && eslint --cache --report-unused-disable-directives . && prettier --check ."
   },
   "dependencies": {
-    "next": "14.1.4",
+    "next": "^14.1.4",
     "node": "^22.0.0",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20",
