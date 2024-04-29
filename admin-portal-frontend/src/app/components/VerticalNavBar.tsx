@@ -5,7 +5,7 @@ import HomeComponent from './HomeComponent';
 import React, { ReactNode } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Card, useAccordionButton } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import GpComponent from './GPComponent';
 import SearchComponent from './SearchComponent';
 
@@ -13,11 +13,10 @@ import SearchComponent from './SearchComponent';
   const VerticalNavBar: React.FC = () => {
       
       interface CustomAccordionProps {
-        eventKey: string;
         children: ReactNode;
       }
       
-      const CustomAccordion = ({ eventKey, children }: CustomAccordionProps) => {
+      const CustomAccordion = ({ children }: CustomAccordionProps) => {
         //const decoratedOnClick = useAccordionButton(eventKey, () => {});
 
         return (
