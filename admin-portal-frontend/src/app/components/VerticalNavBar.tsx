@@ -42,7 +42,7 @@ import SearchComponent from './SearchComponent';
           <a href="#homepagelink" style={{ textDecoration: 'none' }}>
             <Card style={{ border: 'none', borderBottom: 'none'}}>
               <Card.Header style={styles.cardHeader}>
-                <CustomAccordion eventKey="0">
+                <CustomAccordion>
                   <div style={styles.firstCarDiv}>
                     <div style={styles.image}>
                       {/* <Image src={homeIcon} alt={'Home'} style={styles.homeIcon} /> */}
