@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+import { NumbersSection } from "../components/NumbersSection";
 import { Bookmark } from "../components/bookmark";
 
 import styles from "./MainPrinciplesStyles";
@@ -123,45 +124,44 @@ export default function MainPrinciples({ route, navigation }: Props) {
       <View style={styles.topRightContainer}>
         <Bookmark item={generalPrinciple} />
       </View>
-      <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-          <Image style={styles.image} source={require("../assets/ic_caretleft.png")} />
-        </TouchableOpacity>
-        <View style={styles.margin}>
-          {/* <Text style={styles.subtitle}>General Principle</Text> */}
-          {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+        <Image style={styles.image} source={require("../assets/ic_caretleft.png")} />
+      </TouchableOpacity>
+      <View style={styles.margin}>
+        {/* <Text style={styles.subtitle}>General Principle</Text> */}
+        {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
+      </View>
+      <View>
+        <View style={styles.resultList}>
+          <FlatList
+            data={overviewHeaders}
+            //   keyExtractor={(item) => item._id}
+            ItemSeparatorComponent={() => <View style={styles.divider} />}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                style={styles.listItemContainer}
+                onPress={() => {
+                  handlePress(item);
+                }}
+              >
+                <NumbersSection property1={index + 1}></NumbersSection>
+                <View style={styles.listItemTextContainer}>
+                  <Text style={styles.listItemTitle}>{item}</Text>
+                  <Text style={styles.listItemSubtitle}>
+                    {generalPrinciple?.overview[item].subheader}
+                  </Text>
+                </View>
+                <Icon name="chevron-right" size={20} color="#909090" />
+              </TouchableOpacity>
+            )}
+          />
         </View>
-        <View>
-          <View style={styles.resultList}>
-            <FlatList
-              data={overviewHeaders}
-              //   keyExtractor={(item) => item._id}
-              ItemSeparatorComponent={() => <View style={styles.divider} />}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.listItemContainer}
-                  onPress={() => {
-                    handlePress(item);
-                  }}
-                >
-                  <View style={styles.listItemTextContainer}>
-                    <Text style={styles.listItemTitle}>{item}</Text>
-                    <Text style={styles.listItemSubtitle}>
-                      {generalPrinciple?.overview[item].subheader}
-                    </Text>
-                  </View>
-                  <Icon name="chevron-right" size={20} color="#909090" />
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
