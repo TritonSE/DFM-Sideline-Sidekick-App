@@ -3,11 +3,7 @@ import styles from './SearchBarStyles';
 import searchIcon from '../icons/ic_search_grey.png'
 import Image from 'next/image';
 
-interface SearchBarProps {
-  onClear: () => void;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ onClear }) => {
+const SearchBar: React.FC = () => {
   return (
     <div>
       <div style={styles.searchSection}>

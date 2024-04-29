@@ -18,7 +18,7 @@ const HorizontalNavBar: React.FC = () => {
 
 
             <div style={styles.searchBarContainer}>
-                <SearchBar onClear={() => {}} />
+                <SearchBar/>
             </div>
 
             <div style={styles.profileContainer}>

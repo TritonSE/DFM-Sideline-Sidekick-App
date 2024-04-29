@@ -18,10 +18,10 @@ import SearchComponent from './SearchComponent';
       }
       
       const CustomAccordion = ({ eventKey, children }: CustomAccordionProps) => {
-        const decoratedOnClick = useAccordionButton(eventKey, () => {});
+        //const decoratedOnClick = useAccordionButton(eventKey, () => {});
 
         return (
-          <div onClick={decoratedOnClick}>
+          <div>
             {children}
           </div>
         );

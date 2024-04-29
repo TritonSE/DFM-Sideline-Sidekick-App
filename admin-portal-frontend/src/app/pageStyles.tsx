@@ -1,6 +1,6 @@
 const styles = {
     verticalNavBar: {
-      position: 'absolute' as 'absolute',
+      position: 'absolute' as const,
       top: 0,
       left: 0,
       width: '100%',
@@ -9,9 +9,9 @@ const styles = {
     horizontalNavBar: {
       height: '72px',
       zIndex: 1,
-      position: 'absolute' as 'absolute'
+      position: 'absolute' as const
     },
   };
   
-  export default styles;
+export default styles;
   
