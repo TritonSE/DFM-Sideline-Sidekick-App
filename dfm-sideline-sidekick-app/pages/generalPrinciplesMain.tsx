@@ -68,7 +68,7 @@ const GeneralPrinciplesMain = () => {
       "Trauma Centers",
       "Burn Centers",
       "Inclement Weather",
-      "Catastrophic Incident",
+      //"Catastrophic Incident",
       "Muscle Injuries",
     ];
 

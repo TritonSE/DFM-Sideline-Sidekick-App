@@ -128,9 +128,13 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
             {generalPrinciple && <Text style={styles.title}>{generalPrinciple.title}</Text>}
           </View>
 
-          <View style={styles.margin}>
-            {generalPrinciple && <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>}
-          </View>
+          {generalPrinciple.subtitle && (
+            <View style={styles.margin}>
+              {generalPrinciple && (
+                <Text style={styles.subtitle2}>{generalPrinciple.subtitle}</Text>
+              )}
+            </View>
+          )}
 
           <View style={styles.information}>
             <View style={isOverviewPressed ? styles.overview : styles.overviewHidden}>
@@ -145,7 +149,7 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                   {overviewHeaders.map((header, index) => (
                     <View key={index}>
                       <Text style={styles.descriptionTitle}>{header}</Text>
-                      <BulletRenderer data={overviewValues[index]} level={0} />
+                      <StringRenderer data={overviewValues[index]} />
                     </View>
                   ))}
                 </View>
@@ -164,7 +168,7 @@ export default function EmergencyPrinciples({ route, navigation }: Props) {
                   {contentHeaders.map((header, index) => (
                     <View key={index}>
                       <Text style={styles.descriptionTitle}>{header}</Text>
-                      <BulletRenderer data={contentValues[index]} level={0} />
+                      <StringRenderer data={contentValues[index]} />
                     </View>
                   ))}
                 </View>

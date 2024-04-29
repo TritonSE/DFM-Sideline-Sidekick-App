@@ -24,6 +24,7 @@ const StringRenderer: React.FC<Props> = ({ data }) => {
   console.log(data);
   console.log(Array.isArray(data));
   console.log(typeof data);
+  console.log("\n");
   if (typeof data === "string") {
     return <Text style={styles.descriptionInfo}>{data}</Text>;
   } else if (Array.isArray(data) && data.every((item) => typeof item === "string")) {
@@ -33,7 +34,7 @@ const StringRenderer: React.FC<Props> = ({ data }) => {
       <View>
         {Object.keys(data).map((key, index) => (
           <View key={index}>
-            <Text style={styles.descriptionTitle}>{key}</Text>
+            <Text style={styles.descriptionInfo}>{key}</Text>
             <StringRenderer data={data[key] as StringValue} />
           </View>
         ))}
