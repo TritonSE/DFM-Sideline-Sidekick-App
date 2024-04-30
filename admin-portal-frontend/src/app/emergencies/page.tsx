@@ -36,7 +36,7 @@ export default function CategoriesPage() {
           </select>
         </div>
       </div>
-      <div className="flex flex-col h-5/6 w-5/6 p-10 rounded-md bg-white">
+      <div className="flex flex-col h-full w-5/6 p-10 rounded-md bg-white">
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Categories</h2>
           <div className="ml-24">

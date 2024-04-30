@@ -19,9 +19,17 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <div>
-      <h2>All Pages</h2>
-      <EmergencyContainer items={categories}></EmergencyContainer>
+    <div className="flex flex-col items-center justify-center h-screen w-screen p-20 bg-blue-100">
+      <div className="flex flex-col h-screen w-5/6 p-10 rounded-md bg-white">
+        <div className="flex flex-row items-center justify-between mb-10">
+          <h2 className="text-2xl">All Pages</h2>
+          <div className="ml-24">
+            <button className="px-4 py-2 rounded-md text-white bg-blue-600 mr-2">Edit Order</button>
+            <button className="px-4 py-2 rounded-md text-white bg-blue-600">+ Add Page</button>
+          </div>
+        </div>
+        <EmergencyContainer items={categories}></EmergencyContainer>
+      </div>
     </div>
   );
 }

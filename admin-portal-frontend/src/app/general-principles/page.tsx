@@ -24,7 +24,6 @@ export default function CategoriesPage() {
     <div>
       <h1>General Principles</h1>
       <h2>All Categories</h2>
-      <p>Hi</p>
       <CategoryContainer items={categories} type={"General Principle"}></CategoryContainer>
     </div>
   );
