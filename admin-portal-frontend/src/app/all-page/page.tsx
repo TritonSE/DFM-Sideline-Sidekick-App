@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Category, getAllCategories } from "../components/categoryRoutes";
 import EmergencyContainer from "../components/EmergencyContainer";
