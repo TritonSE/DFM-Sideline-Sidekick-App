@@ -1,5 +1,5 @@
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import { RouteProp } from "@react-navigation/native"; // Import RouteProp
+import { ParamListBase, RouteProp } from "@react-navigation/native"; // Import RouteProp
 import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import { useFonts } from "expo-font";
 import React from "react";
@@ -11,21 +11,28 @@ import { Bookmark } from "../pages/HomePage";
 
 import styles from "./viewAllStyles";
 
-type SpecificProps = {
+export type RootStackParamList = {
+  ViewAll: NavProps;
+};
+
+type NavProps = {
   arrayProp: Bookmark[] | MedicalEmergency[] | GeneralPrinciple[];
   title: string;
 };
 
-export type RootStackParamList = {
-  ViewAll: SpecificProps;
+type CardProps = {
+  emergency: GeneralPrinciple | MedicalEmergency | Bookmark;
+  navigation: StackNavigationProp<ParamListBase>;
 };
 
-type Props = {
+type ViewAllProps = {
   route: RouteProp<RootStackParamList, "ViewAll">;
-  navigation: StackNavigationProp<RootStackParamList, "ViewAll">;
+  navigation: StackNavigationProp<ParamListBase>;
+  arrayProp: Bookmark[] | MedicalEmergency[] | GeneralPrinciple[];
+  title: string;
 };
 
-const Card = ({ emergency, navigation }) => {
+const Card = ({ emergency, navigation }: CardProps) => {
   return (
     <Pressable
       onPress={() => {
@@ -44,7 +51,13 @@ const Card = ({ emergency, navigation }) => {
           <View style={styles.grayArea} />
           <View style={styles.textArea}>
             <Text style={styles.textTitle}>{emergency.title}</Text>
-            <Text style={styles.text}>{emergency.content}</Text>
+            <Text style={styles.text}>
+              {emergency.content
+                ? emergency.content[0]
+                : emergency.overview
+                  ? emergency.overview[0]
+                  : ""}
+            </Text>
           </View>
         </View>
       </View>
@@ -52,7 +65,7 @@ const Card = ({ emergency, navigation }) => {
   );
 };
 
-const ViewAll: React.FC<Props> = ({ navigation, route }) => {
+const ViewAll: React.FC<ViewAllProps> = ({ navigation, route }) => {
   const { params } = route;
 
   const [fontsLoaded] = useFonts({
@@ -82,7 +95,7 @@ const ViewAll: React.FC<Props> = ({ navigation, route }) => {
       </View>
       <ScrollView style={styles.scroll}>
         <Text style={styles.lenItems}>{params.arrayProp.length} items</Text>
-        {params.arrayProp.map((emergency) => (
+        {params.arrayProp.map((emergency: GeneralPrinciple | MedicalEmergency | Bookmark) => (
           <Card key={emergency.title} emergency={emergency} navigation={navigation} />
         ))}
       </ScrollView>

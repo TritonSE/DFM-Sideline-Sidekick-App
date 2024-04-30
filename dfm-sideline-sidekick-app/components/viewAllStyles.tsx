@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     textAlign: "left",
     alignSelf: "stretch",
+    paddingBottom: 115,
   },
   title: {
     color: "#182B49",
