@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   pressableText: {
     fontFamily: "Roboto-Bold",
-    fontSize: 0.049 * minDimension,
+    fontSize: 16,
     textAlignVertical: "top",
     color: "#ffffff",
     paddingHorizontal: (13.98 / (1 * 390)) * width, //Figma measurements for padding horizontal

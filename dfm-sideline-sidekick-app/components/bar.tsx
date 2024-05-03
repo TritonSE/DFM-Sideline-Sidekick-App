@@ -47,7 +47,7 @@ export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
         >
           {item.icon === "search" ? (
             <View style={{ top: -26.65 }}>
-              <CircleIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
+              <CircleIcon fillColor="#001F3F" />
             </View>
           ) : item.icon === "home" ? (
             <HomeIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
