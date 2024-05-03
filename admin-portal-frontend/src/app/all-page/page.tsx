@@ -40,7 +40,7 @@ export default function CategoriesPage() {
         </button>
       </div>
 
-      <div className="flex flex-col h-3/5 w-5/6 p-10 rounded-md bg-white">
+      <div className="flex flex-col h-fit w-5/6 p-10 rounded-md bg-white">
         <h1 className="text-start text-2xl font-bold">Filter</h1>
 
         <div className="flex flex-row justify-between mt-5 flex-wrap gap-5">
@@ -71,8 +71,8 @@ export default function CategoriesPage() {
       <div className="flex flex-col h-screen w-5/6 p-10 rounded-md bg-white">
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Pages</h2>
-          <div className="ml-24">
-            <button className="px-4 py-2 rounded-md text-white bg-[#00629B] mr-2">
+          <div className="flex flex-row flex-wrap ml-24 gap-2">
+            <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">
               Edit Order
             </button>
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Page</button>

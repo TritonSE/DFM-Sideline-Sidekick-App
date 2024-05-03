@@ -11,7 +11,7 @@ type PageItemProps = {
 const PageItem: React.FC<PageItemProps> = ({ id, category }) => {
   return category.items.map((page, i) => {
     return (
-      <tr key={id + i} className="border-b">
+      <tr key={id + i} className="border-b bg-white w-5/6 h-fit p-10">
         <td className="w-1/4 text-center py-3">{page}</td>
         <td className="w-1/4 text-center py-3">
           {/* Added just to check styling */}

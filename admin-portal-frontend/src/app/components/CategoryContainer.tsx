@@ -11,7 +11,7 @@ type CategoryItemProps = {
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
   return (
-    <tr key={id} className="border-b">
+    <tr key={id+title} className="border-b">
       <td className="w-1/4 text-center py-3">{title}</td>
       <td className="w-1/4 text-center py-3">
         {/* Added just to check styling */}
