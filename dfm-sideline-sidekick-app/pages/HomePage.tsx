@@ -16,6 +16,7 @@ import { useData } from "../functions/DataContext";
 import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
+import SearchPage from "./SearchPage";
 
 export type Bookmark = {
   _id: string;
@@ -30,6 +31,7 @@ const HomePage = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>();
+  const [searchShowing, setSearchShowing] = useState(false);
 
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
@@ -130,91 +132,87 @@ const HomePage = () => {
   const routes = ["", "", "", "", "", ""];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={[styles.title, styles.horizontalPadding]}>Home</Text>
-        <View style={[styles.searchContainer, styles.horizontalPadding, styles.topPadding]}>
-          <View style={styles.searchSection}>
-            <Icon name="search" size={20} color="gray" style={styles.searchIcon} />
-            <Pressable style={styles.input} onPress={handleSearch}>
-              <Text style={styles.searchText}>Search</Text>
-            </Pressable>
-          </View>
-        </View>
-        <Text style={[styles.subtitle, styles.horizontalPadding, styles.topPadding]}>
-          Browse By Category
-        </Text>
-        <View style={styles.categories}>
-          {cards.map((card, index) => {
-            const route = routes[index];
-            return (
-              <Pressable
-                key={index}
-                style={styles.categoryButton}
-                onPress={() => {
-                  navigation.navigate("ViewAll", {
-                    arrayProp: card.items,
-                    title: card.title,
-                  });
-                }}
-              >
-                <Text style={styles.buttonText}>{card.title}</Text>
-              </Pressable>
-            );
-          })}
-        </View>
-
-        {/* Emergency Carousel */}
-        <View style={[styles.row, styles.horizontalPadding, styles.topPadding]}>
-          <Text style={styles.subtitle}>Medical Emergencies</Text>
-          {emergencies.length > 0 ? (
-            <TouchableOpacity
-              style={styles.viewAllRow}
-              onPress={() => {
-                navigation.navigate("ViewAll", {
-                  arrayProp: emergencies,
-                  title: "Medical Emergencies",
-                });
-              }}
-            >
-              {/* <TouchableOpacity style={styles.viewAllRow}> */}
-              <Text style={styles.viewAll}>View all {emergencies.length}</Text>
-              <ArrowIcon />
-            </TouchableOpacity>
-          ) : null}
-        </View>
-        <EmergenciesComponent />
-
-        {/* Bookmarks Carousel */}
-        <View style={[styles.row, styles.horizontalPadding]}>
-          <Text style={styles.subtitle}>Bookmarks</Text>
-          {bookmarks && bookmarks.length > 0 ? (
-            <View style={styles.viewAllRow}>
-              <TouchableOpacity
-                style={styles.viewAllRow}
-                onPress={() => {
-                  navigation.navigate("ViewAll", { arrayProp: bookmarks, title: "Bookmarks" });
-                }}
-              >
-                {/* <TouchableOpacity style={styles.viewAllRow}> */}
-                <Text style={styles.viewAll}>View all {bookmarks.length}</Text>
-                <ArrowIcon />
-              </TouchableOpacity>
+        <SearchPage title="Home" onPage={searchShowing} setShowing={setSearchShowing} />
+        {!searchShowing && (
+          <View>
+            <Text style={[styles.subtitle, styles.horizontalPadding, styles.topPadding]}>
+              Browse By Category
+            </Text>
+            <View style={styles.categories}>
+              {cards.map((card, index) => {
+                const route = routes[index];
+                return (
+                  <Pressable
+                    key={index}
+                    style={styles.categoryButton}
+                    onPress={() => {
+                      navigation.navigate("ViewAll", {
+                        arrayProp: card.items,
+                        title: card.title,
+                      });
+                    }}
+                  >
+                    <Text style={styles.buttonText}>{card.title}</Text>
+                  </Pressable>
+                );
+              })}
             </View>
-          ) : null}
-        </View>
-        {/* Conditional bookmark display */}
-        {bookmarks ? (
-          bookmarks.length === 0 ? (
-            <Text style={{ textAlign: "center" }}>No bookmarks</Text>
-          ) : (
-            <BookmarksComponent />
-          )
-        ) : (
-          <Text style={{ textAlign: "center" }}>Loading...</Text>
+
+            {/* Emergency Carousel */}
+            <View style={[styles.row, styles.horizontalPadding, styles.topPadding]}>
+              <Text style={styles.subtitle}>Medical Emergencies</Text>
+              {emergencies.length > 0 ? (
+                <TouchableOpacity
+                  style={styles.viewAllRow}
+                  onPress={() => {
+                    navigation.navigate("ViewAll", {
+                      arrayProp: emergencies,
+                      title: "Medical Emergencies",
+                    });
+                  }}
+                >
+                  {/* <TouchableOpacity style={styles.viewAllRow}> */}
+                  <Text style={styles.viewAll}>View all {emergencies.length}</Text>
+                  <ArrowIcon />
+                </TouchableOpacity>
+              ) : null}
+            </View>
+            <EmergenciesComponent />
+
+            {/* Bookmarks Carousel */}
+            <View style={[styles.row, styles.horizontalPadding]}>
+              <Text style={styles.subtitle}>Bookmarks</Text>
+              {bookmarks && bookmarks.length > 0 ? (
+                <View style={styles.viewAllRow}>
+                  <TouchableOpacity
+                    style={styles.viewAllRow}
+                    onPress={() => {
+                      navigation.navigate("ViewAll", { arrayProp: bookmarks, title: "Bookmarks" });
+                    }}
+                  >
+                    {/* <TouchableOpacity style={styles.viewAllRow}> */}
+                    <Text style={styles.viewAll}>View all {bookmarks.length}</Text>
+                    <ArrowIcon />
+                  </TouchableOpacity>
+                </View>
+              ) : null}
+            </View>
+            {/* Conditional bookmark display */}
+            {bookmarks ? (
+              bookmarks.length === 0 ? (
+                <Text style={{ textAlign: "center" }}>No bookmarks</Text>
+              ) : (
+                <BookmarksComponent />
+              )
+            ) : (
+              <Text style={{ textAlign: "center" }}>Loading...</Text>
+            )}
+          </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

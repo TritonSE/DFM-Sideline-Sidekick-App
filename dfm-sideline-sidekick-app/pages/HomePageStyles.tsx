@@ -17,10 +17,15 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#182B49",
+
     fontSize: 32,
+
     fontFamily: "Roboto-Bold",
+
     marginBottom: 20,
+
     textAlign: "left",
+
     paddingTop: 10,
   },
   subtitle: {
