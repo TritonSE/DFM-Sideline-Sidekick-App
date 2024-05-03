@@ -25,10 +25,7 @@ export default function CategoriesPage() {
       <div className="flex flex-row justify-between w-5/6 mb-6">
         <h1 className="text-start text-2xl font-bold">Global Search</h1>
         <div>
-          <select className="px-3 py-1 bg-white">
-            <option disabled selected hidden>
-              Filter by
-            </option>
+          <select className="px-3 py-1 bg-white" defaultValue="Filter by">
             <option value="Alphabetical Order">Alphabetical Order</option>
             <option value="Date added (Earliest)">Date added (Earliest)</option>
             <option value="Date added (Latest)">Date added (Latest)</option>
