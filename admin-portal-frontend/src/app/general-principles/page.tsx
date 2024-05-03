@@ -21,7 +21,7 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full p-20 bg-[#E5EFF5]">
+    <div className="flex flex-col items-center justify-center h-screen w-screen p-20 bg-[#E5EFF5]">
       <div className="flex flex-row justify-between w-5/6 mb-6">
         <h1 className="text-start text-2xl font-bold">General Principles</h1>
         <div>

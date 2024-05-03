@@ -36,7 +36,7 @@ const PageItem: React.FC<PageItemProps> = ({ id, category }) => {
 
 export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categories }) => {
   return (
-    <table className="w-full">
+    <table className="mb-auto">
       <tbody>
         <tr className="border-b">
           <th className="w-1/4 text-center py-3">Page Name</th>

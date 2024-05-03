@@ -24,7 +24,7 @@ export default function CategoriesPage() {
   const unselectedStyle = "text-[#6C6C6C]"
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full p-20 gap-8 bg-[#E5EFF5]">
+    <div className="flex flex-col items-center justify-center min-h-screen w-screen overflow-auto p-20 gap-8 bg-[#E5EFF5]">
       <div className="flex flex-row justify-between w-5/6">
         <h1 className="text-start text-2xl font-bold">Global Search</h1>
       </div>
