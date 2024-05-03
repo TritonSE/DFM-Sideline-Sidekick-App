@@ -68,7 +68,7 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      <div className="flex flex-col h-screen w-5/6 p-10 rounded-md bg-white">
+      <div className="flex flex-col h-max w-5/6 p-10 rounded-md bg-white">
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Pages</h2>
           <div className="flex flex-row flex-wrap ml-24 gap-2">

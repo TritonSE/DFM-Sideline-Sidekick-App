@@ -38,7 +38,7 @@ export const CategoryContainer: React.FC<{ items: Category[]; type: string }> = 
   type,
 }) => {
   return (
-    <table className="w-full">
+    <table>
       {/* table heading */}
       <tbody>
         <tr className="border-b">

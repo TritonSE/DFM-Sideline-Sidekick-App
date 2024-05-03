@@ -21,7 +21,7 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen p-20 bg-[#E5EFF5]">
+    <div className="flex flex-col items-center justify-center min-h-screen w-screen overflow-auto p-20 bg-[#E5EFF5]">
       <div className="flex flex-row justify-between w-5/6 mb-6">
         <h1 className="text-start text-2xl font-bold">Global Search</h1>
         <div>
@@ -33,7 +33,7 @@ export default function CategoriesPage() {
           </select>
         </div>
       </div>
-      <div className="flex flex-col h-full w-5/6 p-10 rounded-md bg-white">
+      <div className="flex flex-col h-max w-5/6 p-10 rounded-md bg-white">
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Categories</h2>
           <div className="flex flex-row flex-wrap ml-24 gap-2">
