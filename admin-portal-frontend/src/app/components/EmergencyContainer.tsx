@@ -1,6 +1,6 @@
 import { Category } from "./categoryRoutes";
-import TrashIcon from "../icons/trash.png";
-import EditIcon from "../icons/edit.png";
+import TrashIcon from "../icons/trash.svg";
+import EditIcon from "../icons/edit.svg";
 
 type EmergencyItemProps = {
   id: string;
