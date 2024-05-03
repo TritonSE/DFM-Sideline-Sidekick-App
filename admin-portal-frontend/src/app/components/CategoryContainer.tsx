@@ -15,17 +15,17 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
       <td className="w-1/4 text-center py-3">{title}</td>
       <td className="w-1/4 text-center py-3">
         {/* Added just to check styling */}
-        <select className="p-1 bg-blue-100 rounded-md">
-          <option value="public">Public</option>
+        <select className="p-1 bg-[#E5EFF5] rounded-md" defaultValue="public">
+          <option value="public" >Public</option>
           <option value="hidden">Hidden</option>
         </select>
       </td>
       <td className="w-1/4 text-center py-3">{pages}</td>
       <td className="w-1/4 text-center py-3">
-        <button className="mr-3 bg-blue-100 p-2 rounded-full border border-black">
+        <button className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
         </button>
-        <button className="bg-blue-100 p-2 rounded-full border border-black">
+        <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img src={TrashIcon.src} alt="Delete" className="w-4 h-4" />
         </button>
       </td>

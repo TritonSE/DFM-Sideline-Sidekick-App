@@ -21,9 +21,9 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen p-20 bg-blue-100">
+    <div className="flex flex-col items-center justify-center h-full w-full p-20 bg-[#E5EFF5]">
       <div className="flex flex-row justify-between w-5/6 mb-6">
-        <h1 className="text-start text-2xl font-bold">General Principles</h1>
+        <h1 className="text-start text-2xl font-bold">Global Search</h1>
         <div>
           <select className="px-3 py-1 bg-white">
             <option disabled selected hidden>
@@ -40,8 +40,8 @@ export default function CategoriesPage() {
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Categories</h2>
           <div className="ml-24">
-            <button className="px-4 py-2 rounded-md text-white bg-blue-600 mr-2">Edit Order</button>
-            <button className="px-4 py-2 rounded-md text-white bg-blue-600">+ Add Category</button>
+            <button className="px-4 py-2 rounded-md text-white bg-[#00629B] mr-2">Edit Order</button>
+            <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Category</button>
           </div>
         </div>
         <CategoryContainer items={categories} type={"Emergency"}></CategoryContainer>
