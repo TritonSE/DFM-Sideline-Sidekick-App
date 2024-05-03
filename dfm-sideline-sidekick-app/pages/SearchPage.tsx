@@ -1,4 +1,5 @@
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import * as Font from "expo-font";
@@ -6,9 +7,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { useData } from "../DataContext";
-import { searchDocuments } from "../HandleSearch";
-import SearchBar from "../SearchBarComponent";
+import SearchBar from "../components/SearchBarComponent";
+import { useData } from "../functions/DataContext";
+import { searchDocuments } from "../functions/HandleSearch";
 
 import { RootStackParamList } from "./ConditionsSection";
 import styles from "./SearchPageStyles";
@@ -78,14 +79,31 @@ const SearchPage: React.FC<SearchPageProps> = ({
     }
   };
 
+  // Load recent searches from AsyncStorage when the component mounts
+  useEffect(() => {
+    const loadRecentSearches = async () => {
+      const storedSearches = await AsyncStorage.getItem("recentSearches");
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      if (storedSearches) setRecentSearches(JSON.parse(storedSearches));
+    };
+
+    void loadRecentSearches();
+    // Other useEffect for fonts loading remains unchanged
+  }, []);
+
+  // Function to update recent searches both in state and AsyncStorage
   const addToRecentSearches = (document: DocumentBase) => {
     setRecentSearches((currentSearches) => {
       const exists = currentSearches.find((item) => item._id === document._id);
       if (exists) {
         return currentSearches;
       }
-      const newSearches = [document, ...currentSearches];
-      return newSearches.slice(0, 10); // limitting to most recent 10 searches
+      const newSearches = [document, ...currentSearches].slice(0, 10); // Limiting to most recent 10 searches
+
+      // Save to AsyncStorage
+      void AsyncStorage.setItem("recentSearches", JSON.stringify(newSearches));
+
+      return newSearches;
     });
   };
 
@@ -133,7 +151,7 @@ const SearchPage: React.FC<SearchPageProps> = ({
       setShowing(false);
       return;
     }
-    navigation.goBack();
+    navigation.pop();
   };
   if (!isFontsLoaded) {
     return <Text>Loading...</Text>;

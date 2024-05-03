@@ -17,7 +17,7 @@ export type NavItem = {
 };
 
 export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(2);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(1);
   const currentRouteName = useNavigationState((state) => {
     if (state !== undefined && state !== null) {
       return state.routes[state.index].name;

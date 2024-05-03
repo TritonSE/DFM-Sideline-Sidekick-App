@@ -6,7 +6,7 @@ import React from "react";
 import { Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import { GeneralPrinciple, MedicalEmergency } from "../DataContext";
+import { GeneralPrinciple, MedicalEmergency } from "../functions/DataContext";
 import { Bookmark } from "../pages/HomePage";
 
 import styles from "./viewAllStyles";
@@ -36,6 +36,7 @@ const Card = ({ emergency, navigation }: CardProps) => {
   return (
     <Pressable
       onPress={() => {
+        //@ts-expect-error Because content prop not defined for emergencies
         if (emergency.content !== undefined) {
           navigation.navigate("GeneralPrinciples", {
             titleProp: emergency.title,
@@ -51,13 +52,7 @@ const Card = ({ emergency, navigation }: CardProps) => {
           <View style={styles.grayArea} />
           <View style={styles.textArea}>
             <Text style={styles.textTitle}>{emergency.title}</Text>
-            <Text style={styles.text}>
-              {emergency.content
-                ? emergency.content[0]
-                : emergency.overview
-                  ? emergency.overview[0]
-                  : ""}
-            </Text>
+            <Text style={styles.text}>{emergency.subtitle}</Text>
           </View>
         </View>
       </View>
@@ -75,7 +70,7 @@ const ViewAll: React.FC<ViewAllProps> = ({ navigation, route }) => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
-  console.log(params.arrayProp[4]);
+
   return (
     <View style={styles.container}>
       <View>
@@ -98,6 +93,7 @@ const ViewAll: React.FC<ViewAllProps> = ({ navigation, route }) => {
         {params.arrayProp.map((emergency: GeneralPrinciple | MedicalEmergency | Bookmark) => (
           <Card key={emergency.title} emergency={emergency} navigation={navigation} />
         ))}
+        <View style={styles.bottomPad} />
       </ScrollView>
     </View>
   );

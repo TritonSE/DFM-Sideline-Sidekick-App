@@ -9,10 +9,10 @@ import React from "react";
 import { Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { useData } from "../DataContext";
 import { getAllBookmarks } from "../components/bookmarkRoutes";
 import { Carousel, CarouselItem } from "../components/carousel";
 import { RootStackParamList } from "../components/viewAll";
+import { useData } from "../functions/DataContext";
 import { ArrowIcon } from "../icons/arrowIcon";
 
 import styles from "./HomePageStyles";
@@ -78,24 +78,10 @@ const HomePage = () => {
     const carouselItems: CarouselItem[] = [];
 
     emergencies.slice(0, 5).forEach((emergency, index) => {
-      // this section is due to inconsistencies in our database schema
-      let description = "";
-
-      // has an object in overview
-      if (emergency.overview instanceof Object) {
-        if ("Placeholder" in emergency.overview) {
-          description = emergency.overview.Placeholder as string;
-        } else if ("Importance" in emergency.overview) {
-          description = emergency.overview.Importance as string;
-        }
-      } else if (typeof emergency.overview === "string") {
-        description = emergency.overview;
-      }
-
+      // this section is due to inconsistencies in our database scheme
       carouselItems.push({
         _id: index.toString(),
         ...emergency,
-        subtitle: description,
       });
     });
 

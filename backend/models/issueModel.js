@@ -4,12 +4,11 @@ const medicalEmergencySchema = new mongoose.Schema({
   title: String,
   overview: {},
   treatment: {},
-  content: {},
 });
 
 const generalPrincipleSchema = new mongoose.Schema({
   title: String,
-  overview: {},
+  subtitle: String,
   content: {},
 });
 

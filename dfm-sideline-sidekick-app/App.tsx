@@ -7,11 +7,12 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import AppInitializer from "./AppInitializer";
-import { DataProvider } from "./DataContext";
 import { BottomNavBar, NavItem } from "./components/bar";
 import ViewAll from "./components/viewAll";
+import { DataProvider } from "./functions/DataContext";
 import ConditionsSection from "./pages/ConditionsSection";
 import HomePage from "./pages/HomePage";
+import MainPrinciples from "./pages/MainPrinciples";
 import SearchPage from "./pages/SearchPage";
 // import TabPage from "./pages/TabPage";
 import GeneralPrinciples from "./pages/generalPrinciples";
@@ -34,6 +35,8 @@ type RootStackParamList = {
   Tab: undefined;
   MedicalConditions: { emergency: DocumentBase };
   GeneralPrinciples: { contentProp: DocumentBase };
+  EmergencyPrinciples: { generalPrinciple: DocumentBase };
+  MainPrinciples: { generalPrinciple: DocumentBase };
 };
 
 type StackNavigation = StackNavigationProp<RootStackParamList>;
@@ -77,13 +80,13 @@ export default function App() {
     <DataProvider>
       <AppInitializer />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Search">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
           <Stack.Screen name="ViewAll" component={ViewAll} options={{ headerShown: false }} />
           <Stack.Screen
             name="Search"
             component={SearchPage}
-            options={{ headerShown: false, animation: "none" }}
+            options={{ headerShown: false, animation: "slide_from_bottom" }}
           />
           <Stack.Screen
             name="GPM"
@@ -98,6 +101,11 @@ export default function App() {
           <Stack.Screen
             name="GeneralPrinciples"
             component={GeneralPrinciples}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MainPrinciples"
+            component={MainPrinciples}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

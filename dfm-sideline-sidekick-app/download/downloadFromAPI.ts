@@ -9,7 +9,7 @@ import { createResumable } from "./createResumable/createResumable";
 import { getCurrentVersion } from "./versionControl/getCurrentVersion";
 import { getStoredVersion, setStoredVersion } from "./versionControl/storedVersion";
 
-export const downloadJSON = async (fileName: string, OS: string) => {
+export const downloadJSON = async (fileName: string, OS: string, fetchNew: boolean) => {
   let localhost;
 
   // check if currently running on an emulator or device
@@ -24,8 +24,6 @@ export const downloadJSON = async (fileName: string, OS: string) => {
 
   const url = `${localhost}/api/allWithVersion`; // all data
   const versionUrl = `${localhost}/api/version`; // newest version
-
-  console.log(versionUrl);
 
   // directory in local storage to store files at
   const fileDir = FileSystem.documentDirectory + "expo/";
@@ -42,7 +40,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
 
     const storedVersion = await getStoredVersion();
     let newestVersion: string | number | null | undefined;
-    if (await checkConnection()) {
+    if (fetchNew && (await checkConnection())) {
       try {
         newestVersion = (await getCurrentVersion(versionUrl))[0].version as string;
       } catch (error) {
@@ -52,14 +50,6 @@ export const downloadJSON = async (fileName: string, OS: string) => {
       newestVersion = storedVersion;
     }
 
-    console.log(); // feel free to remove these extra logs, they're just for output clarity when debugging
-
-    console.log("PRINT VERSIONS BEFORE UPDATE");
-    console.log("UPDATED DEVICE VERSION:", storedVersion);
-    console.log("NEWEST VERSION:", newestVersion);
-
-    console.log();
-
     // no stored version or current doesn't match stored version
     if (!fileExists || !storedVersion || storedVersion !== newestVersion) {
       // find directory or creates it if not found
@@ -67,16 +57,7 @@ export const downloadJSON = async (fileName: string, OS: string) => {
 
       // deletes file if it exists
       if (fileExists) {
-        console.log("DELETING EXISTING FILE");
         await FileSystem.deleteAsync(fileDir + fileName);
-
-        // Check if the file still exists
-        const fileStillExists = await checkFileExists(fileDir, fileName);
-        if (!fileStillExists) {
-          console.log("FILE SUCCESSFULLY DELETED");
-        } else {
-          console.log("FILE DELETION FAILED");
-        }
       }
 
       // downloads file from api and stores in result
@@ -88,43 +69,16 @@ export const downloadJSON = async (fileName: string, OS: string) => {
       // update the stored version to the newest version
       if (newestVersion) {
         await setStoredVersion(newestVersion.toString());
-      } else {
-        console.log("NO VERSIONS CURRENTLY EXIST");
       }
     } else {
-      console.log("FILE ALREADY EXISTS AND IS UP TO DATE");
       uri = fileDir + fileName;
     }
-
-    // gets info about file
-    const output = await FileSystem.getInfoAsync(uri);
 
     // reads in the file as a string
     const str = await FileSystem.readAsStringAsync(uri);
 
     // gets JSON version of string
     const jsonOutput = JSON.parse(str);
-
-    console.log("OUTPUT", output);
-    console.log("VERSION:", jsonOutput.version[0].version);
-
-    const updatedStoredVersion = await getStoredVersion();
-
-    console.log("PRINT UPDATED VERSIONS (should be the same):");
-    console.log("UPDATED DEVICE VERSION:", updatedStoredVersion);
-    console.log("NEWEST VERSION:", newestVersion);
-
-    console.log();
-
-    // prints emergencies and general principles
-    console.log("EMERGENCIES JSON:");
-    console.log(jsonOutput.emergencies);
-
-    console.log();
-
-    console.log("GENERAL PRINCIPLES JSON:");
-    console.log(jsonOutput.generalPrinciples);
-
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return jsonOutput;
   } catch (err) {

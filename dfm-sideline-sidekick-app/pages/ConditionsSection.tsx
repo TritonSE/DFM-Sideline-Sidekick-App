@@ -19,11 +19,11 @@ import { Bookmark } from "../components/bookmark";
 
 import styles from "./ConditionSectionStyles";
 
-import type { Emergency } from "../emergencies";
+import type { MedicalEmergency } from "../functions/DataContext";
 
 export type RootStackParamList = {
   // Define the parameters for your screens here
-  Conditions: { emergency: Emergency }; // Example parameter
+  Conditions: { emergency: MedicalEmergency }; // Example parameter
 } & ParamListBase;
 
 // Define the type for the route parameters
@@ -49,7 +49,7 @@ export default function ConditionsSection({ route, navigation }: Props) {
   const [treatmentValues, setTreatmentValues] = useState<StringValue[]>([]);
 
   const { params } = route; // Destructure params from the route object
-  const [emergency, setEmergency] = useState<Emergency>();
+  const [emergency, setEmergency] = useState<MedicalEmergency>();
 
   useEffect(() => {
     async function loadFont() {
@@ -87,12 +87,12 @@ export default function ConditionsSection({ route, navigation }: Props) {
   useEffect(() => {
     if (emergency?.overview && typeof emergency.overview === "object") {
       setOverviewHeaders(Object.keys(emergency.overview));
-      setOverviewValues(Object.values(emergency.overview) as StringValue[]);
+      setOverviewValues(Object.values(emergency.overview));
     }
 
     if (emergency?.treatment && typeof emergency.treatment === "object") {
       setTreatmentHeaders(Object.keys(emergency.treatment));
-      setTreatmentValues(Object.values(emergency.treatment) as StringValue[]);
+      setTreatmentValues(Object.values(emergency.treatment));
     }
   }, [emergency]);
 
