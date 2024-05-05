@@ -40,7 +40,9 @@ export default function CategoriesPage() {
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Categories</h2>
           <div className="flex flex-row flex-wrap ml-24 gap-2">
-            <button className="px-4 py-2 rounded-md text-white bg-[#00629B] mr-2">Edit Order</button>
+            <button className="px-4 py-2 rounded-md text-white bg-[#00629B] mr-2">
+              Edit Order
+            </button>
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Category</button>
           </div>
         </div>

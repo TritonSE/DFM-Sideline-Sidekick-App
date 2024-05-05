@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState } from "react";
 import { Category } from "./categoryRoutes";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
@@ -10,19 +13,32 @@ type CategoryItemProps = {
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
+  const [selectedValue, setSelectedValue] = useState("public");
+  const [allowEdits, setAllowEdits] = useState(false);
+
   return (
-    <tr key={id+title} className="border-b">
+    <tr key={id + title} className="border-b">
       <td className="w-1/4 text-center py-3">{title}</td>
       <td className="w-1/4 text-center py-3">
         {/* Added just to check styling */}
-        <select className="p-1 bg-[#E5EFF5] rounded-md" defaultValue="public">
-          <option value="public" >Public</option>
+        <select
+          disabled={!allowEdits}
+          className={`p-1 text-center rounded-md ${
+            selectedValue === "public" ? "bg-[#E5EFF5]" : "bg-[#D9D9D9]"
+          } ${allowEdits ? "appearance-auto" : "appearance-none"}`}
+          value={selectedValue}
+          onChange={(e) => setSelectedValue(e.target.value)}
+        >
+          <option value="public">Public</option>
           <option value="hidden">Hidden</option>
         </select>
       </td>
       <td className="w-1/4 text-center py-3">{pages}</td>
       <td className="w-1/4 text-center py-3">
-        <button className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black">
+        <button
+          className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black"
+          onClick={() => setAllowEdits(!allowEdits)}
+        >
           <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
