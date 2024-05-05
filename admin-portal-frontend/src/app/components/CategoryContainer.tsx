@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Category } from "./categoryRoutes";
+import DeleteConfirmationPopup from "./DeletePopUp";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
 
@@ -15,6 +16,21 @@ type CategoryItemProps = {
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
   const [selectedValue, setSelectedValue] = useState("public");
   const [allowEdits, setAllowEdits] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+
+  const handleDelete = () => {
+    setPopupVisible(true);
+  };
+
+  const handleConfirmDelete = () => {
+    // Implement logic to delete the category with the provided ID
+    console.log("Deleting category with ID:", id);
+    setPopupVisible(false);
+  };
+
+  const handleCancelDelete = () => {
+    setPopupVisible(false);
+  };
 
   return (
     <tr key={id + title} className="border-b">
@@ -42,9 +58,17 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
           <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
-          <img src={TrashIcon.src} alt="Delete" className="w-4 h-4" />
+          <img
+            src={TrashIcon.src}
+            alt="Delete"
+            className="w-4 h-4"
+            onClick={() => handleDelete()}
+          />
         </button>
       </td>
+      {popupVisible ? (
+        <DeleteConfirmationPopup onDelete={handleConfirmDelete} onCancel={handleCancelDelete} />
+      ) : null}
     </tr>
   );
 };
