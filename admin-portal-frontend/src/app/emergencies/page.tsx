@@ -18,7 +18,7 @@ export default function CategoriesPage() {
     };
 
     fetchData();
-  }, []);
+  }, [categories]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-screen overflow-auto p-20 bg-[#E5EFF5]">

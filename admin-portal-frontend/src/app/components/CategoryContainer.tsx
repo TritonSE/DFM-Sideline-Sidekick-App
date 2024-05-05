@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Category } from "./categoryRoutes";
+import React, { useState, useEffect } from "react";
+import { Category, deleteCategory } from "./categoryRoutes";
 import DeleteConfirmationPopup from "./DeletePopUp";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
@@ -22,10 +22,14 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
     setPopupVisible(true);
   };
 
-  const handleConfirmDelete = () => {
-    // Implement logic to delete the category with the provided ID
-    console.log("Deleting category with ID:", id);
-    setPopupVisible(false);
+  const handleConfirmDelete = async () => {
+    try {
+      console.log("Deleting category with ID:", id);
+      await deleteCategory(id);
+      setPopupVisible(false);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
   };
 
   const handleCancelDelete = () => {
