@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import CategoryContainer from "../components/CategoryContainer";
-import { Category, getAllCategories } from "../components/categoryRoutes";
+import { Category, getAllCategories, deleteCategory } from "../components/categoryRoutes";
+import Toast from "../components/Toast";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +21,20 @@ export default function CategoriesPage() {
 
     fetchData();
   }, [categories]);
+
+  const onDeleteCategory = async (categoryId: string) => {
+    try {
+      console.log("Deleting category with ID:", categoryId);
+      await deleteCategory(categoryId);
+      setShowToast(true);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-screen overflow-auto p-20 bg-[#E5EFF5]">
@@ -46,7 +62,18 @@ export default function CategoriesPage() {
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Category</button>
           </div>
         </div>
-        <CategoryContainer items={categories} type={"General Principle"}></CategoryContainer>
+        <CategoryContainer
+          items={categories}
+          type={"General Principle"}
+          onDeleteCategory={onDeleteCategory}
+        ></CategoryContainer>
+        {showToast ? (
+          <Toast
+            backgroundColor={"#000000"}
+            message={"Category deleted"}
+            onClose={handleCloseToast}
+          />
+        ) : null}
       </div>
     </div>
   );

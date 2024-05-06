@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Category, deleteCategory } from "./categoryRoutes";
+import { Category } from "./categoryRoutes";
 import DeleteConfirmationPopup from "./DeletePopUp";
+import Toast from "./Toast";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
 
@@ -11,9 +12,10 @@ type CategoryItemProps = {
   title: string;
   visbility?: boolean;
   pages: number;
+  onDeleteCategory: (categoryId: string) => void;
 };
 
-const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
+const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {
   const [selectedValue, setSelectedValue] = useState("public");
   const [allowEdits, setAllowEdits] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -24,8 +26,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      console.log("Deleting category with ID:", id);
-      await deleteCategory(id);
+      await onDeleteCategory(id);
       setPopupVisible(false);
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -77,10 +78,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages }) => {
   );
 };
 
-export const CategoryContainer: React.FC<{ items: Category[]; type: string }> = ({
-  items: categories,
-  type,
-}) => {
+export const CategoryContainer: React.FC<{
+  items: Category[];
+  type: string;
+  onDeleteCategory: (categoryId: string) => void;
+}> = ({ items: categories, type, onDeleteCategory }) => {
   return (
     <table>
       {/* table heading */}
@@ -101,6 +103,7 @@ export const CategoryContainer: React.FC<{ items: Category[]; type: string }> = 
                 id={category._id}
                 title={category.title}
                 pages={category.items.length}
+                onDeleteCategory={onDeleteCategory}
               />
             );
           })}
