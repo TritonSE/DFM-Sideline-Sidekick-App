@@ -55,6 +55,7 @@ const GeneralPrinciplesMain = () => {
   };
 
   return (
+
     <View>
       <SearchPage onPage={searchShowing} setShowing={setSearchShowing} />
       {!searchShowing && (
