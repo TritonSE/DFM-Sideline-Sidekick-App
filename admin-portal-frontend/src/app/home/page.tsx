@@ -6,9 +6,12 @@ export default function Home() {
 
 
   return (
-    <><div className="flex items-center justify-center mb-2">
+    <><div className="flex items-center justify-center my-2">
       Success! Logged in!
     </div><InviteAdmin /></>
 
   );
 }
+
+
+
