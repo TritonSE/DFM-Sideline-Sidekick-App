@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import Image from 'next/image'
+import Image from 'next/image';
 import { auth } from './firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import search from './symbols/search.png'
+import search from './symbols/search.png';
 
 interface LoginForm {
   email: string;
@@ -38,7 +38,7 @@ export default function Home() {
       setError("The email or password is incorrect."); 
     }
   };
-  
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     const formFilled = loginForm.email.trim() !== '' && loginForm.password.trim() !== '';
@@ -50,15 +50,15 @@ export default function Home() {
   }, [loginForm.email, loginForm.password]);
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-2/6 bg-white shadow-xl rounded-lg p-10 pt-8 flex flex-col items-center mt-24">
-        <Image src={search} alt="" width={60} height={60}/> 
-        <h2 className="text-blue-950 text-xl font-bold my-4">Sideline Sidekick Admin Mode</h2>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-md bg-white shadow-xl rounded-lg p-8 flex flex-col items-center mx-4">
+        <Image src={search} alt="Search Icon" width={60} height={60}/> 
+        <h2 className="text-blue-950 text-lg sm:text-xl font-bold my-4">Sideline Sidekick Admin Mode</h2>
         <form onSubmit={handleSubmit} className="w-full">
           <div className="mb-2">
-            <label htmlFor="email" className="block text-sm font-medium mb-1">Username</label>
+            <label htmlFor="email" className="block text-sm sm:text-base font-medium mb-1">Username</label>
             <input
-              className="mb-4 p-2 border w-full rounded border-black border-opacity-40 "
+              className="mb-4 p-2 border w-full rounded border-black border-opacity-40"
               type="text"
               name="email"
               id="email"
@@ -67,7 +67,7 @@ export default function Home() {
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
+            <label htmlFor="password" className="block text-sm sm:text-base font-medium mb-1">Password</label>
             <input
               className="mb-4 p-2 border w-full rounded border-black border-opacity-40"
               type="password"
@@ -79,7 +79,7 @@ export default function Home() {
           </div>
           <div className="mb-6 flex items-center">
             <input id="remember-me" type="checkbox" className="mr-2 h-4 w-4 accent-blue border-2 border-blue-900" name="rememberMe" />
-            <label htmlFor="remember-me" className="text-sm">
+            <label htmlFor="remember-me" className="text-sm sm:text-base">
               Remember me
             </label>
           </div>
@@ -95,12 +95,11 @@ export default function Home() {
           </div>
         </form>
         <a className="text-sm self-start text-sky-700" href="/forgot-password">I forgot my username or password</a>
-        <div className="mt-1 self-start text-sm">
+        <div className="mt-1 self-start text-sm sm:text-base">
           <span>Don't have an account?</span>
           <a className="text-sky-700" href="/signup"> Create a new account.</a>
         </div>
       </div>
     </div>
-
   );
 }

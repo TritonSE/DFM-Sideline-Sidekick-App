@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={roboto.className} >
         {/* <Navbar /> */}
-        <main className="mt-16 flex min-h-screen flex-col antialiased">
+        <main className="flex min-h-screen flex-col antialiased">
           {children}
         </main>
         {/* <Footer /> */}

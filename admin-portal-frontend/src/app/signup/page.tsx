@@ -81,8 +81,8 @@ export default function SignUp() {
   },);
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg p-32 px-80 flex flex-col items-center">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-white shadow-lg rounded-lg p-16 flex flex-col items-center">
         <div className="text-2xl font-bold text-blue-950 my-4">Create an Admin Mode Account</div>
         <form onSubmit={handleSubmit} className="w-5/6">
           <div className="flex gap-4 mb-4">
