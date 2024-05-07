@@ -9,8 +9,8 @@ import { StyleSheet } from "react-native";
 import AppInitializer from "./AppInitializer";
 import { DataProvider } from "./DataContext";
 import { BottomNavBar, NavItem } from "./components/bar";
-import BookmarkPage from "./pages/BookmarkPage";
 import ConditionsSection from "./pages/ConditionsSection";
+import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 // import TabPage from "./pages/TabPage";
 import GeneralPrinciples from "./pages/generalPrinciples";
@@ -26,7 +26,7 @@ type DocumentBase = {
 };
 
 type RootStackParamList = {
-  Bookmark: undefined;
+  Home: undefined;
   Search: undefined;
   GPM: undefined;
   Tab: undefined;
@@ -43,10 +43,10 @@ const BottomNavBarComponent = () => {
   const navigationItems: NavItem[] = [
     {
       id: 1,
-      routeName: "Bookmark",
-      icon: "bookmark",
+      routeName: "Home",
+      icon: "home",
       onClick: () => {
-        navigation.navigate("Bookmark");
+        navigation.navigate("Home");
       },
     },
     {
@@ -76,7 +76,7 @@ export default function App() {
       <AppInitializer />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Search">
-          <Stack.Screen name="Bookmark" component={BookmarkPage} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
           <Stack.Screen name="Search" component={SearchPage} options={{ headerShown: false }} />
           <Stack.Screen
             name="GPM"
