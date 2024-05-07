@@ -1,6 +1,7 @@
 const styles = {
     verticalNavBar: {
-      position: 'absolute' as const,
+      // position: 'absolute' as const,
+      position: "fixed",
       top: 0,
       left: 0,
       width: '100%',
@@ -9,7 +10,11 @@ const styles = {
     horizontalNavBar: {
       height: '72px',
       zIndex: 1,
-      position: 'absolute' as const
+      // position: 'absolute' as const
+      position: 'fixed',
+    },
+    emergencyFlow: {
+      zIndex: 2,
     },
   };
   
