@@ -13,7 +13,6 @@ const VerticalNavBarStyles = {
   },
   accordionContainer: {
     paddingTop: '109px',
-    
   },
   homeIcon: {
     width: '24px',

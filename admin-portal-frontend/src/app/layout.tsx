@@ -1,4 +1,3 @@
-
 "use client";
 
 import './globals.css'
@@ -20,8 +19,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const mainClass = `flex min-h-screen flex-col antialiased bg-sky-100/50 ${showNavbar ? 'mt-16 ml-60' : ''}`;
 
   return (
- 
-    
     <html lang="en">
       {showNavbar && (
           <>
