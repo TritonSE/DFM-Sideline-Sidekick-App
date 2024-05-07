@@ -17,12 +17,13 @@ const roboto = Roboto({
 export default function RootLayout({ children }: { children: ReactNode }) {
   const location = usePathname();
   const showNavbar = location !== '/' && location !== '/signup';
+  const mainClass = `flex min-h-screen flex-col antialiased bg-sky-100/50 ${showNavbar ? 'mt-16 ml-60' : ''}`;
 
   return (
  
+    
     <html lang="en">
-      <body className={roboto.className} >
-        {showNavbar && (
+      {showNavbar && (
           <>
             <div style={styles.verticalNavBar}>
               <VerticalNavBar />
@@ -32,7 +33,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
           </>
         )}
-        <main className="flex min-h-screen flex-col antialiased">
+      <body className={roboto.className} >
+        <main className={mainClass}>
           {children}
         </main>
       </body>
