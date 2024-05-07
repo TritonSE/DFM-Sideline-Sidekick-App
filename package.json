@@ -1,0 +1,15 @@
+{
+  "name": "dfm-sideline-sidekick-app",
+  "version": "1.0.0",
+  "description": "This app is a React Native app with a Node backend, using a MongoDB database. Ask engineering manager about access to the Mongo database, and design lead for access to the figma. Contact Anthony if you have any issues with setup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "react-bootstrap": "^2.10.2"
+  }
+}
