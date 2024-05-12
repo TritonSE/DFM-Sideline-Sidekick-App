@@ -28,7 +28,7 @@ const Toast: React.FC<ToastProps> = ({ backgroundColor, message, onClose }) => {
       >
         <img src={CheckIcon.src} alt="Check" className="w-4 h-4 mr-2" />
         <p className="text-sm mr-2">{message}</p>
-        <button className="focus:outline-none" onClick={() => onClose}>
+        <button className="focus:outline-none" onClick={onClose}>
           <img src={CloseIcon.src} alt="Close" className="w-4 h-4" />
         </button>
       </div>
