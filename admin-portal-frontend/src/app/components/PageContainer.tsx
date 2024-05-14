@@ -20,7 +20,6 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
     <tr key={id} className="border-b">
       <td className="w-1/4 text-center py-3">{page}</td>
       <td className="w-1/4 text-center py-3">
-        {/* Added just to check styling */}
         <select
           disabled={!allowEdits}
           className={`p-1 text-center rounded-md ${
