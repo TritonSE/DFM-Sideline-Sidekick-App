@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const minDimension = Math.min(width, height);
@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: width * 0.05, // 5% of screen width/height
     paddingTop: height * 0.06927, // ~7% of screen width/height
+    backgroundColor: "#FFFFFF",
   },
   listItemContainer: {
     flexDirection: "row",
@@ -43,9 +44,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#182B49",
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: "Roboto-Medium",
-    fontWeight: "500",
+    fontWeight: "600",
     paddingTop: 15,
   },
   divider: {
@@ -93,8 +94,21 @@ const styles = StyleSheet.create({
   highlightedText: {
     color: "#00629B",
   },
+  list: {
+    height: "100%",
+  },
   resultList: {
-    paddingBottom: 350,
+    ...Platform.select({
+      ios: {
+        marginBottom: 280,
+      },
+      android: {
+        marginBottom: 310,
+      },
+      default: {
+        marginBottom: 290,
+      },
+    }),
   },
 });
 

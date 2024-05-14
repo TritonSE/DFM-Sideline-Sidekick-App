@@ -1,0 +1,25 @@
+{
+  "cli": {
+    "version": ">= 8.0.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_IP_ADDRESS": "http://100.115.166.152:3001"
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_IP_ADDRESS": "https://sideline-sidekick-app.web.app"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

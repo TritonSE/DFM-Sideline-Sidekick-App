@@ -3,8 +3,7 @@ import { ParamListBase, RouteProp } from "@react-navigation/native"; // Import R
 import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import { useFonts } from "expo-font";
 import React from "react";
-import { Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { Image, Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { GeneralPrinciple, MedicalEmergency } from "../functions/DataContext";
 import { Bookmark } from "../pages/HomePage";
@@ -80,7 +79,8 @@ const ViewAll: React.FC<ViewAllProps> = ({ navigation, route }) => {
           }}
           style={styles.backButtonContainer}
         >
-          <Icon name="chevron-left" size={12} color="#000000" style={styles.backButton} />
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+          <Image source={require("../assets/ic_caretleft.png")} />
         </TouchableOpacity>
         <View style={styles.headerShadowContainer}>
           <View style={styles.headerShadow}>

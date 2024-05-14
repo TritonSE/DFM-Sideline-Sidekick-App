@@ -33,6 +33,7 @@ if (width > height) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
+    backgroundColor: "#ffffff",
     paddingBottom: 0.42 * height, //Give user leeway for optimal scroll space
     // padding - We should not apply padding here as per Figma specification
   },
@@ -41,11 +42,12 @@ const styles = StyleSheet.create({
     // alignItems: "center", // Center the text horizontally
     paddingLeft: (16 / 390) * width,
     paddingVertical: (10 / 930.25) * height,
+    marginTop: 15,
   },
   subheaderText: {
     color: "#182b49",
     fontFamily: "Roboto-Medium",
-    fontSize: 18, //0.05 * minDimension,
+    fontSize: 20, //0.05 * minDimension,
     fontWeight: "500",
   },
   grid: {
@@ -65,6 +67,13 @@ const styles = StyleSheet.create({
     borderRadius,
     width: (170 / 390.0) * width, //uses Figma measurements to set a width
     height: pressableRatio * (170 / 390.0) * width, //aspect ratio applied to width to set a height
+    elevation: 10,
+    shadowColor: "rgba(0, 0, 0, 0.5)",
+
+    // To add shadows for IOS devices
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
   },
   pressableText: {
     fontFamily: "Roboto-Bold",

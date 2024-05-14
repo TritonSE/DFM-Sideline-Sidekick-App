@@ -3,8 +3,7 @@ import { RouteProp } from "@react-navigation/native"; // Import RouteProp
 import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import { useFonts } from "expo-font";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import AntIcon from "react-native-vector-icons/AntDesign";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import BulletPoint from "../components/BulletPoint";
 import { Bookmark } from "../components/bookmark";
@@ -44,7 +43,8 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
             navigation.goBack();
           }}
         >
-          <AntIcon name="close" style={styles.button} />
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+          <Image source={require("../assets/ic_caretleft.png")} />
         </TouchableOpacity>
         <Text style={styles.title}>{params.contentProp.title}</Text>
         <BulletPoint content={params.contentProp.content} />

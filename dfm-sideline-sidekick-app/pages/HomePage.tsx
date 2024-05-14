@@ -133,9 +133,13 @@ const HomePage = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-        <SearchPage title="Home" onPage={searchShowing} setShowing={setSearchShowing} />
-        {!searchShowing && (
+      <SearchPage title="Home" onPage={searchShowing} setShowing={setSearchShowing} />
+      {!searchShowing && (
+        <ScrollView
+          alwaysBounceHorizontal={false}
+          contentContainerStyle={{ flexGrow: 1 }}
+          style={styles.topMargin}
+        >
           <View>
             <Text style={[styles.subtitle, styles.horizontalPadding, styles.topPadding]}>
               Browse By Category
@@ -210,8 +214,8 @@ const HomePage = () => {
               <Text style={{ textAlign: "center" }}>Loading...</Text>
             )}
           </View>
-        )}
-      </ScrollView>
+        </ScrollView>
+      )}
     </View>
   );
 };

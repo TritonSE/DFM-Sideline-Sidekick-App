@@ -98,7 +98,7 @@ const SearchPage: React.FC<SearchPageProps> = ({
       if (exists) {
         return currentSearches;
       }
-      const newSearches = [document, ...currentSearches].slice(0, 10); // Limiting to most recent 10 searches
+      const newSearches = [document, ...currentSearches].slice(0, 5); // Limiting to most recent 10 searches
 
       // Save to AsyncStorage
       void AsyncStorage.setItem("recentSearches", JSON.stringify(newSearches));
@@ -176,8 +176,9 @@ const SearchPage: React.FC<SearchPageProps> = ({
       {onPage && (
         <View>
           {query.length === 0 ? (
-            <>
+            <View style={styles.list}>
               <Text style={styles.subtitle}>Recent</Text>
+
               <FlatList
                 data={recentSearches}
                 keyExtractor={(item) => item._id}
@@ -197,13 +198,14 @@ const SearchPage: React.FC<SearchPageProps> = ({
                   </TouchableOpacity>
                 )}
               />
-            </>
+            </View>
           ) : (
-            <View style={styles.resultList}>
+            <View>
               <FlatList
                 data={filteredDocuments}
                 keyExtractor={(item) => item._id}
                 ItemSeparatorComponent={() => <View style={styles.divider} />}
+                style={styles.resultList}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={styles.listItemContainer}

@@ -3,16 +3,16 @@ import { Platform, StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     ...Platform.select({
       ios: {
-        marginBottom: 100,
+        paddingBottom: 100,
       },
       android: {
-        marginBottom: 110,
+        paddingBottom: 110,
       },
       default: {
-        marginBottom: 120,
+        paddingBottom: 120,
       },
     }),
   },
@@ -86,6 +86,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "43%",
     height: 90,
+    elevation: 10,
+    shadowColor: "rgba(0, 0, 0, 0.5)",
+
+    // To add shadows for IOS devices
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#FFFFFF",
@@ -114,6 +121,9 @@ const styles = StyleSheet.create({
   },
   topPadding: {
     paddingTop: 10,
+  },
+  topMargin: {
+    marginTop: 15,
   },
 });
 export default styles;
