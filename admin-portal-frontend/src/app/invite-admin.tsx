@@ -4,116 +4,122 @@ import React, { useState } from 'react';
 import { doc, setDoc, getFirestore } from 'firebase/firestore';
 
 const InviteAdmin = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [title, setTitle] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [status, setStatus] = useState('');
+  const [adminForm, setAdminForm] = useState({ firstName: '', lastName: '', title: '', email: '', phone: '' });
+  const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const db = getFirestore();
 
-  const handleInvite = async (e: any) => {
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setAdminForm({ ...adminForm, [name]: value });
+  };
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const inviteRef = doc(db, 'invitations', email);
+    const { firstName, lastName, title, email, phone } = adminForm;
 
     try {
-      await setDoc(inviteRef, { firstName, lastName, title, email, phone, invited: true }); 
-      setStatus('Invitation sent successfully.');
-      setFirstName('');
-      setLastName('');
-      setTitle('');
-      setEmail('');
-      setPhone('');
+      await setDoc(doc(db, 'invitations', email), { firstName, lastName, title, email, phone });
       setShowModal(false);
+      setAdminForm({ firstName: '', lastName: '', title: '', email: '', phone: '' });
     } catch (error: any) {
-      setStatus(`Failed to send invitation: ${error.message}`);
+      setError(error.message);
     }
   };
 
   return (
-    <div className="App">
+    <div className="flex items-center justify-center min-h-screen">
       <button
+        className="bg-dfm-blue text-white py-2 px-4 rounded"
         onClick={() => setShowModal(true)}
-        style={{
-          backgroundColor: '#00629B', 
-          color: 'white',
-          padding: '10px 20px',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
       >
         Add Admin
       </button>
 
       {showModal && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)'
-        }}>
-          <div style={{
-            background: 'white',
-            padding: '20px',
-            borderRadius: '10px',
-            width: '500px'
-          }}>
-            <h2>Add a new Admin</h2>
-            <p>Register a physician to your admin directory below.</p>
-            <form onSubmit={handleInvite} className="flex flex-col">
-              <label>
-                First Name*
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="relative bg-white shadow-xl rounded-lg p-8 flex flex-col w-full max-w-md">
+          <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-5 text-2xl text-gray-400 hover:text-gray-600"
+              aria-label="Close">
+              &times;
+            </button>
+            <h2 className="text-xl text-dfm-navy font-bold">Add a new Admin</h2>
+            <p className="mb-4 text-dfm-navy">Register a physician to your admin directory below.</p>
+            <form onSubmit={handleSubmit} className="w-full">
+              <p className="font-semibold text-dfm-navy text-lg mb-1">Physician Details</p>
+              <div className="mb-4">
+                <label htmlFor="firstName" className="text-slate-600 block font-sm">First Name*</label>
                 <input
                   type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  name="firstName"
+                  id="firstName"
+                  className="p-2 border w-full rounded border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                  onChange={handleInputChange}
                   required
                 />
-              </label>
-              <label>
-                Last Name*
+              </div>
+              <div className="mb-4">
+                <label htmlFor="lastName" className="block text-slate-600 font-sm">Last Name*</label>
                 <input
                   type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  name="lastName"
+                  id="lastName"
+                  className="p-2 border w-full rounded border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                  onChange={handleInputChange}
                   required
                 />
-              </label>
-              <label>
-                Title (ex. HS Clinical Professor)
+              </div>
+              <div className="mb-4">
+                <label htmlFor="title" className="block text-slate-600 font-sm">Title (ex. HS Clinical Professor)</label>
                 <input
                   type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  name="title"
+                  id="title"
+                  className="p-2 border w-full rounded border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                  onChange={handleInputChange}
                 />
-              </label>
-              <label>
-                Email*
+              </div>
+              <p className="font-semibold text-lg mb-2 text-dfm-navy">Contact Info</p>
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-slate-600 font-sm">Email*</label>
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  id="email"
+                  className="p-2 border w-full rounded border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                  onChange={handleInputChange}
                   required
                 />
-              </label>
-              <label>
-                Phone Number (format: xxx-xxx-xxxx)
+              </div>
+              <div className="mb-4">
+                <label htmlFor="phone" className="block text-slate-600 font-sm">Phone Number (format: xxx-xxx-xxxx)</label>
                 <input
                   type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  name="phone"
+                  id="phone"
+                  className="p-2 border w-full rounded border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+                  onChange={handleInputChange}
                 />
-              </label>
-              <button type="submit" style={{ backgroundColor: '#00629B', color: 'white' }}>Save</button>
-              <button type="button" onClick={() => setShowModal(false)} style={{ backgroundColor: 'gray', color: 'white' }}>Cancel</button>
+              </div>
+              <div className="flex justify-end space-x-2">
+                <button
+                  type="button"
+                  className="text-dfm-blue py-2 px-4 rounded hover:bg-gray-600"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-dfm-blue text-white py-2 px-4 rounded hover:bg-blue-700"
+                >
+                  Save
+                </button>
+              </div>
+              {error && <p className="text-red-600 text-sm mt-4">{error}</p>}
             </form>
-            {status && <p>{status}</p>}
           </div>
         </div>
       )}
@@ -122,4 +128,3 @@ const InviteAdmin = () => {
 };
 
 export default InviteAdmin;
-
