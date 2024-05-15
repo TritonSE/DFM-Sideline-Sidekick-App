@@ -214,6 +214,7 @@ const HomePage = () => {
               <Text style={{ textAlign: "center" }}>Loading...</Text>
             )}
           </View>
+          <View style={styles.spacer} />
         </ScrollView>
       )}
     </View>

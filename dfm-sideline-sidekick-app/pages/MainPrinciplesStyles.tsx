@@ -95,24 +95,8 @@ const styles = StyleSheet.create({
   },
   resultList: {
     paddingBottom: 350,
+    marginLeft: 16,
   },
-  //   container: {
-  //     flex: 1,
-  //     backgroundColor: "#fff",
-  //     alignItems: "flex-start",
-  //     justifyContent: "center",
-  //     ...Platform.select({
-  //       ios: {
-  //         paddingTop: 80,
-  //       },
-  //       android: {
-  //         paddingTop: 40,
-  //       },
-  //       default: {
-  //         paddingTop: 50,
-  //       },
-  //     }),
-  //   },
   margin: {
     marginLeft: 16,
   },

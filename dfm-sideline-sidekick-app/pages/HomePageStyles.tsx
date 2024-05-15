@@ -1,20 +1,9 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    ...Platform.select({
-      ios: {
-        paddingBottom: 100,
-      },
-      android: {
-        paddingBottom: 110,
-      },
-      default: {
-        paddingBottom: 120,
-      },
-    }),
   },
   title: {
     color: "#182B49",
@@ -81,7 +70,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingRight: 20,
     paddingLeft: 10,
-    paddingTop: 20,
+    paddingTop: 15,
     paddingBottom: 5,
     borderRadius: 10,
     width: "43%",
@@ -124,6 +113,9 @@ const styles = StyleSheet.create({
   },
   topMargin: {
     marginTop: 15,
+  },
+  spacer: {
+    height: 100,
   },
 });
 export default styles;

@@ -100,13 +100,13 @@ const styles = StyleSheet.create({
   resultList: {
     ...Platform.select({
       ios: {
-        marginBottom: 280,
+        marginBottom: 185,
       },
       android: {
-        marginBottom: 310,
+        marginBottom: 210,
       },
       default: {
-        marginBottom: 290,
+        marginBottom: 210,
       },
     }),
   },

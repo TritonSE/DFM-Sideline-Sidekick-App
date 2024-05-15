@@ -93,8 +93,14 @@ const GeneralPrinciplesMain = () => {
   };
 
   return (
-    <View>
-      <SearchPage title="General Principles" onPage={searchShowing} setShowing={setSearchShowing} />
+    <View style={styles.whiteBack}>
+      <View style={styles.bottomMargin}>
+        <SearchPage
+          title="General Principles"
+          onPage={searchShowing}
+          setShowing={setSearchShowing}
+        />
+      </View>
       {!searchShowing && (
         <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.container}>

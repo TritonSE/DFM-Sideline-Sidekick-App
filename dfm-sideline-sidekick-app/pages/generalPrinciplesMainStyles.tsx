@@ -1,8 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-const { width, height } = Dimensions.get("screen");
-const minDimension = Math.min(width, height);
-let pressableRatio = 0;
+const { height } = Dimensions.get("screen");
 
 // Calculate border radius and padding based on device dimensions
 //const borderRadius = (10.75 / 130) * Math.min(width, height);
@@ -10,16 +8,6 @@ let pressableRatio = 0;
 //
 //iPad = 0.3
 //phone=0.45
-
-//if (deviceWidth < deviceHeight): then ratio = 0.45
-//if (deviceHeight < deviceWidth): then ratio = 0.3
-const borderRadius = 0.035 * minDimension;
-
-if (width > height) {
-  pressableRatio = 0.3;
-} else {
-  pressableRatio = 0.5;
-}
 
 // Get the width of the device screen
 // const screenWidth = Dimensions.get("window").width;
@@ -40,15 +28,14 @@ const styles = StyleSheet.create({
   subheader: {
     justifyContent: "center", // Center the text vertically
     // alignItems: "center", // Center the text horizontally
-    paddingLeft: (16 / 390) * width,
-    paddingVertical: (10 / 930.25) * height,
-    marginTop: 15,
+    paddingLeft: 17,
+    paddingVertical: 10,
   },
   subheaderText: {
     color: "#182b49",
     fontFamily: "Roboto-Medium",
     fontSize: 20, //0.05 * minDimension,
-    fontWeight: "500",
+    fontWeight: "600",
   },
   grid: {
     flexDirection: "column",
@@ -64,9 +51,9 @@ const styles = StyleSheet.create({
   pressable: {
     backgroundColor: "#00629b",
     borderColor: "#00000033",
-    borderRadius,
-    width: (170 / 390.0) * width, //uses Figma measurements to set a width
-    height: pressableRatio * (170 / 390.0) * width, //aspect ratio applied to width to set a height
+    borderRadius: 10,
+    width: "43%", //uses Figma measurements to set a width
+    height: 90, //aspect ratio applied to width to set a height
     elevation: 10,
     shadowColor: "rgba(0, 0, 0, 0.5)",
 
@@ -74,14 +61,22 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
+    paddingRight: 20,
+    paddingLeft: 10,
+    paddingTop: 15,
+    paddingBottom: 5,
   },
   pressableText: {
     fontFamily: "Roboto-Bold",
     fontSize: 16,
     textAlignVertical: "top",
     color: "#ffffff",
-    paddingHorizontal: (13.98 / (1 * 390)) * width, //Figma measurements for padding horizontal
-    paddingVertical: (15.06 / (1 * 930.25)) * height, //Figma measurements for padding vertical
+  },
+  bottomMargin: {
+    paddingBottom: 15,
+  },
+  whiteBack: {
+    backgroundColor: "white",
   },
 });
 
