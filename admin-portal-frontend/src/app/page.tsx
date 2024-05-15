@@ -89,7 +89,7 @@ export default function Home() {
           </div>
           <div className="mb-6 flex items-center">
             <input id="remember-me" type="checkbox" className="mr-2 h-4 w-4 accent-blue border-2 border-blue-900" name="rememberMe" />
-            <label htmlFor="remember-me" className="text-sm sm:text-base">Remember me</label>
+            <label htmlFor="remember-me" className="text-sm">Remember me</label>
           </div>
           <div className="mb-4">
             <button
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </form>
         <a className="text-sm self-start text-sky-700" href="/forgot-password">I forgot my username or password</a>
-        <div className="mt-1 self-start text-sm sm:text-base">
+        <div className="mt-1 self-start text-sm">
           <span>Don't have an account?</span>
           <a className="text-sky-700" href="/signup"> Create a new account.</a>
         </div>
