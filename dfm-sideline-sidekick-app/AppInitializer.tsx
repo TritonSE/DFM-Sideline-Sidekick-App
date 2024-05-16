@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { useEffect } from "react";
 import { Platform } from "react-native";
 
-import { useData } from "./DataContext";
-import { checkConnection } from "./download/connection/checkConnection";
 import { downloadJSON } from "./download/downloadFromAPI";
+import { useData } from "./functions/DataContext";
 
 function AppInitializer() {
   const { updateJsonData } = useData();
@@ -11,32 +12,22 @@ function AppInitializer() {
   const deviceType = Platform.OS;
 
   // makes it so that it only checks the version once per app launch
-  let attempted = false;
 
   // true when there's connection
-  let connected = false;
 
   // checks on app open, connect change
   useEffect(() => {
-    // stores if connected
-    console.log("ATTEMPTED BEFORE:", attempted);
-
     async function matchConditions() {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      connected = await checkConnection();
       // if also connected, attempt to redownload
-      if (connected && !attempted) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const jsonData = await downloadJSON("data.json", deviceType);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        updateJsonData(jsonData);
+      let jsonData = await downloadJSON("data.json", deviceType, false);
+      updateJsonData(jsonData);
 
-        attempted = true; // latches
-      }
+      jsonData = await downloadJSON("data.json", deviceType, true);
+      updateJsonData(jsonData);
     }
 
     void matchConditions();
-  }, [connected]);
+  }, []);
   return null;
 }
 
