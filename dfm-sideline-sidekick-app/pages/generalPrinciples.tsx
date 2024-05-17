@@ -3,24 +3,17 @@ import { RouteProp } from "@react-navigation/native"; // Import RouteProp
 import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import { useFonts } from "expo-font";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import AntIcon from "react-native-vector-icons/AntDesign";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
-import ArrayPage from "../components/ArrayPage";
 import BulletPoint from "../components/BulletPoint";
 import { Bookmark } from "../components/bookmark";
 
 import styles from "./generalPrinciplesStyles";
 
-type ContentItem = Record<string, string>;
-
-type Content = {
-  title: string;
-  content: ContentItem;
-};
+import type { GeneralPrinciple } from "../functions/DataContext";
 
 export type RootStackParamList = {
-  GeneralPrinciples: { titleProp: string; overviewProp?: object; contentProp: Content | Content[] };
+  GeneralPrinciples: { contentProp: GeneralPrinciple };
 };
 
 type GeneralProps = {
@@ -39,32 +32,25 @@ const GeneralPrinciples: React.FC<GeneralProps> = ({ route, navigation }) => {
     return <Text>Loading...</Text>;
   }
 
-  if (Array.isArray(params.contentProp)) {
-    return (
-      <View style={styles.container}>
-        <ArrayPage arrayProp={params.contentProp} title={params.titleProp} />
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={styles.topRightContainer}>
-            <Bookmark item={params.contentProp} />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <AntIcon name="close" style={styles.button} />
-          </TouchableOpacity>
-          <Text style={styles.title}>{params.contentProp.title}</Text>
-          <BulletPoint content={params.contentProp.content} />
-        </ScrollView>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <ScrollView alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.topRightContainer}>
+          <Bookmark item={params.contentProp} />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+          <Image source={require("../assets/ic_caretleft.png")} />
+        </TouchableOpacity>
+        <Text style={styles.title}>{params.contentProp.title}</Text>
+        <BulletPoint content={params.contentProp.content} />
+      </ScrollView>
+    </View>
+  );
 };
 
 export default GeneralPrinciples;

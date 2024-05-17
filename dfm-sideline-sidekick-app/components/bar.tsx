@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 
 // import { BookmarkIcon } from "../icons/bookmarkIcon";
-import { HomeIcon } from "../icons/homeIcon";
 import { CircleIcon } from "../icons/circleIcon";
 import { GeneralPrinciplesIcon } from "../icons/generalPrinciplesIcon";
+import { HomeIcon } from "../icons/homeIcon";
 
 import styles from "./barStyles";
 
@@ -17,7 +17,7 @@ export type NavItem = {
 };
 
 export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(2);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(1);
   const currentRouteName = useNavigationState((state) => {
     if (state !== undefined && state !== null) {
       return state.routes[state.index].name;
@@ -47,7 +47,7 @@ export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
         >
           {item.icon === "search" ? (
             <View style={{ top: -26.65 }}>
-              <CircleIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
+              <CircleIcon fillColor="#001F3F" />
             </View>
           ) : item.icon === "home" ? (
             <HomeIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
