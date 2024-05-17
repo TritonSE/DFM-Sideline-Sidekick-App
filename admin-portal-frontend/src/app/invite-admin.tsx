@@ -1,29 +1,40 @@
 "use client";
 
-import React, { useState } from 'react';
-import { doc, setDoc, getFirestore } from 'firebase/firestore';
+import { doc, setDoc } from "firebase/firestore";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+
+import { db } from "./firebase-config";
 
 const InviteAdmin = () => {
-  const [adminForm, setAdminForm] = useState({ firstName: '', lastName: '', title: '', email: '', phone: '' });
-  const [error, setError] = useState('');
+  const [adminForm, setAdminForm] = useState({
+    firstName: "",
+    lastName: "",
+    title: "",
+    email: "",
+    phone: "",
+  });
+  const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const db = getFirestore();
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAdminForm({ ...adminForm, [name]: value });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { firstName, lastName, title, email, phone } = adminForm;
 
     try {
-      await setDoc(doc(db, 'invitations', email), { firstName, lastName, title, email, phone });
+      await setDoc(doc(db, "invitations", email), { firstName, lastName, title, email, phone });
       setShowModal(false);
-      setAdminForm({ firstName: '', lastName: '', title: '', email: '', phone: '' });
-    } catch (error: any) {
-      setError(error.message);
+      setAdminForm({ firstName: "", lastName: "", title: "", email: "", phone: "" });
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 
@@ -31,7 +42,9 @@ const InviteAdmin = () => {
     <div className="flex items-center justify-center min-h-screen">
       <button
         className="bg-dfm-blue text-white py-2 px-4 rounded"
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          setShowModal(true);
+        }}
       >
         Add Admin
       </button>
@@ -39,18 +52,26 @@ const InviteAdmin = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="relative bg-white shadow-xl rounded-lg p-8 flex flex-col w-full max-w-md">
-          <button
-              onClick={() => setShowModal(false)}
+            <button
+              onClick={() => {
+                setShowModal(false);
+              }}
               className="absolute top-4 right-5 text-2xl text-gray-400 hover:text-gray-600"
-              aria-label="Close">
+              aria-label="Close"
+            >
               &times;
             </button>
             <h2 className="text-xl text-dfm-navy font-bold">Add a new Admin</h2>
-            <p className="mb-4 text-dfm-navy">Register a physician to your admin directory below.</p>
+            <p className="mb-4 text-dfm-navy">
+              Register a physician to your admin directory below.
+            </p>
+            {/*eslint-disable-next-line @typescript-eslint/no-misused-promises*/}
             <form onSubmit={handleSubmit} className="w-full">
               <p className="font-semibold text-dfm-navy text-lg mb-1">Physician Details</p>
               <div className="mb-4">
-                <label htmlFor="firstName" className="text-slate-600 block font-sm">First Name*</label>
+                <label htmlFor="firstName" className="text-slate-600 block font-sm">
+                  First Name*
+                </label>
                 <input
                   type="text"
                   name="firstName"
@@ -61,7 +82,9 @@ const InviteAdmin = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="lastName" className="block text-slate-600 font-sm">Last Name*</label>
+                <label htmlFor="lastName" className="block text-slate-600 font-sm">
+                  Last Name*
+                </label>
                 <input
                   type="text"
                   name="lastName"
@@ -72,7 +95,9 @@ const InviteAdmin = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="title" className="block text-slate-600 font-sm">Title (ex. HS Clinical Professor)</label>
+                <label htmlFor="title" className="block text-slate-600 font-sm">
+                  Title (ex. HS Clinical Professor)
+                </label>
                 <input
                   type="text"
                   name="title"
@@ -83,7 +108,9 @@ const InviteAdmin = () => {
               </div>
               <p className="font-semibold text-lg mb-2 text-dfm-navy">Contact Info</p>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-slate-600 font-sm">Email*</label>
+                <label htmlFor="email" className="block text-slate-600 font-sm">
+                  Email*
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -94,7 +121,9 @@ const InviteAdmin = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="phone" className="block text-slate-600 font-sm">Phone Number (format: xxx-xxx-xxxx)</label>
+                <label htmlFor="phone" className="block text-slate-600 font-sm">
+                  Phone Number (format: xxx-xxx-xxxx)
+                </label>
                 <input
                   type="tel"
                   name="phone"
@@ -107,7 +136,9 @@ const InviteAdmin = () => {
                 <button
                   type="button"
                   className="text-dfm-blue py-2 px-4 rounded hover:bg-gray-600"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                  }}
                 >
                   Cancel
                 </button>

@@ -1,17 +1,12 @@
-import React from 'react';
-import InviteAdmin from '../invite-admin';
+import React from "react";
 
+import InviteAdmin from "../invite-admin";
 
 export default function Home() {
-
-
   return (
-    <><div className="flex items-center justify-center my-2">
+    <main className="flex h-screen w-screen flex-col items-center justify-between p-24">
       Success! Logged in!
-    </div><InviteAdmin /></>
-
+      <InviteAdmin />
+    </main>
   );
 }
-
-
-
