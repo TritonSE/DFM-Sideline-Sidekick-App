@@ -11,7 +11,13 @@ export interface EmergencyFlowProps {
   onSubmit?: () => void;
 }
 
-const InputBlock = ({ label, value, onChange }) => (
+interface InputBlockProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const InputBlock: React.FC<InputBlockProps> = ({ label, value, onChange }) => (
   <>
     <p style={styles.information}>{label}</p>
     <input

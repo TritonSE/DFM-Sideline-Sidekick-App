@@ -1,4 +1,6 @@
-const styles = {
+import { CSSProperties } from "react";
+
+const styles: { [key: string]: CSSProperties } = {
   page: {
     backgroundColor: "#E5EFF5",
     display: "flex",
