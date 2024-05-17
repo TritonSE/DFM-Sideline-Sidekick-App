@@ -30,7 +30,7 @@ const StringRenderer: React.FC<Props> = ({ data }) => {
       <View>
         {Object.keys(data).map((key, index) => (
           <View key={index}>
-            <Text style={styles.descriptionTitle}>{key}</Text>
+            <Text style={styles.descriptionInfo}>{key}</Text>
             <StringRenderer data={data[key] as StringValue} />
           </View>
         ))}

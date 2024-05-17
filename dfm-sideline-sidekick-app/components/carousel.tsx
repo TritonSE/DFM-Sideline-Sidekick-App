@@ -66,11 +66,6 @@ export const Carousel: React.FC<CarouselProps> = ({ items, cardColor }) => {
     </TouchableOpacity>
   );
 
-  items.forEach((item) => {
-    console.log(item);
-    console.log(item.content);
-  });
-
   return (
     <View style={styles.carouselContainer}>
       <FlatList

@@ -15,8 +15,6 @@ export const getStoredVersion = async () => {
 };
 
 export const setStoredVersion = async (version: string) => {
-  console.log("STORED VERSION:", version);
-
   try {
     await AsyncStorage.setItem("version", version.toString());
   } catch (e) {
