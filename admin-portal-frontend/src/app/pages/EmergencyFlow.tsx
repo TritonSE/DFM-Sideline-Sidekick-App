@@ -5,7 +5,7 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import { createEmergency, CreateEmergencyRequest } from "../../../emergencies";
+import { CreateEmergencyRequest, createEmergency } from "../../../emergencies";
 
 import styles from "./EmergencyFlowStyles";
 
@@ -95,7 +95,7 @@ const EmergencyFlow: React.FC = () => {
           console.log(result);
         }
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         // Handle any errors that occur during the request
         console.error("An error occurred while creating emergency:", error);
       });

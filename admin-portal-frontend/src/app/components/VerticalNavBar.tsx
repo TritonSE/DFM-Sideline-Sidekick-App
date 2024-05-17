@@ -2,7 +2,6 @@
 
 import React, { ReactNode } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-
 import { Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 
