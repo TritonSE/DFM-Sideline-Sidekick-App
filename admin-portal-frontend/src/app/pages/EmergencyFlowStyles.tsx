@@ -1,6 +1,19 @@
 import { CSSProperties } from "react";
 
-const styles: { [key: string]: CSSProperties } = {
+interface Styles {
+  page: CSSProperties;
+  container: CSSProperties;
+  header: CSSProperties;
+  subtitle: CSSProperties;
+  subheader: CSSProperties;
+  information: CSSProperties;
+  textbox: CSSProperties;
+  buttonContainer: CSSProperties;
+  cancelButton: CSSProperties;
+  publishButton: CSSProperties;
+}
+
+const styles: Styles = {
   page: {
     backgroundColor: "#E5EFF5",
     display: "flex",

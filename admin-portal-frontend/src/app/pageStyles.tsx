@@ -1,6 +1,12 @@
 import { CSSProperties } from "react";
 
-const styles: { [key: string]: CSSProperties } = {
+interface Styles {
+  verticalNavBar: CSSProperties;
+  horizontalNavBar: CSSProperties;
+  emergencyFlow: CSSProperties;
+}
+
+const styles: Styles = {
   verticalNavBar: {
     position: "fixed",
     top: 0,
