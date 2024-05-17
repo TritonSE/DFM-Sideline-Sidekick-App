@@ -1,19 +1,14 @@
 "use client";
 
 import React, { ReactNode } from "react";
-
 import "bootstrap/dist/css/bootstrap.css";
 
 import { Card } from "react-bootstrap";
-
 import Accordion from "react-bootstrap/Accordion";
 
 import GpComponent from "./GPComponent";
-
 import HomeComponent from "./HomeComponent";
-
 import SearchComponent from "./SearchComponent";
-
 import styles from "./VerticalNavBarStyles";
 
 const VerticalNavBar: React.FC = () => {

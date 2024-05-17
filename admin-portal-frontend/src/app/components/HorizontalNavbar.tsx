@@ -3,9 +3,7 @@
 import React from "react";
 
 import styles from "./HorizontalNavBarStyles";
-
 import SearchBar from "./SearchBar";
-
 import SearchComponent from "./SearchComponent";
 
 const HorizontalNavBar: React.FC = () => {

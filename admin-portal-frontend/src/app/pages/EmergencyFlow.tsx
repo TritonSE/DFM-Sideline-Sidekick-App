@@ -3,7 +3,6 @@
 // import searchIcon from "../icons/ic_search_grey.png";
 // import Image from "next/image";
 import { useRouter } from "next/navigation";
-
 import React from "react";
 
 import { createEmergency, CreateEmergencyRequest } from "../../../emergencies";
@@ -28,7 +27,9 @@ const InputBlock: React.FC<InputBlockProps> = ({ label, value, onChange }) => (
       placeholder="Add details"
       style={styles.textbox}
       value={value}
-      onChange={(event) => onChange(event.target.value)}
+      onChange={(event) => {
+        onChange(event.target.value);
+      }}
     />
   </>
 );
@@ -49,7 +50,7 @@ const EmergencyFlow: React.FC = () => {
     //make an object of type CreateEmergencyRequest
     //use createEmergency to make the emergency in DB
     //redirect back to main page
-    let emergency: CreateEmergencyRequest = {
+    const emergency: CreateEmergencyRequest = {
       title: emergencyTitle,
       overview: {
         Importance: importance,
@@ -65,34 +66,39 @@ const EmergencyFlow: React.FC = () => {
       content: {},
     };
 
-    createEmergency(emergency).then((result) => {
-      if (result.success) {
-        // clear the form
-        setEmergencyTitle("");
-        setImportance("");
-        setRiskFactors("");
-        setMechanismOfInjury("");
-        setDiagnosis("");
-        setPhysicalExam("");
-        setAcuteManagement("");
-        setDispo("");
-        setConsiderations("");
-        //redirect to homepage/main page
-        router.push("/");
-      } else {
-        // You should always clearly inform the user when something goes wrong.
-        // In this case, we're just doing an `alert()` for brevity, but you'd
-        // generally want to show some kind of error state or notification
-        // within your UI. If the problem is with the user's input, then use
-        // the error states of your smaller components (like the `TextField`s).
-        // If the problem is something we don't really control, such as network
-        // issues or an unexpected exception on the server side, then use a
-        // banner, modal, popup, or similar.
+    createEmergency(emergency)
+      .then((result) => {
+        if (result.success) {
+          // clear the form
+          setEmergencyTitle("");
+          setImportance("");
+          setRiskFactors("");
+          setMechanismOfInjury("");
+          setDiagnosis("");
+          setPhysicalExam("");
+          setAcuteManagement("");
+          setDispo("");
+          setConsiderations("");
+          //redirect to homepage/main page
+          router.push("/");
+        } else {
+          // You should always clearly inform the user when something goes wrong.
+          // In this case, we're just doing an `alert()` for brevity, but you'd
+          // generally want to show some kind of error state or notification
+          // within your UI. If the problem is with the user's input, then use
+          // the error states of your smaller components (like the `TextField`s).
+          // If the problem is something we don't really control, such as network
+          // issues or an unexpected exception on the server side, then use a
+          // banner, modal, popup, or similar.
 
-        alert(result.error);
-        console.log(result);
-      }
-    });
+          alert(result.error);
+          console.log(result);
+        }
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("An error occurred while creating emergency:", error);
+      });
   };
 
   return (
