@@ -1,10 +1,10 @@
 import { CSSProperties } from "react";
 
-interface Styles {
+type Styles = {
   verticalNavBar: CSSProperties;
   horizontalNavBar: CSSProperties;
   emergencyFlow: CSSProperties;
-}
+};
 
 const styles: Styles = {
   verticalNavBar: {

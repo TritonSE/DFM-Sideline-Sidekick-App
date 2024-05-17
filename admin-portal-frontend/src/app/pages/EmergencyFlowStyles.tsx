@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-interface Styles {
+type Styles = {
   page: CSSProperties;
   container: CSSProperties;
   header: CSSProperties;
@@ -11,7 +11,7 @@ interface Styles {
   buttonContainer: CSSProperties;
   cancelButton: CSSProperties;
   publishButton: CSSProperties;
-}
+};
 
 const styles: Styles = {
   page: {

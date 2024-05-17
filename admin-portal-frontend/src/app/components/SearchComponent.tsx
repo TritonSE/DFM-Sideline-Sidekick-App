@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 
-interface Props {
+type Props = {
   width?: number;
   height?: number;
   color?: string;
-}
+};
 
 const SearchComponent: FC<Props> = ({ width, height, color }) => (
   <svg

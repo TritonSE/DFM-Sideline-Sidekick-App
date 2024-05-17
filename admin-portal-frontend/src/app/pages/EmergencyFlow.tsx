@@ -1,21 +1,24 @@
 "use client";
 
-import React from "react";
-import styles from "./EmergencyFlowStyles";
-import searchIcon from "../icons/ic_search_grey.png";
-import Image from "next/image";
+// import searchIcon from "../icons/ic_search_grey.png";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
+
+import React from "react";
+
 import { createEmergency, CreateEmergencyRequest } from "../../../emergencies";
 
-export interface EmergencyFlowProps {
-  onSubmit?: () => void;
-}
+import styles from "./EmergencyFlowStyles";
 
-interface InputBlockProps {
+export type EmergencyFlowProps = {
+  onSubmit?: () => void;
+};
+
+type InputBlockProps = {
   label: string;
   value: string;
   onChange: (value: string) => void;
-}
+};
 
 const InputBlock: React.FC<InputBlockProps> = ({ label, value, onChange }) => (
   <>
