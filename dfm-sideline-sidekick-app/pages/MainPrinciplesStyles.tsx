@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const minDimension = Math.min(width, height);
@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: width * 0.05, // 5% of screen width/height
     paddingTop: height * 0.06927, // ~7% of screen width/height
-    backgroundColor: "#FFFFFF",
   },
   listItemContainer: {
     flexDirection: "row",
@@ -44,9 +43,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#182B49",
-    fontSize: 20,
-    fontFamily: "Roboto-Medium",
-    fontWeight: "600",
+    fontSize: 18,
+    fontFamily: "Roboto",
+    fontWeight: "500",
     paddingTop: 15,
   },
   divider: {
@@ -94,21 +93,120 @@ const styles = StyleSheet.create({
   highlightedText: {
     color: "#00629B",
   },
-  list: {
-    height: "100%",
-  },
   resultList: {
-    ...Platform.select({
-      ios: {
-        marginBottom: 185,
-      },
-      android: {
-        marginBottom: 210,
-      },
-      default: {
-        marginBottom: 210,
-      },
-    }),
+    paddingBottom: 350,
+    marginLeft: 16,
+  },
+  margin: {
+    marginLeft: 16,
+  },
+  menu: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-evenly",
+    width: "100%",
+    marginTop: 16,
+  },
+  topRightContainer: {
+    position: "absolute",
+    top: 80,
+    right: 0,
+    padding: 10,
+    zIndex: 1,
+  },
+  menuText: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    color: "#000000",
+    textAlign: "left",
+    marginLeft: 16,
+  },
+  menuButton: {
+    borderBottomWidth: 3,
+    borderColor: "#D5D5D5",
+    width: "50%",
+  },
+  menuButtonSelected: {
+    borderBottomWidth: 3,
+    borderColor: "#000000",
+    width: "50%",
+  },
+  menuTextSelected: {
+    fontFamily: "Roboto-Bold",
+    fontSize: 16,
+    color: "#000000",
+    textAlign: "left",
+    marginLeft: 16,
+  },
+  //   subtitle: {
+  //     fontFamily: "Roboto-Bold",
+  //     fontSize: 18,
+  //     color: "#00629B",
+  //     marginLeft: 2,
+  //   },
+  //   title: {
+  //     fontFamily: "Roboto-Bold",
+  //     fontSize: 32,
+  //     color: "#182B49",
+  //     marginLeft: 2,
+  //   },
+  subtitle2: {
+    fontFamily: "Roboto-Bold",
+    fontSize: 28,
+    color: "#182B49",
+    marginLeft: 2,
+  },
+  image: {
+    width: 24,
+    height: 24,
+    marginLeft: 16,
+    marginBottom: 22,
+  },
+  information: {
+    marginLeft: 16,
+    marginTop: 0,
+    marginRight: 16,
+  },
+  overview: {},
+  howToTreat: {},
+  overviewHidden: {
+    display: "none",
+  },
+  howToTreatHidden: {
+    display: "none",
+  },
+  descriptionTitle: {
+    fontFamily: "Roboto-Bold",
+    fontSize: 18,
+    color: "#000000",
+  },
+  descriptionInfo: {
+    marginTop: 5,
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    color: "#000000",
+  },
+  infoSection: {
+    marginTop: 15,
+  },
+  list: {
+    paddingLeft: 10,
+    marginRight: 50,
+    marginTop: 5,
+  },
+  listItem: {
+    flexDirection: "row",
+  },
+  bullet: {
+    marginRight: 5,
+    fontSize: 18,
+    color: "#000000",
+  },
+  itemText: {
+    fontSize: 16,
+    fontFamily: "Roboto-Regular",
+    color: "#000000",
   },
 });
 

@@ -1,21 +1,28 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 
-type MedicalEmergency = {
+export type MedicalEmergency = {
   title: string;
   overview: object;
   treatment: object;
-  content: object;
+  subtitle;
 };
 
-type GeneralPrinciple = {
+export type GeneralPrinciple = {
   title: string;
-  overview: object;
   content: object;
+  subtitle: string;
+};
+
+export type Category = {
+  title: string;
+  items: string[];
+  type: string;
 };
 
 type JsonDataStructure = {
   emergencies?: MedicalEmergency[]; // Optional array of MedicalEmergency
   generalPrinciples?: GeneralPrinciple[]; // Optional array of GeneralPrinciple
+  categories?: Category[];
 };
 
 type DataContextType = {

@@ -36,6 +36,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
           value={query}
           onChangeText={setQuery}
           onFocus={onFocus}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus={isFocused}
           onBlur={onBlur}
           selectionColor="#909090"
         />

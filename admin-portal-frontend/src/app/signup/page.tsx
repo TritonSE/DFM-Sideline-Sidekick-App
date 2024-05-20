@@ -1,45 +1,52 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { auth } from '../firebase-config'; 
-import { useRouter } from 'next/navigation';
+import { FirebaseError } from "firebase/app";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-interface SignUpForm {
+import { auth } from "../firebase-config";
+
+type SignUpForm = {
   firstName: string;
   lastName: string;
   email: string;
   username: string;
   password: string;
-}
+};
 
-const formatFirebaseError = (error: any): string => {
-  if (error && typeof error.code === 'string') {
-    const errorCode = error.code.split('/')[1];
+const formatFirebaseError = (error: FirebaseError): string => {
+  if (error?.code && typeof error.code === "string") {
+    const errorCode = error.code.split("/")[1];
     return errorCode
-      .split('-')
+      .split("-")
       .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(" ");
   }
-  return 'An unexpected error occurred';
+  return "An unexpected error occurred";
 };
 
 export default function SignUp() {
   const db = getFirestore();
   const [signUpForm, setSignUpForm] = useState<SignUpForm>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    username: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
   });
 
-  const buttonStyle = signUpForm.email && signUpForm.password && signUpForm.firstName && signUpForm.lastName && signUpForm.username
-    ? { backgroundColor: '#00629B' } 
-    : { backgroundColor: '#6C6C6C', cursor: 'not-allowed' };
+  const buttonStyle =
+    signUpForm.email &&
+    signUpForm.password &&
+    signUpForm.firstName &&
+    signUpForm.lastName &&
+    signUpForm.username
+      ? { backgroundColor: "#00629B" }
+      : { backgroundColor: "#6C6C6C", cursor: "not-allowed" };
 
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
   const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +55,8 @@ export default function SignUp() {
   };
 
   const checkInvitation = async (email: string) => {
-    const inviteRef = doc(db, 'invitations', email);
+    //checks if email has an invite
+    const inviteRef = doc(db, "invitations", email);
     const inviteSnap = await getDoc(inviteRef);
     return inviteSnap.exists();
   };
@@ -56,39 +64,47 @@ export default function SignUp() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = signUpForm;
-    
+    console.log("Here");
+
     try {
       const invited = await checkInvitation(email);
+      console.log(invited);
       if (!invited) {
         setError("You must be invited to create an account.");
         return;
       }
-  
+
       await createUserWithEmailAndPassword(auth, email, password);
-      router.push('/home');
-    } catch (err: any) {
-      console.error("Firebase Error:", err); 
-      const friendlyError = formatFirebaseError(err);
-      setError(friendlyError);
+      router.push("/home");
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        const friendlyError = formatFirebaseError(err);
+        setError(friendlyError);
+      } else {
+        setError("Unexpected error occurred.");
+      }
     }
   };
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = 'visible';
+      document.body.style.overflow = "visible";
     };
-  }, []);
+  });
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-white shadow-lg rounded-lg p-16 flex flex-col items-center">
         <div className="text-2xl font-bold text-blue-950 my-4">Create an Admin Mode Account</div>
+        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <form onSubmit={handleSubmit} className="w-5/6">
           <div className="flex gap-4 mb-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium mb-1">First Name</label>
+              <label htmlFor="name" className="block text-sm font-medium mb-1">
+                First Name
+              </label>
               <input
                 className="p-2 border w-full rounded border-black border-opacity-40"
                 type="text"
@@ -99,7 +115,9 @@ export default function SignUp() {
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium mb-1">Last Name</label>
+              <label htmlFor="name" className="block text-sm font-medium mb-1">
+                Last Name
+              </label>
               <input
                 className="p-2 border w-full rounded border-black border-opacity-40"
                 type="text"
@@ -110,7 +128,9 @@ export default function SignUp() {
               />
             </div>
           </div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">Enter your email</label>
+          <label htmlFor="email" className="block text-sm font-medium mb-1">
+            Enter your email
+          </label>
           <input
             className="p-2 border w-full rounded mb-4 border-black border-opacity-40"
             type="email"
@@ -119,7 +139,9 @@ export default function SignUp() {
             onChange={handleInputChange}
             required
           />
-          <label htmlFor="username" className="block text-sm font-medium mb-1">Create a Username</label>
+          <label htmlFor="username" className="block text-sm font-medium mb-1">
+            Create a Username
+          </label>
           <input
             className="p-2 border w-full rounded mb-4 border-black border-opacity-40"
             type="text"
@@ -128,7 +150,9 @@ export default function SignUp() {
             onChange={handleInputChange}
             required
           />
-          <label htmlFor="password" className="block text-sm font-medium mb-1">Create a Password</label>
+          <label htmlFor="password" className="block text-sm font-medium mb-1">
+            Create a Password
+          </label>
           <input
             className="mb-4 p-2 border w-full rounded border-black border-opacity-40"
             type="password"
@@ -137,11 +161,18 @@ export default function SignUp() {
             onChange={handleInputChange}
             required
           />
-          <button 
+          <button
             type="submit"
             style={buttonStyle}
-            className={`p-2 w-full text-white font-bold rounded ${signUpForm.email && signUpForm.password && signUpForm.firstName && signUpForm.lastName && signUpForm.username ? 'hover:bg-blue-700' : ''}`}
-            disabled={!signUpForm.email || !signUpForm.password || !signUpForm.firstName || !signUpForm.lastName || !signUpForm.username}>
+            className={`p-2 w-full text-white font-bold rounded ${signUpForm.email && signUpForm.password && signUpForm.firstName && signUpForm.lastName && signUpForm.username ? "hover:bg-blue-700" : ""}`}
+            disabled={
+              !signUpForm.email ||
+              !signUpForm.password ||
+              !signUpForm.firstName ||
+              !signUpForm.lastName ||
+              !signUpForm.username
+            }
+          >
             Create
           </button>
           {error && <p className="text-red-600 text-sm mt-2">{error}</p>}

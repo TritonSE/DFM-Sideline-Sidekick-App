@@ -5,8 +5,6 @@ export const checkConnection = async () => {
   let connected;
 
   await NetInfo.fetch().then((state) => {
-    console.log("CONNECTION TYPE: ", state.type);
-    console.log("IS CONNECTED: ", state.isConnected);
     connected = state.isConnected;
   });
 

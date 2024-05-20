@@ -13,11 +13,10 @@ const config: Config = {
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'dfm-blue': '#00629B',
-        'dfm-navy': '#182B49'
-      }
+        "dfm-blue": "#00629B",
+        "dfm-navy": "#182B49",
+      },
     },
-    
   },
   plugins: [],
 };

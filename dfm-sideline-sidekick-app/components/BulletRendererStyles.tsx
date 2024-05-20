@@ -1,26 +1,63 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    ...Platform.select({
-      ios: {
-        paddingTop: 80,
-      },
-      android: {
-        paddingTop: 40,
-      },
-      default: {
-        paddingTop: 50,
-      },
-    }),
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: 15,
   },
+  circle: {
+    width: 24, // this should be a "props"-value in future
+    height: 24, // this should be a "props"-value in future
+    borderRadius: 24 / 2,
+    backgroundColor: "#00629B",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  circleCaption: {
+    fontSize: 14,
+    color: "white",
+    fontWeight: "600",
+  },
+  mainText: {
+    color: "black",
+    fontSize: 16,
+    fontFamily: "Roboto-Bold",
+    fontWeight: "700",
+    paddingLeft: 7,
+    paddingRight: 27,
+  },
+  subpoints: {
+    paddingTop: 5,
+    paddingLeft: 38,
+    paddingRight: 25,
+    fontFamily: "Roboto-Regular",
+  },
+  point: {
+    fontSize: 15,
+    fontFamily: "Roboto-Regular",
+  },
+  //   container: {
+  //     flex: 1,
+  //     backgroundColor: "#fff",
+  //     alignItems: "flex-start",
+  //     justifyContent: "center",
+  //     ...Platform.select({
+  //       ios: {
+  //         paddingTop: 80,
+  //       },
+  //       android: {
+  //         paddingTop: 40,
+  //       },
+  //       default: {
+  //         paddingTop: 50,
+  //       },
+  //     }),
+  //   },
   margin: {
     marginLeft: 16,
-    marginTop: 0,
+    marginTop: 20,
   },
   menu: {
     display: "flex",
@@ -125,3 +162,5 @@ export default StyleSheet.create({
     color: "#000000",
   },
 });
+
+export default styles;
