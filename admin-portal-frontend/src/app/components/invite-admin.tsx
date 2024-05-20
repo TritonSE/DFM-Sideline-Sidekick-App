@@ -28,7 +28,7 @@ const InviteAdmin = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-end w-full p-4">
       <button
         className="bg-dfm-blue text-white py-2 px-4 rounded"
         onClick={() => setShowModal(true)}
@@ -113,7 +113,7 @@ const InviteAdmin = () => {
                 </button>
                 <button
                   type="submit"
-                  className="bg-dfm-blue text-white py-2 px-4 rounded hover:bg-blue-700"
+                  className="bg-dfm-blue text-white py-2 px-4 rounded"
                 >
                   Save
                 </button>

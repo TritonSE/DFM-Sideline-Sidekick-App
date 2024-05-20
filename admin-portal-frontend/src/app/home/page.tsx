@@ -1,14 +1,15 @@
 import React from 'react';
-import InviteAdmin from '../invite-admin';
+import InviteAdmin from '../components/invite-admin';
+import AdminCards from '../components/admin-cards';
 
 
 export default function Home() {
 
 
   return (
-    <><div className="flex items-center justify-center my-2">
-      Success! Logged in!
-    </div><InviteAdmin /></>
+    <><InviteAdmin />
+    <AdminCards /></>
+    
 
   );
 }

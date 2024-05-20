@@ -15,7 +15,7 @@ interface SignUpForm {
 }
 
 const formatFirebaseError = (error: any): string => {
-  if (error?.code && typeof error.code === 'string') {
+  if (error && typeof error.code === 'string') {
     const errorCode = error.code.split('/')[1];
     return errorCode
       .split('-')
@@ -36,8 +36,8 @@ export default function SignUp() {
   });
 
   const buttonStyle = signUpForm.email && signUpForm.password && signUpForm.firstName && signUpForm.lastName && signUpForm.username
-? { backgroundColor: '#00629B' } 
-: { backgroundColor: '#6C6C6C', cursor: 'not-allowed' };
+    ? { backgroundColor: '#00629B' } 
+    : { backgroundColor: '#6C6C6C', cursor: 'not-allowed' };
 
   const [error, setError] = useState<string>('');
   const router = useRouter();
@@ -47,12 +47,12 @@ export default function SignUp() {
     setSignUpForm({ ...signUpForm, [name]: value });
   };
 
-  const checkInvitation = async (email: string) => { //checks if email has an invite
+  const checkInvitation = async (email: string) => {
     const inviteRef = doc(db, 'invitations', email);
     const inviteSnap = await getDoc(inviteRef);
-    return inviteSnap.exists(); 
+    return inviteSnap.exists();
   };
-  
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = signUpForm;
@@ -67,6 +67,7 @@ export default function SignUp() {
       await createUserWithEmailAndPassword(auth, email, password);
       router.push('/home');
     } catch (err: any) {
+      console.error("Firebase Error:", err); 
       const friendlyError = formatFirebaseError(err);
       setError(friendlyError);
     }
@@ -78,7 +79,7 @@ export default function SignUp() {
     return () => {
       document.body.style.overflow = 'visible';
     };
-  },);
+  }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -87,7 +88,7 @@ export default function SignUp() {
         <form onSubmit={handleSubmit} className="w-5/6">
           <div className="flex gap-4 mb-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-1">First Name</label>
+              <label htmlFor="firstName" className="block text-sm font-medium mb-1">First Name</label>
               <input
                 className="p-2 border w-full rounded border-black border-opacity-40"
                 type="text"
@@ -98,7 +99,7 @@ export default function SignUp() {
               />
             </div>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-1">Last Name</label>
+              <label htmlFor="lastName" className="block text-sm font-medium mb-1">Last Name</label>
               <input
                 className="p-2 border w-full rounded border-black border-opacity-40"
                 type="text"
@@ -139,7 +140,7 @@ export default function SignUp() {
           <button 
             type="submit"
             style={buttonStyle}
-            className={`p-2 w-full text-white font-bold rounded ${signUpForm.email && signUpForm.password && signUpForm.firstName && signUpForm.lastName && signUpForm.username? 'hover:bg-blue-700' : ''}`}
+            className={`p-2 w-full text-white font-bold rounded ${signUpForm.email && signUpForm.password && signUpForm.firstName && signUpForm.lastName && signUpForm.username ? 'hover:bg-blue-700' : ''}`}
             disabled={!signUpForm.email || !signUpForm.password || !signUpForm.firstName || !signUpForm.lastName || !signUpForm.username}>
             Create
           </button>
