@@ -1,12 +1,15 @@
+import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useRef, useState } from "react";
+import * as Font from "expo-font";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { useData } from "../DataContext";
-import { searchDocuments } from "../HandleSearch";
-import SearchBar from "../SearchBarComponent";
+import SearchBar from "../components/SearchBarComponent";
+import { useData } from "../functions/DataContext";
+import { searchDocuments } from "../functions/HandleSearch";
 
 import { RootStackParamList } from "./ConditionsSection";
 import styles from "./SearchPageStyles";
@@ -23,11 +26,16 @@ type DocumentBase = {
 type SearchPageProps = {
   onPage: boolean;
   setShowing?: (param: boolean) => void;
+  title: string;
 };
 
 type ConditionsNavigationProp = StackNavigationProp<RootStackParamList, "Conditions">;
 
-const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) => {
+const SearchPage: React.FC<SearchPageProps> = ({
+  onPage = true,
+  setShowing,
+  title = "Global Search",
+}) => {
   const [query, setQuery] = useState<string>("");
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentBase[]>([]);
   const [recentSearches, setRecentSearches] = useState<DocumentBase[]>([]);
@@ -36,6 +44,24 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
   const generalPrinciples = jsonData?.generalPrinciples ?? [];
   const navigation = useNavigation<ConditionsNavigationProp>();
   const inputRef = useRef<TextInput>(null);
+  const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function loadFont() {
+      try {
+        await Font.loadAsync({
+          "Roboto-Regular": Roboto_400Regular,
+          "Roboto-Medium": Roboto_500Medium,
+          "Roboto-Bold": Roboto_700Bold,
+        });
+        setIsFontsLoaded(true);
+      } catch (error) {
+        console.error("Error loading fonts:", error);
+      }
+    }
+
+    void loadFont();
+  }, []);
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -53,14 +79,31 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
     }
   };
 
+  // Load recent searches from AsyncStorage when the component mounts
+  useEffect(() => {
+    const loadRecentSearches = async () => {
+      const storedSearches = await AsyncStorage.getItem("recentSearches");
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      if (storedSearches) setRecentSearches(JSON.parse(storedSearches));
+    };
+
+    void loadRecentSearches();
+    // Other useEffect for fonts loading remains unchanged
+  }, []);
+
+  // Function to update recent searches both in state and AsyncStorage
   const addToRecentSearches = (document: DocumentBase) => {
     setRecentSearches((currentSearches) => {
       const exists = currentSearches.find((item) => item._id === document._id);
       if (exists) {
         return currentSearches;
       }
-      const newSearches = [document, ...currentSearches];
-      return newSearches.slice(0, 10); // limitting to most recent 10 searches
+      const newSearches = [document, ...currentSearches].slice(0, 5); // Limiting to most recent 10 searches
+
+      // Save to AsyncStorage
+      void AsyncStorage.setItem("recentSearches", JSON.stringify(newSearches));
+
+      return newSearches;
     });
   };
 
@@ -108,16 +151,15 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
       setShowing(false);
       return;
     }
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    } else {
-      navigation.navigate("Bookmark");
-    }
+    navigation.pop();
   };
+  if (!isFontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Global Search</Text>
+      <Text style={styles.title}>{title}</Text>
       <SearchBar
         query={query}
         setQuery={handleSearch}
@@ -134,8 +176,9 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
       {onPage && (
         <View>
           {query.length === 0 ? (
-            <>
+            <View style={styles.list}>
               <Text style={styles.subtitle}>Recent</Text>
+
               <FlatList
                 data={recentSearches}
                 keyExtractor={(item) => item._id}
@@ -155,13 +198,14 @@ const SearchPage: React.FC<SearchPageProps> = ({ onPage = true, setShowing }) =>
                   </TouchableOpacity>
                 )}
               />
-            </>
+            </View>
           ) : (
-            <View style={styles.resultList}>
+            <View>
               <FlatList
                 data={filteredDocuments}
                 keyExtractor={(item) => item._id}
                 ItemSeparatorComponent={() => <View style={styles.divider} />}
+                style={styles.resultList}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={styles.listItemContainer}

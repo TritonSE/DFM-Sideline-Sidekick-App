@@ -1,29 +1,21 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    ...Platform.select({
-      ios: {
-        marginTop: 80,
-        marginBottom: 150,
-      },
-      android: {
-        marginTop: 40,
-        marginBottom: 110,
-      },
-      default: {
-        marginTop: 50,
-        marginBottom: 120,
-      },
-    }),
+    backgroundColor: "#FFFFFF",
   },
   title: {
     color: "#182B49",
+
     fontSize: 32,
+
     fontFamily: "Roboto-Bold",
+
     marginBottom: 20,
+
     textAlign: "left",
+
     paddingTop: 10,
   },
   subtitle: {
@@ -78,15 +70,23 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingRight: 20,
     paddingLeft: 10,
-    paddingTop: 20,
+    paddingTop: 15,
     paddingBottom: 5,
     borderRadius: 10,
     width: "43%",
     height: 90,
+    elevation: 10,
+    shadowColor: "rgba(0, 0, 0, 0.5)",
+
+    // To add shadows for IOS devices
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#FFFFFF",
     fontWeight: "bold",
+    fontSize: 16,
   },
   searchText: {
     color: "#CCCCCC",
@@ -110,6 +110,12 @@ const styles = StyleSheet.create({
   },
   topPadding: {
     paddingTop: 10,
+  },
+  topMargin: {
+    marginTop: 15,
+  },
+  spacer: {
+    height: 100,
   },
 });
 export default styles;

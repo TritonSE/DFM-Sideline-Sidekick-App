@@ -1,5 +1,6 @@
 import { Version } from "../models/versionModel.js";
 import { Emergency, GeneralPrinciple } from "../models/issueModel.js";
+import { Category } from "../models/categoryModel.js";
 
 export const getVersion = async (req, res) => {
   try {
@@ -35,8 +36,9 @@ export const getAllWithVersion = async (req, res) => {
   try {
     const emergencies = await Emergency.find();
     const generalPrinciples = await GeneralPrinciple.find();
+    const categories = await Category.find();
     const version = await Version.find();
-    res.json({ version, emergencies, generalPrinciples });
+    res.json({ version, emergencies, generalPrinciples, categories });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -1,9 +1,20 @@
-import Image from "next/image";
-import Link from "next/link";
+import HorizontalNavBar from './components/HorizontalNavbar'
+import React from 'react';
+import VerticalNavBar from './components/VerticalNavBar';
+import styles from './pageStyles'
 
-export default function Home() {
+const AnotherPage: React.FC = () => {
+
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-between p-24">
-    </main>
+    <div>
+      <div style={styles.verticalNavBar}>
+        <VerticalNavBar/>
+      </div>
+      <div style={styles.horizontalNavBar}>
+        <HorizontalNavBar />
+      </div>
+    </div>
   );
-}
+};
+
+export default AnotherPage;
