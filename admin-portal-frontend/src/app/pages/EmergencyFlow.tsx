@@ -80,7 +80,7 @@ const EmergencyFlow: React.FC = () => {
     //   content: {},
     // };
 
-    const addPropertyIfNotEmpty = (obj: Record<string, any>, key: string, value: string) => {
+    const addPropertyIfNotEmpty = (obj: Record<string, unknown>, key: string, value: string) => {
       if (value && value.trim() !== "") {
         obj[key] = value.includes(",") ? value.split(",") : value;
       }

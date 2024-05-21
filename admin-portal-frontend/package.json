@@ -13,16 +13,17 @@
     "lint-check": "npm run check-git-hooks && eslint --cache --report-unused-disable-directives . && prettier --check ."
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "next": "14.1.4",
     "react": "^18",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
