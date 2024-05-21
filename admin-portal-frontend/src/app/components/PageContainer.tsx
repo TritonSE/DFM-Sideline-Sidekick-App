@@ -65,11 +65,11 @@ export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categori
 
         {
           // go through each category's items
-          categories.map((category: Category, i) => {
+          categories.map((category: Category) => {
             return category.items.map((page, j) => (
               <PageItem
-                key={"${String(i)}-${String(j)}$}"}
-                id={"${String(i)}-${String(j)}$}"}
+                key={`${String(j)}-${String(j)}`}
+                id={`${String(j)}-${String(j)}`}
                 page={page}
                 title={category.title}
               />
