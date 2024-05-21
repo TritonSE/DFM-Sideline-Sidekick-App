@@ -36,6 +36,7 @@ const InputBlock: React.FC<InputBlockProps> = ({ label, value, onChange }) => (
 
 const EmergencyFlow: React.FC = () => {
   const [emergencyTitle, setEmergencyTitle] = React.useState("");
+  const [emergencySubtitle, setEmergencySubtitle] = React.useState("");
   const [importance, setImportance] = React.useState("");
   const [riskFactors, setRiskFactors] = React.useState("");
   const [mechanismOfInjury, setMechanismOfInjury] = React.useState("");
@@ -50,19 +51,44 @@ const EmergencyFlow: React.FC = () => {
     //make an object of type CreateEmergencyRequest
     //use createEmergency to make the emergency in DB
     //redirect back to main page
+    // const emergency: CreateEmergencyRequest = {
+    //   title: emergencyTitle,
+    //   overview: {
+    //     Importance: importance,
+    //     "Mechanism of Injury": mechanismOfInjury.split(","),
+    //     Diagnosis: diagnosis.split(","),
+    //     "Physical Exam": physicalExam.split(","),
+    //   },
+    //   treatment: {
+    //     "Acute Management": acuteManagement.split(","),
+    //     Dispo: dispo.split(","),
+    //     Considerations: considerations,
+    //   },
+    //   content: {},
+    // };
+
+    const addPropertyIfNotEmpty = (obj: any, key: string, value: any) => {
+      if (value && value.trim() !== "") {
+        obj[key] = value.includes(",") ? value.split(",") : value;
+      }
+    };
+
+    const overview: any = {};
+    addPropertyIfNotEmpty(overview, "Importance", importance);
+    addPropertyIfNotEmpty(overview, "Mechanism of Injury", mechanismOfInjury);
+    addPropertyIfNotEmpty(overview, "Diagnosis", diagnosis);
+    addPropertyIfNotEmpty(overview, "Physical Exam", physicalExam);
+
+    const treatment: any = {};
+    addPropertyIfNotEmpty(treatment, "Acute Management", acuteManagement);
+    addPropertyIfNotEmpty(treatment, "Dispo", dispo);
+    addPropertyIfNotEmpty(treatment, "Considerations", considerations);
+
     const emergency: CreateEmergencyRequest = {
       title: emergencyTitle,
-      overview: {
-        Importance: importance,
-        "Mechanism of Injury": mechanismOfInjury.split(","),
-        Diagnosis: diagnosis.split(","),
-        "Physical Exam": physicalExam.split(","),
-      },
-      treatment: {
-        "Acute Management": acuteManagement.split(","),
-        Dispo: dispo.split(","),
-        Considerations: considerations,
-      },
+      subtitle: emergencySubtitle,
+      ...(Object.keys(overview).length > 0 && { overview }),
+      ...(Object.keys(treatment).length > 0 && { treatment }),
       content: {},
     };
 
@@ -71,6 +97,7 @@ const EmergencyFlow: React.FC = () => {
         if (result.success) {
           // clear the form
           setEmergencyTitle("");
+          setEmergencySubtitle("");
           setImportance("");
           setRiskFactors("");
           setMechanismOfInjury("");
@@ -107,6 +134,12 @@ const EmergencyFlow: React.FC = () => {
         <p style={styles.header}>Global Search &gt; Medical &gt; Add an injury</p>
         <p style={styles.subtitle}>Injury details</p>
         <InputBlock label="Name of injury*" value={emergencyTitle} onChange={setEmergencyTitle} />
+
+        <InputBlock
+          label="Page Description"
+          value={emergencySubtitle}
+          onChange={setEmergencySubtitle}
+        />
 
         <p style={styles.subheader}>Overview</p>
 

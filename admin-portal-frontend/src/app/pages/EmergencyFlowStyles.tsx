@@ -25,7 +25,7 @@ const styles: Styles = {
   },
   container: {
     width: "944px",
-    height: "960px",
+    height: "1050px",
     backgroundColor: "white",
     marginLeft: "350px",
     marginTop: "0px",

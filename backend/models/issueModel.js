@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const medicalEmergencySchema = new mongoose.Schema({
   title: String,
+  subtitle: String,
   overview: {},
   treatment: {},
 });

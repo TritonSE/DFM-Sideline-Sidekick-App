@@ -25,6 +25,7 @@ import type { APIResult } from "./requests";
 export type Emergency = {
   _id: string;
   title: string;
+  subtitle: string;
   overview?: object;
   treatment?: object;
   content?: object;
@@ -37,6 +38,7 @@ export type Emergency = {
  */
 export type CreateEmergencyRequest = {
   title: string;
+  subtitle: string;
   overview?: object;
   treatment?: object;
   content?: object;
@@ -49,6 +51,7 @@ export type CreateEmergencyRequest = {
 export type UpdateEmergencyRequest = {
   _id: string;
   title: string;
+  subtitle: string;
   overview?: object;
   treatment?: object;
   content?: object;

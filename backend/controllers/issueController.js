@@ -70,11 +70,12 @@ export const createEmergency = async (req, res) => {
     }
 
     // Extract data from the request body
-    const { title, overview, treatment, content } = req.body;
+    const { title, subtitle, overview, treatment, content } = req.body;
 
     // Create a new Emergency instance
     const newEmergency = new Emergency({
       title,
+      subtitle,
       overview,
       treatment,
       content,

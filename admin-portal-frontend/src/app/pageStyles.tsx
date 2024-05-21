@@ -16,11 +16,11 @@ const styles: Styles = {
   },
   horizontalNavBar: {
     height: "72px",
-    zIndex: 1,
+    zIndex: 100,
     position: "fixed",
   },
   emergencyFlow: {
-    zIndex: 2,
+    zIndex: 1,
   },
 };
 

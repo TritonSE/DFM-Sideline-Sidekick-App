@@ -15,6 +15,9 @@ const AnotherPage: React.FC = () => {
       <div style={styles.horizontalNavBar}>
         <HorizontalNavBar />
       </div>
+      <div style={styles.emergencyFlow}>
+        <EmergencyFlow />
+      </div>
     </div>
   );
 };
