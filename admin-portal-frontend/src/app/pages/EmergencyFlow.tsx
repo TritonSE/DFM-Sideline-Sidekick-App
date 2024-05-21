@@ -34,6 +34,19 @@ const InputBlock: React.FC<InputBlockProps> = ({ label, value, onChange }) => (
   </>
 );
 
+type Overview = {
+  Importance?: string;
+  "Mechanism of Injury"?: string[];
+  Diagnosis?: string[];
+  "Physical Exam"?: string[];
+};
+
+type Treatment = {
+  "Acute Management"?: string[];
+  Dispo?: string[];
+  Considerations?: string;
+};
+
 const EmergencyFlow: React.FC = () => {
   const [emergencyTitle, setEmergencyTitle] = React.useState("");
   const [emergencySubtitle, setEmergencySubtitle] = React.useState("");
@@ -67,19 +80,19 @@ const EmergencyFlow: React.FC = () => {
     //   content: {},
     // };
 
-    const addPropertyIfNotEmpty = (obj: any, key: string, value: any) => {
+    const addPropertyIfNotEmpty = (obj: Record<string, any>, key: string, value: string) => {
       if (value && value.trim() !== "") {
         obj[key] = value.includes(",") ? value.split(",") : value;
       }
     };
 
-    const overview: any = {};
+    const overview: Overview = {};
     addPropertyIfNotEmpty(overview, "Importance", importance);
     addPropertyIfNotEmpty(overview, "Mechanism of Injury", mechanismOfInjury);
     addPropertyIfNotEmpty(overview, "Diagnosis", diagnosis);
     addPropertyIfNotEmpty(overview, "Physical Exam", physicalExam);
 
-    const treatment: any = {};
+    const treatment: Treatment = {};
     addPropertyIfNotEmpty(treatment, "Acute Management", acuteManagement);
     addPropertyIfNotEmpty(treatment, "Dispo", dispo);
     addPropertyIfNotEmpty(treatment, "Considerations", considerations);
