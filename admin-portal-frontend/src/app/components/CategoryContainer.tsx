@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Category } from "./categoryRoutes";
-import DeleteConfirmationPopup from "./DeletePopUp";
+import DeleteConfirmationPopup from "./DeletePopup";
 import Toast from "./Toast";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
