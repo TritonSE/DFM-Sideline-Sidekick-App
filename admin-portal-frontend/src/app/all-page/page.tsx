@@ -17,7 +17,7 @@ export default function CategoriesPage() {
       setCategories(fetchedCategories as never);
     };
 
-    void fetchData();
+    fetchData();
   }, []);
 
   const selectedStyle = "text-[#00629B] border-[#00629B] border-solid";
