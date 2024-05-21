@@ -10,6 +10,10 @@ export const getAllCategories = async () => {
   try {
     const url = process.env.API_URL;
 
+    if (!url) {
+      throw new Error("API URL is not defined");
+    }
+
     const response = await fetch(url);
     const data = (await response.json()).categories as Category;
 
@@ -25,6 +29,11 @@ export const getAllCategories = async () => {
 export const deleteCategory = async (itemId: string) => {
   try {
     const url = process.env.API_URL + `/${itemId}`;
+
+    if (!url) {
+      throw new Error("API URL is not defined");
+    }
+
     fetch(url, {
       method: "DELETE",
     });
