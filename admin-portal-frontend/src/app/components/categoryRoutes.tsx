@@ -8,7 +8,7 @@ export type Category = {
 // Gets and returns all categories from API
 export const getAllCategories = async () => {
   try {
-    const url = "http://localhost:3001/api/categories";
+    const url = process.env.API_URL;
 
     const response = await fetch(url);
     const data = (await response.json()).categories as Category;
@@ -24,7 +24,7 @@ export const getAllCategories = async () => {
 // Deletes a specific category
 export const deleteCategory = async (itemId: string) => {
   try {
-    const url = `http://localhost:3001/api/categories/${itemId}`;
+    const url = process.env.API_URL + `/${itemId}`;
     fetch(url, {
       method: "DELETE",
     });
