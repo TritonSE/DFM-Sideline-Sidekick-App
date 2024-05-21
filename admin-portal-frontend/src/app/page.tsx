@@ -3,7 +3,6 @@ import React from "react";
 import HorizontalNavBar from "./components/HorizontalNavbar";
 import VerticalNavBar from "./components/VerticalNavBar";
 import styles from "./pageStyles";
-import EmergencyFlow from "./pages/EmergencyFlow";
 
 const AnotherPage: React.FC = () => {
   return (
@@ -13,9 +12,6 @@ const AnotherPage: React.FC = () => {
       </div>
       <div style={styles.horizontalNavBar}>
         <HorizontalNavBar />
-      </div>
-      <div style={styles.emergencyFlow}>
-        <EmergencyFlow />
       </div>
     </div>
   );
