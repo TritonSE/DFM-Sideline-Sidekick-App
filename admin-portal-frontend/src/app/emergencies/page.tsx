@@ -19,7 +19,7 @@ export default function CategoriesPage() {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [categories]);
 
   const onDeleteCategory = async (categoryId: string) => {

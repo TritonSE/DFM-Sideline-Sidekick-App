@@ -4,7 +4,6 @@ import HorizontalNavBar from "./components/HorizontalNavbar";
 import VerticalNavBar from "./components/VerticalNavBar";
 import styles from "./pageStyles";
 import EmergencyFlow from "./pages/EmergencyFlow";
-import Link from "next/link";
 
 const AnotherPage: React.FC = () => {
   return (
