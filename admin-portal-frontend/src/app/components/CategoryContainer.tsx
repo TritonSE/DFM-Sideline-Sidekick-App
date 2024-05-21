@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Category } from "./categoryRoutes";
 import DeleteConfirmationPopup from "./DeletePopup";
-import Toast from "./Toast";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
 
@@ -12,7 +11,7 @@ type CategoryItemProps = {
   title: string;
   visibility?: boolean;
   pages: number;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {

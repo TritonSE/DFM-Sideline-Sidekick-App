@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "../icons/filter.svg";
 import { Category, getAllCategories } from "../components/categoryRoutes";
 import PageContainer from "../components/PageContainer";
@@ -17,7 +17,7 @@ export default function CategoriesPage() {
       setCategories(fetchedCategories as never);
     };
 
-    fetchData();
+    void fetchData();
   }, []);
 
   const selectedStyle = "text-[#00629B] border-[#00629B] border-solid";
@@ -76,7 +76,7 @@ export default function CategoriesPage() {
             />
           </div>
           <button className="flex flex-row items-center gap-2 px-4 py-2 rounded-md text-white bg-[#00629B]">
-            <img src={Filter.src} alt="Filter" className="w-4 h-4" />
+            <img src={Filter?.src as string} alt="Filter" className="w-4 h-4" />
             <p>Filter</p>
           </button>
         </div>
