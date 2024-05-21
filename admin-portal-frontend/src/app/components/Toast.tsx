@@ -17,7 +17,9 @@ const Toast: React.FC<ToastProps> = ({ backgroundColor, message, onClose }) => {
       onClose();
     }, 10000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

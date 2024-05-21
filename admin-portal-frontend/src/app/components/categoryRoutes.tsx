@@ -28,6 +28,10 @@ export const getAllCategories = async () => {
 // Deletes a specific category
 export const deleteCategory = async (itemId: string) => {
   try {
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
     const url = process.env.API_URL + `/${itemId}`;
 
     if (!url) {
