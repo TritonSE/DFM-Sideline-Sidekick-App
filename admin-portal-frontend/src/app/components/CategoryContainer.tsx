@@ -11,7 +11,7 @@ type CategoryItemProps = {
   title: string;
   visibility?: boolean;
   pages: number;
-  onDeleteCategory: (categoryId: string) => Promise<void>;
+  onDeleteCategory: (categoryId: string) => void;
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {
@@ -25,7 +25,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 
   const handleConfirmDelete = async () => {
     try {
-      await onDeleteCategory(id);
+      onDeleteCategory(id);
       setPopupVisible(false);
     } catch (error) {
       console.error("Error deleting category:", error);
