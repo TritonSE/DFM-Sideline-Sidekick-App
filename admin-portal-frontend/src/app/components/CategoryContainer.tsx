@@ -47,7 +47,9 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
             selectedValue === "public" ? "bg-[#E5EFF5]" : "bg-[#D9D9D9]"
           } ${allowEdits ? "appearance-auto" : "appearance-none"}`}
           value={selectedValue}
-          onChange={(e) => setSelectedValue(e.target.value)}
+          onChange={(e) => {
+            setSelectedValue(e.target.value);
+          }}
         >
           <option value="public">Public</option>
           <option value="hidden">Hidden</option>
@@ -57,7 +59,9 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
       <td className="w-1/4 text-center py-3">
         <button
           className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black"
-          onClick={() => setAllowEdits(!allowEdits)}
+          onClick={() => {
+            setAllowEdits(!allowEdits);
+          }}
         >
           <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
         </button>
@@ -66,7 +70,9 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
             src={TrashIcon.src}
             alt="Delete"
             className="w-4 h-4"
-            onClick={() => handleDelete()}
+            onClick={() => {
+              handleDelete();
+            }}
           />
         </button>
       </td>

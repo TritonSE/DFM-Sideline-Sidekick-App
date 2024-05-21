@@ -26,7 +26,9 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
             selectedValue === "public" ? "bg-[#E5EFF5]" : "bg-[#D9D9D9]"
           } ${allowEdits ? "appearance-auto" : "appearance-none"}`}
           value={selectedValue}
-          onChange={(e) => setSelectedValue(e.target.value)}
+          onChange={(e) => {
+            setSelectedValue(e.target.value);
+          }}
         >
           <option value="public">Public</option>
           <option value="hidden">Hidden</option>
@@ -36,7 +38,9 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
       <td className="w-1/4 text-center py-3">
         <button
           className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black"
-          onClick={() => setAllowEdits(!allowEdits)}
+          onClick={() => {
+            setAllowEdits(!allowEdits);
+          }}
         >
           <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
         </button>
@@ -63,7 +67,12 @@ export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categori
           // go through each category's items
           categories.map((category: Category, i) => {
             return category.items.map((page, j) => (
-              <PageItem key={i + "-" + j} id={i + "-" + j} page={page} title={category.title} />
+              <PageItem
+                key={"${String(i)}-${String(j)}$}"}
+                id={"${String(i)}-${String(j)}$}"}
+                page={page}
+                title={category.title}
+              />
             ));
           })
         }
