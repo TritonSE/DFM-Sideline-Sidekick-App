@@ -20,8 +20,8 @@ export default function CategoriesPage() {
     fetchData();
   }, []);
 
-  const selectedStyle = "text-[#00629B] border-[#00629B] border-solid"
-  const unselectedStyle = "text-[#6C6C6C]"
+  const selectedStyle = "text-[#00629B] border-[#00629B] border-solid";
+  const unselectedStyle = "text-[#6C6C6C]";
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-screen overflow-auto p-20 gap-8 bg-[#E5EFF5]">
@@ -30,12 +30,26 @@ export default function CategoriesPage() {
       </div>
 
       <div className="flex flex-row justify-start w-5/6 gap-3">
-        <button className={"bg-white px-5 py-1 rounded-md border " + (publishedState ? selectedStyle : unselectedStyle)} 
-        onClick={() => {setPublishedState(true)}}>
+        <button
+          className={
+            "bg-white px-5 py-1 rounded-md border " +
+            (publishedState ? selectedStyle : unselectedStyle)
+          }
+          onClick={() => {
+            setPublishedState(true);
+          }}
+        >
           Published (0)
         </button>
-        <button className={"bg-white px-5 py-1 rounded-md border " + (!publishedState ? selectedStyle : unselectedStyle)}
-        onClick={() => {setPublishedState(false)}}>
+        <button
+          className={
+            "bg-white px-5 py-1 rounded-md border " +
+            (!publishedState ? selectedStyle : unselectedStyle)
+          }
+          onClick={() => {
+            setPublishedState(false);
+          }}
+        >
           Draft (0)
         </button>
       </div>
@@ -72,9 +86,7 @@ export default function CategoriesPage() {
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Pages</h2>
           <div className="flex flex-row flex-wrap justify-end gap-2">
-            <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">
-              Edit Order
-            </button>
+            <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">Edit Order</button>
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Page</button>
           </div>
         </div>

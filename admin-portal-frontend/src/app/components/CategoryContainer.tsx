@@ -10,7 +10,7 @@ import EditIcon from "../icons/edit.svg";
 type CategoryItemProps = {
   id: string;
   title: string;
-  visbility?: boolean;
+  visibility?: boolean;
   pages: number;
   onDeleteCategory: (categoryId: string) => void;
 };
@@ -89,7 +89,7 @@ export const CategoryContainer: React.FC<{
       <tbody>
         <tr className="border-b">
           <th className="w-1/4 text-center py-3">Category Name</th>
-          <th className="w-1/4 text-center py-3">Visbility</th>
+          <th className="w-1/4 text-center py-3">Visibility</th>
           <th className="w-1/4 text-center py-3">Pages</th>
           <th className="w-1/4 text-center py-3">Actions</th>
         </tr>
