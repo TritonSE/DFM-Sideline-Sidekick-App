@@ -2,14 +2,15 @@
 
 import styles from './VerticalNavBarStyles';
 import HomeComponent from './HomeComponent';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Card } from 'react-bootstrap';
 import GpComponent from './GPComponent';
 import SearchComponent from './SearchComponent';
+import { getAllCategories } from '../api/categories';
+import { NavLink } from 'react-router-dom';
 
-  
   const VerticalNavBar: React.FC = () => {
       
       interface CustomAccordionProps {
@@ -25,6 +26,24 @@ import SearchComponent from './SearchComponent';
           </div>
         );
       }
+
+      interface Category {
+        _id: string;
+        title: String;
+        items: [];
+        type: String;
+      }
+      
+      const [items, setItems] = useState<Category[]>([]);
+      useEffect(() => {
+        (async () => {
+          const categories = await getAllCategories();
+          setItems(categories);
+        })();
+      }, []);
+
+      const generalPrinciples = items.filter(category => category.type === 'General Principle');
+
 
     return (
 
@@ -82,19 +101,19 @@ import SearchComponent from './SearchComponent';
               </div>
             </Accordion.Header>
             <Accordion.Body>
-            <ul style={{ listStyleType: 'none' }}>
-              <li style={styles.listItem}>All</li>
-              <li style={styles.listItem}>Emergency Action Plan</li>
-              <li style={styles.listItem}>Trauma Centers</li>
-              <li style={styles.listItem}>Burn Centers</li>
-              <li style={styles.listItem}>Stroke Centers</li>
-              <li style={styles.listItem}>Serious On-Field Injury</li>
-              <li style={styles.listItem}>Catastrophic Incident</li>
-              <li style={styles.listItem}>Adminstering Medication</li>
-              <li style={styles.listItem}>Muscle Injuries</li>
-              <li style={styles.listItem}>Ligament Injuries</li>
-              <li style={styles.listItem}>Dislocations/Sublaxations</li>
-              <li style={styles.listItem}>Fractures</li>
+
+            <ul>
+              {generalPrinciples.map(category => (
+                <li style={styles.listItem} key={category._id}>
+                  <NavLink to={`/category/${category._id}`} style={({ isActive }) => {
+                    return {
+                      textDecoration: 'none',
+                      fontWeight: isActive ? "bold" : "",
+                      color: isActive ? "var(--DFM-Navy, #182B49)" : "var(--Neutral-Gray6, #484848)",
+                    };
+                }} className="active">{category.title}</NavLink>
+                              </li>
+                ))}
             </ul>
 
             </Accordion.Body>
@@ -110,5 +129,6 @@ import SearchComponent from './SearchComponent';
       </div>
     );
   };
+
   
   export default VerticalNavBar;
