@@ -32,7 +32,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 
   const handleConfirmDelete = () => {
     try {
-      onDeleteCategory(id);
+      void onDeleteCategory(id);
       setPopupVisible(false);
     } catch (error) {
       console.error("Error deleting category:", error);
