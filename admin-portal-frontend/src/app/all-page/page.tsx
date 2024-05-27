@@ -20,7 +20,7 @@ export default function CategoriesPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedCategories = (await getAllCategories()) as Category[];
+        const fetchedCategories = await getAllCategories();
         setCategories(fetchedCategories as never);
       } catch (error) {
         console.log("Fetch categories failed.");
