@@ -1,10 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { Category } from "./categoryRoutes";
-import TrashIcon from "../icons/trash.svg";
+
 import EditIcon from "../icons/edit.svg";
+import TrashIcon from "../icons/trash.svg";
+
 import DeleteConfirmationPopup from "./DeletePopup";
+
+import { Category } from "./categoryRoutes";
+
+type IconProps = {
+  'content-type': string,
+  src: string
+}
 
 type PageItemProps = {
   id: string;
@@ -23,13 +31,13 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }
     setPopupVisible(true);
   };
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmDelete = () => {
     try {
       onDeleteCategory(id);
-      console.log("Category deleted:", id);
+      console.log("Page deleted:", id);
       setPopupVisible(false);
     } catch (error) {
-      console.error("Error deleting category:", error);
+      console.error("Error deleting page:", error);
     }
   };
 
@@ -63,11 +71,11 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }
             setAllowEdits(!allowEdits);
           }}
         >
-          <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
+          <img src={( EditIcon as IconProps ).src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
-            src={TrashIcon.src}
+            src={( TrashIcon as IconProps ).src}
             alt="Delete"
             className="w-4 h-4"
             onClick={() => {
