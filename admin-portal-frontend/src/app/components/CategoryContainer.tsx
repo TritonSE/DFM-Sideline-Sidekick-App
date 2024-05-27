@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 
-import DeleteConfirmationPopup from "./DeletePopup";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
+
+import DeleteConfirmationPopup from "./DeletePopup";
 
 import { Category } from "./categoryRoutes";
 
@@ -74,7 +75,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
-            src={TrashIcon.src}
+            src={( TrashIcon as IconProps ).src}
             alt="Delete"
             className="w-4 h-4"
             onClick={() => {
