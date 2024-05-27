@@ -19,7 +19,7 @@ export const getAllCategories = async () => {
     const url = `${process.env.API_URL}/categories`;
 
     const response = await fetch(url);
-    const data: GetCategoriesResponse = await response.json();
+    const data = (await response.json()) as GetCategoriesResponse;
 
     return data.categories;
   } catch (error) {
