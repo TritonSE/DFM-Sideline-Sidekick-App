@@ -1,11 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Filter from "../icons/filter.svg";
+import FilterIcon from "../icons/filter.svg";
 
 import { Category, deletePage, getAllCategories } from "../components/categoryRoutes";
 import PageContainer from "../components/PageContainer";
 import Toast from "../components/Toast";
+
+type IconProps = {
+  "content-type": string;
+  src: string;
+};
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
@@ -95,7 +100,7 @@ export default function CategoriesPage() {
             />
           </div>
           <button className="flex flex-row items-center gap-2 px-4 py-2 rounded-md text-white bg-[#00629B]">
-            {Filter ? <img src={Filter.src} alt="Filter" className="w-4 h-4" /> : null}
+            <img src={(FilterIcon as IconProps).src} alt="Filter" className="w-4 h-4" />
             <p>Filter</p>
           </button>
         </div>
