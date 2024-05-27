@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import FilterIcon from "../icons/filter.svg";
 
-import { Category, deletePage, getAllCategories } from "../components/categoryRoutes";
+import { deletePage, getAllCategories } from "../components/categoryRoutes";
 import PageContainer from "../components/PageContainer";
 import Toast from "../components/Toast";
 
