@@ -5,6 +5,10 @@ export type Category = {
   type: string;
 };
 
+type GetCategoriesResponse = {
+  categories: Category[];
+};
+
 // Gets and returns all categories from API
 export const getAllCategories = async () => {
   try {
@@ -15,10 +19,9 @@ export const getAllCategories = async () => {
     const url = `${process.env.API_URL}/categories`;
 
     const response = await fetch(url);
-    const data = (await response.json()).categories as Category;
+    const data: GetCategoriesResponse = await response.json();
 
-    // console.log(data);
-    return data;
+    return data.categories;
   } catch (error) {
     console.log("Error getting categories", error);
     return [];
