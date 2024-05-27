@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CategoryContainer from "../components/CategoryContainer";
-import { Category, getAllCategories, deleteCategory } from "../components/categoryRoutes";
+
+import { CategoryContainer } from "../components/CategoryContainer";
 import Toast from "../components/Toast";
+
+import { Category, deleteCategory, getAllCategories } from "../components/categoryRoutes";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
@@ -19,7 +21,7 @@ export default function CategoriesPage() {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [categories]);
 
   const onDeleteCategory = async (categoryId: string) => {
@@ -41,8 +43,8 @@ export default function CategoriesPage() {
       <div className="flex flex-row justify-between w-full md:w-5/6 lg:w-4/5 xl:w-3/4 mb-6">
         <h1 className="text-start text-2xl font-bold">General Principles</h1>
         <div>
-          <select className="px-3 py-1 bg-white">
-            <option disabled selected hidden>
+          <select defaultValue="Filter by" className="px-3 py-1 bg-white">
+            <option value="Filter by" disabled hidden>
               Filter by
             </option>
             <option value="Alphabetical Order">Alphabetical Order</option>
