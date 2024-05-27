@@ -8,7 +8,7 @@ export type Category = {
 // Gets and returns all categories from API
 export const getAllCategories = async () => {
   try {
-    const url = process.env.API_URL;
+    const url = process.env.API_URL + "/categories";
 
     if (!url) {
       throw new Error("API URL is not defined");
@@ -32,7 +32,7 @@ export const deleteCategory = async (itemId: string) => {
       throw new Error("API URL is not defined");
     }
 
-    const url = process.env.API_URL + `/${itemId}`;
+    const url = process.env.API_URL + `/categories/${itemId}`;
 
     if (!url) {
       throw new Error("API URL is not defined");
@@ -43,5 +43,26 @@ export const deleteCategory = async (itemId: string) => {
     });
   } catch (error) {
     console.log("Error delete category", error);
+  }
+};
+
+// Deletes a specific page (title) from a category
+export const deletePage = async (itemId: string, title: string) => {
+  try {
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = process.env.API_URL + `/categories/${itemId}/${title}`;
+
+    if (!url) {
+      throw new Error("API URL is not defined");
+    }
+
+    fetch(url, {
+      method: "PUT",
+    });
+  } catch (error) {
+    console.log("Error deleting page", error);
   }
 };

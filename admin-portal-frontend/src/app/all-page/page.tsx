@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Filter from "../icons/filter.svg";
 
-import { Category, deleteCategory, getAllCategories } from "../components/categoryRoutes";
+import { Category, deletePage, getAllCategories } from "../components/categoryRoutes";
 import PageContainer from "../components/PageContainer";
 import Toast from "../components/Toast";
 
@@ -15,7 +15,7 @@ export default function CategoriesPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedCategories = await getAllCategories();
+        const fetchedCategories = (await getAllCategories()) as Category[];
         console.log(fetchedCategories);
         setCategories(fetchedCategories as never);
       } catch (error) {
@@ -26,10 +26,10 @@ export default function CategoriesPage() {
     fetchData();
   }, [categories]);
 
-  const onDeleteCategory = async (categoryId: string) => {
+  const onDeletePage = async (categoryId: string, title: string) => {
     try {
       console.log("Deleting category with ID:", categoryId);
-      await deleteCategory(categoryId);
+      await deletePage(categoryId, title);
       setShowToast(true);
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -110,7 +110,7 @@ export default function CategoriesPage() {
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Page</button>
           </div>
         </div>
-        <PageContainer items={categories} onDeleteCategory={onDeleteCategory}></PageContainer>
+        <PageContainer items={categories} onDeletePage={onDeletePage}></PageContainer>
         {showToast && (
           <Toast
             backgroundColor={"#000000"}

@@ -10,19 +10,20 @@ import DeleteConfirmationPopup from "./DeletePopup";
 import { Category } from "./categoryRoutes";
 
 type IconProps = {
-  'content-type': string,
-  src: string
-}
+  "content-type": string;
+  src: string;
+};
 
 type PageItemProps = {
   id: string;
+  categoryId: string;
   title: string;
   page: string;
   visibility?: boolean;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeletePage: (categoryId: string, pageTitle: string) => void;
 };
 
-const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }) => {
+const PageItem: React.FC<PageItemProps> = ({ id, page, categoryId, title, onDeletePage }) => {
   const [selectedValue, setSelectedValue] = useState("public");
   const [allowEdits, setAllowEdits] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -33,8 +34,8 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }
 
   const handleConfirmDelete = () => {
     try {
-      onDeleteCategory(id);
-      console.log("Page deleted:", id);
+      onDeletePage(categoryId, page);
+      console.log("Page deleted:", page);
       setPopupVisible(false);
     } catch (error) {
       console.error("Error deleting page:", error);
@@ -71,11 +72,11 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }
             setAllowEdits(!allowEdits);
           }}
         >
-          <img src={( EditIcon as IconProps ).src} alt="Edit" className="w-4 h-4" />
+          <img src={(EditIcon as IconProps).src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
-            src={( TrashIcon as IconProps ).src}
+            src={(TrashIcon as IconProps).src}
             alt="Delete"
             className="w-4 h-4"
             onClick={() => {
@@ -93,8 +94,8 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }
 
 export const PageContainer: React.FC<{
   items: Category[];
-  onDeleteCategory: (categoryId: string) => void;
-}> = ({ items: categories, onDeleteCategory }) => {
+  onDeletePage: (categoryId: string, pageTitle: string) => void;
+}> = ({ items: categories, onDeletePage }) => {
   return (
     <table>
       <tbody>
@@ -111,10 +112,11 @@ export const PageContainer: React.FC<{
             return category.items.map((page, j) => (
               <PageItem
                 key={`${String(j)}-${String(j)}`}
-                id={category._id}
+                id={`${String(j)}-${String(j)}`}
+                categoryId={category._id}
                 page={page}
                 title={category.title}
-                onDeleteCategory={onDeleteCategory}
+                onDeletePage={onDeletePage}
               />
             ));
           })
