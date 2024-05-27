@@ -48,7 +48,6 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
     <tr key={id + title} className="border-b">
       <td className="w-1/4 text-center py-3">{title}</td>
       <td className="w-1/4 text-center py-3">
-        {/* Added just to check styling */}
         <select
           disabled={!allowEdits}
           className={`p-1 text-center rounded-md ${
