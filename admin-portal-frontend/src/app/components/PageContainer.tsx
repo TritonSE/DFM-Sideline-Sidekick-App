@@ -20,7 +20,7 @@ type PageItemProps = {
   title: string;
   page: string;
   visibility?: boolean;
-  onDeletePage: (categoryId: string, pageTitle: string) => void;
+  onDeletePage: (categoryId: string, pageTitle: string) => Promise<void>;
 };
 
 const PageItem: React.FC<PageItemProps> = ({ id, page, categoryId, title, onDeletePage }) => {
