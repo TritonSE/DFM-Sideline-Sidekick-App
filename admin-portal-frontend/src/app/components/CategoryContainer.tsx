@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { Category } from "./categoryRoutes";
+
 import DeleteConfirmationPopup from "./DeletePopup";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
+
+import { Category } from "./categoryRoutes";
+
+type IconProps = {
+  'content-type': string,
+  src: string
+}
 
 type CategoryItemProps = {
   id: string;
@@ -23,7 +30,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
     setPopupVisible(true);
   };
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmDelete = () => {
     try {
       onDeleteCategory(id);
       setPopupVisible(false);
@@ -63,7 +70,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
             setAllowEdits(!allowEdits);
           }}
         >
-          <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
+          <img src={( EditIcon as IconProps ).src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
@@ -105,6 +112,7 @@ export const CategoryContainer: React.FC<{
           .map((category: Category) => {
             return (
               <CategoryItem
+                key={category._id}
                 id={category._id}
                 title={category.title}
                 pages={category.items.length}
