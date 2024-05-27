@@ -16,14 +16,13 @@ export default function CategoriesPage() {
     const fetchData = async () => {
       try {
         const fetchedCategories = (await getAllCategories()) as Category[];
-        console.log(fetchedCategories);
         setCategories(fetchedCategories as never);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.log("Fetch categories failed.");
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [categories]);
 
   const onDeletePage = async (categoryId: string, title: string) => {
@@ -96,7 +95,7 @@ export default function CategoriesPage() {
             />
           </div>
           <button className="flex flex-row items-center gap-2 px-4 py-2 rounded-md text-white bg-[#00629B]">
-            {Filter?.src && <img src={Filter.src} alt="Filter" className="w-4 h-4" />}
+            {Filter ? <img src={Filter.src} alt="Filter" className="w-4 h-4" /> : null}
             <p>Filter</p>
           </button>
         </div>
