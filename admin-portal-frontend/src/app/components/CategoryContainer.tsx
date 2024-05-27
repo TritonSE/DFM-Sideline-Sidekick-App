@@ -93,7 +93,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 export const CategoryContainer: React.FC<{
   items: Category[];
   type: string;
-  onDeleteCategory: (categoryId: string) => Promise<undefined>;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 }> = ({ items: categories, type, onDeleteCategory }) => {
   return (
     <table>
