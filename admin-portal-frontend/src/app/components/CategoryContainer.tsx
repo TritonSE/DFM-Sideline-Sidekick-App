@@ -6,7 +6,6 @@ import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
-
 import { Category } from "./categoryRoutes";
 
 type IconProps = {
@@ -93,7 +92,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 export const CategoryContainer: React.FC<{
   items: Category[];
   type: string;
-  onDeleteCategory: (categoryId: string) => Promise<void>;
+  onDeleteCategory: (categoryId: string) => Promise<void> | void;
 }> = ({ items: categories, type, onDeleteCategory }) => {
   return (
     <table>
