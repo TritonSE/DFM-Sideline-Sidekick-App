@@ -6,7 +6,6 @@ import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
-
 import { Category } from "./categoryRoutes";
 
 type IconProps = {
@@ -19,7 +18,7 @@ type CategoryItemProps = {
   title: string;
   visibility?: boolean;
   pages: number;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {
@@ -33,7 +32,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 
   const handleConfirmDelete = () => {
     try {
-      onDeleteCategory(id);
+      void onDeleteCategory(id);
       setPopupVisible(false);
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -93,7 +92,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 export const CategoryContainer: React.FC<{
   items: Category[];
   type: string;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 }> = ({ items: categories, type, onDeleteCategory }) => {
   return (
     <table>

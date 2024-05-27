@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CategoryContainer from "../components/CategoryContainer";
-import { Category, getAllCategories, deleteCategory } from "../components/categoryRoutes";
+
+import { CategoryContainer } from "../components/CategoryContainer";
 import Toast from "../components/Toast";
+import { Category, deleteCategory, getAllCategories } from "../components/categoryRoutes";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
@@ -19,7 +20,7 @@ export default function CategoriesPage() {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [categories]);
 
   const onDeleteCategory = async (categoryId: string) => {
