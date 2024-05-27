@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import { CategoryContainer } from "../components/CategoryContainer";
 import Toast from "../components/Toast";
-
 import { Category, deleteCategory, getAllCategories } from "../components/categoryRoutes";
 
 export default function CategoriesPage() {
