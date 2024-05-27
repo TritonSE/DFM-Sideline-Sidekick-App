@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 
-import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
+import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
 
