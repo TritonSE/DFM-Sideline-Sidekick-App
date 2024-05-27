@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Filter from "../icons/filter.svg";
-import { Category, getAllCategories, deleteCategory } from "../components/categoryRoutes";
+
+import { Category, deleteCategory, getAllCategories } from "../components/categoryRoutes";
 import PageContainer from "../components/PageContainer";
 import Toast from "../components/Toast";
 
@@ -13,10 +14,13 @@ export default function CategoriesPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedCategories = (await getAllCategories()) as Category[];
-      console.log(fetchedCategories);
-
-      setCategories(fetchedCategories as never);
+      try {
+        const fetchedCategories = await getAllCategories();
+        console.log(fetchedCategories);
+        setCategories(fetchedCategories as never);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
     };
 
     fetchData();
@@ -92,7 +96,7 @@ export default function CategoriesPage() {
             />
           </div>
           <button className="flex flex-row items-center gap-2 px-4 py-2 rounded-md text-white bg-[#00629B]">
-            <img src={Filter?.src as string} alt="Filter" className="w-4 h-4" />
+            {Filter?.src && <img src={Filter.src} alt="Filter" className="w-4 h-4" />}
             <p>Filter</p>
           </button>
         </div>
