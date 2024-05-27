@@ -34,11 +34,10 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, categoryId, title, onDele
 
   const handleConfirmDelete = () => {
     try {
-      onDeletePage(categoryId, page);
-      console.log("Page deleted:", page);
+      void onDeletePage(categoryId, page);
       setPopupVisible(false);
     } catch (error) {
-      console.error("Error deleting page:", error);
+      console.error("Error deleting category:", error);
     }
   };
 
