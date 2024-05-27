@@ -4,17 +4,38 @@ import React, { useState } from "react";
 import { Category } from "./categoryRoutes";
 import TrashIcon from "../icons/trash.svg";
 import EditIcon from "../icons/edit.svg";
+import DeleteConfirmationPopup from "./DeletePopup";
 
 type PageItemProps = {
   id: string;
   title: string;
   page: string;
   visibility?: boolean;
+  onDeleteCategory: (categoryId: string) => void;
 };
 
-const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
+const PageItem: React.FC<PageItemProps> = ({ id, page, title, onDeleteCategory }) => {
   const [selectedValue, setSelectedValue] = useState("public");
   const [allowEdits, setAllowEdits] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+
+  const handleDelete = () => {
+    setPopupVisible(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      onDeleteCategory(id);
+      console.log("Category deleted:", id);
+      setPopupVisible(false);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setPopupVisible(false);
+  };
 
   return (
     <tr key={id} className="border-b">
@@ -45,14 +66,27 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
           <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
-          <img src={TrashIcon.src} alt="Delete" className="w-4 h-4" />
+          <img
+            src={TrashIcon.src}
+            alt="Delete"
+            className="w-4 h-4"
+            onClick={() => {
+              handleDelete();
+            }}
+          />
         </button>
+        {popupVisible ? (
+          <DeleteConfirmationPopup onDelete={handleConfirmDelete} onCancel={handleCancelDelete} />
+        ) : null}
       </td>
     </tr>
   );
 };
 
-export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categories }) => {
+export const PageContainer: React.FC<{
+  items: Category[];
+  onDeleteCategory: (categoryId: string) => void;
+}> = ({ items: categories, onDeleteCategory }) => {
   return (
     <table>
       <tbody>
@@ -69,9 +103,10 @@ export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categori
             return category.items.map((page, j) => (
               <PageItem
                 key={`${String(j)}-${String(j)}`}
-                id={`${String(j)}-${String(j)}`}
+                id={category._id}
                 page={page}
                 title={category.title}
+                onDeleteCategory={onDeleteCategory}
               />
             ));
           })

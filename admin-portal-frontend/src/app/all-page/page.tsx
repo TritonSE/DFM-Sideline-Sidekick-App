@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Filter from "../icons/filter.svg";
-import { Category, getAllCategories } from "../components/categoryRoutes";
+import { Category, getAllCategories, deleteCategory } from "../components/categoryRoutes";
 import PageContainer from "../components/PageContainer";
+import Toast from "../components/Toast";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [publishedState, setPublishedState] = useState(true);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +20,21 @@ export default function CategoriesPage() {
     };
 
     fetchData();
-  }, []);
+  }, [categories]);
+
+  const onDeleteCategory = async (categoryId: string) => {
+    try {
+      console.log("Deleting category with ID:", categoryId);
+      await deleteCategory(categoryId);
+      setShowToast(true);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
 
   const selectedStyle = "text-[#00629B] border-[#00629B] border-solid";
   const unselectedStyle = "text-[#6C6C6C]";
@@ -90,7 +106,14 @@ export default function CategoriesPage() {
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Page</button>
           </div>
         </div>
-        <PageContainer items={categories}></PageContainer>
+        <PageContainer items={categories} onDeleteCategory={onDeleteCategory}></PageContainer>
+        {showToast && (
+          <Toast
+            backgroundColor={"#000000"}
+            message={"Category deleted"}
+            onClose={handleCloseToast}
+          />
+        )}
       </div>
     </div>
   );
