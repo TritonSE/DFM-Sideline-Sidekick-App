@@ -8,11 +8,11 @@ export type Category = {
 // Gets and returns all categories from API
 export const getAllCategories = async () => {
   try {
-    const url = process.env.API_URL + "/categories";
-
-    if (!url) {
+    if (!process.env.API_URL) {
       throw new Error("API URL is not defined");
     }
+
+    const url = `${process.env.API_URL}/categories`;
 
     const response = await fetch(url);
     const data = (await response.json()).categories as Category;
@@ -32,13 +32,13 @@ export const deleteCategory = async (itemId: string) => {
       throw new Error("API URL is not defined");
     }
 
-    const url = process.env.API_URL + `/categories/${itemId}`;
+    const url = `${process.env.API_URL}/categories/${itemId}`;
 
     if (!url) {
       throw new Error("API URL is not defined");
     }
 
-    fetch(url, {
+    await fetch(url, {
       method: "DELETE",
     });
   } catch (error) {
@@ -53,13 +53,13 @@ export const deletePage = async (itemId: string, title: string) => {
       throw new Error("API URL is not defined");
     }
 
-    const url = process.env.API_URL + `/categories/${itemId}/${title}`;
+    const url = `${process.env.API_URL}/categories/${itemId}/${title}`;
 
     if (!url) {
       throw new Error("API URL is not defined");
     }
 
-    fetch(url, {
+    await fetch(url, {
       method: "PUT",
     });
   } catch (error) {
