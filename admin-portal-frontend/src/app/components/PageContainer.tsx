@@ -94,7 +94,7 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, categoryId, title, onDele
 
 export const PageContainer: React.FC<{
   items: Category[];
-  onDeletePage: (categoryId: string, pageTitle: string) => void;
+  onDeletePage: (categoryId: string, pageTitle: string) => Promise<void>;
 }> = ({ items: categories, onDeletePage }) => {
   return (
     <table>
