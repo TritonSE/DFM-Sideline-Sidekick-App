@@ -18,7 +18,7 @@ type CategoryItemProps = {
   title: string;
   visibility?: boolean;
   pages: number;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {
@@ -92,7 +92,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 export const CategoryContainer: React.FC<{
   items: Category[];
   type: string;
-  onDeleteCategory: (categoryId: string) => Promise<void> | void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 }> = ({ items: categories, type, onDeleteCategory }) => {
   return (
     <table>
