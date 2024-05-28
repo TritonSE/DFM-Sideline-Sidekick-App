@@ -1,3 +1,5 @@
+import { updateVersion } from "./Version";
+
 export type Category = {
   _id: string;
   title: string;
@@ -44,6 +46,8 @@ export const deleteCategory = async (itemId: string) => {
     await fetch(url, {
       method: "DELETE",
     });
+
+    await updateVersion();
   } catch (error) {
     console.log("Error delete category", error);
   }
@@ -65,6 +69,35 @@ export const deletePage = async (itemId: string, title: string) => {
     await fetch(url, {
       method: "PUT",
     });
+
+    await updateVersion();
+  } catch (error) {
+    console.log("Error deleting page", error);
+  }
+};
+
+// Add a page (title) to a category
+export const addPage = async (itemId: string, title: string) => {
+  try {
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/categories/${itemId}`;
+
+    if (!url) {
+      throw new Error("API URL is not defined");
+    }
+
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title }),
+    });
+
+    await updateVersion();
   } catch (error) {
     console.log("Error deleting page", error);
   }
