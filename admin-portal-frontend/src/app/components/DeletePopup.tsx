@@ -10,7 +10,7 @@ type IconProps = {
 type DeleteConfirmationPopupProps = {
   onDelete: () => void;
   onCancel: () => void;
-  type: String;
+  type: string;
 };
 
 const DeleteConfirmationPopup: React.FC<DeleteConfirmationPopupProps> = ({
