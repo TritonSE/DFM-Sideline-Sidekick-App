@@ -3,7 +3,7 @@
 import { doc, setDoc } from "firebase/firestore";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
-import { db } from "./firebase-config";
+import { db } from "../firebase-config";
 
 const InviteAdmin = () => {
   const [adminForm, setAdminForm] = useState({

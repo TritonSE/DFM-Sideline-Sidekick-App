@@ -73,7 +73,7 @@ const AdminCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
       {admins.map((admin, index) => (
-        <div key={index} className="bg-white shadow-md rounded-lg p-5 pt-3">
+        <div key={index} className="bg-white shadow-md rounded-lg p-4 py-3">
             <button
               className="flex justify-end pt-1 w-full text-gray-500 hover:text-gray-900"
               onClick={() => deleteAdmin(admin.email)}

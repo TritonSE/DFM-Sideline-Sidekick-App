@@ -16,16 +16,27 @@ type SignUpForm = {
   password: string;
 };
 
-const formatFirebaseError = (error: FirebaseError): string => {
+const formatFirebaseError = (error: any): string => {
+  // Log the error to understand its structure
+  console.log("Firebase error:", error);
+
+  // Check if the error has a code property and it's a string
   if (error?.code && typeof error.code === "string") {
-    const errorCode = error.code.split("/")[1];
-    return errorCode
-      .split("-")
-      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+    const errorParts = error.code.split("/");
+    if (errorParts.length > 1) {
+      const errorCode = errorParts[1];
+      return errorCode
+        .split("-")
+        .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    }
   }
+
+  // Fallback if error.code doesn't exist or isn't in the expected format
   return "An unexpected error occurred";
 };
+
+
 
 export default function SignUp() {
   const db = getFirestore();
