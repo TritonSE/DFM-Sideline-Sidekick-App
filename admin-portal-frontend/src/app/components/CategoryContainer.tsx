@@ -6,12 +6,12 @@ import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
-import { Category } from "./categoryRoutes";
+import { Category } from "../api/Categories";
 
 type IconProps = {
-  'content-type': string,
-  src: string
-}
+  "content-type": string;
+  src: string;
+};
 
 type CategoryItemProps = {
   id: string;
@@ -69,11 +69,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
             setAllowEdits(!allowEdits);
           }}
         >
-          <img src={( EditIcon as IconProps ).src} alt="Edit" className="w-4 h-4" />
+          <img src={(EditIcon as IconProps).src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
-            src={( TrashIcon as IconProps ).src}
+            src={(TrashIcon as IconProps).src}
             alt="Delete"
             className="w-4 h-4"
             onClick={() => {

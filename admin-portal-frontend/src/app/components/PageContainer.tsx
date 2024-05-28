@@ -7,7 +7,7 @@ import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
 
-import { Category } from "./categoryRoutes";
+import { Category } from "../api/Categories";
 
 type IconProps = {
   "content-type": string;
