@@ -83,7 +83,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
         </button>
       </td>
       {popupVisible ? (
-        <DeleteConfirmationPopup onDelete={handleConfirmDelete} onCancel={handleCancelDelete} />
+        <DeleteConfirmationPopup
+          onDelete={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+          type={"category"}
+        />
       ) : null}
     </tr>
   );

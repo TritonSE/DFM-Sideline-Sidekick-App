@@ -3,18 +3,20 @@ import React from "react";
 import CloseIcon from "../icons/close.svg";
 
 type IconProps = {
-  'content-type': string,
-  src: string
-}
+  "content-type": string;
+  src: string;
+};
 
 type DeleteConfirmationPopupProps = {
   onDelete: () => void;
   onCancel: () => void;
+  type: String;
 };
 
 const DeleteConfirmationPopup: React.FC<DeleteConfirmationPopupProps> = ({
   onDelete,
   onCancel,
+  type,
 }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
@@ -26,10 +28,10 @@ const DeleteConfirmationPopup: React.FC<DeleteConfirmationPopupProps> = ({
           <h1 className="text-xl sm:text-2xl text-[#182B49] font-bold">
             Are you sure you want to delete
             <br />
-            this category?
+            this {type}?
           </h1>
           <p className="my-4 text-[#182B49]">
-            This category cannot be restored and will not be saved.
+            This {type} cannot be restored and will not be saved.
           </p>
           <div className="flex justify-evenly mt-4 sm:mt-6">
             <button

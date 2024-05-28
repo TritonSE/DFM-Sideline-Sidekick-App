@@ -84,7 +84,11 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, categoryId, title, onDele
           />
         </button>
         {popupVisible ? (
-          <DeleteConfirmationPopup onDelete={handleConfirmDelete} onCancel={handleCancelDelete} />
+          <DeleteConfirmationPopup
+            onDelete={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+            type={"page"}
+          />
         ) : null}
       </td>
     </tr>

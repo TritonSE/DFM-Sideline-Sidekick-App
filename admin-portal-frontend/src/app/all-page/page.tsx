@@ -116,11 +116,7 @@ export default function CategoriesPage() {
         </div>
         <PageContainer items={categories} onDeletePage={onDeletePage}></PageContainer>
         {showToast && (
-          <Toast
-            backgroundColor={"#000000"}
-            message={"Category deleted"}
-            onClose={handleCloseToast}
-          />
+          <Toast backgroundColor={"#000000"} message={"Page deleted"} onClose={handleCloseToast} />
         )}
       </div>
     </div>
