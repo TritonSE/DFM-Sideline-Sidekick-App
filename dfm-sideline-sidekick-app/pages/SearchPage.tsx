@@ -70,8 +70,7 @@ const SearchPage: React.FC<SearchPageProps> = ({
       const matchedDocuments = searchDocuments(allDocuments, text).map((doc) => ({
         ...doc,
         _id: doc._id ?? "fallback-id",
-        subtitle:
-          doc.subtitle ?? "Lorem ipsum dolor sit amet, consectetur adip iscing elit, sed do.",
+        subtitle: doc.subtitle,
       }));
       setFilteredDocuments(matchedDocuments);
     } else {
