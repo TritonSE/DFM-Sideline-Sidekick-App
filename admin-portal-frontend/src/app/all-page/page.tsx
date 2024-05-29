@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FilterIcon from "../icons/filter.svg";
 
 import { deletePage, getAllCategories } from "../api/Categories";
 import PageContainer from "../components/PageContainer";
 import Toast from "../components/Toast";
+import FilterIcon from "../icons/filter.svg";
 
 type IconProps = {
   "content-type": string;

@@ -70,6 +70,7 @@ async function assertOk(response: Response): Promise<void> {
     return;
   }
 
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   let message = `${response.status} ${response.statusText}`;
 
   try {
