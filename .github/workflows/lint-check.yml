@@ -26,7 +26,7 @@ jobs:
       run: |
         npm ci
         npm run lint-check
-  admin portal frontend:
+  admin-portal-frontend:
     name: Admin portal frontend lint and style check
     runs-on: ubuntu-latest
     steps:
