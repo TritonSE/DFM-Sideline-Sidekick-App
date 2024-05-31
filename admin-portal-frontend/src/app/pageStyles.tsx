@@ -11,6 +11,14 @@ const styles = {
       zIndex: 1,
       position: 'absolute' as const
     },
+    blankPage: {
+      position: 'absolute' as const,
+      zIndex: 2,
+      backgroundColor: 'white',
+      top: '50vh',
+      left: '50vw',
+      bottom: '50vh',
+    },
   };
   
 export default styles;
