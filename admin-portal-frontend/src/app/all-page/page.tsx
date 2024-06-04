@@ -1,24 +1,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Filter from "../icons/filter.svg";
-import { Category, getAllCategories } from "../components/categoryRoutes";
+import FilterIcon from "../icons/filter.svg";
+
+import { deletePage, getAllCategories } from "../api/Categories";
 import PageContainer from "../components/PageContainer";
+import Toast from "../components/Toast";
+
+type IconProps = {
+  "content-type": string;
+  src: string;
+};
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [publishedState, setPublishedState] = useState(true);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedCategories = (await getAllCategories()) as Category[];
-      console.log(fetchedCategories);
-
-      setCategories(fetchedCategories as never);
+      try {
+        const fetchedCategories = await getAllCategories();
+        setCategories(fetchedCategories as never);
+      } catch (error) {
+        console.log("Fetch categories failed.");
+      }
     };
 
-    fetchData();
-  }, []);
+    void fetchData();
+  }, [categories]);
+
+  const onDeletePage = async (categoryId: string, title: string) => {
+    try {
+      console.log("Deleting category with ID:", categoryId);
+      await deletePage(categoryId, title);
+      setShowToast(true);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
 
   const selectedStyle = "text-[#00629B] border-[#00629B] border-solid";
   const unselectedStyle = "text-[#6C6C6C]";
@@ -76,7 +100,7 @@ export default function CategoriesPage() {
             />
           </div>
           <button className="flex flex-row items-center gap-2 px-4 py-2 rounded-md text-white bg-[#00629B]">
-            <img src={Filter?.src as string} alt="Filter" className="w-4 h-4" />
+            <img src={(FilterIcon as IconProps).src} alt="Filter" className="w-4 h-4" />
             <p>Filter</p>
           </button>
         </div>
@@ -90,7 +114,10 @@ export default function CategoriesPage() {
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Page</button>
           </div>
         </div>
-        <PageContainer items={categories}></PageContainer>
+        <PageContainer items={categories} onDeletePage={onDeletePage}></PageContainer>
+        {showToast && (
+          <Toast backgroundColor={"#000000"} message={"Page deleted"} onClose={handleCloseToast} />
+        )}
       </div>
     </div>
   );

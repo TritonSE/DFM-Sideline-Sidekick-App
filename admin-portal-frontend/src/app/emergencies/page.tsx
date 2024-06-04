@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CategoryContainer from "../components/CategoryContainer";
-import { Category, getAllCategories, deleteCategory } from "../components/categoryRoutes";
+
+import { CategoryContainer } from "../components/CategoryContainer";
 import Toast from "../components/Toast";
+import { deleteCategory, getAllCategories } from "../api/Categories";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
@@ -12,14 +13,14 @@ export default function CategoriesPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedCategories = (await getAllCategories()) as Category[];
+        const fetchedCategories = await getAllCategories();
         setCategories(fetchedCategories as never);
       } catch (error) {
         console.log("Fetch categories failed.");
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [categories]);
 
   const onDeleteCategory = async (categoryId: string) => {

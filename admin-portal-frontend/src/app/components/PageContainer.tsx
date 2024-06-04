@@ -1,20 +1,49 @@
 "use client";
 
 import React, { useState } from "react";
-import { Category } from "./categoryRoutes";
-import TrashIcon from "../icons/trash.svg";
+
 import EditIcon from "../icons/edit.svg";
+import TrashIcon from "../icons/trash.svg";
+
+import DeleteConfirmationPopup from "./DeletePopup";
+
+import { Category } from "../api/Categories";
+
+type IconProps = {
+  "content-type": string;
+  src: string;
+};
 
 type PageItemProps = {
   id: string;
+  categoryId: string;
   title: string;
   page: string;
   visibility?: boolean;
+  onDeletePage: (categoryId: string, pageTitle: string) => Promise<void>;
 };
 
-const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
+const PageItem: React.FC<PageItemProps> = ({ id, page, categoryId, title, onDeletePage }) => {
   const [selectedValue, setSelectedValue] = useState("public");
   const [allowEdits, setAllowEdits] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+
+  const handleDelete = () => {
+    setPopupVisible(true);
+  };
+
+  const handleConfirmDelete = () => {
+    try {
+      void onDeletePage(categoryId, page);
+      setPopupVisible(false);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setPopupVisible(false);
+  };
 
   return (
     <tr key={id} className="border-b">
@@ -42,17 +71,34 @@ const PageItem: React.FC<PageItemProps> = ({ id, page, title }) => {
             setAllowEdits(!allowEdits);
           }}
         >
-          <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
+          <img src={(EditIcon as IconProps).src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
-          <img src={TrashIcon.src} alt="Delete" className="w-4 h-4" />
+          <img
+            src={(TrashIcon as IconProps).src}
+            alt="Delete"
+            className="w-4 h-4"
+            onClick={() => {
+              handleDelete();
+            }}
+          />
         </button>
+        {popupVisible ? (
+          <DeleteConfirmationPopup
+            onDelete={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+            type={"page"}
+          />
+        ) : null}
       </td>
     </tr>
   );
 };
 
-export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categories }) => {
+export const PageContainer: React.FC<{
+  items: Category[];
+  onDeletePage: (categoryId: string, pageTitle: string) => Promise<void>;
+}> = ({ items: categories, onDeletePage }) => {
   return (
     <table>
       <tbody>
@@ -70,8 +116,10 @@ export const PageContainer: React.FC<{ items: Category[] }> = ({ items: categori
               <PageItem
                 key={`${String(j)}-${String(j)}`}
                 id={`${String(j)}-${String(j)}`}
+                categoryId={category._id}
                 page={page}
                 title={category.title}
+                onDeletePage={onDeletePage}
               />
             ));
           })

@@ -1,17 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { Category } from "./categoryRoutes";
-import DeleteConfirmationPopup from "./DeletePopup";
-import TrashIcon from "../icons/trash.svg";
+
 import EditIcon from "../icons/edit.svg";
+import TrashIcon from "../icons/trash.svg";
+
+import DeleteConfirmationPopup from "./DeletePopup";
+import { Category } from "../api/Categories";
+
+type IconProps = {
+  "content-type": string;
+  src: string;
+};
 
 type CategoryItemProps = {
   id: string;
   title: string;
   visibility?: boolean;
   pages: number;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {
@@ -23,9 +30,9 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
     setPopupVisible(true);
   };
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmDelete = () => {
     try {
-      onDeleteCategory(id);
+      void onDeleteCategory(id);
       setPopupVisible(false);
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -40,7 +47,6 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
     <tr key={id + title} className="border-b">
       <td className="w-1/4 text-center py-3">{title}</td>
       <td className="w-1/4 text-center py-3">
-        {/* Added just to check styling */}
         <select
           disabled={!allowEdits}
           className={`p-1 text-center rounded-md ${
@@ -63,11 +69,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
             setAllowEdits(!allowEdits);
           }}
         >
-          <img src={EditIcon.src} alt="Edit" className="w-4 h-4" />
+          <img src={(EditIcon as IconProps).src} alt="Edit" className="w-4 h-4" />
         </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
-            src={TrashIcon.src}
+            src={(TrashIcon as IconProps).src}
             alt="Delete"
             className="w-4 h-4"
             onClick={() => {
@@ -77,7 +83,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
         </button>
       </td>
       {popupVisible ? (
-        <DeleteConfirmationPopup onDelete={handleConfirmDelete} onCancel={handleCancelDelete} />
+        <DeleteConfirmationPopup
+          onDelete={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+          type={"category"}
+        />
       ) : null}
     </tr>
   );
@@ -86,7 +96,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
 export const CategoryContainer: React.FC<{
   items: Category[];
   type: string;
-  onDeleteCategory: (categoryId: string) => void;
+  onDeleteCategory: (categoryId: string) => Promise<void>;
 }> = ({ items: categories, type, onDeleteCategory }) => {
   return (
     <table>
@@ -105,6 +115,7 @@ export const CategoryContainer: React.FC<{
           .map((category: Category) => {
             return (
               <CategoryItem
+                key={category._id}
                 id={category._id}
                 title={category.title}
                 pages={category.items.length}
