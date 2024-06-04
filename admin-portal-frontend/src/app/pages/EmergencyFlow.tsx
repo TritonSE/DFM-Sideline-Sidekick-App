@@ -5,7 +5,7 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import { CreateEmergencyRequest, createEmergency } from "../../../emergencies";
+import { CreateEmergencyRequest, createEmergency } from "../api/emergencies";
 
 import styles from "./EmergencyFlowStyles";
 
