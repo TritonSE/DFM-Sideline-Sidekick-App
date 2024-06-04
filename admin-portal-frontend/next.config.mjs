@@ -3,7 +3,7 @@ import "dotenv/config";
 
 const nextConfig = {
   env: {
-    API_URL: process.env.API_URL,
+    API_URL: "https://sideline-sidekick-app.web.app/api/",
   },
   output: "export",
   images: {
