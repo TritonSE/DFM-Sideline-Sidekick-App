@@ -69,7 +69,7 @@ export async function createEmergency(
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencies`;
+    const url = `${process.env.API_URL}/emergencyFlow`;
 
     const response = await post(url, emergency);
     const json = (await response.json()) as Emergency;
@@ -85,7 +85,7 @@ export async function getEmergency(id: string): Promise<APIResult<Emergency>> {
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencies/${id}`;
+    const url = `${process.env.API_URL}/emergencyFlow/${id}`;
 
     const response = await get(url);
     const json = (await response.json()) as Emergency;
@@ -101,7 +101,7 @@ export async function getAllEmergencies(): Promise<APIResult<Emergency[]>> {
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencies`;
+    const url = `${process.env.API_URL}/emergencyFlow`;
     const response = await get(url);
     const json = (await response.json()) as Emergency[];
     // const parsedJson = json.map((element) => (element));
@@ -120,7 +120,7 @@ export async function updateEmergency(
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencies/${emergency._id}`;
+    const url = `${process.env.API_URL}/emergencyFlow/${emergency._id}`;
     const response = await put(url, emergency);
     const json = (await response.json()) as Emergency;
     return { success: true, data: json };
