@@ -26,13 +26,13 @@ jobs:
       run: |
         npm ci
         npm run lint-check
-  # admin-portal-frontend:
-  #   name: Admin portal frontend lint and style check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - uses: actions/setup-node@v3
-  #   - working-directory: admin-portal-frontend # Change this to the name of your frontend directory
-  #     run: |
-  #       npm ci
-  #       npm run lint-check
+  admin-portal-frontend:
+    name: Admin portal frontend lint and style check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    - working-directory: admin-portal-frontend # Change this to the name of your frontend directory
+      run: |
+        npm ci
+        npm run lint-check
