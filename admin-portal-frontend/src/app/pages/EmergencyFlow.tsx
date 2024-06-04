@@ -130,8 +130,18 @@ const EmergencyFlow: React.FC = () => {
           // If the problem is something we don't really control, such as network
           // issues or an unexpected exception on the server side, then use a
           // banner, modal, popup, or similar.
-
-          alert(result.error);
+          if (
+            !emergencyTitle ||
+            emergencyTitle == "" ||
+            emergencyTitle === "" ||
+            !emergencySubtitle ||
+            emergencySubtitle == "" ||
+            emergencyTitle === ""
+          ) {
+            alert("Missing required title or subtitle fields. Please resubmit the form.");
+          } else {
+            alert(result.error);
+          }
           console.log(result);
         }
       })
