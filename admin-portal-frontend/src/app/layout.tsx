@@ -16,7 +16,8 @@ const roboto = Roboto({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const location = usePathname();
-  const showNavbar = location !== "/" && location !== "/signup/" && location !== "/forgot-password/";
+  const showNavbar =
+    location !== "/" && location !== "/signup/" && location !== "/forgot-password/";
   const mainClass = `flex min-h-screen flex-col antialiased bg-sky-100/50 ${showNavbar ? "pt-16 pl-60" : ""}`;
 
   return (

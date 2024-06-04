@@ -36,8 +36,6 @@ const formatFirebaseError = (error: any): string => {
   return "An unexpected error occurred";
 };
 
-
-
 export default function SignUp() {
   const db = getFirestore();
   const [signUpForm, setSignUpForm] = useState<SignUpForm>({

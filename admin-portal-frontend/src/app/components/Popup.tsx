@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-interface PopupProps {
+type PopupProps = {
   message: string;
   onClose: () => void;
-}
+};
 
 const Popup: React.FC<PopupProps> = ({ message, onClose }) => {
   return (
@@ -17,16 +17,18 @@ const Popup: React.FC<PopupProps> = ({ message, onClose }) => {
           &times;
         </button>
         <div className="flex items-center space-x-2">
-          <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            className="h-6 w-6 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
           </svg>
           <p className="text-green-500 font-semibold text-lg">{message}</p>
         </div>
         <div className="mt-6 flex justify-center">
-          <button
-            className="bg-dfm-blue text-white py-2 px-8 rounded"
-            onClick={onClose}
-          >
+          <button className="bg-dfm-blue text-white py-2 px-8 rounded" onClick={onClose}>
             Close
           </button>
         </div>

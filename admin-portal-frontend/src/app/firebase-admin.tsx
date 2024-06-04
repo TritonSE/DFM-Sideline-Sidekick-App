@@ -1,7 +1,6 @@
+import admin from "firebase-admin";
 
-import admin from 'firebase-admin';
-
-const serviceAccount = require('./dfm-sideline-sidekick-app-firebase-adminsdk-mqgtq-32d66e30cf.json');
+const serviceAccount = require("./dfm-sideline-sidekick-app-firebase-adminsdk-mqgtq-32d66e30cf.json");
 
 if (!admin.apps.length) {
   admin.initializeApp({

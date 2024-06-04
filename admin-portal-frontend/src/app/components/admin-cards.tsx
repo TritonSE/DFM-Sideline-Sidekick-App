@@ -1,31 +1,32 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { collection, getDocs, getFirestore, deleteDoc, doc } from 'firebase/firestore';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import Popup from './Popup';
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { collection, deleteDoc, doc, getDocs, getFirestore } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 
-interface Admin {
+import Popup from "./Popup";
+
+type Admin = {
   firstName: string;
   lastName: string;
   title: string;
   email: string;
   phone: string;
-}
+};
 
 const AdminCards: React.FC = () => {
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState('');
+  const [popupMessage, setPopupMessage] = useState("");
   const db = getFirestore();
 
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'invitations'));
-        const adminsList = querySnapshot.docs.map(doc => doc.data() as Admin);
+        const querySnapshot = await getDocs(collection(db, "invitations"));
+        const adminsList = querySnapshot.docs.map((doc) => doc.data() as Admin);
         setAdmins(adminsList);
       } catch (error) {
         console.error("Error fetching admins: ", error);
@@ -37,9 +38,9 @@ const AdminCards: React.FC = () => {
 
   const deleteAdmin = async (id: string) => {
     try {
-      await deleteDoc(doc(db, 'invitations', id));
-      setAdmins(admins.filter(admin => admin.email !== id));
-      setPopupMessage('Physician deleted!');
+      await deleteDoc(doc(db, "invitations", id));
+      setAdmins(admins.filter((admin) => admin.email !== id));
+      setPopupMessage("Physician deleted!");
       setShowPopup(true);
     } catch (error) {
       console.error("Error deleting admin: ", error);
@@ -47,45 +48,47 @@ const AdminCards: React.FC = () => {
   };
 
   //having trouble with deleting account from firebase auth
-//   const deleteAdmin = async (email: string) => {
-//     try {
-//       const response = await fetch('/api/deleteAdmin', {
-//         method: 'DELETE',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ email }),
-//       });
+  //   const deleteAdmin = async (email: string) => {
+  //     try {
+  //       const response = await fetch('/api/deleteAdmin', {
+  //         method: 'DELETE',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({ email }),
+  //       });
 
-//       if (!response.ok) {
-//         console.log('deletion error')
-//         throw new Error('Failed to delete admin');
-//       }
+  //       if (!response.ok) {
+  //         console.log('deletion error')
+  //         throw new Error('Failed to delete admin');
+  //       }
 
-//       setAdmins(admins.filter(admin => admin.email !== email));
-//       setPopupMessage('Physician deleted!');
-//       setShowPopup(true);
-//     } catch (error) {
-//       console.error("Error deleting admin:", error);
-//     }
-//   };
+  //       setAdmins(admins.filter(admin => admin.email !== email));
+  //       setPopupMessage('Physician deleted!');
+  //       setShowPopup(true);
+  //     } catch (error) {
+  //       console.error("Error deleting admin:", error);
+  //     }
+  //   };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
       {admins.map((admin, index) => (
         <div key={index} className="bg-white shadow-md rounded-lg p-4 py-3">
-            <button
-              className="flex justify-end pt-1 w-full text-gray-500 hover:text-gray-900"
-              onClick={() => deleteAdmin(admin.email)}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
+          <button
+            className="flex justify-end pt-1 w-full text-gray-500 hover:text-gray-900"
+            onClick={() => deleteAdmin(admin.email)}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
           <div className="flex items-center space-x-4">
             {/* <div className="w-16 h-16 rounded-full overflow-hidden">
               <img src="" alt="admin picture" />
             </div> */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-800">{admin.firstName} {admin.lastName}</h2>
+              <h2 className="text-xl font-semibold text-gray-800">
+                {admin.firstName} {admin.lastName}
+              </h2>
               <p className="text-gray-600">{admin.title}</p>
             </div>
           </div>
@@ -96,9 +99,14 @@ const AdminCards: React.FC = () => {
         </div>
       ))}
 
-        {showPopup && (
-        <Popup message={popupMessage} onClose={() => setShowPopup(false)} />
-        )}
+      {showPopup && (
+        <Popup
+          message={popupMessage}
+          onClose={() => {
+            setShowPopup(false);
+          }}
+        />
+      )}
     </div>
   );
 };

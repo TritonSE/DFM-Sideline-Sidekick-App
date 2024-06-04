@@ -1,9 +1,10 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../firebase-config";
 import { useRouter } from "next/navigation";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+
+import { auth } from "../firebase-config";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState<string>("");
@@ -22,7 +23,9 @@ export default function ForgotPassword() {
       setMessage("Password reset email sent. Please check your inbox.");
       setError("");
     } catch (err) {
-      setError("Failed to send password reset email. Please check the email address and try again.");
+      setError(
+        "Failed to send password reset email. Please check the email address and try again.",
+      );
       setMessage("");
     }
   };
@@ -30,9 +33,7 @@ export default function ForgotPassword() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md bg-white shadow-xl rounded-lg p-8 flex flex-col items-center mx-4">
-        <h2 className="text-blue-950 text-lg sm:text-xl font-bold my-4">
-          Reset Your Password
-        </h2>
+        <h2 className="text-blue-950 text-lg sm:text-xl font-bold my-4">Reset Your Password</h2>
         <form onSubmit={handleSubmit} className="w-full">
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm sm:text-base font-medium mb-1">
@@ -48,10 +49,7 @@ export default function ForgotPassword() {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="p-2 w-full text-white font-bold rounded bg-dfm-blue"
-          >
+          <button type="submit" className="p-2 w-full text-white font-bold rounded bg-dfm-blue">
             Send Reset Email
           </button>
           {message && <p className="text-green-600 text-sm mt-2">{message}</p>}

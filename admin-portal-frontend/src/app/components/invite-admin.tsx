@@ -142,10 +142,7 @@ const InviteAdmin = () => {
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="bg-dfm-blue text-white py-2 px-4 rounded"
-                >
+                <button type="submit" className="bg-dfm-blue text-white py-2 px-4 rounded">
                   Save
                 </button>
               </div>
