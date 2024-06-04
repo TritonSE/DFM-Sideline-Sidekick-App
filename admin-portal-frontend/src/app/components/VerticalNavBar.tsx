@@ -1,16 +1,33 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
+import Link from "next/link";
 
 import GpComponent from "./GPComponent";
 import HomeComponent from "./HomeComponent";
 import SearchComponent from "./SearchComponent";
+import { Category, getAllCategories } from "../api/Categories";
 import styles from "./VerticalNavBarStyles";
 
 const VerticalNavBar: React.FC = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedCategories = await getAllCategories();
+        setCategories(fetchedCategories as never);
+      } catch (error) {
+        console.log("Fetch categories failed.");
+      }
+    };
+
+    void fetchData();
+  }, [categories]);
+
   type CustomAccordionProps = {
     children: ReactNode;
   };
@@ -67,13 +84,43 @@ const VerticalNavBar: React.FC = () => {
                     {/* <Image src={gpIcon} alt={'General Principles'} style={styles.gpIcon} /> */}
                     <GpComponent />
                   </div>
-                  <a href="/general-principles" style={{ textDecoration: "none", color: "var(--bs-accordion-btn-color)" }}>General Principles</a>
+                  <a
+                    href="/general-principles"
+                    style={{ textDecoration: "none", color: "var(--bs-accordion-btn-color)" }}
+                  >
+                    General Principles
+                  </a>
                 </div>
               </Accordion.Header>
               <Accordion.Body>
                 <ul style={{ listStyleType: "none" }}>
-                  <li style={styles.listItem}>All</li>
-                  <li style={styles.listItem}>Emergency Action Plan</li>
+                  <li style={styles.listItem}>
+                    <Link
+                      href={"/general-principles/"}
+                      style={{
+                        textDecoration: "none",
+                        color: "var(--bs-accordion-btn-color)",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      All
+                    </Link>
+                  </li>
+                  {categories.map((category: Category) => (
+                    <li key={category._id}>
+                      {/* Generate unique link for each category */}
+                      <Link
+                        href={`/general-principles/${encodeURIComponent(category.title)}`}
+                        style={{
+                          textDecoration: "none",
+                          color: "var(--bs-accordion-btn-color)",
+                        }}
+                      >
+                        {category.title}
+                      </Link>
+                    </li>
+                  ))}
+                  {/* <li style={styles.listItem}>Emergency Action Plan</li>
                   <li style={styles.listItem}>Trauma Centers</li>
                   <li style={styles.listItem}>Burn Centers</li>
                   <li style={styles.listItem}>Stroke Centers</li>
@@ -83,7 +130,7 @@ const VerticalNavBar: React.FC = () => {
                   <li style={styles.listItem}>Muscle Injuries</li>
                   <li style={styles.listItem}>Ligament Injuries</li>
                   <li style={styles.listItem}>Dislocations/Sublaxations</li>
-                  <li style={styles.listItem}>Fractures</li>
+                  <li style={styles.listItem}>Fractures</li> */}
                 </ul>
               </Accordion.Body>
             </Accordion.Item>
