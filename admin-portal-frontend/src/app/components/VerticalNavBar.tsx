@@ -10,6 +10,8 @@ import HomeComponent from "./HomeComponent";
 import SearchComponent from "./SearchComponent";
 import styles from "./VerticalNavBarStyles";
 
+import Link from "next/link";
+
 const VerticalNavBar: React.FC = () => {
   type CustomAccordionProps = {
     children: ReactNode;
@@ -67,7 +69,7 @@ const VerticalNavBar: React.FC = () => {
                     {/* <Image src={gpIcon} alt={'General Principles'} style={styles.gpIcon} /> */}
                     <GpComponent />
                   </div>
-                  General Principles
+                  <a href="/general-principles" style={{ textDecoration: "none", color: "var(--bs-accordion-btn-color)" }}>General Principles</a>
                 </div>
               </Accordion.Header>
               <Accordion.Body>

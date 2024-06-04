@@ -110,7 +110,6 @@ export const CategoryContainer: React.FC<{
         </tr>
 
         {categories
-          // gets only either emergency or general principle
           .filter((category) => category.type === type)
           .map((category: Category) => {
             return (
