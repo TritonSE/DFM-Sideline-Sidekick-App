@@ -109,7 +109,6 @@ export const deleteTitleToCategoryById = async (req, res) => {
 
     // Delete title to the category's items array
     const index = category.items.indexOf(deletedTitle);
-    console.log("hihi");
 
     if (index > -1) {
       category.items.splice(index, 1);
