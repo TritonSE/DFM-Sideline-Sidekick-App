@@ -132,10 +132,8 @@ const EmergencyFlow: React.FC = () => {
           // banner, modal, popup, or similar.
           if (
             !emergencyTitle ||
-            emergencyTitle == "" ||
             emergencyTitle === "" ||
             !emergencySubtitle ||
-            emergencySubtitle == "" ||
             emergencyTitle === ""
           ) {
             alert("Missing required title or subtitle fields. Please resubmit the form.");
