@@ -10,8 +10,6 @@ import HomeComponent from "./HomeComponent";
 import SearchComponent from "./SearchComponent";
 import styles from "./VerticalNavBarStyles";
 
-import Link from "next/link";
-
 const VerticalNavBar: React.FC = () => {
   type CustomAccordionProps = {
     children: ReactNode;

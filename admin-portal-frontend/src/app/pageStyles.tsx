@@ -8,10 +8,10 @@ type Styles = {
 
 const styles: Styles = {
   verticalNavBar: {
-    position: "fixed",
+    position: "relative",
     top: 0,
     left: 0,
-    width: "100%",
+    width: "50%",
     zIndex: 0,
   },
   horizontalNavBar: {
