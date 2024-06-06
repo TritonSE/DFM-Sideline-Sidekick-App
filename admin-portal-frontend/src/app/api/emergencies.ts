@@ -65,7 +65,13 @@ export async function createEmergency(
   emergency: CreateEmergencyRequest,
 ): Promise<APIResult<Emergency>> {
   try {
-    const response = await post("/api/emergencies", emergency);
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/emergencyFlow`;
+
+    const response = await post(url, emergency);
     const json = (await response.json()) as Emergency;
     return { success: true, data: json };
   } catch (error) {
@@ -75,7 +81,13 @@ export async function createEmergency(
 
 export async function getEmergency(id: string): Promise<APIResult<Emergency>> {
   try {
-    const response = await get(`/api/emergencies/${id}`);
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/emergencyFlow/${id}`;
+
+    const response = await get(url);
     const json = (await response.json()) as Emergency;
     return { success: true, data: json };
   } catch (error) {
@@ -85,7 +97,12 @@ export async function getEmergency(id: string): Promise<APIResult<Emergency>> {
 
 export async function getAllEmergencies(): Promise<APIResult<Emergency[]>> {
   try {
-    const response = await get(`/api/emergencies/`);
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/emergencyFlow`;
+    const response = await get(url);
     const json = (await response.json()) as Emergency[];
     // const parsedJson = json.map((element) => (element));
     return { success: true, data: json };
@@ -99,8 +116,12 @@ export async function updateEmergency(
   emergency: UpdateEmergencyRequest,
 ): Promise<APIResult<Emergency>> {
   try {
-    // your code here
-    const response = await put(`/api/emergencies/${emergency._id}`, emergency);
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/emergencyFlow/${emergency._id}`;
+    const response = await put(url, emergency);
     const json = (await response.json()) as Emergency;
     return { success: true, data: json };
   } catch (error) {
