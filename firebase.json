@@ -20,7 +20,7 @@
       },
       {
         "source": "/citations",
-        "destination": "citations.html"
+        "destination": "/citations.html"
       },
       {
         "source": "**",
