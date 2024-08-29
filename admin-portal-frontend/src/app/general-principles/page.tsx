@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import { deleteCategory, getAllCategories } from "../api/Categories";
 import { CategoryContainer } from "../components/CategoryContainer";
 import Toast from "../components/Toast";
-import { deleteCategory, getAllCategories } from "../api/Categories";
 import AnotherPage from "../page";
 
 export default function CategoriesPage() {

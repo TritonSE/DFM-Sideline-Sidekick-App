@@ -19,6 +19,10 @@
         "destination": "/privacypolicy.html"
       },
       {
+        "source": "/citations",
+        "destination": "/citations.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

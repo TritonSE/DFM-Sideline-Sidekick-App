@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 
+import { Category } from "../api/Categories";
 import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
-import { Category } from "../api/Categories";
 
 type IconProps = {
   "content-type": string;
