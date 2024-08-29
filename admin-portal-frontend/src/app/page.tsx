@@ -4,9 +4,9 @@ import HorizontalNavBar from "./components/HorizontalNavbar";
 import VerticalNavBar from "./components/VerticalNavBar";
 import styles from "./pageStyles";
 
-interface LayoutProps {
+type LayoutProps = {
   children: React.ReactNode;
-}
+};
 
 const AnotherPage: React.FC<LayoutProps> = ({ children }) => {
   return (

@@ -6,10 +6,11 @@ import { Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import Link from "next/link";
 
+import { Category, getAllCategories } from "../api/Categories";
+
 import GpComponent from "./GPComponent";
 import HomeComponent from "./HomeComponent";
 import SearchComponent from "./SearchComponent";
-import { Category, getAllCategories } from "../api/Categories";
 import styles from "./VerticalNavBarStyles";
 
 const VerticalNavBar: React.FC = () => {
@@ -110,7 +111,10 @@ const VerticalNavBar: React.FC = () => {
                     <li key={category._id}>
                       {/* Generate unique link for each category */}
                       <Link
-                        href={`/general-principles/${encodeURIComponent(category.title)}`}
+                        href={{
+                          pathname: "/category",
+                          query: { category: JSON.stringify(category) },
+                        }}
                         style={{
                           textDecoration: "none",
                           color: "var(--bs-accordion-btn-color)",
