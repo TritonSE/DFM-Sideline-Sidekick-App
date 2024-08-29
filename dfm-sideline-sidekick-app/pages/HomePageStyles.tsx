@@ -25,6 +25,15 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "left",
     maxWidth: "70%",
+    paddingRight: 4,
+  },
+  citationTitle: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "flex-start",
+  },
+  citeIcon: {
+    paddingBottom: 2,
   },
   searchContainer: {
     flexDirection: "row",

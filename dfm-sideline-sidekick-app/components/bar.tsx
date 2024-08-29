@@ -52,7 +52,11 @@ export const BottomNavBar: React.FC<{ items: NavItem[] }> = ({ items }) => {
           ) : item.icon === "home" ? (
             <HomeIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
           ) : (
-            <GeneralPrinciplesIcon fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"} />
+            <View style={{ width: 29 }}>
+              <GeneralPrinciplesIcon
+                fillColor={selectedItemId === item.id ? "#001F3F" : "#C0C8CB"}
+              />
+            </View>
           )}
         </TouchableOpacity>
       ))}

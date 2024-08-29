@@ -3,10 +3,19 @@
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { Tooltip } from "@rneui/themed";
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
 import React from "react";
-import { Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Linking,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
 import { getAllBookmarks } from "../components/bookmarkRoutes";
@@ -14,6 +23,7 @@ import { Carousel, CarouselItem } from "../components/carousel";
 import { RootStackParamList } from "../components/viewAll";
 import { useData } from "../functions/DataContext";
 import { ArrowIcon } from "../icons/arrowIcon";
+import { CiteIcon } from "../icons/citeIcon";
 
 import styles from "./HomePageStyles";
 import SearchPage from "./SearchPage";
@@ -32,6 +42,7 @@ const HomePage = () => {
   const [isFontsLoaded, setIsFontsLoaded] = useState<boolean>(false);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>();
   const [searchShowing, setSearchShowing] = useState(false);
+  const [tooltipShow, setTooltipShow] = useState(false);
 
   const { jsonData } = useData();
   const emergencies = jsonData?.emergencies ?? [];
@@ -141,9 +152,40 @@ const HomePage = () => {
           style={styles.topMargin}
         >
           <View>
-            <Text style={[styles.subtitle, styles.horizontalPadding, styles.topPadding]}>
-              Browse By Category
-            </Text>
+            <View style={styles.citationTitle}>
+              <Text style={[styles.subtitle, styles.horizontalPadding, styles.topPadding]}>
+                Browse By Category
+              </Text>
+              <View style={styles.citeIcon}>
+                <Tooltip
+                  visible={tooltipShow}
+                  onOpen={() => {
+                    setTooltipShow(true);
+                  }}
+                  onClose={() => {
+                    setTooltipShow(false);
+                  }}
+                  popover={
+                    <Text style={{ color: "#fff" }}>
+                      For support and citations for the info found in this app, visit{" "}
+                      <Text
+                        style={{ color: "#0000EE", textDecorationLine: "underline" }}
+                        onPress={() =>
+                          void Linking.openURL("https://sideline-sidekick-app.web.app/citations")
+                        }
+                      >
+                        this link
+                      </Text>
+                      .
+                    </Text>
+                  }
+                  width={200}
+                  height={100}
+                >
+                  <CiteIcon />
+                </Tooltip>
+              </View>
+            </View>
             <View style={styles.categories}>
               {cards.map((card, index) => {
                 const route = routes[index];
