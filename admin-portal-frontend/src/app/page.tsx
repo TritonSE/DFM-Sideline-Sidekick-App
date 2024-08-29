@@ -1,27 +1,11 @@
 import React from "react";
 
-import HorizontalNavBar from "./components/HorizontalNavbar";
-import VerticalNavBar from "./components/VerticalNavBar";
-import styles from "./pageStyles";
-
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-const AnotherPage: React.FC<LayoutProps> = ({ children }) => {
+const Home: React.FC = () => {
   return (
     <div>
-      <div style={styles.horizontalNavBar}>
-        <HorizontalNavBar />
-      </div>
-      <div className="flex flex-row">
-        <div style={styles.verticalNavBar}>
-          <VerticalNavBar />
-        </div>
-        {children}
-      </div>
+      <h1>Home</h1>
     </div>
   );
 };
 
-export default AnotherPage;
+export default Home;

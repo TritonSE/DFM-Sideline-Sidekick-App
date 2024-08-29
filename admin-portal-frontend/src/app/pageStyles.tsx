@@ -11,7 +11,6 @@ const styles: Styles = {
     position: "relative",
     top: 0,
     left: 0,
-    width: "50%",
     zIndex: 0,
   },
   horizontalNavBar: {

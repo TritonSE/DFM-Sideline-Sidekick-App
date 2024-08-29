@@ -3,7 +3,6 @@
 import React from "react";
 
 import { CreateEmergencyRequest, createEmergency } from "../../../emergencies";
-import AnotherPage from "../page";
 
 import styles from "./EmergencyFlowStyles";
 
@@ -138,56 +137,54 @@ const EmergencyFlow: React.FC = () => {
   };
 
   return (
-    <AnotherPage>
-      <form style={styles.page}>
-        <div style={styles.container}>
-          <p style={styles.header}>Global Search &gt; Medical &gt; Add an injury</p>
-          <p style={styles.subtitle}>Injury details</p>
-          <InputBlock label="Name of injury*" value={emergencyTitle} onChange={setEmergencyTitle} />
+    <form style={styles.page}>
+      <div style={styles.container}>
+        <p style={styles.header}>Global Search &gt; Medical &gt; Add an injury</p>
+        <p style={styles.subtitle}>Injury details</p>
+        <InputBlock label="Name of injury*" value={emergencyTitle} onChange={setEmergencyTitle} />
 
-          <InputBlock
-            label="Page Description"
-            value={emergencySubtitle}
-            onChange={setEmergencySubtitle}
-          />
+        <InputBlock
+          label="Page Description"
+          value={emergencySubtitle}
+          onChange={setEmergencySubtitle}
+        />
 
-          <p style={styles.subheader}>Overview</p>
+        <p style={styles.subheader}>Overview</p>
 
-          <InputBlock label="Importance" value={importance} onChange={setImportance} />
+        <InputBlock label="Importance" value={importance} onChange={setImportance} />
 
-          <InputBlock label="Risk factors" value={riskFactors} onChange={setRiskFactors} />
+        <InputBlock label="Risk factors" value={riskFactors} onChange={setRiskFactors} />
 
-          <InputBlock
-            label="Mechanism of Injury"
-            value={mechanismOfInjury}
-            onChange={setMechanismOfInjury}
-          />
+        <InputBlock
+          label="Mechanism of Injury"
+          value={mechanismOfInjury}
+          onChange={setMechanismOfInjury}
+        />
 
-          <InputBlock label="Diagnosis" value={diagnosis} onChange={setDiagnosis} />
+        <InputBlock label="Diagnosis" value={diagnosis} onChange={setDiagnosis} />
 
-          <InputBlock label="Physical Exam" value={physicalExam} onChange={setPhysicalExam} />
+        <InputBlock label="Physical Exam" value={physicalExam} onChange={setPhysicalExam} />
 
-          <p style={styles.subheader}>How to Treat</p>
+        <p style={styles.subheader}>How to Treat</p>
 
-          <InputBlock
-            label="Acute Management"
-            value={acuteManagement}
-            onChange={setAcuteManagement}
-          />
+        <InputBlock
+          label="Acute Management"
+          value={acuteManagement}
+          onChange={setAcuteManagement}
+        />
 
-          <InputBlock label="Dispo" value={dispo} onChange={setDispo} />
+        <InputBlock label="Dispo" value={dispo} onChange={setDispo} />
 
-          <InputBlock label="Considerations" value={considerations} onChange={setConsiderations} />
-        </div>
+        <InputBlock label="Considerations" value={considerations} onChange={setConsiderations} />
+      </div>
 
-        <div style={styles.buttonContainer}>
-          <button style={styles.cancelButton}>Close</button>
-          <button style={styles.publishButton} onClick={handlePublish}>
-            Publish
-          </button>
-        </div>
-      </form>
-    </AnotherPage>
+      <div style={styles.buttonContainer}>
+        <button style={styles.cancelButton}>Close</button>
+        <button style={styles.publishButton} onClick={handlePublish}>
+          Publish
+        </button>
+      </div>
+    </form>
   );
 };
 

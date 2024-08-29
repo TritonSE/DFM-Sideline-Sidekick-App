@@ -42,8 +42,6 @@ const VerticalNavBar: React.FC = () => {
   return (
     <div style={styles.container}>
       <nav style={styles.nav}>
-        <div></div>
-
         <div style={styles.accordionContainer}>
           <Accordion defaultActiveKey="0">
             <a href="#homepagelink" style={{ textDecoration: "none" }}>
