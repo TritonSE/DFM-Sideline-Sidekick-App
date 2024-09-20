@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "admin-portal-frontend/.next",
+    "public": "admin-portal-frontend/public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -24,7 +24,7 @@
       },
       {
         "source": "**",
-        "destination": "/index.html"
+        "function": "nextApp"
       }
     ]
   },
@@ -40,6 +40,18 @@
         "**/.*",
         "**/node_modules/**"
       ]
-    }
+    },
+    {
+        "runtime": "nodejs18",
+        "source": "admin-portal-frontend",
+        "codebase": "nextApp",
+        "ignore": [
+          ".git",
+          "firebase-debug.log",
+          "firebase-debug.*.log",
+          "**/.*",
+          "**/node_modules/**"
+        ]
+      }
   ]
 }
