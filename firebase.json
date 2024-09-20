@@ -24,7 +24,7 @@
       },
       {
         "source": "**",
-        "function": "nextApp"
+        "function": "nextapp"
       }
     ]
   },
@@ -44,7 +44,7 @@
     {
         "runtime": "nodejs18",
         "source": "admin-portal-frontend",
-        "codebase": "nextApp",
+        "codebase": "nextapp",
         "ignore": [
           ".git",
           "firebase-debug.log",
