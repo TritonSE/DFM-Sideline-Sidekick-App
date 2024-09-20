@@ -36,3 +36,5 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SIDELINE_SIDEKICK_APP }}
           projectId: sideline-sidekick-app
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks

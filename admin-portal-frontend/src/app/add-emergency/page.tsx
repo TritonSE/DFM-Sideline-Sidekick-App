@@ -1,8 +1,5 @@
 "use client";
 
-// import searchIcon from "../icons/ic_search_grey.png";
-// import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 import { CreateEmergencyRequest, createEmergency } from "../../../emergencies";
@@ -58,7 +55,6 @@ const EmergencyFlow: React.FC = () => {
   const [acuteManagement, setAcuteManagement] = React.useState("");
   const [dispo, setDispo] = React.useState("");
   const [considerations, setConsiderations] = React.useState("");
-  const router = useRouter();
 
   const handlePublish = () => {
     //make an object of type CreateEmergencyRequest
@@ -120,7 +116,6 @@ const EmergencyFlow: React.FC = () => {
           setDispo("");
           setConsiderations("");
           //redirect to homepage/main page
-          router.push("/");
         } else {
           // You should always clearly inform the user when something goes wrong.
           // In this case, we're just doing an `alert()` for brevity, but you'd

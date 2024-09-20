@@ -1,7 +1,7 @@
 const VerticalNavBarStyles = {
   container: {
     display: "flex",
-    height: "100vh",
+    height: "100%",
   },
   nav: {
     width: "350px",

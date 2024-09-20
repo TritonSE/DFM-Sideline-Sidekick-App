@@ -27,7 +27,7 @@ const Toast: React.FC<ToastProps> = ({ backgroundColor, message, onClose }) => {
   }, []);
 
   return (
-    <div className="fixed top-10 right-10 flex justify-center mb-4 z-50">
+    <div className="top-20 right-10 absolute justify-center mb-4 z-50">
       <div
         style={{ backgroundColor }}
         className={`flex items-center justify-between w-auto py-4 px-6 rounded-lg transition-opacity duration-300 ease-in opacity-100 text-white`}

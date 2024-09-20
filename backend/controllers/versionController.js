@@ -24,6 +24,8 @@ export const updatedVersion = async (req, res) => {
       res.status(404).json({ message: "Version not found" });
     }
 
+    console.log("Updated Version: ", updatedVersion);
+
     // Respond with the updated version data
     res.status(200).json(updatedVersion);
   } catch (error) {

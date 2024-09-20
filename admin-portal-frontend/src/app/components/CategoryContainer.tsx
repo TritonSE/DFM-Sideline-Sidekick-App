@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 
 import { Category } from "../api/Categories";
@@ -15,13 +16,11 @@ type IconProps = {
 
 type CategoryItemProps = {
   id: string;
-  title: string;
-  visibility?: boolean;
-  pages: number;
+  category: Category;
   onDeleteCategory: (categoryId: string) => Promise<void>;
 };
 
-const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteCategory }) => {
+const CategoryItem: React.FC<CategoryItemProps> = ({ id, category, onDeleteCategory }) => {
   const [selectedValue, setSelectedValue] = useState("public");
   const [allowEdits, setAllowEdits] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -44,8 +43,18 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
   };
 
   return (
-    <tr key={id + title} className="border-b">
-      <td className="w-1/4 text-center py-3">{title}</td>
+    <tr key={id + category.title} className="border-b">
+      <td className="w-1/4 text-center py-3">
+        <Link
+          href={{
+            pathname: "/category",
+            query: { category: JSON.stringify(category) },
+          }}
+          className="underline"
+        >
+          {category.title}
+        </Link>
+      </td>
       <td className="w-1/4 text-center py-3">
         <select
           disabled={!allowEdits}
@@ -61,7 +70,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, title, pages, onDeleteC
           <option value="hidden">Hidden</option>
         </select>
       </td>
-      <td className="w-1/4 text-center py-3">{pages}</td>
+      <td className="w-1/4 text-center py-3">{category.items.length}</td>
       <td className="w-1/4 text-center py-3">
         <button
           className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black"
@@ -110,15 +119,13 @@ export const CategoryContainer: React.FC<{
         </tr>
 
         {categories
-          // gets only either emergency or general principle
           .filter((category) => category.type === type)
           .map((category: Category) => {
             return (
               <CategoryItem
                 key={category._id}
                 id={category._id}
-                title={category.title}
-                pages={category.items.length}
+                category={category}
                 onDeleteCategory={onDeleteCategory}
               />
             );

@@ -2,13 +2,36 @@
 
 import { useEffect, useState } from "react";
 
-import { deleteCategory, getAllCategories } from "../api/Categories";
+import { addCategory, deleteCategory, getAllCategories } from "../api/Categories";
 import { CategoryContainer } from "../components/CategoryContainer";
+import CategoryAddPopup from "../components/CategoryPopup";
 import Toast from "../components/Toast";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [showToast, setShowToast] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [toastText, setToastText] = useState("");
+
+  const handleAdd = () => {
+    setPopupVisible(true);
+  };
+
+  const handleConfirmAdd = async (name: string) => {
+    try {
+      setPopupVisible(false);
+      console.log("adding " + name);
+      await addCategory(name, "General Principle");
+      setToastText("Category added succesfully");
+      setShowToast(true);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const handleCancelAdd = () => {
+    setPopupVisible(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +50,7 @@ export default function CategoriesPage() {
     try {
       console.log("Deleting category with ID:", categoryId);
       await deleteCategory(categoryId);
+      setToastText("Category deleted");
       setShowToast(true);
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -60,7 +84,14 @@ export default function CategoriesPage() {
             <button className="px-4 py-2 rounded-md text-white bg-[#00629B] mr-2">
               Edit Order
             </button>
-            <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">+ Add Category</button>
+            <button
+              className="px-4 py-2 rounded-md text-white bg-[#00629B]"
+              onClick={() => {
+                handleAdd();
+              }}
+            >
+              + Add Category
+            </button>
           </div>
         </div>
         <CategoryContainer
@@ -70,12 +101,21 @@ export default function CategoriesPage() {
         />
         {showToast && (
           <Toast
-            backgroundColor={"#000000"}
-            message={"Category deleted"}
+            backgroundColor={toastText === "Category deleted" ? "#000000" : "#3BB966"}
+            message={toastText}
             onClose={handleCloseToast}
           />
         )}
       </div>
+      {popupVisible && (
+        <CategoryAddPopup
+          onAdd={(name: string) => {
+            void handleConfirmAdd(name);
+          }}
+          onCancel={handleCancelAdd}
+          type={"General Principles"}
+        />
+      )}
     </div>
   );
 }
