@@ -102,3 +102,31 @@ export const addPage = async (itemId: string, title: string) => {
     console.log("Error deleting page", error);
   }
 };
+
+export const addCategory = async (title: string, type: string) => {
+  try {
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/categories`;
+
+    if (!url) {
+      throw new Error("API URL is not defined");
+    }
+    console.log(title);
+    console.log(type);
+
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, items: [], type }),
+    });
+
+    await updateVersion();
+  } catch (error) {
+    console.log("Error deleting page", error);
+  }
+};

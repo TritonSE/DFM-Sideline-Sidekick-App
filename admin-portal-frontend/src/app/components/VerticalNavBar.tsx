@@ -14,20 +14,28 @@ import SearchComponent from "./SearchComponent";
 import styles from "./VerticalNavBarStyles";
 
 const VerticalNavBar: React.FC = () => {
-  const [categories, setCategories] = useState([]);
+  const [principles, setPrinciples] = useState([]);
+  const [emergencies, setEmergencies] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const fetchedCategories = await getAllCategories();
-        setCategories(fetchedCategories as never);
+        const generalPrinciples = fetchedCategories.filter(
+          (category: Category) => category.type === "General Principle",
+        );
+        const emergencies_data = fetchedCategories.filter(
+          (category: Category) => category.type === "Emergency",
+        );
+        setPrinciples(generalPrinciples as never);
+        setEmergencies(emergencies_data as never);
       } catch (error) {
         console.log("Fetch categories failed.");
       }
     };
 
     void fetchData();
-  }, [categories]);
+  }, [principles, emergencies]);
 
   type CustomAccordionProps = {
     children: ReactNode;
@@ -71,8 +79,35 @@ const VerticalNavBar: React.FC = () => {
               </Accordion.Header>
               <Accordion.Body>
                 <ul>
-                  <li style={styles.listItem}>All</li>
-                  <li style={styles.listItem}>By Category</li>
+                  <li style={styles.listItem}>
+                    <Link
+                      href={"/emergencies/"}
+                      style={{
+                        textDecoration: "none",
+                        color: "var(--bs-accordion-btn-color)",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      All Categories
+                    </Link>
+                  </li>
+                  {emergencies.map((category: Category) => (
+                    <li key={category._id}>
+                      {/* Generate unique link for each category */}
+                      <Link
+                        href={{
+                          pathname: "/category",
+                          query: { category: JSON.stringify(category) },
+                        }}
+                        style={{
+                          textDecoration: "none",
+                          color: "var(--bs-accordion-btn-color)",
+                        }}
+                      >
+                        {category.title}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </Accordion.Body>
             </Accordion.Item>
@@ -83,12 +118,7 @@ const VerticalNavBar: React.FC = () => {
                     {/* <Image src={gpIcon} alt={'General Principles'} style={styles.gpIcon} /> */}
                     <GpComponent />
                   </div>
-                  <a
-                    href="/general-principles"
-                    style={{ textDecoration: "none", color: "var(--bs-accordion-btn-color)" }}
-                  >
-                    General Principles
-                  </a>
+                  General Principles
                 </div>
               </Accordion.Header>
               <Accordion.Body>
@@ -102,10 +132,10 @@ const VerticalNavBar: React.FC = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      All
+                      All Categories
                     </Link>
                   </li>
-                  {categories.map((category: Category) => (
+                  {principles.map((category: Category) => (
                     <li key={category._id}>
                       {/* Generate unique link for each category */}
                       <Link

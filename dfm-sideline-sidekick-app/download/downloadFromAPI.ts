@@ -21,6 +21,7 @@ export const downloadJSON = async (fileName: string, OS: string, fetchNew: boole
     // compatibility for type of device
     localhost = OS === "android" ? "http://10.0.2.2:3001" : "http://127.0.0.1:3001";
   }
+  localhost = process.env.EXPO_PUBLIC_IP_ADDRESS;
 
   const url = `${localhost}/api/allWithVersion`; // all data
   const versionUrl = `${localhost}/api/version`; // newest version
