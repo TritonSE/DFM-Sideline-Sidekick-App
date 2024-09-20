@@ -3,7 +3,7 @@ import { updateVersion } from "./Version";
 export type Category = {
   _id: string;
   title: string;
-  items: [];
+  items: Category[];
   type: string;
 };
 

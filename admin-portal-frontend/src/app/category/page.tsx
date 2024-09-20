@@ -32,8 +32,6 @@ export default function CategoriesPage() {
       setCategory((prevCategory) => {
         return { ...prevCategory, items: newItems };
       });
-      searchParams.get();
-      console.log(category);
     } catch (error) {
       console.error("Error deleting category:", error);
     }
