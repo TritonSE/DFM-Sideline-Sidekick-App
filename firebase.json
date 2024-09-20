@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "admin-portal-frontend/out",
+    "public": "admin-portal-frontend/.next",
     "ignore": [
       "firebase.json",
       "**/.*",
