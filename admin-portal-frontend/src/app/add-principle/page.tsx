@@ -4,7 +4,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
 
 import { Category, addPage } from "../api/Categories";
-import { createEmergency, getEmergency, updateEmergency } from "../api/emergencies";
+import {
+  createGeneralPrinciple,
+  getGeneralPrinciple,
+  updateGeneralPrinciple,
+} from "../api/principles";
 import PublishPopup from "../components/PublishPopup";
 import CloseIcon from "../icons/close.svg";
 
@@ -22,18 +26,15 @@ export default function AddEmergency() {
     JSON.parse(categoryString ? categoryString : "") as Category,
   );
   const [title, setTitle] = useState(titleString ? titleString : "");
-  const [overviewHeaders, setOverviewHeaders] = useState([""]);
-  const [overviewDetails, setOverviewDetails] = useState([""]);
-  const [treatHeaders, setTreatHeaders] = useState([""]);
-  const [treatDetails, setTreatDetails] = useState([""]);
+  const [contentHeaders, setContentHeaders] = useState([""]);
+  const [contentDetails, setContentDetails] = useState([""]);
   const [popupVisible, setPopupVisible] = useState(false);
-  const [prevEmergency, setPrevEmergency] = useState({ _id: "" });
+  const [prevPrinciple, setPrevPrinciple] = useState({ _id: "" });
 
   const [page, setPage] = useState({
     title: "",
     subtitle: "",
-    overview: {},
-    treatment: {},
+    content: {},
   });
 
   useEffect(() => {
@@ -52,37 +53,33 @@ export default function AddEmergency() {
   useEffect(() => {
     const fetchEmergency = async () => {
       if (title) {
-        const emergency = await getEmergency(title);
-        setPrevEmergency(emergency);
+        const principle = await getGeneralPrinciple(title);
+        setPrevPrinciple(principle);
         setPage({
-          title: emergency.title,
-          subtitle: emergency.subtitle,
-          overview: {},
-          treatment: {},
+          title: principle.title,
+          subtitle: principle.subtitle,
+          content: {},
         });
-        setOverviewHeaders(Object.keys(emergency.overview ? emergency.overview : {}));
-        setOverviewDetails(Object.values(emergency.overview ? emergency.overview : {}));
-        setTreatHeaders(Object.keys(emergency.treatment ? emergency.treatment : {}));
-        setTreatDetails(Object.values(emergency.treatment ? emergency.treatment : {}));
+        setContentHeaders(Object.keys(principle.content ? principle.content : {}));
+        setContentDetails(Object.values(principle.content ? principle.content : {}));
       }
     };
     void fetchEmergency();
   }, [title]);
 
-  const publishEmergency = async () => {
+  const publishPrinciple = async () => {
     try {
       setPopupVisible(false);
       const newPage = { ...page };
-      newPage.overview = Object.fromEntries(
-        overviewHeaders.map((key, i) => [key, overviewDetails[i]]),
+      newPage.content = Object.fromEntries(
+        contentHeaders.map((key, i) => [key, contentDetails[i]]),
       );
-      newPage.treatment = Object.fromEntries(treatHeaders.map((key, i) => [key, treatDetails[i]]));
 
       if (title) {
-        const toAdd = { ...newPage, _id: prevEmergency._id };
-        await updateEmergency(toAdd);
+        const toAdd = { ...newPage, _id: prevPrinciple._id };
+        await updateGeneralPrinciple(toAdd);
       } else {
-        await createEmergency(newPage);
+        await createGeneralPrinciple(newPage);
         await addPage(category._id, newPage.title);
       }
       const encodedCategory = encodeURIComponent(JSON.stringify(category));
@@ -100,7 +97,7 @@ export default function AddEmergency() {
     <div className="flex flex-col items-center justify-center min-h-screen w-screen overflow-auto p-20 bg-[#E5EFF5]">
       <div className="flex flex-row justify-between w-full md:w-5/6 lg:w-4/5 xl:w-3/4 mb-6">
         <h1 className="text-[#182B49] mt-[20px] text-start text-2xl font-bold">
-          {title ? "Editing Emergency: " : "Add an Emergency to: "}{" "}
+          {title ? "Editing General Principle: " : "Add a General Principle to: "}{" "}
           <span className="text-[#00629B]">{title ? title : category.title}</span>
         </h1>
       </div>
@@ -131,8 +128,8 @@ export default function AddEmergency() {
             });
           }}
         />
-        <h1 className="text-[#182B49] text-start text-xl font-bold">Overview</h1>
-        {overviewHeaders.map((header, index) => {
+        <h1 className="text-[#182B49] text-start text-xl font-bold">Content</h1>
+        {contentHeaders.map((header, index) => {
           return (
             <div className="flex w-full" key={index}>
               <span className="w-full">
@@ -142,7 +139,7 @@ export default function AddEmergency() {
                   value={header}
                   placeholder="Section header"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setOverviewHeaders((prevHeaders) => {
+                    setContentHeaders((prevHeaders) => {
                       const newHeaders = [...prevHeaders];
                       newHeaders[index] = e.target.value;
                       return newHeaders;
@@ -151,10 +148,10 @@ export default function AddEmergency() {
                 />
                 <textarea
                   className="flex p-[13px_14px] items-start gap-2 self-stretch rounded-[5px] border border-[#B4B4B4] bg-white w-full"
-                  value={overviewDetails[index]}
+                  value={contentDetails[index]}
                   placeholder="Section details"
                   onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                    setOverviewDetails((prevDetails) => {
+                    setContentDetails((prevDetails) => {
                       const newDetails = [...prevDetails];
                       newDetails[index] = e.target.value;
                       return newDetails;
@@ -165,12 +162,12 @@ export default function AddEmergency() {
               <button
                 className="flex justify-end mb-4"
                 onClick={() => {
-                  setOverviewDetails((prevDetails) => {
+                  setContentDetails((prevDetails) => {
                     const newDetails = [...prevDetails];
                     newDetails.splice(index, 1);
                     return newDetails;
                   });
-                  setOverviewHeaders((prevHeaders) => {
+                  setContentHeaders((prevHeaders) => {
                     const newHeaders = [...prevHeaders];
                     newHeaders.splice(index, 1);
                     return newHeaders;
@@ -189,87 +186,17 @@ export default function AddEmergency() {
         <button
           className="px-2 sm:px-4 py-2 text-[#182B49] text-sm font-bold underline"
           onClick={() => {
-            setOverviewDetails((prevDetails) => {
+            setContentDetails((prevDetails) => {
               const newDetails = [...prevDetails, ""];
               return newDetails;
             });
-            setOverviewHeaders((prevHeaders) => {
+            setContentHeaders((prevHeaders) => {
               const newHeaders = [...prevHeaders, ""];
               return newHeaders;
             });
           }}
         >
           + Add section to Overview
-        </button>
-        <h1 className="text-[#182B49] text-start text-xl font-bold">How to Treat</h1>
-        {treatHeaders.map((header, index) => {
-          return (
-            <div className="flex w-full" key={index}>
-              <span className="w-full">
-                <input
-                  className="flex p-[13px_14px] items-start gap-2 self-stretch rounded-[5px] border border-[#B4B4B4] bg-white mt-[20px] mb-[5px] w-full"
-                  type="text"
-                  value={header}
-                  placeholder="Section header"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setTreatHeaders((prevHeaders) => {
-                      const newHeaders = [...prevHeaders];
-                      newHeaders[index] = e.target.value;
-                      return newHeaders;
-                    });
-                  }}
-                />
-                <textarea
-                  className="flex p-[13px_14px] items-start gap-2 self-stretch rounded-[5px] border border-[#B4B4B4] bg-white w-full"
-                  value={treatDetails[index]}
-                  placeholder="Section details"
-                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                    setTreatDetails((prevDetails) => {
-                      const newDetails = [...prevDetails];
-                      newDetails[index] = e.target.value;
-                      return newDetails;
-                    });
-                  }}
-                />
-              </span>
-              <button
-                className="flex justify-end mb-4"
-                onClick={() => {
-                  setTreatDetails((prevDetails) => {
-                    const newDetails = [...prevDetails];
-                    newDetails.splice(index, 1);
-                    return newDetails;
-                  });
-                  setTreatHeaders((prevHeaders) => {
-                    const newHeaders = [...prevHeaders];
-                    newHeaders.splice(index, 1);
-                    return newHeaders;
-                  });
-                }}
-              >
-                <img
-                  src={(CloseIcon as IconProps).src}
-                  alt="Close"
-                  className="ml-[8px] mt-[28px] w-3 h-3"
-                />
-              </button>
-            </div>
-          );
-        })}
-        <button
-          className="px-2 sm:px-4 py-2 text-[#182B49] text-sm font-bold inline-block underline"
-          onClick={() => {
-            setTreatDetails((prevDetails) => {
-              const newDetails = [...prevDetails, ""];
-              return newDetails;
-            });
-            setTreatHeaders((prevHeaders) => {
-              const newHeaders = [...prevHeaders, ""];
-              return newHeaders;
-            });
-          }}
-        >
-          + Add section to How to Treat
         </button>
       </div>
       <div className="flex flex-row justify-between w-full md:w-5/6 lg:w-4/5 xl:w-3/4 mt-6">
@@ -293,7 +220,7 @@ export default function AddEmergency() {
       {popupVisible && (
         <PublishPopup
           onPublish={() => {
-            void publishEmergency();
+            void publishPrinciple();
           }}
           onCancel={handleCancel}
         />

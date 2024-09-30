@@ -1,26 +1,7 @@
-import { get, handleAPIError, post, put } from "./requests";
+import { updateVersion } from "./Version";
+import { get, handleAPIError } from "./requests";
 
 import type { APIResult } from "./requests";
-
-// export type Emergency = {
-//   _id: string;
-//   title: string;
-//   overview?: {
-//     Importance?: string;
-//     "Mechanism of Injury"?: string[];
-//     Diagnosis?: string[];
-//     "Physical Exam"?: string[];
-//   };
-//   treatment?: {
-//     "Acute Management"?: string[];
-//     Dispo?: string[];
-//     Considerations?: {
-//       Header?: string;
-//       Content?: string[];
-//     };
-//   };
-//   content?: object;
-// };
 
 export type Emergency = {
   _id: string;
@@ -69,29 +50,47 @@ export async function createEmergency(
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencyFlow`;
+    const url = `${process.env.API_URL}/emergencies`;
+    console.log(emergency);
+    console.log(url);
 
-    const response = await post(url, emergency);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emergency),
+    });
     const json = (await response.json()) as Emergency;
+    await updateVersion();
     return { success: true, data: json };
   } catch (error) {
+    console.log(error);
     return handleAPIError(error);
   }
 }
 
-export async function getEmergency(id: string): Promise<APIResult<Emergency>> {
+export async function getEmergency(title: string): Promise<Emergency> {
   try {
     if (!process.env.API_URL) {
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencyFlow/${id}`;
+    const url = `${process.env.API_URL}/emergencies/${title}`;
 
-    const response = await get(url);
+    const response = await fetch(url, {
+      method: "GET",
+    });
     const json = (await response.json()) as Emergency;
-    return { success: true, data: json };
+    return json;
   } catch (error) {
-    return handleAPIError(error);
+    console.log(error);
+    return {
+      _id: "0", // A default or dummy ID
+      title: "Unknown Emergency",
+      subtitle: "No details available",
+      // Add any other properties of the Emergency type here
+    };
   }
 }
 
@@ -101,7 +100,7 @@ export async function getAllEmergencies(): Promise<APIResult<Emergency[]>> {
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencyFlow`;
+    const url = `${process.env.API_URL}/emergencies`;
     const response = await get(url);
     const json = (await response.json()) as Emergency[];
     // const parsedJson = json.map((element) => (element));
@@ -120,9 +119,16 @@ export async function updateEmergency(
       throw new Error("API URL is not defined");
     }
 
-    const url = `${process.env.API_URL}/emergencyFlow/${emergency._id}`;
-    const response = await put(url, emergency);
+    const url = `${process.env.API_URL}/emergencies/${emergency._id}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emergency),
+    });
     const json = (await response.json()) as Emergency;
+    await updateVersion();
     return { success: true, data: json };
   } catch (error) {
     return handleAPIError(error);

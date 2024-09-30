@@ -26,9 +26,9 @@ const getAllEmergencies = async (req, res) => {
 };
 
 // Get a specific emergency by ID
-const getEmergencyById = async (req, res) => {
+const getEmergencyByTitle = async (req, res) => {
   try {
-    const emergency = await Emergency.findById(req.params.id);
+    const emergency = await Emergency.findOne({ title: req.params.title });
     if (!emergency) {
       return res.status(404).json({ message: "Emergency not found" });
     }
@@ -49,9 +49,9 @@ const getAllGeneralPrinciples = async (req, res) => {
 };
 
 // Get a specific general principle by ID
-const getGeneralPrincipleById = async (req, res) => {
+const getGeneralPrincipleByTitle = async (req, res) => {
   try {
-    const generalPrinciple = await GeneralPrinciple.findById(req.params.id);
+    const generalPrinciple = await GeneralPrinciple.findOne({ title: req.params.title });
     if (!generalPrinciple) {
       return res.status(404).json({ message: "General Principle not found" });
     }
@@ -204,7 +204,7 @@ export const updatedGeneralPrincipleById = async (req, res) => {
 export {
   getAll,
   getAllEmergencies,
-  getEmergencyById,
+  getEmergencyByTitle,
   getAllGeneralPrinciples,
-  getGeneralPrincipleById,
+  getGeneralPrincipleByTitle,
 };

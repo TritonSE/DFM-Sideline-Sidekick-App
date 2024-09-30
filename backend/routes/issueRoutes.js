@@ -8,8 +8,8 @@ import {
   getAll,
   getAllEmergencies,
   getAllGeneralPrinciples,
-  getEmergencyById,
-  getGeneralPrincipleById,
+  getEmergencyByTitle,
+  getGeneralPrincipleByTitle,
   updatedEmergencyById,
   updatedGeneralPrincipleById,
 } from "../controllers/issueController.js";
@@ -28,8 +28,8 @@ router.get("/all", getAll);
 // GET all emergencies
 router.get("/emergencies", getAllEmergencies);
 
-// GET a specific emergency by ID
-router.get("/emergencies/:id", getEmergencyById);
+// GET a specific emergency by name
+router.get("/emergencies/:title", getEmergencyByTitle);
 
 // POST an emergency (with validation)
 router.post("/emergencies", validateEmergencyData, handleValidationErrors, createEmergency);
@@ -38,7 +38,7 @@ router.post("/emergencies", validateEmergencyData, handleValidationErrors, creat
 router.get("/generalPrinciples", getAllGeneralPrinciples);
 
 // GET a specific general principle by ID
-router.get("/generalPrinciples/:id", getGeneralPrincipleById);
+router.get("/generalPrinciples/:title", getGeneralPrincipleByTitle);
 
 // POST a general principle (with validation)
 router.post(
