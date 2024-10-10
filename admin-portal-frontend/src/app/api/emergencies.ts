@@ -51,8 +51,6 @@ export async function createEmergency(
     }
 
     const url = `${process.env.API_URL}/emergencies`;
-    console.log(emergency);
-    console.log(url);
 
     const response = await fetch(url, {
       method: "POST",
@@ -126,6 +124,24 @@ export async function updateEmergency(
         "Content-Type": "application/json",
       },
       body: JSON.stringify(emergency),
+    });
+    const json = (await response.json()) as Emergency;
+    await updateVersion();
+    return { success: true, data: json };
+  } catch (error) {
+    return handleAPIError(error);
+  }
+}
+
+export async function deleteEmergency(title: string): Promise<APIResult<Emergency>> {
+  try {
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/emergencies/${title}`;
+    const response = await fetch(url, {
+      method: "DELETE",
     });
     const json = (await response.json()) as Emergency;
     await updateVersion();

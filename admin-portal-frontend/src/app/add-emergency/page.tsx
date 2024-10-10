@@ -1,11 +1,13 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, Suspense, useEffect, useState } from "react";
 
-import { Category, addPage } from "../api/Categories";
+import { Category, addPage, deletePage } from "../api/Categories";
 import { createEmergency, getEmergency, updateEmergency } from "../api/emergencies";
+import ProtectedRoute from "../components/ProtectedRoute";
 import PublishPopup from "../components/PublishPopup";
+import Toast from "../components/Toast";
 import CloseIcon from "../icons/close.svg";
 
 type IconProps = {
@@ -13,7 +15,7 @@ type IconProps = {
   src: string;
 };
 
-export default function AddEmergency() {
+function AddEmergencyPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const categoryString = searchParams.get("category");
@@ -28,6 +30,7 @@ export default function AddEmergency() {
   const [treatDetails, setTreatDetails] = useState([""]);
   const [popupVisible, setPopupVisible] = useState(false);
   const [prevEmergency, setPrevEmergency] = useState({ _id: "" });
+  const [toast, showToast] = useState(false);
 
   const [page, setPage] = useState({
     title: "",
@@ -72,20 +75,31 @@ export default function AddEmergency() {
   const publishEmergency = async () => {
     try {
       setPopupVisible(false);
+      if (page.title === "" || page.subtitle === "") {
+        showToast(true);
+        return;
+      }
       const newPage = { ...page };
       newPage.overview = Object.fromEntries(
         overviewHeaders.map((key, i) => [key, overviewDetails[i]]),
       );
       newPage.treatment = Object.fromEntries(treatHeaders.map((key, i) => [key, treatDetails[i]]));
-
+      const newCategory = { ...category };
       if (title) {
         const toAdd = { ...newPage, _id: prevEmergency._id };
+        if (newPage.title !== title) {
+          await deletePage(category._id, title);
+          await addPage(category._id, newPage.title);
+          newCategory.items = newCategory.items.filter((item) => item !== title);
+          newCategory.items.push(newPage.title);
+        }
         await updateEmergency(toAdd);
       } else {
         await createEmergency(newPage);
         await addPage(category._id, newPage.title);
+        newCategory.items.push(newPage.title);
       }
-      const encodedCategory = encodeURIComponent(JSON.stringify(category));
+      const encodedCategory = encodeURIComponent(JSON.stringify(newCategory));
       router.push(`/category?category=${encodedCategory}`);
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -298,6 +312,26 @@ export default function AddEmergency() {
           onCancel={handleCancel}
         />
       )}
+      {toast && (
+        <Toast
+          backgroundColor={"#FF0000"}
+          message={"Title and subtitle must be non-empty"}
+          onClose={() => {
+            showToast(false);
+          }}
+          isError={true}
+        />
+      )}
     </div>
+  );
+}
+
+export default function AddEmergency() {
+  return (
+    <ProtectedRoute>
+      <Suspense>
+        <AddEmergencyPage />
+      </Suspense>
+    </ProtectedRoute>
   );
 }

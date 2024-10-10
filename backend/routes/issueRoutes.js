@@ -3,8 +3,8 @@ import express from "express";
 import {
   createEmergency,
   createGeneralPrinciple,
-  deleteEmergencyById,
-  deleteGeneralPrincipleById,
+  deleteEmergencyByTitle,
+  deleteGeneralPrincipleByTitle,
   getAll,
   getAllEmergencies,
   getAllGeneralPrinciples,
@@ -49,10 +49,10 @@ router.post(
 );
 
 // DELETE a specific emergency by ID
-router.delete("/emergencies/:id", deleteEmergencyById);
+router.delete("/emergencies/:title", deleteEmergencyByTitle);
 
 // DELETE a specific general principle by ID
-router.delete("/generalPrinciples/:id", deleteGeneralPrincipleById);
+router.delete("/generalPrinciples/:title", deleteGeneralPrincipleByTitle);
 
 // PUT a specific emergency by ID
 router.put("/emergencies/:id", updatedEmergencyById);

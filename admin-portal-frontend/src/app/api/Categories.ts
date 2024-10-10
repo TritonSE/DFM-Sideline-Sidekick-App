@@ -114,8 +114,6 @@ export const addCategory = async (title: string, type: string) => {
     if (!url) {
       throw new Error("API URL is not defined");
     }
-    console.log(title);
-    console.log(type);
 
     await fetch(url, {
       method: "POST",

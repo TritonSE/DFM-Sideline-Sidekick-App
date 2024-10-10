@@ -5,7 +5,10 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 import { Category, deletePage } from "../api/Categories";
+import { deleteEmergency } from "../api/emergencies";
+import { deleteGeneralPrinciple } from "../api/principles";
 import PageContainer from "../components/PageContainer";
+import ProtectedRoute from "../components/ProtectedRoute";
 import Toast from "../components/Toast";
 
 function CategoryInfo() {
@@ -25,11 +28,14 @@ function CategoryInfo() {
 
   const onDeletePage = async (categoryId: string, title: string) => {
     try {
-      console.log("Deleting page:", title);
       await deletePage(categoryId, title);
+      if (category.type === "Emergency") {
+        await deleteEmergency(title);
+      } else {
+        await deleteGeneralPrinciple(title);
+      }
       setShowToast(true);
       const newItems = category.items.filter((item) => item !== title);
-      console.log(category);
       setCategory((prevCategory) => {
         return { ...prevCategory, items: newItems };
       });
@@ -52,7 +58,6 @@ function CategoryInfo() {
         <div className="flex flex-row items-center justify-between mb-10">
           <h2 className="text-2xl">All Pages</h2>
           <div className="flex flex-row flex-wrap justify-end gap-2">
-            <button className="px-4 py-2 rounded-md text-white bg-[#00629B]">Edit Order</button>
             <Link
               href={{
                 pathname: category.type === "Emergency" ? "/add-emergency" : "/add-principle",
@@ -72,6 +77,7 @@ function CategoryInfo() {
             onClose={() => {
               handleCloseToast();
             }}
+            isError={false}
           />
         )}
       </div>
@@ -81,8 +87,10 @@ function CategoryInfo() {
 
 export default function CategoriesPage() {
   return (
-    <Suspense>
-      <CategoryInfo />
-    </Suspense>
+    <ProtectedRoute>
+      <Suspense>
+        <CategoryInfo />
+      </Suspense>
+    </ProtectedRoute>
   );
 }

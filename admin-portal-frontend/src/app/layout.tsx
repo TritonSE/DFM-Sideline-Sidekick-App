@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
-
 import "./globals.css";
+import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
 import HorizontalNavBar from "./components/HorizontalNavbar";
 import VerticalNavBar from "./components/VerticalNavBar";
+import { AuthProvider } from "./context/AuthContext";
 import styles from "./pageStyles";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sideline Sidekick Admin",
@@ -15,22 +17,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  const layout = (
     <html lang="en">
       <head></head>
       <body>
-        <div>
-          <div style={styles.horizontalNavBar}>
-            <HorizontalNavBar />
-          </div>
-          <div className="flex flex-row inline-block">
-            <div style={styles.verticalNavBar}>
-              <VerticalNavBar />
+        <AuthProvider>
+          <div>
+            <div style={styles.horizontalNavBar}>
+              <HorizontalNavBar />
             </div>
-            {children}
+            <div className="flex flex-row inline-block">
+              <div style={styles.verticalNavBar}>
+                <VerticalNavBar />
+              </div>
+              {children}
+            </div>
           </div>
-        </div>
+        </AuthProvider>
       </body>
     </html>
   );
+  return <ClientLayoutWrapper layout={layout}>{children}</ClientLayoutWrapper>;
 }

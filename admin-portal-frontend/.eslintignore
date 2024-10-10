@@ -7,3 +7,5 @@ public/
 next.config.js
 vite.config.ts
 postcss.config.js
+src/app/firebase-admin.tsx
+src/app/AuthContext.js

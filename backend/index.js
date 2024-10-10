@@ -8,6 +8,8 @@ import issueRoutes from "./routes/issueRoutes.js";
 import { onRequest } from "firebase-functions/v2/https";
 import versionRoutes from "./routes/versionRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import admin from "firebase-admin";
 
 // import { CustomError, InternalError } from "./errors.js";
 
@@ -51,16 +53,26 @@ const errorHandler = (err, req, res, next) => {
 };
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-// app.use("/tier", tierRouter);
-// app.use("/user", userRouter);
-// app.use("/category", categoryRouter);
-// app.use("/visualization", visRouter);
+// CORS configuration for non-GET requests
+app.use((req, res, next) => {
+  if (
+    req.method === "GET" &&
+    !req.path.startsWith("/api/admin") &&
+    !req.path.startsWith("/api/isSuperAdmin") &&
+    !req.path.startsWith("/api/allAdmins")
+  ) {
+    cors({ origin: "*" })(req, res, next);
+  } else {
+    next();
+  }
+});
+
 app.use("/api", issueRoutes);
 app.use("/api", versionRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", adminRoutes);
 
 app.use(errorHandler);
 

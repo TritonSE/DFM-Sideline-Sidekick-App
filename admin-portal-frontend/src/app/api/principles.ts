@@ -87,3 +87,21 @@ export async function updateGeneralPrinciple(
     return handleAPIError(error);
   }
 }
+
+export async function deleteGeneralPrinciple(title: string): Promise<APIResult<GeneralPrinciple>> {
+  try {
+    if (!process.env.API_URL) {
+      throw new Error("API URL is not defined");
+    }
+
+    const url = `${process.env.API_URL}/generalPrinciples/${title}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
+    const json = (await response.json()) as GeneralPrinciple;
+    await updateVersion();
+    return { success: true, data: json };
+  } catch (error) {
+    return handleAPIError(error);
+  }
+}

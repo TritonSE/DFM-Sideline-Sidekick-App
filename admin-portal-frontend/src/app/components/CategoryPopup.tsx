@@ -20,7 +20,7 @@ const CategoryAddPopup: React.FC<CategoryAddPopupProps> = ({ onAdd, onCancel, ty
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+    <div className="fixed top-[36px] left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white w-11/12 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5 p-8 rounded-md shadow-md flex flex-col justify-center">
         <button className="flex justify-end mb-4" onClick={onCancel}>
           <img src={(CloseIcon as IconProps).src} alt="Close" className="w-4 h-4" />

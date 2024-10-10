@@ -126,13 +126,12 @@ export const createGeneralPrinciple = async (req, res) => {
 };
 
 // Delete an emergency by ID
-export const deleteEmergencyById = async (req, res) => {
+export const deleteEmergencyByTitle = async (req, res) => {
   try {
-    const deletedEmergency = await Emergency.findByIdAndDelete(req.params.id);
+    const deletedEmergency = await Emergency.findOneAndDelete({ title: req.params.title });
     if (!deletedEmergency) {
       return res.status(404).json({ message: "Emergency not found" });
     }
-
     // Respond with success and the doc deleted
     res.status(200).json({ sucesss: true, "deleted document": deletedEmergency });
   } catch (error) {
@@ -141,13 +140,12 @@ export const deleteEmergencyById = async (req, res) => {
 };
 
 // Delete a general principle by ID
-export const deleteGeneralPrincipleById = async (req, res) => {
+export const deleteGeneralPrincipleByTitle = async (req, res) => {
   try {
-    const deletedPrinciple = await GeneralPrinciple.findByIdAndDelete(req.params.id);
+    const deletedPrinciple = await GeneralPrinciple.findOneAndDelete({ title: req.params.title });
     if (!deletedPrinciple) {
       return res.status(404).json({ message: "General principle not found" });
     }
-
     // Respond with success and the doc deleted
     res.status(200).json({ sucesss: true, "deleted document": deletedPrinciple });
   } catch (error) {

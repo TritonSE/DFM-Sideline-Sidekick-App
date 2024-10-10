@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 import { Category } from "../api/Categories";
-import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 
 import DeleteConfirmationPopup from "./DeletePopup";
@@ -21,8 +20,6 @@ type CategoryItemProps = {
 };
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ id, category, onDeleteCategory }) => {
-  const [selectedValue, setSelectedValue] = useState("public");
-  const [allowEdits, setAllowEdits] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
 
   const handleDelete = () => {
@@ -55,31 +52,9 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ id, category, onDeleteCateg
           {category.title}
         </Link>
       </td>
-      <td className="w-1/4 text-center py-3">
-        <select
-          disabled={!allowEdits}
-          className={`p-1 text-center rounded-md ${
-            selectedValue === "public" ? "bg-[#E5EFF5]" : "bg-[#D9D9D9]"
-          } ${allowEdits ? "appearance-auto" : "appearance-none"}`}
-          value={selectedValue}
-          onChange={(e) => {
-            setSelectedValue(e.target.value);
-          }}
-        >
-          <option value="public">Public</option>
-          <option value="hidden">Hidden</option>
-        </select>
-      </td>
+      <td className="w-1/4 text-center py-3">Public</td>
       <td className="w-1/4 text-center py-3">{category.items.length}</td>
       <td className="w-1/4 text-center py-3">
-        <button
-          className="mr-3 bg-[#E5EFF5] p-2 rounded-full border border-black"
-          onClick={() => {
-            setAllowEdits(!allowEdits);
-          }}
-        >
-          <img src={(EditIcon as IconProps).src} alt="Edit" className="w-4 h-4" />
-        </button>
         <button className="bg-[#E5EFF5] p-2 rounded-full border border-black">
           <img
             src={(TrashIcon as IconProps).src}

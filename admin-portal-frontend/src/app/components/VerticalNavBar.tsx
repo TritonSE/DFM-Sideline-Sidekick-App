@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import React, { ReactNode, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import Link from "next/link";
 
 import { Category, getAllCategories } from "../api/Categories";
 
@@ -52,7 +52,7 @@ const VerticalNavBar: React.FC = () => {
       <nav style={styles.nav}>
         <div style={styles.accordionContainer}>
           <Accordion defaultActiveKey="0">
-            <a href="#homepagelink" style={{ textDecoration: "none" }}>
+            <Link href="/home" style={{ textDecoration: "none" }}>
               <Card style={{ border: "none", borderBottom: "none" }}>
                 <Card.Header style={styles.cardHeader}>
                   <CustomAccordion>
@@ -66,7 +66,7 @@ const VerticalNavBar: React.FC = () => {
                   </CustomAccordion>
                 </Card.Header>
               </Card>
-            </a>
+            </Link>
 
             <Accordion.Item eventKey="1" style={{ border: "none" }}>
               <Accordion.Header>

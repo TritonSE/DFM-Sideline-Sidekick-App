@@ -12,9 +12,10 @@ type ToastProps = {
   backgroundColor: string;
   message: string;
   onClose: () => void;
+  isError: boolean;
 };
 
-const Toast: React.FC<ToastProps> = ({ backgroundColor, message, onClose }) => {
+const Toast: React.FC<ToastProps> = ({ backgroundColor, message, onClose, isError = false }) => {
   useEffect(() => {
     // Set a timer to hide the toast after 10 seconds
     const timer = setTimeout(() => {
@@ -27,12 +28,14 @@ const Toast: React.FC<ToastProps> = ({ backgroundColor, message, onClose }) => {
   }, []);
 
   return (
-    <div className="top-20 right-10 absolute justify-center mb-4 z-50">
+    <div className="top-20 right-10 fixed justify-center mb-4 z-50">
       <div
         style={{ backgroundColor }}
         className={`flex items-center justify-between w-auto py-4 px-6 rounded-lg transition-opacity duration-300 ease-in opacity-100 text-white`}
       >
-        <img src={(CheckIcon as IconProps).src} alt="Check" className="w-4 h-4 mr-2" />
+        {!isError && (
+          <img src={(CheckIcon as IconProps).src} alt="Check" className="w-4 h-4 mr-2" />
+        )}
         <p className="text-sm mr-2">{message}</p>
         <button className="focus:outline-none" onClick={onClose}>
           <img src={(CloseIcon as IconProps).src} alt="Close" className="w-4 h-4" />
